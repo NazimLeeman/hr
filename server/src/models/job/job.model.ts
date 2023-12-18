@@ -36,7 +36,4 @@ const Job = sequelize.define<JobInstance>('job', {
     },
 })
 
-Job.hasMany(Applicant, { foreignKey: 'job_id' });
-Applicant.belongsTo(Job, { foreignKey: 'job_id' });
-
 export default Job;

@@ -1,8 +1,6 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import { IAttendance } from "../../interfaces/attendence.interface";
 import sequelize from "..";
-import Employee from "../employee/employee.model";
-import Payroll from "../payroll/payroll.model";
 
 interface AttendanceCreationAttributes extends Optional<IAttendance, 'id'> {};
 
@@ -37,8 +35,6 @@ const Attendance = sequelize.define<AttendanceInstance>('attendance', {
     }
 })
 
-Attendance.belongsTo(Employee, { foreignKey: 'employee_id' });
-Payroll.belongsTo(Employee, { foreignKey: 'employee_id' });
 // PerformanceReview.belongsTo(Employee, { foreignKey: 'employee_id' });
 
 export default Attendance;

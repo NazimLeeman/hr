@@ -5,6 +5,7 @@ import Position from "../position/position.model";
 import Applicant from "../applicant/applicant.model";
 import Attendance from "../attendance/attendance.model";
 import Payroll from "../payroll/payroll.model";
+import Job from "../job/job.model";
 
 interface EmployeeCreationAttributes extends Optional<IEmployee, 'id'> {};
 
@@ -56,6 +57,11 @@ Position.hasMany(Employee, { foreignKey: 'position_id' });
 Employee.belongsTo(Applicant, { foreignKey: 'applicant_id' });
 Employee.hasMany(Attendance, { foreignKey: 'employee_id' });
 Employee.hasMany(Payroll, { foreignKey: 'employee_id' });
+Applicant.hasOne(Employee, { foreignKey: 'applicant_id' });
+Attendance.belongsTo(Employee, { foreignKey: 'employee_id' });
+Payroll.belongsTo(Employee, { foreignKey: 'employee_id' });
+Job.hasMany(Applicant, { foreignKey: 'job_id' });
+Applicant.belongsTo(Job, { foreignKey: 'job_id' });
 // Employee.hasMany(PerformanceReview, { 
 //     foreignKey: 'employee_id' 
 // });

@@ -1,8 +1,6 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import { IPosition } from "../../interfaces/position.interface";
 import sequelize from "..";
-import Employee from "../employee/employee.model";
-import Applicant from "../applicant/applicant.model";
 
 interface PositionCreationAttributes extends Optional<IPosition, 'id'> {};
 
@@ -28,8 +26,5 @@ const Position = sequelize.define<PositionInstance>('position', {
         allowNull: false
     }
 })
-
-
-Applicant.hasOne(Employee, { foreignKey: 'applicant_id' });
 
 export default Position;
