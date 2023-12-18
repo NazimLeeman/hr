@@ -22,6 +22,10 @@ const Employee = sequelize.define<EmployeeInstance>('employee', {
         type: DataTypes.INTEGER,
         unique: true
     },
+    restaurantId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     name: {
         type: DataTypes.TEXT,
         allowNull: false

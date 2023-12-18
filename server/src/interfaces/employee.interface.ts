@@ -1,5 +1,6 @@
 export interface IEmployee {
     id: number,
+    restaurantId: number,
     name: string,
     email: string,
     phoneNumber: number,
