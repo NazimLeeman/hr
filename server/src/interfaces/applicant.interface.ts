@@ -6,4 +6,5 @@ export interface IApplicant {
   phoneNumber: number;
   skillTags: string;
   hourlyRate: number;
+  restaurantId?: number
   }
