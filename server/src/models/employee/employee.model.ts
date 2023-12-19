@@ -66,6 +66,7 @@ Attendance.belongsTo(Employee, { foreignKey: 'employee_id' });
 Payroll.belongsTo(Employee, { foreignKey: 'employee_id' });
 Job.hasMany(Applicant, { foreignKey: 'job_id' });
 Applicant.belongsTo(Job, { foreignKey: 'job_id' });
+
 // Employee.hasMany(PerformanceReview, { 
 //     foreignKey: 'employee_id' 
 // });
