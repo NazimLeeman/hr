@@ -21,16 +21,12 @@ export async function getAllEmployeeOfRestaurant (req: Request, res: Response) {
       let id = req.params.id;
       const restaurantId = Number(id);
       if (id && restaurantId) {
-        const { name, email, phoneNumber, joiningDate, address, positionId, applicantId } = req.body;
+        const { name, email, phoneNumber, joiningDate, address } = req.body;
         if (
             typeof name === 'string' &&
             typeof email === 'string' &&
-            typeof phoneNumber === 'number' &&
-            // typeof joiningDate === 'object' &&
-            typeof address === 'string' &&
-            typeof positionId === 'number' &&
-            typeof applicantId === 'number') {
-          const employee = await addEmployeeToRestaurant(restaurantId, {name, email, phoneNumber, joiningDate, address, positionId, applicantId});
+            typeof phoneNumber === 'number') {
+          const employee = await addEmployeeToRestaurant(restaurantId, {name, email, phoneNumber, joiningDate, address});
           res.status(201).json(employee);
         } else res.status(400).json({ message: "Invalid employee information." });
       } else res.status(400).json({ message: "Invalid restaurant ID." });

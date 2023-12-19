@@ -46,26 +46,26 @@ const Employee = sequelize.define<EmployeeInstance>('employee', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    positionId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    applicantId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    }
+    // positionId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false
+    // },
+    // applicantId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false
+    // }
 })
 
-Employee.belongsTo(Position, { foreignKey: 'position_id' });
-Position.hasMany(Employee, { foreignKey: 'position_id' });
-Employee.belongsTo(Applicant, { foreignKey: 'applicant_id' });
-Employee.hasMany(Attendance, { foreignKey: 'employee_id' });
-Employee.hasMany(Payroll, { foreignKey: 'employee_id' });
-Applicant.hasOne(Employee, { foreignKey: 'applicant_id' });
-Attendance.belongsTo(Employee, { foreignKey: 'employee_id' });
-Payroll.belongsTo(Employee, { foreignKey: 'employee_id' });
-Job.hasMany(Applicant, { foreignKey: 'job_id' });
-Applicant.belongsTo(Job, { foreignKey: 'job_id' });
+Employee.belongsTo(Position, { foreignKey: 'positionId' });
+Position.hasMany(Employee, { foreignKey: 'positionId' });
+Employee.belongsTo(Applicant, { foreignKey: 'applicantId' });
+Employee.hasMany(Attendance, { foreignKey: 'employeeId' });
+Employee.hasMany(Payroll, { foreignKey: 'employeeId' });
+Applicant.hasOne(Employee, { foreignKey: 'applicantId' });
+Attendance.belongsTo(Employee, { foreignKey: 'employeeId' });
+Payroll.belongsTo(Employee, { foreignKey: 'employeeId' });
+Job.hasMany(Applicant, { foreignKey: 'jobId' });
+Applicant.belongsTo(Job, { foreignKey: 'jobId' });
 
 // Employee.hasMany(PerformanceReview, { 
 //     foreignKey: 'employee_id' 

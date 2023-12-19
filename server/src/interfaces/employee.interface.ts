@@ -6,6 +6,6 @@ export interface IEmployee {
     phoneNumber: number,
     joiningDate: Date,
     address: string,
-    positionId: number,
-    applicantId: number
+    positionId?: number,
+    applicantId?: number
 }

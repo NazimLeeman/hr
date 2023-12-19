@@ -21,8 +21,9 @@ export async function addEmployeeToRestaurant (restaurantId: number, data: {
     phoneNumber: number,
     joiningDate: Date,
     address: string,
-    positionId: number,
-    applicantId: number }) {
+    // positionId: number,
+    // applicantId: number
+ }) {
   try {
     const newEmployee = await Employee.create({ ...data, restaurantId });
     return newEmployee;
