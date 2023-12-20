@@ -3,9 +3,12 @@ export interface IEmployee {
     restaurantId: number,
     name: string,
     email: string,
+    experience: string,
     phoneNumber: number,
-    joiningDate: Date,
+    // joiningDate: Date,
     address: string,
+    skillTags: string,
+    hourlyRate: number,
     positionId?: number,
     applicantId?: number
 }

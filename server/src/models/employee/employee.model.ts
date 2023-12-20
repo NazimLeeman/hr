@@ -34,16 +34,28 @@ const Employee = sequelize.define<EmployeeInstance>('employee', {
         type: DataTypes.TEXT,
         allowNull: false
     },
+    experience: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     phoneNumber: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    joiningDate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
+    // joiningDate: {
+    //     type: DataTypes.DATE,
+    //     allowNull: false,
+    // },
     address: {
         type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    skillTags: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    hourlyRate: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     // positionId: {

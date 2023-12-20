@@ -17,7 +17,7 @@ const Applicant = sequelize.define<ApplicantInstance>('applicant', {
         type: DataTypes.INTEGER,
         unique: true
     },
-    applicantName: {
+    name: {
         type: DataTypes.TEXT,
         allowNull: false
     },
@@ -32,6 +32,10 @@ const Applicant = sequelize.define<ApplicantInstance>('applicant', {
     phoneNumber: {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    address: {
+        type: DataTypes.TEXT,
+        allowNull: false
     },
     skillTags: {
         type: DataTypes.TEXT,
