@@ -32,7 +32,10 @@ const Schedule = sequelize.define<ScheduleInstance>('schedule', {
     slotEnds: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    }
+    },restaurantId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
 })
 
 export default Schedule;

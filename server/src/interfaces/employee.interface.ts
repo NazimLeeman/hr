@@ -10,5 +10,8 @@ export interface IEmployee {
     skillTags: string,
     hourlyRate: number,
     positionId?: number,
-    applicantId?: number
+    applicantId?: number,
+    scheduleId?: number,
+    attendanceId?: number,
+    payrollId?: number
 }

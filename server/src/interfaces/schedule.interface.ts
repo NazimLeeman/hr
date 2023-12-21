@@ -4,4 +4,5 @@ export interface ISchedule {
     day: string,
     slotStart: number,
     slotEnds: number,
+    restaurantId?: number,
 }

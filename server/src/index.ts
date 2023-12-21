@@ -2,7 +2,8 @@ import express, { Express } from 'express';
 import config from './config';
 import sequelize from './models';
 import employeeRouter from './routers/employee.router';
-import applicantRouter from './routers/applicant.router'
+import applicantRouter from './routers/applicant.router';
+import scheduleRouter from './routers/schedule.router';
 
 const app: Express = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 
 app.use('/employee', employeeRouter);
 app.use('/applicant', applicantRouter);
+app.use('/schedule', scheduleRouter);
 
 (async function bootstrap () {
     try {
