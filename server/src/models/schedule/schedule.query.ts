@@ -1,7 +1,6 @@
 import Employee from "../employee/employee.model";
 import Schedule from "./schedule.model";
 
-
 export async function createScheduleForEmployee (employeeId: number, restaurantId: number, data: { 
     day: string,
     slotStart: number,
@@ -10,7 +9,8 @@ export async function createScheduleForEmployee (employeeId: number, restaurantI
   try {
     let employee = await Employee.findOne({
       where: {
-        id: employeeId
+        id: employeeId,
+        // restaurantId: restaurantId
       }
     })
     if (!employee) {
@@ -19,6 +19,7 @@ export async function createScheduleForEmployee (employeeId: number, restaurantI
     const newSchedule = await Schedule.create({ ...data, employeeId, restaurantId });
     return newSchedule;
   } catch (error) {
+    console.log(error)
     throw new Error('Error creating schedule for employee.');
   }
 }
@@ -72,11 +73,12 @@ export async function findAllScheduleInRestaurant (id: number) {
     }
   }
 
-  export async function findScheduleOfEmployee (id: number) {
+  export async function findAllScheduleOfEmployee (employeeId: number, restaurantId: number) {
     try {
       const employeeSchedule = await Schedule.findAll({
         where: {
-          employeeId: id
+          employeeId: employeeId,
+          restaurantId: restaurantId
         }
       });
       return employeeSchedule;

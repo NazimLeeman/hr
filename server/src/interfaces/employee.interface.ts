@@ -11,7 +11,7 @@ export interface IEmployee {
     hourlyRate: number,
     positionId?: number,
     applicantId?: number,
-    scheduleId?: number,
+    // scheduleId?: number,
     attendanceId?: number,
     payrollId?: number
 }
