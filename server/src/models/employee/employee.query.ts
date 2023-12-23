@@ -53,6 +53,7 @@ export async function addApplicantToEmployee (applicantId: number, restaurantId:
   address: string,
   skillTags: string,
   hourlyRate: number,
+  position: string
 }) {
 try {
   let applicant = await Applicant.findOne({
