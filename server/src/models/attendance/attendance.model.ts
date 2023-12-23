@@ -2,7 +2,7 @@ import { Model, DataTypes, Optional } from "sequelize";
 import { IAttendance } from "../../interfaces/attendence.interface";
 import sequelize from "..";
 
-interface AttendanceCreationAttributes extends Optional<IAttendance, 'id'> {};
+interface AttendanceCreationAttributes extends Optional<IAttendance, 'id' | 'checkOutTime'> {};
 
 interface AttendanceInstance extends Model<IAttendance, AttendanceCreationAttributes>, IAttendance {
     createdAt?: Date;
@@ -21,20 +21,21 @@ const Attendance = sequelize.define<AttendanceInstance>('attendance', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    day: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     checkInTime: {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     checkOutTime: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
-    date: {
-        type: DataTypes.DATE,
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },restaurantId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 })
-
-// PerformanceReview.belongsTo(Employee, { foreignKey: 'employee_id' });
 
 export default Attendance;

@@ -24,7 +24,10 @@ const Position = sequelize.define<PositionInstance>('position', {
     employeeId: {
         type: DataTypes.INTEGER,
         allowNull: false
-    }
+    },restaurantId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
 })
 
 export default Position;

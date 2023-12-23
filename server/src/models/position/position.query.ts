@@ -1,19 +1,20 @@
+import Employee from "../employee/employee.model";
 import Position from "./position.model";
 
-export async function createPositionForEmployee (employeeId: number, data: { 
+export async function createPositionForEmployee (employeeId: number, restaurantId: number, data: { 
     name: string
  }) {
   try {
-    let position = await Position.findOne({
+    let employee = await Employee.findOne({
       where: {
-        employeeId: employeeId,
-        // restaurantId: restaurantId
+        id: employeeId,
+        restaurantId: restaurantId
       }
     })
-    if (!position) {
+    if (!employee) {
       throw new Error('Employee not found.');
     }
-    const newPosition = await Position.create({ ...data, employeeId });
+    const newPosition = await Position.create({ ...data, employeeId, restaurantId });
     return newPosition;
   } catch (error) {
     console.log(error)

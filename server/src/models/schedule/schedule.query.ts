@@ -10,7 +10,7 @@ export async function createScheduleForEmployee (employeeId: number, restaurantI
     let employee = await Employee.findOne({
       where: {
         id: employeeId,
-        // restaurantId: restaurantId
+        restaurantId: restaurantId
       }
     })
     if (!employee) {
