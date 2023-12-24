@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Job from "./job.model";
 
 export async function createJob(data: {
@@ -21,4 +22,21 @@ export async function findAllJob() {
     } catch (error) {
         throw new Error('Error finding job.')
     }
+}
+
+export async function findJobBySearchTerm (searchTerm: string) {
+  try {
+    const job = await Job.findAll({
+      where: { 
+          [Op.or]: [
+              { jobRole: {[Op.iLike]: `%${searchTerm}%`} },
+              { skillTags: {[Op.iLike]: `%${searchTerm}%`} }
+          ]
+      }
+    })
+    return job;
+  } catch (error) {
+    console.log(error);
+    throw new Error ('Error searching for job.')
+  }
 }

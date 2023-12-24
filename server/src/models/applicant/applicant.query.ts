@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Applicant from "./applicant.model";
 
 // export async function findAllApplicant() {
@@ -39,3 +40,20 @@ export async function createApplicant(data: {
 //     throw new Error('Error finding applicant.')
 //   }
 // }
+
+export async function findApplicantBySearchTerm (searchTerm: string) {
+    try {
+      const applicant = await Applicant.findAll({
+        where: { 
+            [Op.or]: [
+                { experience: {[Op.iLike]: `%${searchTerm}%`} },
+                { skillTags: {[Op.iLike]: `%${searchTerm}%`} }
+            ]
+        }
+      })
+      return applicant;
+    } catch (error) {
+      console.log(error);
+      throw new Error ('Error searching for applicant.')
+    }
+  }

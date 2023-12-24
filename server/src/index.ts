@@ -1,6 +1,9 @@
 import express, { Express } from 'express';
+import cors from 'cors';
 import config from './config';
 import sequelize from './models';
+import authRouter from './routers/auth.router';
+import serviceAccessRouter from './routers/serviceAccess.router';
 import employeeRouter from './routers/employee.router';
 import applicantRouter from './routers/applicant.router';
 import scheduleRouter from './routers/schedule.router';
@@ -10,7 +13,13 @@ import attendanceRouter from './routers/attendance.router'
 
 const app: Express = express();
 
+app.use(cors({
+  origin: config.CORS_ORIGIN.split(',')
+}));
+
 app.use(express.json());
+app.use('/auth', authRouter);
+app.use('/access', serviceAccessRouter);
 
 app.use('/employee', employeeRouter);
 app.use('/applicant', applicantRouter);

@@ -24,7 +24,8 @@ export async function addEmployeeToRestaurant (restaurantId: number, data: {
     // joiningDate: Date,
     address: string,
     skillTags: string,
-    hourlyRate: number
+    hourlyRate: number,
+    position: string
     // positionId: number,
     // applicantId: number
  }) {

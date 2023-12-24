@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createApplicant } from "../models/applicant/applicant.query";
+import { createApplicant, findApplicantBySearchTerm } from "../models/applicant/applicant.query";
 
 
 export async function postApplicant (req: Request, res: Response) {
@@ -23,3 +23,18 @@ export async function postApplicant (req: Request, res: Response) {
   }
 }
 
+
+export async function searchApplicant (req: Request, res: Response) {
+  try {
+      const search = req.query.q;
+      const searchTerm = search?.toString();
+  
+      if (searchTerm) {
+        const applicant = await findApplicantBySearchTerm(searchTerm);
+        res.json({ data: applicant });
+      } else res.json({ data: [] });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+}
