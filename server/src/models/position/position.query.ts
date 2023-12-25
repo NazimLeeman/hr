@@ -21,3 +21,16 @@ export async function createPositionForEmployee (employeeId: number, restaurantI
     throw new Error('Error creating position for employee.');
   }
 }
+
+export async function findAllPositionInRestaurant (id: number) {
+  try {
+    const position = await Position.findAll({
+      where: {
+        restaurantId: id
+      }
+    });
+    return position;
+  } catch (error) {
+    throw new Error('Error finding position in restaurant.');
+  }
+}

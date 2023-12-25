@@ -24,8 +24,7 @@ export async function updateAttendanceOfEmployee (req: Request, res: Response) {
         const attendanceId = Number(req.params.attendanceId);
         if (employeeId && attendanceId) {
             const { checkOutTime } = req.body;
-            if (
-                typeof checkOutTime === 'number') {
+            if ( typeof checkOutTime === 'number') {
               const attendance = await CheckOutTimeForEmployee( employeeId, attendanceId,{checkOutTime});
               res.status(201).json(attendance);
             } else res.status(400).json({ message: "Invalid employee ID." });

@@ -11,7 +11,11 @@ export async function findUserById(UserId: number) {
     }
 }
 
-export async function createUser(data:IUser) {
+export async function createUser(data:{
+    name: string,
+    email: string,
+    role: 'admin' | 'employee'
+}) {
     try {
         const user = await User.create(data);
         return user;

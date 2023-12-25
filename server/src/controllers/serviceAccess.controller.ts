@@ -21,8 +21,7 @@ export async function postServiceAccess (req: Request, res: Response) {
     if (user && validateServices(services)) {
       const prevServiceAccess = await findUserServiceAccess(user.id);
       let access;
-      const data = {
-        id,
+      const data = {    
         userId: user.id, 
         services
       }

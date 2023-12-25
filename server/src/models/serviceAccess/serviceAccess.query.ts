@@ -1,7 +1,9 @@
 import { IServiceAccess } from "../../interfaces/serviceAccess.interface";
 import ServiceAccess from "./serviceAccess.model";
 
-export async function createUserServiceAccess(data: IServiceAccess) {
+export async function createUserServiceAccess(data: {
+    userId: number, services: string[]
+}) {
     try {
         const access = await ServiceAccess.create(data);
         return access;
@@ -11,7 +13,9 @@ export async function createUserServiceAccess(data: IServiceAccess) {
     }
 }
 
-export async function updateUserServiceAccess(serviceAccessId: number, data: IServiceAccess) {
+export async function updateUserServiceAccess(serviceAccessId: number, data: {
+    userId: number, services: string[]
+}) {
     try {
         const existingServiceAccess = await ServiceAccess.findOne({
             where: {

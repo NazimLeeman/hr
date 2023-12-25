@@ -7,8 +7,8 @@ import { checkUserServiceAccess, createUserServiceAccess } from '../models/servi
 
 export async function signUp (req: Request, res: Response) {
   try {
-    const { id, name, email, password, role } = req.body;
-    const data = { id, name, email, password, role };
+    const { name, email, password, role } = req.body;
+    const data = { name, email, password, role };
 
     if (validateUserData({ name, email, password, role })) {
       const loginCheck = await findUserLoginByEmail(email);
@@ -19,7 +19,6 @@ export async function signUp (req: Request, res: Response) {
         const salt = bcrypt.genSaltSync();
         const encryptedPassword =  bcrypt.hashSync(password, salt);
         const loginData = {
-          id,
           email,
           password: encryptedPassword,
           userId: newUser.id
@@ -28,7 +27,7 @@ export async function signUp (req: Request, res: Response) {
         await createUserLogin(loginData);
 
         if (data.role === 'admin') {
-          await createUserServiceAccess({id, userId: newUser.id, services: ["all"] });
+          await createUserServiceAccess({ userId: newUser.id, services: ["all"] });
         }
 
         res.status(201).send({ status: 'success', user: newUser });
