@@ -2,7 +2,7 @@ import { Model, DataTypes, Optional } from "sequelize";
 import { IServiceAccess } from "../../interfaces/serviceAccess.interface";
 import sequelize from "..";
 
-interface ServiceAccessCreationAttibutes extends Optional<IServiceAccess, 'id'> {};
+interface ServiceAccessCreationAttibutes extends Optional<IServiceAccess, 'id' | 'employeeId'> {};
 
 interface ServiceAccessInstance extends Model<IServiceAccess, ServiceAccessCreationAttibutes>, IServiceAccess {
     createdAt?: Date;
@@ -19,6 +19,18 @@ const ServiceAccess = sequelize.define<ServiceAccessInstance>('serviceAccess', {
     },
     userId: {
         type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    employeeId: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    // restaurantId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false
+    // },
+    position: {
+        type: DataTypes.TEXT,
         allowNull: false
     },
     services: {

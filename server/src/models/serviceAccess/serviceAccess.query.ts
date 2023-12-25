@@ -2,7 +2,7 @@ import { IServiceAccess } from "../../interfaces/serviceAccess.interface";
 import ServiceAccess from "./serviceAccess.model";
 
 export async function createUserServiceAccess(data: {
-    userId: number, services: string[]
+    userId: number, employeeId?: number, position: string, services: string[]
 }) {
     try {
         const access = await ServiceAccess.create(data);

@@ -16,14 +16,16 @@ import { createUserServiceAccess, findUserServiceAccess, updateUserServiceAccess
 export async function postServiceAccess (req: Request, res: Response) {
   try {
     const id = Number(req.params.id);
-    const { services } = req.body;
+    const { services, position, employeeId } = req.body;
     const user = await findUserById(id);
     if (user && validateServices(services)) {
       const prevServiceAccess = await findUserServiceAccess(user.id);
       let access;
       const data = {    
         userId: user.id, 
-        services
+        services,
+        employeeId,
+        position
       }
 
       if (prevServiceAccess)

@@ -27,7 +27,7 @@ export async function signUp (req: Request, res: Response) {
         await createUserLogin(loginData);
 
         if (data.role === 'admin') {
-          await createUserServiceAccess({ userId: newUser.id, services: ["all"] });
+          await createUserServiceAccess({ userId: newUser.id, services: ["all"], position: "owner" });
         }
 
         res.status(201).send({ status: 'success', user: newUser });
