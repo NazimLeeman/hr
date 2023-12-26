@@ -17,7 +17,7 @@ const Position = sequelize.define<PositionInstance>('position', {
         type: DataTypes.INTEGER,
         unique: true
     },
-    name: {
+    position: {
         type: DataTypes.TEXT,
         allowNull: false
     },
@@ -28,6 +28,10 @@ const Position = sequelize.define<PositionInstance>('position', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    services: {
+        type: DataTypes.ARRAY(DataTypes.TEXT),
+        allowNull: false
+    }
 })
 
 export default Position;

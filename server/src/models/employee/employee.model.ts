@@ -7,9 +7,9 @@ import Attendance from "../attendance/attendance.model";
 import Payroll from "../payroll/payroll.model";
 import Job from "../job/job.model";
 import Schedule from "../schedule/schedule.model";
-import ServiceAccess from "../serviceAccess/serviceAccess.model";
+// import ServiceAccess from "../serviceAccess/serviceAccess.model";
 
-interface EmployeeCreationAttributes extends Optional<IEmployee, 'id'> {};
+interface EmployeeCreationAttributes extends Optional<IEmployee, 'id' > {};
 
 interface EmployeeInstance extends Model<IEmployee, EmployeeCreationAttributes>, IEmployee {
     createdAt?: Date;
@@ -44,10 +44,6 @@ const Employee = sequelize.define<EmployeeInstance>('employee', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    // joiningDate: {
-    //     type: DataTypes.DATE,
-    //     allowNull: false,
-    // },
     address: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -60,18 +56,14 @@ const Employee = sequelize.define<EmployeeInstance>('employee', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    position: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    },
-    // applicantId: {
+    // positionId: {
     //     type: DataTypes.INTEGER,
     //     allowNull: false
-    // }
+    // },
 })
 
-Employee.hasMany(Position, { foreignKey: 'employeeId' });
-Position.belongsTo(Employee, { foreignKey: 'employeeId' });
+Employee.belongsTo(Position, { foreignKey: 'positionId' });
+Position.hasMany(Employee, { foreignKey: 'positionId' });
 Employee.belongsTo(Applicant, { foreignKey: 'applicantId' });
 Employee.hasMany(Attendance, { foreignKey: 'employeeId' });
 Employee.hasMany(Payroll, { foreignKey: 'employeeId' });
@@ -82,8 +74,8 @@ Job.hasMany(Applicant, { foreignKey: 'jobId' });
 Applicant.belongsTo(Job, { foreignKey: 'jobId' });
 Schedule.belongsTo(Employee, {foreignKey: 'employeeId'});
 Employee.hasMany(Schedule, { foreignKey: 'employeeId'});
-Employee.hasMany(ServiceAccess, { foreignKey: 'employeeId'});
-ServiceAccess.belongsTo(Employee, { foreignKey: 'employeeId'})
+// Employee.hasMany(ServiceAccess, { foreignKey: 'employeeId'});
+// ServiceAccess.belongsTo(Employee, { foreignKey: 'employeeId'})
 
 // Employee.hasMany(PerformanceReview, { 
 //     foreignKey: 'employee_id' 

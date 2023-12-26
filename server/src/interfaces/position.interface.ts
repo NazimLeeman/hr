@@ -1,7 +1,9 @@
 export interface IPosition {
     id: number,
-    name: string,
+    position: string,
     employeeId: number
     restaurantId?: number,
+    services: string[]
 }
+
 

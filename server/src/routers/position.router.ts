@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { postPositionToEmployee, getAllPositionsFromRestaurant } from "../controllers/posiiton.controller";
+import { postPositionAccess, getAllPositionsFromRestaurant, checkPositionAccess } from "../controllers/position.controller";
 const router = Router();
 
 router.get('/:id/restaurant/', getAllPositionsFromRestaurant);
-router.post('/:id/restaurant/:employeeId', postPositionToEmployee)
+router.post('/:id/', postPositionAccess);
+router.post('/check', checkPositionAccess);
 
 
 export default router;

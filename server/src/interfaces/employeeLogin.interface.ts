@@ -1,6 +1,6 @@
-export interface IUserLogin {
+export interface IEmployeeLogin {
     id?: number,
     email: string,
     password: string,
-    userId: number
+    employeeId: number
 }

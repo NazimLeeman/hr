@@ -1,15 +1,15 @@
 import { Model, DataTypes, Optional } from "sequelize";
-import { IUserLogin } from "../../interfaces/userLogin.interface"
+import { IEmployeeLogin } from "../../interfaces/employeeLogin.interface"
 import sequelize from "..";
 
-interface UserLoginCreationAttributes extends Optional<IUserLogin, 'id'> {};
+interface EmployeeLoginCreationAttributes extends Optional<IEmployeeLogin, 'id'> {};
 
-interface UserLoginInstance extends Model<IUserLogin, UserLoginCreationAttributes>, IUserLogin {
+interface EmployeeLoginInstance extends Model<IEmployeeLogin, EmployeeLoginCreationAttributes>, IEmployeeLogin {
     createdAt?: Date;
     updatedAt?: Date;
 }
 
-const UserLogin = sequelize.define<UserLoginInstance>('userLogin', {
+const EmployeeLogin = sequelize.define<EmployeeLoginInstance>('employeeLogin', {
     id: {
         allowNull: false,
         autoIncrement: true,
@@ -25,10 +25,10 @@ const UserLogin = sequelize.define<UserLoginInstance>('userLogin', {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    userId: {
+    employeeId: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
 })
 
-export default UserLogin;
+export default EmployeeLogin;

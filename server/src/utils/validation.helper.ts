@@ -1,11 +1,11 @@
+import { IEmployee } from "../interfaces/employee.interface";
 import { IUser } from "../interfaces/user.interface";
 
-export function validateUserData(data: any): data is IUser {
+export function validateEmployeeData(data: any): data is IEmployee {
   return (
     typeof data === 'object' &&
     typeof data.name === 'string' &&
-    typeof data.email === 'string' &&
-    (data.role === 'admin' || data.role === 'employee')
+    typeof data.email === 'string' 
   );
 }
 
