@@ -1,5 +1,4 @@
 import { IEmployee } from "../interfaces/employee.interface";
-import { IUser } from "../interfaces/user.interface";
 
 export function validateEmployeeData(data: any): data is IEmployee {
   return (

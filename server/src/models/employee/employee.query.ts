@@ -38,14 +38,6 @@ export async function addEmployeeToRestaurant (data: {
   }
 }
 
-export async function findAllApplicant() {
-  try {
-    const applicant = await Applicant.findAll({});
-    return applicant;
-  } catch (error) {
-    throw new Error('Error finding applicant.');
-  }
-}
 
 export async function addApplicantToEmployee (applicantId: number, restaurantId: number, data: { 
   name: string, 
@@ -54,8 +46,7 @@ export async function addApplicantToEmployee (applicantId: number, restaurantId:
   phoneNumber: number,
   address: string,
   skillTags: string,
-  hourlyRate: number,
-  position: string
+  hourlyRate: number
 }) {
 try {
   let applicant = await Applicant.findOne({

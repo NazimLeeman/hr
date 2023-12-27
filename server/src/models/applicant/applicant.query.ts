@@ -28,6 +28,16 @@ export async function createApplicant(data: {
 }
 
 
+
+export async function findAllApplicant() {
+  try {
+    const applicant = await Applicant.findAll({});
+    return applicant;
+  } catch (error) {
+    throw new Error('Error finding applicant.');
+  }
+}
+
 // export async function findApplicantById(id: number) {
 //   try {
 //     const employee = await Applicant.findAll({
@@ -55,5 +65,15 @@ export async function findApplicantBySearchTerm (searchTerm: string) {
     } catch (error) {
       console.log(error);
       throw new Error ('Error searching for applicant.')
+    }
+  }
+
+  export async function findApplicantById(ApplicantId: number) {
+    try {
+        const applicant = await Applicant.findByPk(ApplicantId);
+        return applicant;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error while finding applicant by ID in database');
     }
   }

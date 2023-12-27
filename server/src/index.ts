@@ -17,8 +17,8 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use('/employee', employeeRouter);
 app.use('/applicant', applicantRouter);
+app.use('/employee', employeeRouter);
 app.use('/schedule', scheduleRouter);
 app.use('/job', jobRouter);
 app.use('/position', positionRouter);
