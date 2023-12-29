@@ -11,7 +11,19 @@
         margin-bottom: 8px;
       }
 
+      .custom-error-tip {
+        color: red;
+      }
   
+      .nz-form-control input::placeholder {
+        color: black; /* Replace with the desired color value */
+      }
+      
+      
+      /* Optional: Add styles to customize the focus color
+      .nz-form-control input:focus::placeholder {
+        color: #your-focused-color; 
+      } */
       
 
       

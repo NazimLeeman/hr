@@ -22,6 +22,8 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 import { ApplicantLoginComponent } from './applicant-login/applicant-login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     AppComponent,
     EmployeeLoginComponent,
     ApplicantLoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    LoginFormComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

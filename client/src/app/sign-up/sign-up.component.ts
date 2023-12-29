@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -85,5 +85,6 @@ export class SignUpComponent {
       hourlyRate: ['', [Validators.required]],
       // agree: [false]
     });
+    
   }
 }

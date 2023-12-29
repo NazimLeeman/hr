@@ -8,23 +8,23 @@ import { Router } from '@angular/router';
   styleUrl: './applicant-login.component.css'
 })
 export class ApplicantLoginComponent {
-  validateForm: FormGroup<{
-    email: FormControl<string>;
-    password: FormControl<string>;
-    remember: FormControl<boolean>;
-  }> = this.fb.group({
-    email: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    remember: [true]
-  });
-  constructor(private fb: NonNullableFormBuilder, private router: Router) {}
+  // validateForm: FormGroup<{
+  //   email: FormControl<string>;
+  //   password: FormControl<string>;
+  //   remember: FormControl<boolean>;
+  // }> = this.fb.group({
+  //   email: ['', [Validators.required]],
+  //   password: ['', [Validators.required]],
+  //   remember: [true]
+  // });
+  // constructor(private fb: NonNullableFormBuilder, private router: Router) {}
 
-  signUp() {
-    this.router.navigate(['/signup']);
-  }
+  // signUp() {
+  //   this.router.navigate(['/signup']);
+  // }
 
-  submitForm(): void {
-    console.log('submit', this.validateForm.value);
-  }
+  // submitForm(): void {
+  //   console.log('submit', this.validateForm.value);
+  // }
 
 }

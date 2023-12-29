@@ -7,19 +7,19 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@ang
   styleUrl: './employee-login.component.css'
 })
 export class EmployeeLoginComponent {
-  validateForm: FormGroup<{
-    email: FormControl<string>;
-    password: FormControl<string>;
-    remember: FormControl<boolean>;
-  }> = this.fb.group({
-    email: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    remember: [true]
-  });
+  // validateForm: FormGroup<{
+  //   email: FormControl<string>;
+  //   password: FormControl<string>;
+  //   remember: FormControl<boolean>;
+  // }> = this.fb.group({
+  //   email: ['', [Validators.required]],
+  //   password: ['', [Validators.required]],
+  //   remember: [true]
+  // });
 
-  submitForm(): void {
-    console.log('submit', this.validateForm.value);
-  }
+  // submitForm(): void {
+  //   console.log('submit', this.validateForm.value);
+  // }
 
-  constructor(private fb: NonNullableFormBuilder) {}
+  // constructor(private fb: NonNullableFormBuilder) {}
 }
