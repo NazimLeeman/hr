@@ -1,0 +1,22 @@
+ <div class="mx-2">
+  <div class="border cursor-pointer border-green-600 p-4 rounded-lg my-4 " style="width: 40rem;">
+    <div class="flex justify-between items-start">
+      <div >
+        <h3 class="text-2xl">{{card.title}}</h3>
+        <h3 class="text-lg">{{card.role}}</h3>
+        <div class="flex justify-center pt-2">
+          <button type="submit" nz-button
+              class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
+              [nzType]="'primary'">Apply
+          </button>
+        </div>
+      </div>      
+      <h3>{{card.salary | currency:'USD':true}}</h3>
+      
+    </div>
+    <div class=" bg-green-300 w-100 h-0.5 my-2">
+    </div>
+    <p class="description" *ngIf="isSliced">{{card.description | slice:0:450}}<span *ngIf="card.description.length > 100">...</span></p>
+  <p class="description" *ngIf="!isSliced">{{card.description }}</p>
+  </div>
+</div>

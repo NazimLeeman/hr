@@ -24,6 +24,15 @@ import { ApplicantLoginComponent } from './applicant-login/applicant-login.compo
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { JobCardComponent } from './job-card/job-card.component';
+import { RegistrationSummaryComponent } from './registration-summary/registration-summary.component';
+import { ExperienceComponent } from './experience/experience.component';
+import { SkillsComponent } from './skills/skills.component';
+import { ApplicationsComponent } from './applications/applications.component';
+import { SettingsComponent } from './settings/settings.component';
+import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
 
 
 @NgModule({
@@ -33,7 +42,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ApplicantLoginComponent,
     SignUpComponent,
     LoginFormComponent,
-    DashboardComponent
+    DashboardComponent,
+    SuccessDialogComponent,
+    JobCardComponent,
+    RegistrationSummaryComponent,
+    ExperienceComponent,
+    SkillsComponent,
+    ApplicationsComponent,
+    SettingsComponent,
+    NavbarProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +66,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NzBreadCrumbModule,
     NzUploadModule,
     NzSelectModule,
-    NzIconModule
+    NzIconModule,
+    NzNotificationModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

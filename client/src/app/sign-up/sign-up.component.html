@@ -1,34 +1,30 @@
-   <div class="min-h-screen bg-gray-100  py-6 flex flex-col justify-center sm:py-12">
-      <h1 class="text-4xl font-proxima font-bold text-center mb-8">Register Now and Savor the Flavor of a Restaurant Job You'll Love!</h1>
-    <div class="flex flex-row">
-      <img src="../../assets/images/SignupBG.png" class="mx-24" alt="" style="width:30rem;">
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center">
+     <h1 class="text-4xl font-proxima font-bold text-center mb-40">Register Now and Savor the Flavor of a Restaurant Job You'll Love!</h1>
+    <div class="flex flex-row mb-12">
+      <img src="../../assets/images/SignupBG.png" class="mx-48" alt="" style="width:30rem;">
     
-      <!-- <div class="bg-white border border-green-500 rounded-lg shadow-md p-8 mx-auto">  -->
+      <div class=" rounded-lg shadow-lg shadow-green-300 py-12 px-24 ml-60"> 
         <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-          <div class="font-GTPressura grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <nz-form-item>
-              <!-- <nz-form-label nzFor="email">Email</nz-form-label> -->
+          <div class="font-GTPressura ">
+            <nz-form-item >
               <nz-form-control nzErrorTip="The input is not a valid email!" class="custom-error-tip">
-                <input nz-input type="email" id="email" formControlName="email" placeholder="Email" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
+                <input nz-input type="email" id="email" formControlName="email" placeholder="Email" class="mb-4 border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
               </nz-form-control>
             </nz-form-item>
     
             <nz-form-item>
-              <!-- <nz-form-label nzFor="password">Password</nz-form-label> -->
               <nz-form-control nzErrorTip="Please input your password!" class="custom-error-tip">
-                <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" placeholder="Password" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
+                <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" placeholder="Password" class="mb-4 border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
               </nz-form-control>
             </nz-form-item>
     
             <nz-form-item>
-              <!-- <nz-form-label nzFor="name">Name</nz-form-label> -->
               <nz-form-control nzErrorTip="Please input your name!" class="custom-error-tip">
-                <input nz-input id="name" formControlName="name" placeholder="Name" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
+                <input nz-input id="name" formControlName="name" placeholder="Name" class="mb-4 border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
               </nz-form-control>
             </nz-form-item>
 
             <nz-form-item>
-              <!-- <nz-form-label nzFor="checkPassword">Confirm Password</nz-form-label> -->
               <nz-form-control [nzErrorTip]="errorTpl" class="custom-error-tip">
                 <input nz-input type="password" id="checkPassword" formControlName="checkPassword" placeholder="Confirm password" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
                 <ng-template #errorTpl let-control>
@@ -38,15 +34,11 @@
               </nz-form-control>
             </nz-form-item>
     
-            <nz-form-item>
-              <!-- <nz-form-label nzFor="phoneNumber">Phone Number</nz-form-label> -->
+            <!-- <nz-form-item>
               <nz-form-control [nzValidateStatus]="validateForm.controls['phoneNumber']" nzErrorTip="Please input your phone number!" class="custom-error-tip">
                 <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
                   <ng-template #addOnBeforeTemplate>
-                    <!-- <nz-select formControlName="phoneNumberPrefix" class="phone-select">
-                      <nz-option nzLabel="+86" nzValue="+86"></nz-option>
-                      <nz-option nzLabel="+87" nzValue="+87"></nz-option>
-                    </nz-select> -->
+                    
                   </ng-template>
                 </nz-input-group>
                 <input nz-input formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
@@ -54,14 +46,12 @@
             </nz-form-item>
 
             <nz-form-item>
-              <!-- <nz-form-label nzFor="hourlyRate">Hourly Rate</nz-form-label> -->
               <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
                 <input nz-input id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;"> 
               </nz-form-control>
-            </nz-form-item>
+            </nz-form-item> -->
     
-            <nz-form-item>
-              <!-- <nz-form-label nzFor="address">Address</nz-form-label> -->
+            <!-- <nz-form-item>
               <nz-form-control nzErrorTip="Please input a address!" class="custom-error-tip">
                 <textarea nz-input id="address" formControlName="address" placeholder="Address" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
                 </textarea>
@@ -69,25 +59,23 @@
             </nz-form-item>
 
             <nz-form-item>
-              <!-- <nz-form-label nzFor="skillTags">Skill Tags</nz-form-label> -->
               <nz-form-control nzErrorTip="Please input your skill Tags!" class="custom-error-tip">
                 <textarea nz-input id="skillTags" formControlName="skillTags" placeholder="Skill Tags" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
                 </textarea>
               </nz-form-control>
-            </nz-form-item>
-
+            </nz-form-item> -->
+            
           </div>
           
-          <div class="flex pt-4 font-GTPressura">
+          <!-- <div class="flex pt-4 font-GTPressura">
             <nz-form-item>
-              <!-- <nz-form-label nzFor="experience">Experience</nz-form-label> -->
               <nz-form-control nzErrorTip="Please input your experience!" class="custom-error-tip">
                 <textarea nz-input id="experience" formControlName="experience" placeholder="Experience" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:w-80 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all " style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
                 </textarea>
               </nz-form-control>
             </nz-form-item>
-          </div>
-          <div class="flex justify-center pt-4">
+          </div> -->
+          <div class="flex justify-center pt-8">
             <button type="submit" nz-button
                 class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
                 [nzType]="'primary'">Register

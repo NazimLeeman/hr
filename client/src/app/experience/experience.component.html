@@ -1,0 +1,24 @@
+<app-navbar-profile></app-navbar-profile>
+<div class="mx-60 border font-GTPressura">
+    <div class="p-4 ml-4">
+    <h1 class="text-3xl mb-2">Experience</h1>
+       <p class="mx-2">Highlight any relevant work & volunteer experience you may have.</p> 
+<div class="flex p-3 font-GTPressura">
+    <form nz-form class="p-8 " [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label>Add Experience</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your experience!" class="custom-error-tip">
+        <textarea nz-input id="experience" formControlName="experience" placeholder="Experience" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:w-80 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all " style="padding-left: 2px; padding: 2rem;  border-radius: 10px;">
+        </textarea>
+      </nz-form-control>
+    </nz-form-item>
+    </form>
+  </div>
+  <div class="flex justify-center pt-8">
+    <button type="submit" nz-button
+        class="font-GTPressura bg-green-500 text-white rounded-md px-4 py-1 h-12 text-xl hover:bg-green-600"
+        [nzType]="'primary'">Save Experience
+    </button>
+</div>
+</div>
+</div>

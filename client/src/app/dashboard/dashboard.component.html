@@ -6,5 +6,21 @@
       </div>
     </div>
   </nav>
-  
-  
+
+  <div class="flex justify-center mt-2">
+      <label class="text-xl mr-56">Find Job</label>
+  </div>
+  <div class="flex justify-center mt-2 mr-6">
+    <input type="text" placeholder="Search anything" class=" border rounded-lg  px-32 py-2" style="padding-left: 1rem;">
+  </div>
+
+  <div class="flex ml-52">
+    <div>
+      <app-job-card *ngFor="let card of cards" [card]="card" [isSliced]="true" (click)="selectCard(card)" ></app-job-card>
+    </div>
+    <div class="selected-card">
+      <app-job-card *ngIf="selectedCard" [card]="selectedCard" [isSliced]="false"></app-job-card>
+    
+    </div>
+  </div>
+

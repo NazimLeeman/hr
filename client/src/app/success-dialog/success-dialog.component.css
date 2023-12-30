@@ -1,0 +1,47 @@
+.congratulations-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  }
+  
+  .congratulations-title {
+    font-size: 24px;
+    font-size: larger;
+    margin-bottom: 10px;
+  }
+  
+  .congratulations-message {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  
+  
+  .animated-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24rem;
+    height: 8rem;
+    border: #4CAF50;
+    border-radius: 2rem;
+    background-color: #4CAF50; /* Green background color */
+    margin: 20rem auto; /* Center the div horizontally */
+    /* animation: bounce 1s infinite alternate; Apply the bounce animation */
+  }
+  
+  .center-button {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  @keyframes bounce {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-20px);
+    }
+  }
+  
