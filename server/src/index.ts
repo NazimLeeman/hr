@@ -12,7 +12,7 @@ import attendanceRouter from './routers/attendance.router'
 const app: Express = express();
 
 app.use(cors({
-  origin: config.CORS_ORIGIN.split(',')
+  origin: config.CORS_ORIGIN
 }));
 
 app.use(express.json());
