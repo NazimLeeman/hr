@@ -28,4 +28,9 @@ export class ApiClientService {
     const url = `${this.apiUrl}/applicant/loginData/${applicantId}`
     return this.http.get(url);
   }
+  
+  getApplicantData(applicantId: number): Observable<any> {
+    const url = `${this.apiUrl}/applicant/${applicantId}`
+    return this.http.get(url);
+  }
 }

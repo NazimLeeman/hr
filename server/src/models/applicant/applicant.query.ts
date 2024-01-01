@@ -82,7 +82,7 @@ export async function findApplicantBySearchTerm (searchTerm: string) {
   export async function findApplicantById(ApplicantId: number) {
     try {
         const applicant = await Applicant.findByPk(ApplicantId);
-        return applicant;
+        return applicant;  
     } catch (error) {
         console.log(error);
         throw new Error('Error while finding applicant by ID in database');

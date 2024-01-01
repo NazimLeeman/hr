@@ -153,3 +153,18 @@ export async function getApplicantLoginData(req: Request, res: Response) {
       return res.status(500).json({ message: 'Internal Server Error' });
   }
 }
+
+export async function getApplicantById(req: Request, res: Response) {
+  const applicantId = Number(req.params.applicantId);
+  try {
+    const applicantData = await findApplicantById(applicantId);
+    if(applicantId) {
+      return res.status(200).json({data: applicantData})
+    } else {
+      return res.status(404).json({ message: 'Applicant data not found'})
+    }
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+}

@@ -9,17 +9,17 @@
                 <label class="mb-6" for="">First Name
                     <input type="text" [value]="firstName" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
                 </label>
-                <label class=""  for="">Email
-                    <input type="text" [value]="lastName" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
+                <label class=""  for="email">Email
+                    <input type="text" [value]="email" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
                 </label>
             </div>
 
             <div class="flex flex-col justify-center">
                 <label class="mb-6" for="">Last Name
-                    <input type="text" [value]="firstName" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
-                </label>
-                <label class=""  for="">Password
                     <input type="text" [value]="lastName" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
+                </label>
+                <label class=""  for="password">Password
+                    <input type="password" [value]="password" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
                 </label>
                 
             </div>
@@ -30,26 +30,26 @@
         <form nz-form class="p-8 grid grid-cols-2 " [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <nz-form-item class="p-3">
             <nz-form-label>Enter your phone number to connect with others</nz-form-label>
-            <nz-form-control [nzValidateStatus]="validateForm.controls['phoneNumber']" nzErrorTip="Please input your phone number!" class="custom-error-tip">
-              <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+            <nz-form-control  nzErrorTip="Please input your phone number!" class="custom-error-tip">
+              <!-- <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
                 <ng-template #addOnBeforeTemplate>
                 </ng-template>
-              </nz-input-group>
-              <input nz-input formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;">
+              </nz-input-group> -->
+              <input nz-input [value]="phoneNumber" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;">
             </nz-form-control>
           </nz-form-item>
     
           <nz-form-item class="p-3">
             <nz-form-label>Enter your expected hourly rate</nz-form-label>
             <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
-              <input nz-input id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
+              <input nz-input [value]="hourlyRate" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
             </nz-form-control>
           </nz-form-item>
     
           <nz-form-item class="p-3">
             <nz-form-label>Entering your address allows us to find jobs closest to you!</nz-form-label>
             <nz-form-control nzErrorTip="Please input a address!" class="custom-error-tip">
-              <textarea nz-input id="address" formControlName="address" placeholder="Address" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem;  border-radius: 10px;">
+              <textarea nz-input [value]="address" id="address" formControlName="address" placeholder="Address" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem;  border-radius: 10px;">
               </textarea>
             </nz-form-control>
           </nz-form-item>

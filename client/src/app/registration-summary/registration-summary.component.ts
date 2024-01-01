@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ApiClientService } from '../api-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration-summary',
@@ -17,32 +18,59 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RegistrationSummaryComponent implements OnInit {
 
-  applicantId: number = 0; // Assuming applicantId is a string, update accordingly
+  applicantId: number = 0;
   firstName: string = '';
   lastName: string = '';
   email: string = '';
+  address: string = '';
+  hourlyRate: number = 0;
+  phoneNumber: number = +880;
   password: string = '';
 
   validateForm: FormGroup<{
-    phoneNumber: FormControl<string>,
+    // phoneNumber: FormControl<string>,
     address: FormControl<string>;
-    experience: FormControl<string>;
-    skillTags: FormControl<string>;
-    hourlyRate: FormControl<string>;
+    // experience: FormControl<string>;
+    // skillTags: FormControl<string>;
+    // hourlyRate: FormControl<string>;
   }>
 
-  ngOnInit(): void {
-      this.route.params.subscribe(params => {
-        this.applicantId = params['applicantId']
-
-        this.apiClientService.getRegisterData(this.applicantId).subscribe((data: any) => {
-          // Update component properties with received data
-          this.firstName = data.firstName;
-          this.lastName = data.lastName;
-          this.email = data.email;
-          this.password = data.password;
+ngOnInit(): void {
+  this.route.params.pipe(
+      switchMap((params) => {
+          this.applicantId = params['applicantId'];
+          return this.apiClientService.getRegisterData(this.applicantId);
       })
-  })
+  ).subscribe(
+      (data: any) => {
+        console.log('API Response:', data);
+          this.email = data.data.email;
+          this.password = data.data.password;
+      },
+      (error) => {
+          console.error('Error fetching data from the API', error);
+      }
+  );
+}
+
+additionOnInit(): void {
+  this.route.params.pipe(
+      switchMap((params) => {
+          this.applicantId = params['applicantId'];
+          return this.apiClientService.getApplicantData(this.applicantId);
+      })
+  ).subscribe(
+      (data: any) => {
+        console.log('API Response:', data);
+          this.firstName = data.data.name;
+          this.hourlyRate = data.data.hourlyRate;
+          this.address = data.data.address;
+          this.phoneNumber = data.data.phoneNumber
+      },
+      (error) => {
+          console.error('Error fetching data from the API', error);
+      }
+  );
 }
 
   submitForm(): void {
@@ -67,11 +95,11 @@ export class RegistrationSummaryComponent implements OnInit {
 
   constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
-      phoneNumber: ['', [Validators.required]],
+      // phoneNumber: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      experience: ['', [Validators.required]],
-      skillTags: ['', [Validators.required]],
-      hourlyRate: ['', [Validators.required]],
+      // experience: ['', [Validators.required]],
+      // skillTags: ['', [Validators.required]],
+      // hourlyRate: ['', [Validators.required]],
     })
   }
 
