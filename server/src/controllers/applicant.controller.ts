@@ -1,23 +1,18 @@
 import bcrypt from 'bcryptjs';
 import { Request, Response } from "express";
-import { createApplicant, findAllApplicant, findApplicantById, findApplicantBySearchTerm } from "../models/applicant/applicant.query";
+import { createApplicant, deleteApplicantById, updateApplicantById, findAllApplicant, findApplicantById, findApplicantBySearchTerm, findAllApplicantLogin, deleteApplicantLogin } from "../models/applicant/applicant.query";
 import { createApplicantLogin, findApplicantLoginByEmail } from "../models/applicantLogin/applicantLogin.query";
 
 
 export async function postApplicant (req: Request, res: Response) {
   try {
-    const { name, email, password, experience, phoneNumber, address, skillTags, hourlyRate } = req.body;
+    const { name, email, password } = req.body;
     if (name && email && typeof name === 'string' && typeof email === 'string') {
       const loginCheck = await findApplicantLoginByEmail(email);
       if(!loginCheck) {
         const newApplicant = await createApplicant({
           name, 
-          email, 
-          experience,
-          phoneNumber,
-          address,
-          skillTags,
-          hourlyRate,
+          email
           });
 
         const salt = bcrypt.genSaltSync();
@@ -64,6 +59,16 @@ export async function getAllApplicant (req: Request, res: Response) {
   }
 }
 
+export async function getAllApplicantLogin (req: Request, res: Response) {
+  try {
+    const applicants = await findAllApplicantLogin();
+    res.json({ data: applicants });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
+
 export async function login (req: Request, res: Response) {
   try {
     const { email, password } = req.body;
@@ -82,4 +87,54 @@ export async function login (req: Request, res: Response) {
     console.log(error);
     res.status(500).send({ message: (error as Error).message})
   }
+}
+
+export async function deleteApplicant(req: Request, res: Response) {
+  const applicantId = Number(req.params.applicantId);
+    try {
+        const result = await deleteApplicantById(applicantId);
+
+        if (result.success) {
+          const loginData = await deleteApplicantLogin(applicantId)
+            return res.status(200).json({ message: result.message });
+        } else {
+            return res.status(404).json({ message: result.message });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
+
+export async function updateApplicant(req: Request, res: Response) {
+  const applicantId = parseInt(req.params.applicantId, 10);
+  const updatedData = req.body; 
+
+  try {
+      const result = await updateApplicantById(applicantId, updatedData);
+
+      if (result.success) {
+          return res.status(200).json({ message: result.message });
+      } else {
+          return res.status(404).json({ message: result.message });
+      }
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
+export async function deleteApplicantLoginData(req: Request, res: Response) {
+  const applicantId = Number(req.params.applicantId);
+    try {
+        const result = await deleteApplicantLogin(applicantId);
+        if (result.success) {
+            return res.status(200).json({ message: result.message });
+        } else {
+            return res.status(404).json({ message: result.message });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
 }

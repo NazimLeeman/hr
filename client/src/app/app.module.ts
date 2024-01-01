@@ -33,6 +33,13 @@ import { SkillsComponent } from './skills/skills.component';
 import { ApplicationsComponent } from './applications/applications.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
+import { AdminSummaryComponent } from './admin-summary/admin-summary.component';
+import { PostJobComponent } from './post-job/post-job.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { ScheduleAdminComponent } from './schedule-admin/schedule-admin.component';
+import { ApplicantTrackingComponent } from './applicant-tracking/applicant-tracking.component';
+import { PayrollComponent } from './payroll/payroll.component';
 
 
 @NgModule({
@@ -50,7 +57,14 @@ import { NavbarProfileComponent } from './navbar-profile/navbar-profile.componen
     SkillsComponent,
     ApplicationsComponent,
     SettingsComponent,
-    NavbarProfileComponent
+    NavbarProfileComponent,
+    AdminSummaryComponent,
+    PostJobComponent,
+    NavbarAdminComponent,
+    CreateEmployeeComponent,
+    ScheduleAdminComponent,
+    ApplicantTrackingComponent,
+    PayrollComponent
   ],
   imports: [
     BrowserModule,

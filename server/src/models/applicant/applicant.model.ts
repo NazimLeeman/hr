@@ -27,23 +27,28 @@ const Applicant = sequelize.define<ApplicantInstance>('applicant', {
     },
     experience: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true,
+        defaultValue: ''
     },
     phoneNumber: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 0
     },
     address: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true,
+        defaultValue: ''
     },
     skillTags: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true,
+        defaultValue: ''
     },
     hourlyRate: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 0
     }
 })
 

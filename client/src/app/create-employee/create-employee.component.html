@@ -1,26 +1,25 @@
-<!-- <nav class="navbar bg-green-600 text-white">
-    <div class="container mx-auto flex items-center justify-end">
-      <div class="flex items-center p-2">
-        <button class="btn btn-ghost border rounded-md px-3 py-2 bg-white text-green-600">Log out</button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="mx-60 border font-GTPressura">
-    <div>
-        <div class="bg-gray-300 flex justify-around p-2 list-none">
-            <li class="cursor-pointer" routerLink="/profile">Profile</li>
-            <li class="cursor-pointer" routerLink="/experience">Experience</li>
-            <li class="cursor-pointer" routerLink="/skills">Skills</li>
-            <li class="cursor-pointer" routerLink="/applications">Applications</li>
-            <li class="cursor-pointer" routerLink="/settings">Settings</li>
+<app-navbar-admin></app-navbar-admin>
+<div class="mx-60 border font-GTPressura">
+    <div *ngIf="!showForm">
+    <h1 class="mt-6 text-center text-3xl">You dont have any Employee right now.</h1>
+    <div  class=" flex justify-center mt-2 p-8">
+    <button type="submit" nz-button
+        class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 h-12 text-xl hover:bg-green-600"
+        [nzType]="'primary'" (click)="showForm = true">Create New Employee
+    </button>
+  </div>
+</div>
+    <div *ngIf="showForm">
+        <div class="float-right m-4">
+            <button type="submit" nz-button
+        class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 h-12 text-xl hover:bg-green-600"
+        [nzType]="'primary'" (click)="showForm = false">Go back
+    </button>
         </div>
-      </div> -->
-      <app-navbar-profile></app-navbar-profile>
-      <div class="mx-60 border font-GTPressura">
       <div class="p-4 ml-4">
-          <h1 class="text-3xl pb-4">Contact Info</h1>
-          <p class="mx-2 pb-4">Start by filling in some basic profile and contact information.</p>
+        
+          <h1 class="text-3xl pb-4">Create Employee</h1>
+          <p class="mx-2 pb-4">Create by filling in these information.</p>
           <div class="grid grid-cols-3">
             <img class=" pb-4" src="../../assets/images/user-profile-default.png">
             <div class="flex flex-col justify-center">
@@ -45,9 +44,9 @@
           </div>
         
     </div>
-        <form nz-form class="p-8 grid grid-cols-2 " [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <form nz-form class="p-8 grid grid-cols-3 " [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <nz-form-item class="p-3">
-            <nz-form-label>Enter your phone number to connect with others</nz-form-label>
+            <nz-form-label>Phone Number</nz-form-label>
             <nz-form-control [nzValidateStatus]="validateForm.controls['phoneNumber']" nzErrorTip="Please input your phone number!" class="custom-error-tip">
               <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
                 <ng-template #addOnBeforeTemplate>
@@ -58,50 +57,60 @@
           </nz-form-item>
     
           <nz-form-item class="p-3">
-            <nz-form-label>Enter your expected hourly rate</nz-form-label>
+            <nz-form-label>Hourly Rate</nz-form-label>
             <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
               <input nz-input id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
             </nz-form-control>
           </nz-form-item>
     
           <nz-form-item class="p-3">
-            <nz-form-label>Entering your address allows us to find jobs closest to you!</nz-form-label>
+            <nz-form-label>Address</nz-form-label>
             <nz-form-control nzErrorTip="Please input a address!" class="custom-error-tip">
               <textarea nz-input id="address" formControlName="address" placeholder="Address" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem;  border-radius: 10px;">
               </textarea>
             </nz-form-control>
           </nz-form-item>
-    
-          <!-- <nz-form-item class="p-3">
+          
+          <nz-form-item class="p-3">
+            <nz-form-label>Experience</nz-form-label>
+            <nz-form-control nzErrorTip="Please input a address!" class="custom-error-tip">
+              <textarea nz-input id="address" formControlName="address" placeholder="Address" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem;  border-radius: 10px;">
+              </textarea>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="p-3">
+            <nz-form-label>Skill Tags</nz-form-label>
             <nz-form-control nzErrorTip="Please input your skill Tags!" class="custom-error-tip">
-              <textarea nz-input id="skillTags" formControlName="skillTags" placeholder="Skill Tags" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:w-80 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;">
+              <textarea nz-input id="skillTags" formControlName="skillTags" placeholder="Skill Tags" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; border-radius: 10px;">
               </textarea>
+            </nz-form-control>
+          </nz-form-item>
+          
+          <nz-form-item class="p-3">
+            <nz-form-label>Service Access</nz-form-label>
+            <nz-form-control nzErrorTip="Please input service access!" class="custom-error-tip">
+              <select nz-input id="serviceAccess" formControlName="serviceAccess" placeholder="KDS" class="border bg-gray-100  text-gray-700  focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; height: auto; border-radius: 10px;">
+                <option value="" disabled selected>Select services</option>
+                <option value="Option 1">INVENTORY</option>
+                <option value="Option 2">MENU BUILDER</option>
+                <option value="Option 3">KDS</option>
+                <option value="Option 4">MARKET PLACE</option>
+                <option value="Option 5">POS</option>
+                <!-- <option value="Option 6"></option>   -->
+            </select>
             </nz-form-control>
           </nz-form-item>
     
-        
-        
-        <div class="flex p-3 font-GTPressura">
-          <nz-form-item>
-            <nz-form-control nzErrorTip="Please input your experience!" class="custom-error-tip">
-              <textarea nz-input id="experience" formControlName="experience" placeholder="Experience" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:w-80 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all " style="padding-left: 2px; padding: .5rem;  border-radius: 10px;">
-              </textarea>
-            </nz-form-control>
-          </nz-form-item>
-        </div> -->
+          
     </form>
     <div >
         
-        <div class=" flex justify-center p-16">
+        <div class=" flex justify-center p-14">
           <button type="submit" nz-button
               class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
-              [nzType]="'primary'">Save
+              [nzType]="'primary'">Create
           </button>
         </div>
-    </div>
-    
-  </div>
-
-  
-
-
+    </div>   
+</div>

@@ -1,0 +1,88 @@
+<app-navbar-admin></app-navbar-admin>
+
+  <div class="mx-60 border font-GTPressura">
+    <div *ngIf="!showForm">
+        <h1 class="mt-6 text-center text-3xl">You didn't posted any Job.</h1>
+        <div  class=" flex justify-center mt-2 p-8">
+        <button type="submit" nz-button
+            class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 h-12 text-xl hover:bg-green-600"
+            [nzType]="'primary'" (click)="showForm = true">Create Job Post
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="showForm">
+        <div class="float-right m-4">
+            <button type="submit" nz-button
+        class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 h-12 text-xl hover:bg-green-600"
+        [nzType]="'primary'" (click)="showForm = false">Go back
+    </button>
+        </div>
+      <div class="p-4 ml-4">
+          <h1 class="text-3xl pb-4">Create Job</h1>
+          <p class="mx-2 pb-4">Create by filling in these information.</p>        
+    </div>
+        <form nz-form class="p-8 grid grid-cols-3 " [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item class="p-3">
+            <nz-form-label>Job Role</nz-form-label>
+            <nz-form-control nzErrorTip="Please input Job Role!" class="custom-error-tip">
+                <input nz-input id="jobRole" formControlName="jobRole" placeholder="Chef" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
+              </nz-form-control>
+          </nz-form-item>
+    
+          <nz-form-item class="p-3">
+            <nz-form-label>Job Nature</nz-form-label>
+            <nz-form-control nzErrorTip="Please input the Job Nature!" class="custom-error-tip">
+              <input nz-input id="jobNature" formControlName="jobNature" placeholder="Full-Time" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
+            </nz-form-control>
+          </nz-form-item>
+          
+          <nz-form-item class="p-3">
+            <nz-form-label>Hourly Rate</nz-form-label>
+            <nz-form-control nzErrorTip="Please input your Hourly Rate!" class="custom-error-tip">
+              <input nz-input id="hourlyRate formControlName="hourlyRate placeholder="20$" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
+            </nz-form-control>
+          </nz-form-item>
+    
+          
+          
+          <nz-form-item class="p-3">
+            <nz-form-label>Experience </nz-form-label>
+            <nz-form-control nzErrorTip="Please input your required experience!" class="custom-error-tip">
+              <textarea nz-input id="experience" formControlName="experience" placeholder="Experience" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem;  border-radius: 10px;">
+              </textarea>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="p-3">
+            <nz-form-label>Skill Tags</nz-form-label>
+            <nz-form-control nzErrorTip="Please input your required skill Tags!" class="custom-error-tip">
+              <textarea nz-input id="skillTags" formControlName="skillTags" placeholder="Skill Tags" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; border-radius: 10px;">
+              </textarea>
+            </nz-form-control>
+          </nz-form-item>
+          
+          <nz-form-item class="p-3">
+            <nz-form-label>Job Description</nz-form-label>
+            <nz-form-control nzErrorTip="Please input job description!" class="custom-error-tip">
+              <textarea nz-input id="jobDescription" formControlName="jobDescription" placeholder="Description" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; border-radius: 10px;">
+              </textarea>
+            </nz-form-control>
+          </nz-form-item>
+    
+    </form>
+    <div >
+        
+        <div class=" flex justify-center p-16">
+          <button type="submit" nz-button
+              class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
+              [nzType]="'primary'">Post
+          </button>
+        </div>
+    </div>
+    
+  </div>
+</div>
+  
+
+

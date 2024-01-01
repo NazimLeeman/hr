@@ -10,11 +10,23 @@ import { ApplicationsComponent } from './applications/applications.component';
 import { ExperienceComponent } from './experience/experience.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SkillsComponent } from './skills/skills.component';
+import { AdminSummaryComponent } from './admin-summary/admin-summary.component';
+import { PostJobComponent } from './post-job/post-job.component';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { ScheduleAdminComponent } from './schedule-admin/schedule-admin.component';
+import { ApplicantTrackingComponent } from './applicant-tracking/applicant-tracking.component';
+import { PayrollComponent } from './payroll/payroll.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent},
   { path: 'signup', component: SignUpComponent},
   { path: 'profile', component: RegistrationSummaryComponent },
+  { path: 'admin', component: AdminSummaryComponent },
+  { path: 'createEmployee', component: CreateEmployeeComponent},
+  { path: 'createSchedule', component: ScheduleAdminComponent},
+  { path: 'jobs', component: PostJobComponent },
+  { path: 'applicant', component: ApplicantTrackingComponent },
+  { path: 'payroll', component: PayrollComponent },
   // { path: 'profile', component: ProfileComponent },
   { path: 'experience', component: ExperienceComponent },
   { path: 'skills', component: SkillsComponent },

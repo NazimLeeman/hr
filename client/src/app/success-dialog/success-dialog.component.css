@@ -1,10 +1,4 @@
-.congratulations-container {
-    text-align: center;
-    padding: 20px;
-    background-color: #4CAF50; /* Green background color */
-    color: white; /* White text color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
-  }
+
   
   .congratulations-title {
     font-size: 24px;
@@ -25,7 +19,7 @@
     width: 24rem;
     height: 8rem;
     border: #4CAF50;
-    border-radius: 2rem;
+    border-radius: 1rem;
     background-color: #4CAF50; /* Green background color */
     margin: 20rem auto; /* Center the div horizontally */
     /* animation: bounce 1s infinite alternate; Apply the bounce animation */
