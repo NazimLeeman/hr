@@ -28,11 +28,9 @@ export class RegistrationSummaryComponent implements OnInit {
   password: string = '';
 
   validateForm: FormGroup<{
-    // phoneNumber: FormControl<string>,
+    phoneNumber: FormControl<number>,
     address: FormControl<string>;
-    // experience: FormControl<string>;
-    // skillTags: FormControl<string>;
-    // hourlyRate: FormControl<string>;
+    hourlyRate: FormControl<number>;
   }>
 
 ngOnInit(): void {
@@ -45,7 +43,9 @@ ngOnInit(): void {
       (data: any) => {
         console.log('API Response:', data);
           this.email = data.data.email;
-          this.password = data.data.password;
+          this.password = '********';
+
+          this.additionOnInit();
       },
       (error) => {
           console.error('Error fetching data from the API', error);
@@ -62,10 +62,22 @@ additionOnInit(): void {
   ).subscribe(
       (data: any) => {
         console.log('API Response:', data);
+      this.firstName = '';
+      this.lastName = '';
+
+      if (data.data.name) {
+        const spaceIndex = data.data.name.indexOf(' ');
+        if (spaceIndex !== -1) {
+          this.firstName = data.data.name.substring(0, spaceIndex);
+          this.lastName = data.data.name.substring(spaceIndex + 1);
+        } else {
           this.firstName = data.data.name;
-          this.hourlyRate = data.data.hourlyRate;
-          this.address = data.data.address;
-          this.phoneNumber = data.data.phoneNumber
+        }
+      }
+
+      this.hourlyRate = data.data.hourlyRate;
+      this.address = data.data.address;
+      this.phoneNumber = data.data.phoneNumber;
       },
       (error) => {
           console.error('Error fetching data from the API', error);
@@ -75,13 +87,12 @@ additionOnInit(): void {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      const userData = this.validateForm.value;
-      this.apiClientService.registerUser(userData).subscribe((response) => {
-        console.log('Applicant registered successfully:', response);
-        this.router.navigate(['/summary']);
+      const updatedData = this.validateForm.value;
+      this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
+        console.log('Applicant updated successfully:', response);
       },
       (error) => {
-        console.log("Error during resgistration", error)
+        console.log("Error during update", error)
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -95,11 +106,9 @@ additionOnInit(): void {
 
   constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
-      // phoneNumber: ['', [Validators.required]],
+      phoneNumber: [+880, [Validators.required]],
       address: ['', [Validators.required]],
-      // experience: ['', [Validators.required]],
-      // skillTags: ['', [Validators.required]],
-      // hourlyRate: ['', [Validators.required]],
+      hourlyRate: [0, [Validators.required]],
     })
   }
 

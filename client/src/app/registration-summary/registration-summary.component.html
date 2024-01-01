@@ -5,7 +5,7 @@
           <p class="mx-2 pb-4">Start by filling in some basic profile and contact information.</p>
           <div class="grid grid-cols-3">
             <img class=" pb-4" src="../../assets/images/user-profile-default.png">
-            <div class="flex flex-col justify-center">
+            <div class="flex flex-col justify-center">              
                 <label class="mb-6" for="">First Name
                     <input type="text" [value]="firstName" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
                 </label>
@@ -31,10 +31,6 @@
         <nz-form-item class="p-3">
             <nz-form-label>Enter your phone number to connect with others</nz-form-label>
             <nz-form-control  nzErrorTip="Please input your phone number!" class="custom-error-tip">
-              <!-- <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-                <ng-template #addOnBeforeTemplate>
-                </ng-template>
-              </nz-input-group> -->
               <input nz-input [value]="phoneNumber" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;">
             </nz-form-control>
           </nz-form-item>
@@ -60,11 +56,10 @@
         <div class=" flex justify-center p-16">
           <button type="submit" nz-button
               class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
-              [nzType]="'primary'">Save
+              [nzType]="'primary'" (click)="submitForm()">Save
           </button>
         </div>
     </div>
-    
   </div>
 
   

@@ -33,4 +33,9 @@ export class ApiClientService {
     const url = `${this.apiUrl}/applicant/${applicantId}`
     return this.http.get(url);
   }
+
+  updateApplicantData(applicantId: number, updatedData: any): Observable<any> {
+    const url = `${this.apiUrl}/applicant/${applicantId}`
+    return this.http.put(url, updatedData);
+  }
 }
