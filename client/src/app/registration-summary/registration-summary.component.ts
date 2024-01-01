@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -8,17 +8,20 @@ import {
   Validators
 } from '@angular/forms';
 import { ApiClientService } from '../api-client.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registration-summary',
   templateUrl: './registration-summary.component.html',
   styleUrl: './registration-summary.component.css'
 })
-export class RegistrationSummaryComponent {
+export class RegistrationSummaryComponent implements OnInit {
 
-  @Input() firstName: string = '';
-  @Input() lastName: string = '';
+  applicantId: number = 0; // Assuming applicantId is a string, update accordingly
+  firstName: string = '';
+  lastName: string = '';
+  email: string = '';
+  password: string = '';
 
   validateForm: FormGroup<{
     phoneNumber: FormControl<string>,
@@ -28,19 +31,30 @@ export class RegistrationSummaryComponent {
     hourlyRate: FormControl<string>;
   }>
 
+  ngOnInit(): void {
+      this.route.params.subscribe(params => {
+        this.applicantId = params['applicantId']
+
+        this.apiClientService.getRegisterData(this.applicantId).subscribe((data: any) => {
+          // Update component properties with received data
+          this.firstName = data.firstName;
+          this.lastName = data.lastName;
+          this.email = data.email;
+          this.password = data.password;
+      })
+  })
+}
+
   submitForm(): void {
     if (this.validateForm.valid) {
       const userData = this.validateForm.value;
       this.apiClientService.registerUser(userData).subscribe((response) => {
         console.log('Applicant registered successfully:', response);
-        // this.router.navigate(['/success'])
         this.router.navigate(['/summary']);
-        // this.showSuccessNotification();
       },
       (error) => {
         console.log("Error during resgistration", error)
       })
-      // console.log('submit', this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -51,7 +65,7 @@ export class RegistrationSummaryComponent {
     }
   }
 
-  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
+  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
       phoneNumber: ['', [Validators.required]],
       address: ['', [Validators.required]],

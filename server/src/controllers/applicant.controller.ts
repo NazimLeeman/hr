@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { Request, Response } from "express";
-import { createApplicant, deleteApplicantById, updateApplicantById, findAllApplicant, findApplicantById, findApplicantBySearchTerm, findAllApplicantLogin, deleteApplicantLogin } from "../models/applicant/applicant.query";
-import { createApplicantLogin, findApplicantLoginByEmail } from "../models/applicantLogin/applicantLogin.query";
+import { createApplicant,  deleteApplicantById, updateApplicantById, findAllApplicant, findApplicantById, findApplicantBySearchTerm, findAllApplicantLogin, deleteApplicantLogin } from "../models/applicant/applicant.query";
+import { createApplicantLogin, findApplicantLoginData, findApplicantLoginByEmail } from "../models/applicantLogin/applicantLogin.query";
 
 
 export async function postApplicant (req: Request, res: Response) {
@@ -137,4 +137,19 @@ export async function deleteApplicantLoginData(req: Request, res: Response) {
         console.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
+}
+
+export async function getApplicantLoginData(req: Request, res: Response) {
+  const applicantId = Number(req.params.applicantId);
+  try {
+      const loginData = await findApplicantLoginData(applicantId);
+      if (loginData) {
+          return res.status(200).json({ data: loginData });
+      } else {
+          return res.status(404).json({ message: 'Applicant login data not found' });
+      }
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+  }
 }

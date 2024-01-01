@@ -25,3 +25,18 @@ export async function createApplicantLogin (data: IApplicantLogin) {
     }
 }
 
+export async function findApplicantLoginData(applicantId: number) {
+    try {
+        const loginData = await ApplicantLogin.findOne({
+            where: {
+                applicantId: applicantId
+            }
+        });
+        return loginData;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error while finding applicant login data by applicantId from the database.');
+    }
+}
+
+

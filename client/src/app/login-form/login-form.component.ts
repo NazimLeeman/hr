@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Input, OnInit } from '@angular/core';
+import { ApiClientService } from '../api-client.service';
 
 @Component({
   selector: 'app-login-form',
@@ -13,6 +14,7 @@ export class LoginFormComponent {
   @Input() signInLabel: string = 'Sign in';
   @Input() signUpLabel: string = 'Sign Up';
   @Input() showSignUpButton: boolean = true;
+  @Input() signInRoute: string = '/profile';
 
   validateForm: FormGroup<{
     email: FormControl<string>;
@@ -23,7 +25,7 @@ export class LoginFormComponent {
     password: ['', [Validators.required]],
     remember: [true]
   });
-  constructor(private fb: NonNullableFormBuilder, private router: Router) {}
+  constructor(private fb: NonNullableFormBuilder,private apiClientService: ApiClientService, private router: Router) {}
 
   showSignUp(): boolean {
     return this.showSignUpButton;
@@ -34,6 +36,23 @@ export class LoginFormComponent {
   }
 
   submitForm(): void {
-    console.log('submit', this.validateForm.value);
+    if (this.validateForm.valid) {
+      const loginData = this.validateForm.value;
+      this.apiClientService.loginUser(loginData).subscribe((response) => {
+        console.log('Applicant logined successfully:', response);
+        let applicantId = response.applicant.id
+        this.router.navigate([this.signInRoute +  '/' +  applicantId]);
+      },
+      (error) => {
+        console.log("Error during login", error)
+      })
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 }

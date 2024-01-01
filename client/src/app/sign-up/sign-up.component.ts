@@ -21,31 +21,19 @@ export class SignUpComponent {
     password: FormControl<string>;
     checkPassword: FormControl<string>;
     name: FormControl<string>;
-    // phoneNumber: FormControl<string>;
-    // address: FormControl<string>;
-    // experience: FormControl<string>;
-    // skillTags: FormControl<string>;
-    // hourlyRate: FormControl<string>;
-    // agree: FormControl<boolean>;
   }>;
-  // captchaTooltipIcon: NzFormTooltipIcon = {
-  //   type: 'info-circle',
-  //   theme: 'twotone'
-  // };
 
   submitForm(): void {
     if (this.validateForm.valid) {
       const userData = this.validateForm.value;
       this.apiClientService.registerUser(userData).subscribe((response) => {
         console.log('Applicant registered successfully:', response);
-        // this.router.navigate(['/success'])
-        this.router.navigate(['/profile']);
-        // this.showSuccessNotification();
+        const applicantId = response.user.id
+        this.router.navigate(['/profile', applicantId]);
       },
       (error) => {
         console.log("Error during resgistration", error)
       })
-      // console.log('submit', this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -58,7 +46,6 @@ export class SignUpComponent {
 
 
   updateConfirmValidator(): void {
-    /** wait for refresh value */
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
 
@@ -70,10 +57,6 @@ export class SignUpComponent {
     }
     return {};
   };
-
-  // getCaptcha(e: MouseEvent): void {
-  //   e.preventDefault();
-  // }
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
