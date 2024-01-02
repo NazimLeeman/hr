@@ -1,5 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { Request, Response } from "express";
+import jwt from 'jsonwebtoken';
+import config from '../config'
 import { createApplicant,  deleteApplicantById, updateApplicantById, findAllApplicant, findApplicantById, findApplicantBySearchTerm, findAllApplicantLogin, deleteApplicantLogin } from "../models/applicant/applicant.query";
 import { createApplicantLogin, findApplicantLoginData, findApplicantLoginByEmail } from "../models/applicantLogin/applicantLogin.query";
 
@@ -78,7 +80,8 @@ export async function login (req: Request, res: Response) {
         if (bcrypt.compareSync(password, login.password)) {
           const applicant = await findApplicantById(login.applicantId);
           if (applicant) {
-            res.status(200).send({ status: 'success', applicant});
+            const token = jwt.sign({ id: applicant.id, email: applicant.email}, config.JWT_SECRET, { expiresIn: '1h'})
+            res.status(200).send({ status: 'success', applicant, token});
           } else res.status(400).send({ message: 'This is account is no longer in service.'})
         } else res.status(401).send({ message: 'Invalid password for this login.'})
       } else res.status(400).send({ message: 'There have been no accounts created with this email.' });
