@@ -16,11 +16,12 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
 import { ScheduleAdminComponent } from './schedule-admin/schedule-admin.component';
 import { ApplicantTrackingComponent } from './applicant-tracking/applicant-tracking.component';
 import { PayrollComponent } from './payroll/payroll.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent},
   { path: 'signup', component: SignUpComponent},
-  { path: 'profile/:applicantId', component: RegistrationSummaryComponent },
+  { path: 'profile/:applicantId', component: RegistrationSummaryComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminSummaryComponent },
   { path: 'createEmployee', component: CreateEmployeeComponent},
   { path: 'createSchedule', component: ScheduleAdminComponent},
@@ -28,10 +29,10 @@ const routes: Routes = [
   { path: 'applicant', component: ApplicantTrackingComponent },
   { path: 'payroll', component: PayrollComponent },
   // { path: 'profile', component: ProfileComponent },
-  { path: 'experience/:applicantId', component: ExperienceComponent },
-  { path: 'skills/:applicantId', component: SkillsComponent },
-  { path: 'applications/:applicantId', component: ApplicationsComponent },
-  { path: 'settings/:applicantId', component: SettingsComponent },
+  { path: 'experience/:applicantId', component: ExperienceComponent, canActivate: [authGuard]  },
+  { path: 'skills/:applicantId', component: SkillsComponent, canActivate: [authGuard]  },
+  { path: 'applications/:applicantId', component: ApplicationsComponent, canActivate: [authGuard]  },
+  { path: 'settings/:applicantId', component: SettingsComponent, canActivate: [authGuard]  },
   { path: 'login', component: EmployeeLoginComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'success', component: SuccessDialogComponent},

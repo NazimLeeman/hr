@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiClientService {
 
   private apiUrl = 'https://hr-server-icl9.onrender.com';
+  private tokenKey = 'token';
 
   constructor(private http: HttpClient) { }
 
@@ -37,5 +38,12 @@ export class ApiClientService {
   updateApplicantData(applicantId: number, updatedData: any): Observable<any> {
     const url = `${this.apiUrl}/applicant/${applicantId}`
     return this.http.put(url, updatedData);
+  }
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem(this.tokenKey);
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
   }
 }

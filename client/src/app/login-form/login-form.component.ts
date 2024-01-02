@@ -40,6 +40,8 @@ export class LoginFormComponent {
       const loginData = this.validateForm.value;
       this.apiClientService.loginUser(loginData).subscribe((response) => {
         console.log('Applicant logined successfully:', response);
+        const jwtToken = response.token;
+        localStorage.setItem('token', jwtToken);
         let applicantId = response.applicant.id
         this.router.navigate([this.signInRoute +  '/' +  applicantId]);
       },
