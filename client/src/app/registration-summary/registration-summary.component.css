@@ -1,0 +1,46 @@
+.custom-error-tip {
+    color: red;
+    font-size: large;
+  }
+  
+  nz-form-item {
+    display: block;
+  }
+  
+  nz-form-control {
+    position: relative;
+  }
+  
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="text"] {
+    margin-bottom: 1rem;
+    border: 1px solid #cbd5e0;
+    background-color: #F3F4F6;
+    color: black;
+    outline: none;
+    transition: all;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-right: 5rem;
+    padding-left: 1rem;
+    border-radius: 10px;
+  }
+
+  #address {
+    padding-right: 20rem;
+    padding-bottom: 8rem;
+  }
+
+   
+  
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="text"]:focus {
+    border-color: #2bb053; 
+  }
+  
+  
+  
+  

@@ -90,6 +90,7 @@ additionOnInit(): void {
       const updatedData = this.validateForm.value;
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
         console.log('Applicant updated successfully:', response);
+        location.reload();
       },
       (error) => {
         console.log("Error during update", error)
