@@ -1,4 +1,4 @@
-<div class="font-proxima min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+<!-- <div class="font-proxima min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
     <div class="relative w-4/12 py-3 sm:max-w-xl sm:mx-auto">
         <div class="absolute inset-0 bg-gradient-to-r from-green-300 to-green-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
         <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
@@ -46,6 +46,59 @@
                             </button>
                             </div>
                             
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div style="font-family: 'Proxima Nova', sans-serif; min-height: 100vh; background-color: #f3f4f6; display: flex; flex-direction: column; justify-content: center;">
+    <div style="position: relative;  margin: auto;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, #a2f5cb, #38a169, #38a169); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transform: skewY(-6deg); border-radius: 1.875rem;"></div>
+        <div style="position: relative; padding: 4rem; background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 1.875rem; ">
+            <div >
+                <div>
+                    <h1 style="font-size: 2rem; font-weight: bold; text-align: center;">{{title}}</h1>
+                </div>
+
+                <form style="border-top: 1px solid #e2e8f0;" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+
+                    <div style="padding: 1rem; font-size: 1rem; color: #4a5568;">
+                        <div >
+                            <nz-form-item >
+                                <nz-form-control nzErrorTip="Please input your email!" class="custom-error-tip">
+                                    <nz-input-group>
+                                        <input type="text" nz-input formControlName="email" placeholder="Email"/>
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+
+                        <nz-form-item >
+                            <nz-form-control nzErrorTip="Please input your Password!" class="custom-error-tip">
+                                <nz-input-group>
+                                    <input type="password" nz-input formControlName="password" placeholder="Password"/>
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <div style="display: flex; justify-content: center;">
+                            <div style="position: relative;">
+                                <button type="submit" nz-button
+                                        style="background-color: #60C576; color: #ffffff; border-radius: 0.625rem; padding: 0.75rem 2rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#60C576';"
+                                        [nzType]="'primary'">{{signInLabel}}
+                                </button>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center; padding-top: 1rem;">
+                            <div style="position: relative;">
+                                <button *ngIf="showSignUp()" type="submit" nz-button
+                                        style="border: .1rem solid #38a169; background-color: #ffffff; color: #38a169; border-radius: 0.625rem; padding: 0.75rem 1.5rem; font-size: 1.25rem;" onmouseover="this.style.backgroundColor='#60C576'; this.style.color='#1F2937';" onmouseout="this.style.backgroundColor='#ffffff'; this.style.color='#38a169';"
+                                        [nzType]="'primary'" (click)="signUp()">{{signUpLabel}}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>

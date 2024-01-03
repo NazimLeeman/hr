@@ -1,12 +1,9 @@
-
-       .custom-error-tip {
-        color: red;
-      }
-
+.custom-error-tip {
+  color: red;
+}
 
 nz-form-item {
   display: block;
-  /* margin-bottom: 1.5rem;  */
 }
 
 nz-form-control {
