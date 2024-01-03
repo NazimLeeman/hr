@@ -25,22 +25,24 @@
 
 <div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura'">
   <div style="padding: 1rem; margin-left: 4px;">
-    <div> 
-
-    </div>
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Experiences</h1>
-    <!-- <p style="margin-left: .5rem; font-size: large; padding-bottom: 1rem;">Highlight any relevant work & volunteer experience you may have.</p> -->
+    
     <div *ngIf="experience !== undefined && experience !== null && experience !== ''" style="display: flex; flex-direction: column;">
-      <!-- <label style="margin-bottom: 6px; font-size: 1.875rem; font-weight: bold;">Experiences
-      </label> -->
-      <input type="text" style="font-size: large;" [value]="experience" readonly>
+      <!-- <input type="text" style="font-size: large;" [value]="experience" readonly> -->
+      <div style=" background-color: hsl(126, 29%, 93%); font-size: larger; width: 40rem; height: 6rem; border-radius: 1rem; margin-bottom: 1rem;">
+        <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 2rem; list-style-type: none; font-size: larger;">
+          <h1 > {{experience}}</h1>
+        <!-- <button style="background-color: #EF4444; color: #ffffff; padding-left:.75rem; padding-right:.75rem; border-radius: .5rem;">Delete</button> -->
+        </div>
+      </div>
     </div>
     
+    <div>
+      <p style="margin-left: .5rem; font-size: larger; padding-bottom: 1rem;">Highlight any relevant work & volunteer experience you may have.</p>
+    </div>
     <div style=" display: flex; padding: 0.75rem; font-family: 'GTPressura';">
       <form style="padding: 2rem;" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <div>
-          <div>
-          </div>
           <div style="display: flex; align-items: center; text-decoration: underline;" >
             <svg style="cursor: pointer; border-radius: 50%; background-color: #fff;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
               <circle cx="12" cy="12" r="10"></circle>

@@ -1,24 +1,42 @@
 <app-navbar-profile></app-navbar-profile>
-<div class="mx-60 border font-GTPressura">
-    <div class="p-4 ml-4">
-    <h1 class="text-3xl mb-2">Skills</h1>
-       <p class="mx-2">Tell employers what skills you possess.</p> 
-<div class="flex p-3 font-GTPressura">
-    <form nz-form class="p-8 " [formGroup]="validateForm" (ngSubmit)="submitForm()">
+<div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura'">
+    <div style="padding: 1rem; margin-left: 4px;">
+    <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Skills</h1>
+    <div *ngIf="skillTags !== undefined && skillTags !== null && skillTags !== ''" style="display: flex; flex-direction: column;">
+      <!-- <input type="text" style="font-size: large;" [value]="skillTags" readonly> -->
+      <div style=" background-color: hsl(126, 29%, 93%); font-size: larger; width: 40rem; height: 6rem; border-radius: 1rem; margin-bottom: 1rem;">
+        <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 2rem; list-style-type: none; font-size: larger;">
+          <h1 > {{skillTags}}</h1>
+        <!-- <button style="background-color: #EF4444; color: #ffffff; padding-left:.75rem; padding-right:.75rem; border-radius: .5rem;">Delete</button> -->
+        </div>
+      </div>
+    </div>   
+    <p style="font-size: larger; padding-left: .5rem;">Tell employers what skills you possess.</p> 
+<div style=" font-family: 'GTPressura'">
+  <form nz-form style="padding: 2rem;" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <div style="display: flex; align-items: center; text-decoration: underline;" >
+      <svg style="cursor: pointer; border-radius: 50%; background-color: #fff;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>   
+    <label style="font-size: larger; display: flex; cursor: pointer;"  (click)="showSkillTagsForm = !showSkillTagsForm">Add Skill Tags</label>
+    
+  </div>
+  <div *ngIf="showSkillTagsForm">
         <nz-form-item>
-            <nz-form-label>Add Skill Tags</nz-form-label>
             <nz-form-control nzErrorTip="Please input your skill Tags!" class="custom-error-tip">
-              <textarea nz-input id="skillTags" formControlName="skillTags" placeholder="Skill Tags" class="border bg-gray-100 placeholder-gray-900 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem; width: 100%; height: 100%; border-radius: 10px;">
-              </textarea>
+              <input nz-input style="font-size: large;" type="text" id="skillTags" formControlName="skillTags" placeholder="Skill Tags" >
             </nz-form-control>
           </nz-form-item>
+          <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
+            <button type="submit" (click)="submitForm()" nz-button style="font-family: 'GTPressura'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Add Skills</button>
+        </div>
+        </div>
     </form>
     
   </div>
-  <div class="flex justify-center pt-8">
-    <button type="submit" nz-button
-        class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
-        [nzType]="'primary'">Save Skills
-    </button>
+    
 </div>
 </div>
+

@@ -1,0 +1,34 @@
+.custom-error-tip {
+    color: red;
+  }
+  
+  nz-form-item {
+    display: block;
+  }
+  
+  nz-form-control {
+    position: relative;
+  }
+
+  input[type="text"] {
+  border: 1px solid #cbd5e0;
+  background-color: #f3f4f5;
+  color: black;
+  outline: none;
+  transition: all;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 10rem;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #2bb053; 
+  }
+
+  #skillTags {
+    padding-right: 20rem;
+    padding-bottom: 8rem;
+  }
