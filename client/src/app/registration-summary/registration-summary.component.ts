@@ -88,6 +88,7 @@ additionOnInit(): void {
   submitForm(): void {
     if (this.validateForm.valid) {
       const updatedData = this.validateForm.value;
+      // console.log(updatedData)
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
         console.log('Applicant updated successfully:', response);
         location.reload();

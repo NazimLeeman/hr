@@ -35,9 +35,9 @@ export class ApiClientService {
     return this.http.get(url);
   }
 
-  updateApplicantData(applicantId: number, updatedData: any): Observable<any> {
+  updateApplicantData(applicantId: number, mergedData: any): Observable<any> {
     const url = `${this.apiUrl}/applicant/${applicantId}`
-    return this.http.put(url, updatedData);
+    return this.http.put(url, mergedData);
   }
 
   private getHeaders(): HttpHeaders {
