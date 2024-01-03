@@ -40,6 +40,11 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
 import { ScheduleAdminComponent } from './schedule-admin/schedule-admin.component';
 import { ApplicantTrackingComponent } from './applicant-tracking/applicant-tracking.component';
 import { PayrollComponent } from './payroll/payroll.component';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { IconsProviderModule } from './icons-provider.module';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 
 @NgModule({
@@ -64,7 +69,7 @@ import { PayrollComponent } from './payroll/payroll.component';
     CreateEmployeeComponent,
     ScheduleAdminComponent,
     ApplicantTrackingComponent,
-    PayrollComponent
+    PayrollComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +86,11 @@ import { PayrollComponent } from './payroll/payroll.component';
     NzUploadModule,
     NzSelectModule,
     NzIconModule,
-    NzNotificationModule
+    NzNotificationModule,
+    NzBreadCrumbModule,
+    NzLayoutModule,
+    NzMenuModule,
+    IconsProviderModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
