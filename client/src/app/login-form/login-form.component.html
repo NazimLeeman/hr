@@ -68,34 +68,29 @@
                     <div style="padding: 1rem; font-size: 1rem; color: #4a5568;">
                         <div >
                             <nz-form-item >
-                                <nz-form-control nzErrorTip="Please input your email!" class="custom-error-tip">
-                                    <nz-input-group>
-                                        <input type="text" nz-input formControlName="email" placeholder="Email"/>
-                                    </nz-input-group>
+                                <nz-form-control nzErrorTip="The input is not a valid email!" class="custom-error-tip">
+                                    <input style="font-size: 1rem;" nz-input type="email" id="email" formControlName="email" placeholder="Email" >
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
 
                         <nz-form-item >
-                            <nz-form-control nzErrorTip="Please input your Password!" class="custom-error-tip">
-                                <nz-input-group>
-                                    <input type="password" nz-input formControlName="password" placeholder="Password"/>
-                                </nz-input-group>
+                            <nz-form-control nzErrorTip="Please input your password!" class="custom-error-tip">
+                                <input style="font-size: 1rem;" nz-input type="password" id="password" formControlName="password" placeholder="Password">
                             </nz-form-control>
                         </nz-form-item>
 
                         <div style="display: flex; justify-content: center;">
                             <div style="position: relative;">
-                                <button type="submit" nz-button
-                                        style="background-color: #60C576; color: #ffffff; border-radius: 0.625rem; padding: 0.75rem 2rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#60C576';"
-                                        [nzType]="'primary'">{{signInLabel}}
-                                </button>
+                                <div style="display: flex; justify-content: center;">
+                                    <button type="submit" nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.25rem; padding-right: 0.25rem;  width: 6rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';" [nzType]="'primary'">{{signInLabel}}</button>
+                                </div>
                             </div>
                         </div>
                         <div style="display: flex; justify-content: center; padding-top: 1rem;">
                             <div style="position: relative;">
                                 <button *ngIf="showSignUp()" type="submit" nz-button
-                                        style="border: .1rem solid #38a169; background-color: #ffffff; color: #38a169; border-radius: 0.625rem; padding: 0.75rem 1.5rem; font-size: 1.25rem;" onmouseover="this.style.backgroundColor='#60C576'; this.style.color='#1F2937';" onmouseout="this.style.backgroundColor='#ffffff'; this.style.color='#38a169';"
+                                style="font-family: 'GTPressura', sans-serif; background-color: #ffffff; color: #22c55e; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.25rem; padding-right: 0.25rem; padding-top: 0.2rem; padding-bottom: 0.2rem; width: 6rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#22c55e'; this.style.color='#ffffff';" onmouseout="this.style.backgroundColor='#ffffff'; this.style.color='#22c55e';"
                                         [nzType]="'primary'" (click)="signUp()">{{signUpLabel}}
                                 </button>
                             </div>
@@ -106,3 +101,4 @@
         </div>
     </div>
 </div>
+

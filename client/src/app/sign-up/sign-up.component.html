@@ -45,29 +45,29 @@
 
           <div style="min-height: 100vh; background-color: #f3f4f6; display: flex; flex-direction: column; justify-content: center;">
             <h1 style="font-size: 2.25rem; font-family: 'Proxima Nova', sans-serif; font-weight: bold; text-align: center; margin-bottom: 2.5rem;">Register Now and Savor the Flavor of a Restaurant Job You'll Love!</h1>
-            <div style="display: flex; flex-direction: row; justify-content: space-around; margin-bottom: 1.5rem; ">
+            <div style="display: flex; flex-direction: row; justify-content: space-around;  ">
                 <img src="../../assets/images/SignupBG.png" style=" width: 30rem;" alt="">
                 <div style="background-color: white; border-radius: 0.375rem; box-shadow: 0 4px 6px -1px rgba(46, 129, 83, 0.4), 0 2px 4px -1px rgba(46, 129, 83, 0.06); padding-top: 3rem; padding-bottom: 3rem; padding-left: 2rem; padding-right:2rem; ">
                     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
                         <div style=" font-family: 'GTPressura', sans-serif;">
                             <nz-form-item>
                                 <nz-form-control nzErrorTip="The input is not a valid email!" class="custom-error-tip">
-                                    <input nz-input type="email" id="email" formControlName="email" placeholder="Email" >
+                                    <input style="font-size: 1rem;" nz-input type="email" id="email" formControlName="email" placeholder="Email" >
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item>
                                 <nz-form-control nzErrorTip="Please input your name!" class="custom-error-tip">
-                                    <input nz-input type="text" id="name" formControlName="name" placeholder="Name" >
+                                    <input style="font-size: 1rem;" nz-input type="text" id="name" formControlName="name" placeholder="Name" >
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item>
                                 <nz-form-control nzErrorTip="Please input your password!" class="custom-error-tip">
-                                    <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" placeholder="Password">
+                                    <input style="font-size: 1rem;" nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" placeholder="Password">
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item>
                                 <nz-form-control [nzErrorTip]="errorTpl" class="custom-error-tip">
-                                    <input nz-input type="password" id="checkPassword" formControlName="checkPassword" placeholder="Confirm password" >
+                                    <input style="font-size: 1rem;" nz-input type="password" id="checkPassword" formControlName="checkPassword" placeholder="Confirm password" >
                                     <ng-template #errorTpl let-control>
                                         <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container>
                                         <ng-container *ngIf="control.hasError('confirm')">Two passwords that you entered are inconsistent!</ng-container>
@@ -76,7 +76,7 @@
                             </nz-form-item>
                         </div>
                         <div style="display: flex; justify-content: center; padding-top: 2rem;">
-                            <button class="my-btn" type="submit" nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 10rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Register</button>
+                            <button type="submit" nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 10rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Register</button>
                         </div>
                     </form>
                 </div>

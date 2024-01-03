@@ -1,0 +1,23 @@
+/* ::ng-deep nz-result[nzStatus="success"] {
+    background-color: #e6f7ff; 
+    border: 1px solid #91d5ff; 
+  }
+  
+  ::ng-deep nz-result[nzStatus="success"] .ant-result-title {
+    color: #1890ff;
+  }
+  
+  ::ng-deep nz-result[nzStatus="success"] .ant-result-subtitle {
+    color: #1890ff; 
+  }
+  
+  ::ng-deep nz-result[nzStatus="success"] button {
+    background-color: #1890ff; 
+    color: #ffffff; 
+    margin-right: 8px; 
+  }
+  
+  ::ng-deep nz-result[nzStatus="success"] button:hover {
+    background-color: #40a9ff; 
+  }
+   */

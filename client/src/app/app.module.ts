@@ -42,6 +42,8 @@ import { ApplicantTrackingComponent } from './applicant-tracking/applicant-track
 import { PayrollComponent } from './payroll/payroll.component';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { IconsProviderModule } from './icons-provider.module';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { DialogComponent } from './dialog/dialog.component';
 import en from '@angular/common/locales/en';
 
 registerLocaleData(en);
@@ -70,6 +72,7 @@ registerLocaleData(en);
     ScheduleAdminComponent,
     ApplicantTrackingComponent,
     PayrollComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +93,8 @@ registerLocaleData(en);
     NzBreadCrumbModule,
     NzLayoutModule,
     NzMenuModule,
-    IconsProviderModule
+    IconsProviderModule,
+    NzResultModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

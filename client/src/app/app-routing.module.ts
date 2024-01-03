@@ -17,10 +17,12 @@ import { ScheduleAdminComponent } from './schedule-admin/schedule-admin.componen
 import { ApplicantTrackingComponent } from './applicant-tracking/applicant-tracking.component';
 import { PayrollComponent } from './payroll/payroll.component';
 import { authGuard } from './auth.guard';
+import { DialogComponent } from './dialog/dialog.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent},
   { path: 'signup', component: SignUpComponent},
+  { path: 'successful', component: DialogComponent},
   { path: 'profile/:applicantId', component: RegistrationSummaryComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminSummaryComponent },
   { path: 'createEmployee', component: CreateEmployeeComponent},

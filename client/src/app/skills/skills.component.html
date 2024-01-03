@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>   
-    <p style="font-size: larger; padding-left: .5rem;">Tell employers what skills you possess.</p> 
+    <p style="font-size:x-large; padding-left: .5rem;">Tell employers what skills you possess.</p> 
 <div style=" font-family: 'GTPressura'">
   <form nz-form style="padding: 2rem;" [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <div style="display: flex; align-items: center; text-decoration: underline;" >
@@ -20,17 +20,17 @@
         <line x1="12" y1="5" x2="12" y2="19"></line>
         <line x1="5" y1="12" x2="19" y2="12"></line>
       </svg>   
-    <label style="font-size: larger; display: flex; cursor: pointer;"  (click)="showSkillTagsForm = !showSkillTagsForm">Add Skill Tags</label>
+    <label style="font-size: large; display: flex; cursor: pointer;"  (click)="showSkillTagsForm = !showSkillTagsForm">Add Skill Tags</label>
     
   </div>
   <div *ngIf="showSkillTagsForm">
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your skill Tags!" class="custom-error-tip">
-              <input nz-input style="font-size: large;" type="text" id="skillTags" formControlName="skillTags" placeholder="Skill Tags" >
+              <input nz-input style="font-size: large; width: 40rem; margin-top: 1rem;" type="text" id="skillTags" formControlName="skillTags" placeholder="Skill Tags" >
             </nz-form-control>
           </nz-form-item>
           <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
-            <button type="submit" (click)="submitForm()" nz-button style="font-family: 'GTPressura'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Add Skills</button>
+            <button type="submit" (click)="submitForm()" nz-button style="font-family: 'GTPressura'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Add Skills</button>
         </div>
         </div>
     </form>

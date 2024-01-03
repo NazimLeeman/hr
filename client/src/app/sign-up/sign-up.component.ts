@@ -29,7 +29,7 @@ export class SignUpComponent {
       this.apiClientService.registerUser(userData).subscribe((response) => {
         console.log('Applicant registered successfully:', response);
         const applicantId = response.user.id
-        this.router.navigate(['/profile', applicantId]);
+        this.router.navigate(['/successful']);
       },
       (error) => {
         console.log("Error during resgistration", error)
@@ -64,12 +64,6 @@ export class SignUpComponent {
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
       name: ['', [Validators.required]],
-      // phoneNumber: ['', [Validators.required]],
-      // address: ['', [Validators.required]],
-      // experience: ['', [Validators.required]],
-      // skillTags: ['', [Validators.required]],
-      // hourlyRate: ['', [Validators.required]],
-      // agree: [false]
     });
     
   }

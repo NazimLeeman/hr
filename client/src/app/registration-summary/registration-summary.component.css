@@ -28,18 +28,38 @@
     border-radius: 10px;
   }
 
-  #address {
+  /* #address {
     padding-right: 20rem;
     padding-bottom: 8rem;
+    
+  } */
+
+  #address {
+    margin-left: 1rem;
+    width: 32rem;
+    padding-bottom: 8rem;
+  }
+
+  #hourlyRate {
+    margin-left: 1rem;
+    width: 24rem;
+  }
+
+  #phoneNumber {
+    margin-left: 1rem;
+    width: 24rem;
+    
   }
 
    
   
   input[type="email"]:focus,
-  input[type="password"]:focus,
-  input[type="text"]:focus {
-    border-color: #2bb053; 
-  }
+input[type="password"]:focus,
+input[type="text"]:focus {
+  /* border-color: #2bb053;  */
+  box-shadow: 0 0 5px #2bb053 !important;
+  border-color: #2bb053 !important;
+}
   
   
   
