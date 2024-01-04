@@ -1,93 +1,85 @@
 <app-navbar-admin></app-navbar-admin>
 
-  <div class="mx-60 border font-GTPressura">
+  <div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura';">
     <div > 
-    <div class="flex p-4 ml-4">
-          <div>
-          <h1 class="text-3xl pb-4">Genarate Payroll</h1>
-          <p class="mx-2 pb-2">Search the Employee you want to genarate payroll.</p>
-          <div class="input-container">
-            <input type="text" placeholder="Employee Id" class="border bg-gray-100 text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all p-2 rounded-md">
-            <button class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M 21 4 C 11.082241 4 3 12.082241 3 22 C 3 31.917759 11.082241 40 21 40 C 24.62177 40 27.99231 38.91393 30.820312 37.0625 L 43.378906 49.621094 L 47.621094 45.378906 L 35.224609 32.982422 C 37.581469 29.938384 39 26.13473 39 22 C 39 12.082241 30.917759 4 21 4 z M 21 8 C 28.756241 8 35 14.243759 35 22 C 35 29.756241 28.756241 36 21 36 C 13.243759 36 7 29.756241 7 22 C 7 14.243759 13.243759 8 21 8 z"></path></svg></button>
-          </div>
-          
-        </div>
-        <!-- <div>
-            <button type="submit" nz-button
-              class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
-              [nzType]="'primary'" >Send Payroll
-          </button>
-        </div> -->
+    <div style="padding: 1rem; margin-left: 4px;">
+      <div>
+        <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Genarate Payroll</h1>
+        <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Search the Employee you want to generate payroll.</p>
+        <div class="input-container">
+          <input style="font-size: large; " id="employeeId" placeholder="Employee Id">
+          <button class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M 21 4 C 11.082241 4 3 12.082241 3 22 C 3 31.917759 11.082241 40 21 40 C 24.62177 40 27.99231 38.91393 30.820312 37.0625 L 43.378906 49.621094 L 47.621094 45.378906 L 35.224609 32.982422 C 37.581469 29.938384 39 26.13473 39 22 C 39 12.082241 30.917759 4 21 4 z M 21 8 C 28.756241 8 35 14.243759 35 22 C 35 29.756241 28.756241 36 21 36 C 13.243759 36 7 29.756241 7 22 C 7 14.243759 13.243759 8 21 8 z"></path></svg></button>
+        </div>             
+      </div>
         
     </div>
-        <form nz-form class="p-6 grid grid-cols-3 " [formGroup]="validateForm" (ngSubmit)="submitForm()">
-        <nz-form-item class="p-3">
-            <nz-form-label>Hourly Rate</nz-form-label>
-            <nz-form-control nzErrorTip="Please input Job Role!" class="custom-error-tip">
-                <input nz-input id="jobRole" formControlName="jobRole" placeholder="50$" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
+        <form nz-form style="padding: 1.5rem; display: grid; grid-template-columns: repeat(3, 1fr);" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item >
+            <label style="font-size: large;">Hourly Rate:</label>
+            <nz-form-control nzErrorTip="Please input Hourly Rate!" class="custom-error-tip">
+                <input type="text" style="font-size: large;" nz-input id="hourlyRate formControlName="hourlyRate placeholder="60$" > 
               </nz-form-control>
           </nz-form-item>  
-          <nz-form-item class="p-3">
-            <nz-form-label>Total Hours</nz-form-label>
-            <nz-form-control nzErrorTip="Please input the Job Nature!" class="custom-error-tip">
-              <input nz-input id="jobNature" formControlName="jobNature" placeholder="60" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
+          <nz-form-item >
+            <label style=" font-size: large;">Total Hours:</label>
+            <nz-form-control nzErrorTip="Please input the Starting Time!" class="custom-error-tip">
+              <input type="text" style="font-size: large;" nz-input id="totalHours" formControlName="totalHours" placeholder="240 Hours" > 
             </nz-form-control>
           </nz-form-item>
           
-          <nz-form-item class="p-3">
-            <nz-form-label>Total Deduction</nz-form-label>
-            <nz-form-control nzErrorTip="Please input your Hourly Rate!" class="custom-error-tip">
-              <input nz-input id="hourlyRate formControlName="hourlyRate placeholder="100$" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
+          <nz-form-item >
+            <label style="font-size: large;">Total Deduction:</label>
+            <nz-form-control nzErrorTip="Please input the Ending Time!" class="custom-error-tip">
+              <input type="text" style="font-size: large;" nz-input id="totalDeduction" formControlName="totalDeduction" placeholder="100$" > 
             </nz-form-control>
           </nz-form-item>
     </form>
     <div >
         
-        <div class=" flex justify-center p-4">
+        <div style="display: flex; justify-content: center;  padding-bottom: 1rem;">
           <button type="submit" nz-button
-              class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
+          style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
               [nzType]="'primary'" (click)="showForm = true">Genarate
           </button>
         </div>
     </div>
 </div> 
-      <div *ngIf="showForm" class="p-4 ml-4">
-        <!-- <h1 class="text-3xl pb-2 text-center">Current Schedule</h1> -->
+      <div *ngIf="showForm" style="padding: 1rem; margin-left: 1rem;">
         
-        <table class="border-collapse w-full">
+        <table style="border-collapse: collapse; width: 100%;">
           <thead>
             <tr>
-              <th class="border p-2 " colspan="2">Income Description</th>
+              <th style="border: 1px solid #cbd5e0; padding: 0.5rem;" colspan="2">Income Description</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="text-center">
-                <th class="border">Hourly Rate</th>
-              <td class="border p-2"> {{hourlyRate | currency: 'USD'}}</td>
+            <tr style="text-align: center;">
+                <th style="border: 1px solid #cbd5e0; padding: 0.5rem;">Hourly Rate</th>
+              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;"> {{hourlyRate | currency: 'USD'}}</td>
             </tr>
           </tbody>
           <tbody>
-            <tr class="text-center">
-                <th class="border p-2">Total Hours</th>
-              <td class="border p-2"> {{totalHours}}</td>
+            <tr style="text-align: center;">
+                <th style="border: 1px solid #cbd5e0; padding: 0.5rem;">Total Hours</th>
+              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;"> {{totalHours}}</td>
             </tr>
           </tbody>
           <tbody>
-            <tr class="text-center">
-                <th class="border p-2">Total Deduction</th>
-              <td class="border p-2">{{totalDeduction | currency: 'USD'}}</td>
+            <tr style="text-align: center;">
+                <th style="border: 1px solid #cbd5e0; padding: 0.5rem;">Total Deduction</th>
+              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">{{totalDeduction | currency: 'USD'}}</td>
             </tr>
           </tbody>
           <tbody>
-            <tr class="text-center">
-                <th class="border p-2">Net Payable</th>
-              <td class="border p-2">{{netPayable | currency: 'USD'}}</td>
+            <tr style="text-align: center;">
+                <th style="border: 1px solid #cbd5e0; padding: 0.5rem;">Net Payable</th>
+              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">{{netPayable | currency: 'USD'}}</td>
             </tr>
           </tbody>
         </table>
-        <div class=" flex justify-center m-6">
+        <div style="display: flex; justify-content: center; margin: 1.5rem;">
           <button type="submit" nz-button
-              class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
+          style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 10rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
               [nzType]="'primary'" >Send Payroll
           </button>
         </div>

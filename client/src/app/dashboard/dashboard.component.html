@@ -1,20 +1,41 @@
-  <nav class="navbar bg-green-600 text-white">
-    <div class="container mx-auto flex items-center justify-end">
-      <div class="flex items-center">
-        <button class="btn btn-ghost p-4 text-white">Sign In</button>
-        <button class="btn btn-ghost border rounded-md px-3 py-2 bg-white text-green-600">Sign Up</button>
+  <nav style="background-color: #16a34a; color: #ffffff;" class="navbar">
+    <div style="margin-right: 2rem; padding-right: 2rem; padding-left: 2rem; display: flex; align-items: center; justify-content: flex-end;">
+      <div style="display: flex; align-items: center; padding: 0.5rem;">
+        <button style="color: white; margin-right: 1rem; font-family: 'GTPressura'; font-size: large;" >Sign In</button>
+        <button style="border: 1px solid #ffffff; font-family: 'GTPressura'; font-size: large; border-radius: 0.375rem; padding: 0.5rem 0.75rem; width: 6rem; background-color: #ffffff; color: #38a169;">Sign Up</button>
       </div>
     </div>
   </nav>
-
-  <div class="flex justify-center mt-2">
-      <label class="text-xl mr-56">Find Job</label>
+  <div style="  font-family: 'GTPressura';">
+  <div style="background-color: 68d391; border-radius: 0.375rem; box-shadow: 0 4px 6px -1px rgba(46, 129, 83, 0.4), 0 2px 4px -1px rgba(46, 129, 83, 0.06); ">
+  <!-- <h1 style=" text-align: center; font-size: 2rem;">Find your desired Job</h1> -->
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-top: .5rem; ">
+  <div>
+    <label style="margin-left: 1.2rem; font-weight: bold;">Job Title</label>
+    <div class="input-container">
+      <input style="font-size: large; margin-right: 1.5rem;" id="serachbox" placeholder="Search...">
+      <button class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M 21 4 C 11.082241 4 3 12.082241 3 22 C 3 31.917759 11.082241 40 21 40 C 24.62177 40 27.99231 38.91393 30.820312 37.0625 L 43.378906 49.621094 L 47.621094 45.378906 L 35.224609 32.982422 C 37.581469 29.938384 39 26.13473 39 22 C 39 12.082241 30.917759 4 21 4 z M 21 8 C 28.756241 8 35 14.243759 35 22 C 35 29.756241 28.756241 36 21 36 C 13.243759 36 7 29.756241 7 22 C 7 14.243759 13.243759 8 21 8 z"></path></svg></button>
+    </div>             
   </div>
-  <div class="flex justify-center mt-2 mr-6">
-    <input type="text" placeholder="Search anything" class=" border rounded-lg  px-32 py-2" style="padding-left: 1rem;">
+  <div>
+    <label style="margin-left: 1.2rem; font-weight: bold;">Your Address</label>
+    <div class="input-container">
+      <input style="font-size: large; margin-right: 1.5rem;" id="serachbox" placeholder="Dhaka">
+      <!-- <button class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M 21 4 C 11.082241 4 3 12.082241 3 22 C 3 31.917759 11.082241 40 21 40 C 24.62177 40 27.99231 38.91393 30.820312 37.0625 L 43.378906 49.621094 L 47.621094 45.378906 L 35.224609 32.982422 C 37.581469 29.938384 39 26.13473 39 22 C 39 12.082241 30.917759 4 21 4 z M 21 8 C 28.756241 8 35 14.243759 35 22 C 35 29.756241 28.756241 36 21 36 C 13.243759 36 7 29.756241 7 22 C 7 14.243759 13.243759 8 21 8 z"></path></svg></button> -->
+    </div>             
   </div>
-
-  <div class="flex ml-52">
+  <div>
+    <label style="margin-left: 1.2rem; font-weight: bold;">Distance</label>
+    <div class="input-container">
+      <input style="font-size: large; " id="serachbox" placeholder="10 mile">
+      <!-- <button class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M 21 4 C 11.082241 4 3 12.082241 3 22 C 3 31.917759 11.082241 40 21 40 C 24.62177 40 27.99231 38.91393 30.820312 37.0625 L 43.378906 49.621094 L 47.621094 45.378906 L 35.224609 32.982422 C 37.581469 29.938384 39 26.13473 39 22 C 39 12.082241 30.917759 4 21 4 z M 21 8 C 28.756241 8 35 14.243759 35 22 C 35 29.756241 28.756241 36 21 36 C 13.243759 36 7 29.756241 7 22 C 7 14.243759 13.243759 8 21 8 z"></path></svg></button> -->
+    </div>             
+  </div>
+</div>
+<div style="margin-top: .5rem;  width: 100%; height: .1rem;">
+</div>
+</div>
+  <div style="display: flex; justify-content: center; margin-top: .5rem; ">
     <div>
       <app-job-card *ngFor="let card of cards" [card]="card" [isSliced]="true" (click)="selectCard(card)" ></app-job-card>
     </div>
@@ -22,5 +43,6 @@
       <app-job-card *ngIf="selectedCard" [card]="selectedCard" [isSliced]="false"></app-job-card>
     
     </div>
+  </div>
   </div>
 

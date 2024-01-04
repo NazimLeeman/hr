@@ -14,12 +14,9 @@ export class PayrollComponent {
   totalHours: number = 60;
   totalDeduction: number = 100;
   validateForm: FormGroup<{
-    jobRole: FormControl<string>,
-    jobNature: FormControl<string>;
-    jobDescription: FormControl<string>;
-    experience: FormControl<string>;
-    skillTags: FormControl<string>;
-    hourlyRate: FormControl<string>;
+    hourlyRate: FormControl<string>,
+    totalHours: FormControl<string>;
+    totalDeduction: FormControl<string>;
   }>
 
   get netPayable(): number {
@@ -51,11 +48,8 @@ export class PayrollComponent {
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
-      jobRole: ['', [Validators.required]],
-      jobNature: ['', [Validators.required]],
-      jobDescription: ['', [Validators.required]],
-      experience: ['', [Validators.required]],
-      skillTags: ['', [Validators.required]],
+      totalHours: ['', [Validators.required]],
+      totalDeduction: ['', [Validators.required]],
       hourlyRate: ['', [Validators.required]],
     })
   }

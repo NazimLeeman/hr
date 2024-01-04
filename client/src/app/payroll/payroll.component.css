@@ -1,18 +1,96 @@
 .input-container {
-    display: flex;
-    position: relative;
-  }
+  display: flex;
+  position: relative;
+}
+
+/* .input-container input {
+  flex: 1;
+} */
+
+.btn-icon {
+  position: absolute;
+  top: 50%;
+  left: 22rem;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-error-tip {
+  color: red;
+  font-size: large;
+}
+
+nz-form-item {
+  display: block;
+}
+
+nz-form-control {
+  position: relative;
+}
+
+input[type="text"] {
+  margin-bottom: 1rem;
+  border: 1px solid #cbd5e0;
+  background-color: #F3F4F6;
+  color: black;
+  outline: none;
+  transition: all;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-right: 5rem;
+  padding-left: 1rem;
+  border-radius: 10px;
+  width: 24rem;
+}
+
+/* #address {
+  padding-right: 20rem;
+  padding-bottom: 8rem;
   
-  .input-container input {
-    flex: 1;
-  }
-  
-  .btn-icon {
-    position: absolute;
-    top: 50%;
-    right:3%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
+} */
+ 
+#employeeId {
+  /* margin-bottom: 1rem; */
+  border: 1px solid #cbd5e0;
+  background-color: #F3F4F6;
+  color: black;
+  outline: none;
+  transition: all;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-right: 5rem;
+  padding-left: 1rem;
+  border-radius: 10px;
+  width: 24rem;
+}
+
+#hourlyRate, #totalHours, #totalDeduction {
+  width: 24rem;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+/* border-color: #2bb053;  */
+box-shadow: 0 0 5px #2bb053 !important;
+border-color: #2bb053 !important;
+}
+
+input[type='text']:hover {
+border-color: #2bb053;
+}
+
+#employeeId:hover {
+border-color: #2bb053;
+}
+
+#employeeId:focus {
+border-color: #2bb053
+}
+
+
+* {
+font-size: large;
+}  

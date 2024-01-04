@@ -25,15 +25,13 @@ export class PostJobComponent {
     if (this.validateForm.valid) {
       const userData = this.validateForm.value;
       this.apiClientService.registerUser(userData).subscribe((response) => {
-        console.log('Applicant registered successfully:', response);
-        // this.router.navigate(['/success'])
-        this.router.navigate(['/summary']);
-        // this.showSuccessNotification();
+        console.log('Job Posted successfully:', response);
+        const applicantId = response.user.id
+        this.router.navigate(['/successful']);
       },
       (error) => {
         console.log("Error during resgistration", error)
       })
-      // console.log('submit', this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {

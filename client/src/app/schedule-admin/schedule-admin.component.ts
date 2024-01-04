@@ -11,27 +11,22 @@ import { ApiClientService } from '../api-client.service';
 export class ScheduleAdminComponent {
   showForm: boolean = false;
   validateForm: FormGroup<{
-    jobRole: FormControl<string>,
-    jobNature: FormControl<string>;
-    jobDescription: FormControl<string>;
-    experience: FormControl<string>;
-    skillTags: FormControl<string>;
-    hourlyRate: FormControl<string>;
+    day: FormControl<string>,
+    slotStarts: FormControl<string>,
+    slotEnds: FormControl<string>
   }>
 
   submitForm(): void {
     if (this.validateForm.valid) {
       const userData = this.validateForm.value;
       this.apiClientService.registerUser(userData).subscribe((response) => {
-        console.log('Applicant registered successfully:', response);
-        // this.router.navigate(['/success'])
-        this.router.navigate(['/summary']);
-        // this.showSuccessNotification();
+        console.log('Schedule Posted successfully:', response);
+        const applicantId = response.user.id
+        this.router.navigate(['/successful']);
       },
       (error) => {
         console.log("Error during resgistration", error)
       })
-      // console.log('submit', this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -44,12 +39,9 @@ export class ScheduleAdminComponent {
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
-      jobRole: ['', [Validators.required]],
-      jobNature: ['', [Validators.required]],
-      jobDescription: ['', [Validators.required]],
-      experience: ['', [Validators.required]],
-      skillTags: ['', [Validators.required]],
-      hourlyRate: ['', [Validators.required]],
+      slotStarts: ['', [Validators.required]],
+      slotEnds: ['', [Validators.required]],
+      day: ['', [Validators.required]]
     })
   }
 }
