@@ -1,0 +1,76 @@
+.custom-error-tip {
+    color: red;
+    font-size: large;
+  }
+  
+  nz-form-item {
+    display: block;
+  }
+  
+  nz-form-control {
+    position: relative;
+  }
+  
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="text"] {
+    margin-bottom: 1rem;
+    border: 1px solid #cbd5e0;
+    background-color: #F3F4F6;
+    color: black;
+    outline: none;
+    transition: all;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-right: 5rem;
+    padding-left: 1rem;
+    border-radius: 10px;
+  }
+
+  /* #address {
+    padding-right: 20rem;
+    padding-bottom: 8rem;
+    
+  } */
+
+  #address {
+    margin-left: 1rem;
+    width: 32rem;
+    padding-bottom: 8rem;
+  }
+
+  #hourlyRate {
+    margin-left: 1rem;
+    width: 24rem;
+  }
+
+  #phoneNumber {
+    margin-left: 1rem;
+    width: 24rem;
+    
+  }
+
+  #service {
+    width: 20rem;
+  }
+
+
+  #firstName, #lastName, #email, #password {
+    width: 18rem;
+    margin-left: .5rem;
+  }
+
+   
+  
+  input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  /* border-color: #2bb053;  */
+  box-shadow: 0 0 5px #2bb053 !important;
+  border-color: #2bb053 !important;
+}
+  
+  
+  
+  

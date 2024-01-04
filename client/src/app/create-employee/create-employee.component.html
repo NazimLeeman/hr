@@ -1,5 +1,5 @@
 <app-navbar-admin></app-navbar-admin>
-<div class="mx-60 border font-GTPressura">
+<!-- <div class="mx-60 border font-GTPressura">
     <div *ngIf="!showForm">
     <h1 class="mt-6 text-center text-3xl">You dont have any Employee right now.</h1>
     <div  class=" flex justify-center mt-2 p-8">
@@ -97,7 +97,6 @@
                 <option value="Option 3">KDS</option>
                 <option value="Option 4">MARKET PLACE</option>
                 <option value="Option 5">POS</option>
-                <!-- <option value="Option 6"></option>   -->
             </select>
             </nz-form-control>
           </nz-form-item>
@@ -113,4 +112,111 @@
           </button>
         </div>
     </div>   
+</div> -->
+
+
+<div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura';">
+  <div *ngIf="!showForm">
+    <h1 style="margin-top: 1.5rem; text-align: center; font-size: 1.875rem;">You don't have any Employee right now.</h1>
+    <div style="display: flex; justify-content: center; margin-top: 1rem; padding: 2rem;">
+        <button type="submit" nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 16rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
+            [nzType]="'primary'" (click)="showForm = true">Create New Employee
+        </button>
+    </div>
+</div>
+<div *ngIf="showForm">
+  <div style="float: right; margin: 1rem 4rem;">
+      <button type="submit" nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
+          [nzType]="'primary'" (click)="showForm = false">Go back
+      </button>
+  </div>
+  <div style="padding: 1rem; margin-left: 4px;">
+    <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Create Employee</h1>
+    <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Create by filling in these information.</p>
+    <form nz-form style="display: grid; grid-template-columns: repeat(3, 1fr);" [formGroup]="validateFormPartOne">
+    <!-- <div style="display: grid; grid-template-columns: repeat(3, 1fr);"> -->
+      <img style="padding-bottom: 1rem;" src="../../assets/images/user-profile-default.png" alt="">
+      <nz-form-item>
+      <div style="display: flex;">
+        <div >
+        <label style=" font-size: large;">First Name</label>
+        <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
+          <input nz-input style="font-size: large; margin-top: .5rem;" type="text"  formControlName="firstName" id="firstName" placeholder="First Name" >
+        </nz-form-control>
+      </div>
+      <div style="margin-left: 3rem;">
+        <label style=" font-size: large;" for="email">Email</label>
+        <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
+          <input nz-input style="font-size: large; margin-top: .5rem;" type="text"  formControlName="email" id="email" placeholder="Email" >
+        </nz-form-control>
+      </div>
+      </div>
+      <div style="display: flex;">
+        <div >
+        <label style=" font-size: large;">Last Name</label>
+        <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
+          <input nz-input style="font-size: large; margin-top: .5rem;" type="text"  formControlName="lastName" id="lastName" placeholder="Last Name" >
+        </nz-form-control>
+      </div>
+      <div style="margin-left: 3rem;">
+        <label style="  font-size: large;" for="password">Password</label>
+        <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
+          <input nz-input style="font-size: large; margin-top: .5rem;" type="text"  formControlName="password" id="password" placeholder="Password" >
+        </nz-form-control>
+      </div>
+      </div>
+      </nz-form-item>
+    </form>
+  </div>
+  <form nz-form style="padding: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr);" [formGroup]="validateFormPartOne" (ngSubmit)="submitFormPartOne()">
+    <nz-form-item>
+      <label style="font-size: large;" >Phone Number</label>
+      <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
+        <input nz-input style="font-size: large; margin-top: .5rem;" type="text"  formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" >
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item >
+      <label style="font-size: large;">Hourly Rate</label>
+      <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
+        <input nz-input style="font-size: large; margin-top: .5rem;" type="text"  id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" >
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item >
+      <label style="font-size: large;">Address</label>
+      <nz-form-control nzErrorTip="Please input an address!" class="custom-error-tip">
+        <input nz-input style="font-size: large; margin-top: .5rem;" type="text"  id="address" formControlName="address" placeholder="Address">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div style="display: flex; justify-content: center;  padding-bottom: 1rem;">
+    <button class="my-btn" type="submit" (click)="goToNextStep()"  nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Next</button>
+</div>
+</div>
+<div *ngIf="showFormTwo">
+  <h1 style="margin-top: 1.5rem; margin-bottom: 1rem; text-align: center; font-size: 1.875rem;">Provide the neccessary Service Access.</h1>
+  <div style="display: flex; flex-direction: row; justify-content: space-around;">
+  <form nz-form style="display: flex; flex-direction: row; padding: 1rem;" [formGroup]="validateFormPartTwo" (ngSubmit)="submitFormPartTwo()">
+    <nz-form-item style="margin-right: 20rem; " >
+    <nz-form-control nzErrorTip="Please input Position!" class="custom-error-tip">
+      <input nz-input style="font-size: large; margin-top: .5rem; margin-left: .5rem;" type="text" id="position" placeholder="Position">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please select a service access!">
+      <select nz-select style="font-size: large; margin-top: .5rem; margin-left: .5rem;" formControlName="selectedService" (ngModelChange)="onServiceChange($event)" placeholder="Select Service Access">
+        <option value="INVENTORY">INVENTORY</option>
+        <option value="MENU BUILDER">MENU BUILDER</option>
+        <option value="KDS">KDS</option>
+        <option value="MARKET PLACE">MARKET PLACE</option>
+        <option value="POS">POS</option>
+      </select>
+      <input nz-input style="font-size: large; margin-top: .5rem; margin-left: 1.2rem;" type="text" id="service" [value]="selectedServiceOptions" readonly>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+</div>
+<div style="display: flex; justify-content: center;  padding-bottom: 1rem;">
+  <button class="my-btn" type="submit" (click)="submitFormPartTwo()" nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Post Position</button>
+</div>
 </div>

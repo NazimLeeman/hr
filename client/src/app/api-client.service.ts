@@ -16,6 +16,10 @@ export class ApiClientService {
     return this.http.post(`${this.apiUrl}/applicant/signup`, userData)
   }
 
+  createEmployee(userData:any): Observable<any>{
+    return this.http.post(`${this.apiUrl}/employee/signup`, userData);
+  }
+
   loginUser(loginData: any): Observable<any>{
     return this.http.post(`${this.apiUrl}/applicant/login`, loginData)
   }
