@@ -11,14 +11,13 @@
   }
 
   input[type="text"] {
-  border: 1px solid #cbd5e0;
-  background-color: #f3f4f5;
+ 
+  background-color: #ffffff;
   color: black;
   outline: none;
   transition: all;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-right: 10rem;
+  padding-top: .2rem;
+  padding-bottom: .2rem;
   padding-left: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px;
@@ -31,6 +30,37 @@
     box-shadow: 0 0 5px #2bb053 !important;
     border-color: #2bb053 !important;
   }
+
+  input[type="text"]:hover {
+    border-color: #2bb053;
+  }
+
+  #rangePicker {
+    padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  width: 32rem;
+  border-radius: 10px;
+  font-size: x-large;
+  }
+
+  #rangePicker:hover {
+    border-color: #2bb053;
+  }
+  #rangePicker:focus {
+    border-color: #2bb053;
+  }
+
+  .large-font {
+    font-size: 18px;
+  }
+
+  /* nz-descriptions .ant-descriptions-title {
+    font-size: 20px;
+  } */
+
+
 
   /* #experience {
     padding-right: 20rem;

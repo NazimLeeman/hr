@@ -24,13 +24,14 @@ export class RegistrationSummaryComponent implements OnInit {
   email: string = '';
   address: string = '';
   hourlyRate: number = 0;
-  phoneNumber: number = +880;
+  phoneNumber: string = '';
   password: string = '';
 
   validateForm: FormGroup<{
-    phoneNumber: FormControl<number>,
+    phoneNumber: FormControl<string>,
     address: FormControl<string>;
     hourlyRate: FormControl<number>;
+    phoneNumberPrefix: FormControl<'+86' | '+87'>;
   }>
 
 ngOnInit(): void {
@@ -108,9 +109,10 @@ additionOnInit(): void {
 
   constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
-      phoneNumber: [+880, [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
       address: ['', [Validators.required]],
       hourlyRate: [0, [Validators.required]],
+      phoneNumberPrefix: '+86' as '+86' | '+87'
     })
   }
 

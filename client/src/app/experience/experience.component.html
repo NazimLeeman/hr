@@ -27,18 +27,25 @@
   <div style="padding: 1rem; margin-left: 4px;">
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Experiences</h1>
     
-    <div *ngIf="experience !== undefined && experience !== null && experience !== ''" style="display: flex; flex-direction: column;">
-      <!-- <input type="text" style="font-size: large;" [value]="experience" readonly> -->
-      <div style=" background-color: hsl(126, 29%, 93%); font-size: larger; width: 40rem; height: 6rem; border-radius: 1rem; margin-bottom: 1rem;">
-        <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 2rem; list-style-type: none; font-size: larger;">
-          <p > {{experience}}</p>
-        <!-- <button style="background-color: #EF4444; color: #ffffff; padding-left:.75rem; padding-right:.75rem; border-radius: .5rem;">Delete</button> -->
+    <div *ngIf="experience && experience.length > 0" style="display: flex; flex-direction: column;">
+      <!-- <h1 style="margin-left: .5rem; font-size:xx-large;">Current Experiences</h1> -->
+      <nz-descriptions *ngFor="let exp of experience"  nzBordered nzLayout="vertical">
+        <nz-descriptions-item nzTitle="Restaurant Name" >{{ getExperiencePart(exp, 0) }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Position">{{ getExperiencePart(exp, 1) }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Employment Tenure">{{ formatDateRange(exp) }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Responsibilites" [nzSpan]="2">
+          {{ getExperiencePart(exp, 2) }}
+        </nz-descriptions-item>
+      </nz-descriptions>
+      <!-- <div *ngFor="let exp of experience" style=" background-color: hsl(126, 29%, 93%);  font-size: larger; width: 40rem; height: 6rem; border-radius: 1rem; margin-bottom: 1rem;">
+        <div  style="display: flex; flex-direction: row; justify-content: space-between; padding: 2rem; list-style-type: none; font-size: larger;">
+          <p > {{exp}}</p>
         </div>
-      </div>
+      </div> -->
     </div>
     
     <div>
-      <p style="margin-left: .5rem; font-size:x-large; padding-bottom: 1rem;">Highlight any relevant work & volunteer experience you may have.</p>
+      <h1 style="margin-top: 1rem; margin-left: .5rem; font-size:x-large;">Highlight any relevant work & volunteer experience you may have.</h1>
     </div>
     <div style=" display: flex; padding: 0.75rem; font-family: 'GTPressura';">
       <form style="padding: 2rem;" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
@@ -49,7 +56,7 @@
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>   
-          <label style="font-size: large; display: flex; cursor: pointer;"  (click)="showExperienceForm = !showExperienceForm">Add Experience</label>
+          <label style="font-size: x-large; display: flex; cursor: pointer;"  (click)="showExperienceForm = !showExperienceForm">Add Experience</label>
           
         </div> 
         
@@ -60,14 +67,23 @@
           <input nz-input type="text" style="font-size: large; " id="position" formControlName="position" placeholder="Position">
           <h1 style="font-size: large; padding: .5rem;">Responsibilites</h1>
           <input nz-input type="text" style="font-size: large; " id="responsibilities" formControlName="responsibilities" placeholder="Responsibilites">
-          <h1 style="font-size: large; padding: .5rem;">Worked For</h1>
-          <input nz-input type="text" style="font-size: large; " id="years" formControlName="years" placeholder="Years">
+          <h1 style="font-size: large; padding: .5rem;">Employment Tenure</h1>
+          <!-- <input nz-input type="text" style="font-size: large; " id="years" formControlName="years" placeholder="Years"> -->
+        <nz-form-item>
+          <!-- <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>RangePicker</nz-form-label> -->
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <nz-range-picker id="rangePicker" formControlName="rangePicker"></nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
           <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
             <button class="my-btn" type="submit" (click)="submitForm()" nz-button style="font-family: 'GTPressura'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Add Experience</button>
+          </div>
         </div>
-        </div>
-        </div>
-      </form>
+      </div>
+    </form>
+    <!-- <div>
+      <nz-range-picker nzMode="month" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+    </div> -->
     </div>
   </div>
 </div>

@@ -45,6 +45,10 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { DialogComponent } from './dialog/dialog.component';
 import en from '@angular/common/locales/en';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 registerLocaleData(en);
 
@@ -94,7 +98,11 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     IconsProviderModule,
-    NzResultModule
+    NzResultModule,
+    NzDatePickerModule,
+    NzDescriptionsModule,
+    NzTableModule,
+    NzDividerModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -36,3 +36,13 @@
     padding-right: 20rem;
     padding-bottom: 8rem;
   }
+
+  nz-select {
+    font-size: x-large;
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  #select:hover {
+    border-color: #2bb053
+  }

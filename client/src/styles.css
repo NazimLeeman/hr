@@ -23,3 +23,20 @@ body {
     font-family: 'Proxima Nova','Arial' ,'sans-serif'; 
 }; */
 
+nz-descriptions .ant-descriptions-title {
+    font-size: 24px; /* Adjust the font size as needed */
+  }
+
+  nz-descriptions .ant-descriptions-item-label {
+    font-size: 18px; 
+  }
+
+  nz-descriptions .ant-descriptions-item-content {
+    font-size: 18px;
+  }
+
+  .ant-table {
+    font-size: 18px;
+  }
+
+  

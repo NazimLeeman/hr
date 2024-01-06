@@ -3,6 +3,7 @@ import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
 import { switchMap } from 'rxjs/operators';
+import { getISOWeek } from 'date-fns';
 
 @Component({
   selector: 'app-experience',
@@ -11,13 +12,18 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ExperienceComponent implements OnInit {
   applicantId: number = 0;
-  experience: string = '';
+  experience: string[] = [];
+  name: string ='';
+  position: string ='';
+  careerDuration: string ='';
+  responsibilities: string ='';
   showExperienceForm: boolean = false;
+  date = null;
   validateForm: FormGroup<{
     restaurantName: FormControl<string>;
     position: FormControl<string>;
     responsibilities: FormControl<string>;
-    years: FormControl<string>;
+    rangePicker: FormControl<[Date, Date] | null>;
   }>
 
   ngOnInit(): void {
@@ -29,7 +35,12 @@ export class ExperienceComponent implements OnInit {
   ).subscribe(
       (data: any) => {
         console.log('API Response:', data);
-      this.experience = data.data.experience;
+      this.experience = data.data.experience || [];
+      const experienceParts = this.experience[0].split('-');
+      this.name = experienceParts[0];
+          this.position = experienceParts[1];
+          this.careerDuration = experienceParts[2];
+          this.responsibilities = experienceParts[3];
       },
       (error) => {
           console.error('Error fetching data from the API', error);
@@ -63,17 +74,44 @@ export class ExperienceComponent implements OnInit {
     this.showExperienceForm = !this.showExperienceForm;
   }
 
+  getExperiencePart(experience: string, partIndex: number): string {
+    const experienceParts = experience.split('-');
+    return experienceParts.length > partIndex ? experienceParts[partIndex].trim() : '';
+  }
+
   mergeFormData(): any {
     const restaurantName = this.validateForm.get('restaurantName')?.value || '';
     const position = this.validateForm.get('position')?.value || '';
     const responsibilities = this.validateForm.get('responsibilities')?.value || '';
-    const years = this.validateForm.get('years')?.value || '';
+    const years = this.validateForm.get('rangePicker')?.value || '';
 
+    const newExperience = `${restaurantName}-${position}-${responsibilities}-${years}`;
     const mergedData = {
-      experience: `${restaurantName} ${position} ${responsibilities} ${years}`
+      experience: [...this.experience, newExperience]
     };
     
     return mergedData;
+  }
+
+  formatDateRange(experience: string): string {
+    const dateParts = experience.split(',');
+    const startDate = new Date(dateParts[0]);
+    const endDate = new Date(dateParts[1]);
+  
+    const formattedStartDate = this.formatDate(startDate);
+    const formattedEndDate = this.formatDate(endDate);
+  
+    return `From ${formattedStartDate} to ${formattedEndDate}`;
+  }
+  
+  formatDate(date: Date): string {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+    const day = date.getDate();
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+  
+    return `${month} ${day} ${year}`;
   }
 
   constructor(private fb: NonNullableFormBuilder,private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router) {
@@ -81,7 +119,7 @@ export class ExperienceComponent implements OnInit {
       restaurantName: ['', [Validators.required]],
       position: ['', [Validators.required]],
       responsibilities: ['', [Validators.required]],
-      years: ['', [Validators.required]],
+      rangePicker: this.fb.control<[Date, Date] | null>(null),
     })
   }
 }

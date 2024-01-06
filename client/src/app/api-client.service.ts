@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ApiClientService {
 
-  private apiUrl = 'https://hr-server-icl9.onrender.com';
+  private apiUrl = 'http://localhost:4000';
+  // private apiUrl = 'https://hr-server-icl9.onrender.com';
   private tokenKey = 'token';
 
   constructor(private http: HttpClient) { }

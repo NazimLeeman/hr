@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
@@ -9,12 +9,29 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.css'
 })
-export class SkillsComponent {
+export class SkillsComponent implements OnInit {
   applicantId: number = 0;
-  skillTags: string = '';
+  skillTags: string[] = [];
   showSkillTagsForm: boolean = false;
+  listOfOption: string[] = ['Customer Service',
+  'Communication Skills',
+  'Menu Knowledge',
+  'Order Taking',
+  'Upselling',
+  'Table Service',
+  'Time Management',
+  'Multitasking',
+  'Problem-Solving',
+  'Culinary Creativity',
+  'Menu Planning and Development',
+  'Food Presentation',
+  'Cooking Techniques',
+  'Ingredient Knowledge',
+  'Time Management',
+  'Team Leadership'];
+  listOfSelectedValue = [];
   validateForm: FormGroup<{
-    skillTags: FormControl<string>;
+    listOfSelectedValue: FormControl<string[]>;
   }>
 
   ngOnInit(): void {
@@ -36,11 +53,11 @@ export class SkillsComponent {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      const updatedData = this.validateForm.value;
+      // const skillTags = this.validateForm.get('listOfSelectedValue')?.value || [];
+      const updatedData = this.suitableData();
       console.log('merged data:', updatedData)
-      // const updatedData = this.validateForm.value;
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
-        console.log('Applicant updated successfully:', response);
+        console.log('Applicant skill tags updated successfully:', response);
         location.reload();
       },
       (error) => {
@@ -60,9 +77,20 @@ export class SkillsComponent {
     this.showSkillTagsForm = !this.showSkillTagsForm;
   }
 
+  suitableData(): any {
+    const skillTags = this.validateForm.get('listOfSelectedValue')?.value || [];
+
+    const newSkillTags = `${skillTags}`;
+    const mergedData = {
+      skillTags: [...this.skillTags, newSkillTags]
+    };
+    
+    return mergedData;
+  }
+
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute) {
     this.validateForm = this.fb.group({
-      skillTags: ['', [Validators.required]],
+      listOfSelectedValue: [[] as string[], [Validators.required]],
     })
   }
 }

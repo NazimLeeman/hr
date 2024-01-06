@@ -70,20 +70,20 @@
         <img style="padding-bottom: 1rem;" src="../../assets/images/user-profile-default.png" alt="">
         <div style="display: flex; flex-direction: column; justify-content: center; padding-left: 1rem;">
           <label style="margin-bottom: 6px; font-size: large;">First Name
-            <input type="text" [value]="firstName" readonly></label>
+            <input style="background-color: #F3F4F6;" type="text" [value]="firstName" readonly></label>
           <label style="margin-bottom: 6px; font-size: large;" for="email">Email
-            <input type="text" [value]="email" readonly></label>
+            <input style="background-color: #F3F4F6;" type="text" [value]="email" readonly></label>
         </div>
         <div style="display: flex; flex-direction: column; justify-content: center;">
           <label style="margin-bottom: 6px; font-size: large;">Last Name
-            <input type="text" [value]="lastName" readonly></label>
+            <input style="background-color: #F3F4F6;" type="text" [value]="lastName" readonly></label>
           <label style=" margin-bottom: 6px; font-size: large;" for="password">Password
-            <input type="password" [value]="password" readonly></label>
+            <input style="background-color: #F3F4F6;" type="password" [value]="password" readonly></label>
         </div>
       </div>
     </div>
     <form nz-form style="padding: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr);" [formGroup]="validateForm" (ngSubmit)="submitForm()">
-      <nz-form-item>
+     <nz-form-item>
         <label style="font-size: large;" >Enter your phone number to connect with others</label>
         <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
           <input nz-input style="font-size: large; margin-top: .5rem;" type="text" [value]="phoneNumber" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" >
