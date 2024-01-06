@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { checkEmployeeServiceAccess } from '../models/position/position.query';
 import { Request, Response } from "express";
-import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, updateEmployeeInformation, deleteEmployeeById, deleteEmployeeLogin, updateEmployeeById, findEmployeeBySearchTerm } from "../models/employee/employee.query";
+import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById } from "../models/employee/employee.query";
 import { findEmployeeLoginByEmail, createEmployeeLogin } from "../models/employeeLogin/employeeLogin.query";
 import { validateLoginData, validateEmployeeData } from "../utils/validation.helper";
 
