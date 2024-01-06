@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { checkEmployeeServiceAccess } from '../models/position/position.query';
 import { Request, Response } from "express";
-import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, updateEmployeeInformation } from "../models/employee/employee.query";
+import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, updateEmployeeInformation, deleteEmployeeById, deleteEmployeeLogin, updateEmployeeById, findEmployeeBySearchTerm } from "../models/employee/employee.query";
 import { findEmployeeLoginByEmail, createEmployeeLogin } from "../models/employeeLogin/employeeLogin.query";
 import { validateLoginData, validateEmployeeData } from "../utils/validation.helper";
 
@@ -44,14 +44,15 @@ export async function getAllEmployeeOfRestaurant (req: Request, res: Response) {
 
   export async function postEmployeeToRestaurant (req: Request, res: Response) {
     try {
-      const { restaurantId, name, email, password, experience, phoneNumber, address, skillTags, hourlyRate } = req.body;
-      const data = { restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate };
+      const restaurantId = Number(req.params.restaurantId);
+      const { name, email, password, phoneNumber, address, hourlyRate } = req.body;
+      const data = { name, email, phoneNumber, address, hourlyRate };
   
       if (validateEmployeeData({ name, email, password })) {
         const loginCheck = await findEmployeeLoginByEmail(email);
   
         if (!loginCheck) {
-          const newEmployee = await addEmployeeToRestaurant(data);
+          const newEmployee = await addEmployeeToRestaurant( restaurantId,data);
   
           const salt = bcrypt.genSaltSync();
           const encryptedPassword =  bcrypt.hashSync(password, salt);
@@ -79,9 +80,9 @@ export async function getAllEmployeeOfRestaurant (req: Request, res: Response) {
   
 export async function login (req: Request, res: Response) {
   try {
-    const { email, password, service } = req.body;
+    const { email, password } = req.body;
 
-    if (validateLoginData({ email, password, service })) {
+    if (validateLoginData({ email, password })) {
       const login = await findEmployeeLoginByEmail(email);
 
       if (login) {
@@ -89,9 +90,7 @@ export async function login (req: Request, res: Response) {
           const employee = await findEmployeeById(login.employeeId);
 
           if (employee) {
-            const accessCheck = await checkEmployeeServiceAccess(employee.id, service);
-            if (accessCheck) res.status(200).send({ status: 'success', employee });
-            else res.status(403).send({ message: 'You do not have access to this service.' });
+             res.status(200).send({ status: 'success', employee });
           } else res.status(400).send({ message: 'This account is no longer in service.' });
           
         } else res.status(401).send({ message: 'Invalid password for this login.' });
@@ -126,21 +125,86 @@ export async function login (req: Request, res: Response) {
     }
   }
 
-  export async function updateInformationOfEmployee (req: Request, res: Response) {
+  // export async function updateInformationOfEmployee (req: Request, res: Response) {
+  //   try {
+  //       const employeeId = Number(req.params.employeeId);
+  //       if (employeeId) {
+  //           const { restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId } = req.body;
+  //           if (
+  //               typeof restaurantId === 'number' &&
+  //               typeof name === 'string' &&
+  //               typeof email === 'string') {
+  //             const information = await updateEmployeeInformation( employeeId, {restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId});
+  //             res.status(201).json(information);
+  //           } else res.status(400).json({ message: "Invalid employee ID." });
+  //         } else res.status(400).json({ message: "Invalid information ID." });
+  //   } catch (error) {
+  //       console.log(error);
+  //       res.status(500).json(error);
+  //   }
+  // }
+
+  export async function deleteEmployee(req: Request, res: Response) {
+    const employeeId = Number(req.params.employeeId);
+      try {
+          const result = await deleteEmployeeById(employeeId);
+  
+          if (result.success) {
+            const loginData = await deleteEmployeeLogin(employeeId)
+              return res.status(200).json({ message: result.message });
+          } else {
+              return res.status(404).json({ message: result.message });
+          }
+      } catch (error) {
+          console.error(error);
+          return res.status(500).json({ message: 'Internal Server Error' });
+      }
+  }
+  
+  export async function updateEmployee(req: Request, res: Response) {
+    const employeeId = parseInt(req.params.employeeId, 10);
+    const updatedData = req.body; 
+  
     try {
-        const employeeId = Number(req.params.employeeId);
-        if (employeeId) {
-            const { restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId } = req.body;
-            if (
-                typeof restaurantId === 'number' &&
-                typeof name === 'string' &&
-                typeof email === 'string') {
-              const information = await updateEmployeeInformation( employeeId, {restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId});
-              res.status(201).json(information);
-            } else res.status(400).json({ message: "Invalid employee ID." });
-          } else res.status(400).json({ message: "Invalid information ID." });
+        const result = await updateEmployeeById(employeeId, updatedData);
+  
+        if (result.success) {
+            return res.status(200).json({ message: result.message });
+        } else {
+            return res.status(404).json({ message: result.message });
+        }
     } catch (error) {
-        console.log(error);
-        res.status(500).json(error);
+        console.error(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
   }
+  
+  export async function deleteEmployeeLoginData(req: Request, res: Response) {
+    const employeeId = Number(req.params.employeeId);
+      try {
+          const result = await deleteEmployeeLogin(employeeId);
+          if (result.success) {
+              return res.status(200).json({ message: result.message });
+          } else {
+              return res.status(404).json({ message: result.message });
+          }
+      } catch (error) {
+          console.error(error);
+          return res.status(500).json({ message: 'Internal Server Error' });
+      }
+  }
+
+  export async function searchEmployee (req: Request, res: Response) {
+    try {
+        const search = req.query.q;
+        const searchTerm = search?.toString();
+    
+        if (searchTerm) {
+          const job = await findEmployeeBySearchTerm(searchTerm);
+          res.json({ data: job });
+        } else res.json({ data: [] });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+      }
+}
