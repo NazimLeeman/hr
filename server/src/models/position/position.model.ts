@@ -24,7 +24,8 @@ const Position = sequelize.define<PositionInstance>('position', {
     employeeId: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },restaurantId: {
+    },
+    restaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false
     },

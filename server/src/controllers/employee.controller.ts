@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { checkEmployeeServiceAccess } from '../models/position/position.query';
 import { Request, Response } from "express";
-import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById } from "../models/employee/employee.query";
+import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, deleteEmployeeById, deleteEmployeeLogin, findEmployeeBySearchTerm, updateEmployeeById, updateEmployeeInformation } from "../models/employee/employee.query";
 import { findEmployeeLoginByEmail, createEmployeeLogin } from "../models/employeeLogin/employeeLogin.query";
 import { validateLoginData, validateEmployeeData } from "../utils/validation.helper";
 
@@ -125,86 +125,86 @@ export async function login (req: Request, res: Response) {
     }
   }
 
-  // export async function updateInformationOfEmployee (req: Request, res: Response) {
-  //   try {
-  //       const employeeId = Number(req.params.employeeId);
-  //       if (employeeId) {
-  //           const { restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId } = req.body;
-  //           if (
-  //               typeof restaurantId === 'number' &&
-  //               typeof name === 'string' &&
-  //               typeof email === 'string') {
-  //             const information = await updateEmployeeInformation( employeeId, {restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId});
-  //             res.status(201).json(information);
-  //           } else res.status(400).json({ message: "Invalid employee ID." });
-  //         } else res.status(400).json({ message: "Invalid information ID." });
-  //   } catch (error) {
-  //       console.log(error);
-  //       res.status(500).json(error);
-  //   }
-  // }
+  export async function updateInformationOfEmployee (req: Request, res: Response) {
+    try {
+        const employeeId = Number(req.params.employeeId);
+        if (employeeId) {
+            const { restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId } = req.body;
+            if (
+                typeof restaurantId === 'number' &&
+                typeof name === 'string' &&
+                typeof email === 'string') {
+              const information = await updateEmployeeInformation( employeeId, {restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId});
+              res.status(201).json(information);
+            } else res.status(400).json({ message: "Invalid employee ID." });
+          } else res.status(400).json({ message: "Invalid information ID." });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+  }
 
-  // export async function deleteEmployee(req: Request, res: Response) {
-  //   const employeeId = Number(req.params.employeeId);
-  //     try {
-  //         const result = await deleteEmployeeById(employeeId);
+  export async function deleteEmployee(req: Request, res: Response) {
+    const employeeId = Number(req.params.employeeId);
+      try {
+          const result = await deleteEmployeeById(employeeId);
   
-  //         if (result.success) {
-  //           const loginData = await deleteEmployeeLogin(employeeId)
-  //             return res.status(200).json({ message: result.message });
-  //         } else {
-  //             return res.status(404).json({ message: result.message });
-  //         }
-  //     } catch (error) {
-  //         console.error(error);
-  //         return res.status(500).json({ message: 'Internal Server Error' });
-  //     }
-  // }
+          if (result.success) {
+            const loginData = await deleteEmployeeLogin(employeeId)
+              return res.status(200).json({ message: result.message });
+          } else {
+              return res.status(404).json({ message: result.message });
+          }
+      } catch (error) {
+          console.error(error);
+          return res.status(500).json({ message: 'Internal Server Error' });
+      }
+  }
   
-  // export async function updateEmployee(req: Request, res: Response) {
-  //   const employeeId = parseInt(req.params.employeeId, 10);
-  //   const updatedData = req.body; 
+  export async function updateEmployee(req: Request, res: Response) {
+    const employeeId = parseInt(req.params.employeeId, 10);
+    const updatedData = req.body; 
   
-  //   try {
-  //       const result = await updateEmployeeById(employeeId, updatedData);
+    try {
+        const result = await updateEmployeeById(employeeId, updatedData);
   
-  //       if (result.success) {
-  //           return res.status(200).json({ message: result.message });
-  //       } else {
-  //           return res.status(404).json({ message: result.message });
-  //       }
-  //   } catch (error) {
-  //       console.error(error);
-  //       return res.status(500).json({ message: 'Internal Server Error' });
-  //   }
-  // }
+        if (result.success) {
+            return res.status(200).json({ message: result.message });
+        } else {
+            return res.status(404).json({ message: result.message });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
   
-  // export async function deleteEmployeeLoginData(req: Request, res: Response) {
-  //   const employeeId = Number(req.params.employeeId);
-  //     try {
-  //         const result = await deleteEmployeeLogin(employeeId);
-  //         if (result.success) {
-  //             return res.status(200).json({ message: result.message });
-  //         } else {
-  //             return res.status(404).json({ message: result.message });
-  //         }
-  //     } catch (error) {
-  //         console.error(error);
-  //         return res.status(500).json({ message: 'Internal Server Error' });
-  //     }
-  // }
+  export async function deleteEmployeeLoginData(req: Request, res: Response) {
+    const employeeId = Number(req.params.employeeId);
+      try {
+          const result = await deleteEmployeeLogin(employeeId);
+          if (result.success) {
+              return res.status(200).json({ message: result.message });
+          } else {
+              return res.status(404).json({ message: result.message });
+          }
+      } catch (error) {
+          console.error(error);
+          return res.status(500).json({ message: 'Internal Server Error' });
+      }
+  }
 
-//   export async function searchEmployee (req: Request, res: Response) {
-//     try {
-//         const search = req.query.q;
-//         const searchTerm = search?.toString();
+  export async function searchEmployee (req: Request, res: Response) {
+    try {
+        const search = req.query.q;
+        const searchTerm = search?.toString();
     
-//         if (searchTerm) {
-//           const job = await findEmployeeBySearchTerm(searchTerm);
-//           res.json({ data: job });
-//         } else res.json({ data: [] });
-//       } catch (error) {
-//         console.log(error);
-//         res.status(500).json(error);
-//       }
-// }
+        if (searchTerm) {
+          const job = await findEmployeeBySearchTerm(searchTerm);
+          res.json({ data: job });
+        } else res.json({ data: [] });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+      }
+}

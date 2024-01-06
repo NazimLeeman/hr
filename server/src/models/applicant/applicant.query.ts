@@ -15,10 +15,10 @@ import ApplicantLogin from "../applicantLogin/applicantLogin.model";
 export async function createApplicant(data: {
     name: string, 
     email: string,
-    experience?: string,
+    experience?: [string],
     phoneNumber?: number,
     address?: string,
-    skillTags?: string,
+    skillTags?: [string],
     hourlyRate?: number
 }) {
     try {
@@ -67,8 +67,10 @@ export async function findApplicantBySearchTerm (searchTerm: string) {
       const applicant = await Applicant.findAll({
         where: { 
             [Op.or]: [
-                { experience: {[Op.iLike]: `%${searchTerm}%`} },
-                { skillTags: {[Op.iLike]: `%${searchTerm}%`} }
+                { experience: {[Op.overlap]: [searchTerm]} },
+                { skillTags: {[Op.overlap]: [searchTerm]} }
+                // { experience: {[Op.iLike]: `%${searchTerm}%`} },
+                // { skillTags: {[Op.iLike]: `%${searchTerm}%`} }
             ]
         }
       })
@@ -111,10 +113,10 @@ export async function findApplicantBySearchTerm (searchTerm: string) {
   export async function updateApplicantById(applicantId: number, updatedData: {
     name?: string, 
     email?: string,
-    experience?: string,
+    experience?: [string],
     phoneNumber?: number,
     address?: string,
-    skillTags?: string,
+    skillTags?: [string],
     hourlyRate?: number
   })  {
     try {

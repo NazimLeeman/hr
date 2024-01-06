@@ -7,7 +7,8 @@ import applicantRouter from './routers/applicant.router';
 import scheduleRouter from './routers/schedule.router';
 import jobRouter from './routers/job.router';
 import positionRouter from './routers/position.router';
-import attendanceRouter from './routers/attendance.router'
+import attendanceRouter from './routers/attendance.router';
+import payrollRouter from './routers/payroll.router';
 
 const app: Express = express();
 
@@ -23,6 +24,7 @@ app.use('/schedule', scheduleRouter);
 app.use('/job', jobRouter);
 app.use('/position', positionRouter);
 app.use('/attendance', attendanceRouter);
+app.use('/payroll', payrollRouter);
 
 (async function bootstrap () {
     try {

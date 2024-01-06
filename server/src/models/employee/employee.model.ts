@@ -37,25 +37,35 @@ const Employee = sequelize.define<EmployeeInstance>('employee', {
         allowNull: false
     },
     experience: {
-        type: DataTypes.TEXT,
-        allowNull: false
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
+        defaultValue: []
     },
     phoneNumber: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 0
     },
     address: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: ''
     },
     skillTags: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
+        defaultValue: []
     },
     hourlyRate: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 0
     },
+    efficiency: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: ''
+    }
     // positionId: {
     //     type: DataTypes.INTEGER,
     //     allowNull: false

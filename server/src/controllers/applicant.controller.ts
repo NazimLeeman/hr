@@ -171,3 +171,43 @@ export async function getApplicantById(req: Request, res: Response) {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 }
+
+export async function addExperience(req: Request, res: Response) {
+  const applicantId = Number(req.params.applicantId);
+  const updatedData = req.body;
+  try {
+    const existingApplicant = await findApplicantById(applicantId);
+    if(existingApplicant && existingApplicant.experience && updatedData.experience) {
+      updatedData.experience = [...existingApplicant.experience, ...updatedData.experience]
+    } const result = await updateApplicantById(applicantId, updatedData);
+
+    if (result.success) {
+      return res.status(200).json({ message: result.message });
+    } else {
+      return res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
+export async function addSkillTags(req: Request, res: Response) {
+  const applicantId = Number(req.params.applicantId);
+  const updatedData = req.body;
+  try {
+    const existingApplicant = await findApplicantById(applicantId);
+    if(existingApplicant && existingApplicant.skillTags && updatedData.skillTags) {
+      updatedData.skillTags = [...existingApplicant.skillTags, ...updatedData.skillTags]
+    } const result = await updateApplicantById(applicantId, updatedData);
+
+    if (result.success) {
+      return res.status(200).json({ message: result.message });
+    } else {
+      return res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+}

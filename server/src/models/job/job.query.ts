@@ -3,9 +3,13 @@ import Job from "./job.model";
 
 export async function createJob(data: {
   jobRole: string;
+  jobNature: string,
+  jobDescription: string;
   experience: string;
-  skillTags: string;
+  skillTags: [string];
   hourlyRate: number;
+  applicationDeadline: Date;
+  responsibilities: string[]
 }) {
   try {
     const newJob = await Job.create(data);
@@ -30,7 +34,7 @@ export async function findJobBySearchTerm (searchTerm: string) {
       where: { 
           [Op.or]: [
               { jobRole: {[Op.iLike]: `%${searchTerm}%`} },
-              { skillTags: {[Op.iLike]: `%${searchTerm}%`} }
+              { skillTags: {[Op.overlap]: [searchTerm]} }
           ]
       }
     })

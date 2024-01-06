@@ -25,9 +25,17 @@ const Payroll = sequelize.define<PayrollInstance>('payroll', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    deductions: {
+    totalHours: {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    totalDeduction: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    restaurantId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 })
 

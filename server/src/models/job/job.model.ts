@@ -22,18 +22,34 @@ const Job = sequelize.define<JobInstance>('job', {
         type: DataTypes.TEXT,
         allowNull: false
     },
+    jobNature: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    jobDescription: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     experience: {
         type: DataTypes.TEXT,
         allowNull: false
     },
     skillTags: {
-        type: DataTypes.TEXT,
+        type: DataTypes.ARRAY(DataTypes.TEXT),
         allowNull: false
     },
     hourlyRate: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    applicationDeadline: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    responsibilities: {
+        type: DataTypes.ARRAY(DataTypes.TEXT),
+        allowNull: false
+    }
 })
 
 export default Job;

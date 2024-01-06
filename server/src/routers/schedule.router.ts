@@ -6,6 +6,6 @@ router.get('/restaurant/:id', getAllScheduleOfRestaurant);
 router.get('/:employeeId/restaurant/:id', getAllScheduleOfEmployee);
 
 router.put('/:employeeId/restaurant/:scheduleId', updateScheduleOfEmployee);
-router.post('/:id/restaurant/:employeeId', postScheduleToEmployee);
+router.post('/:id/restaurant', postScheduleToEmployee);
 
 export default router;

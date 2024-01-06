@@ -3,10 +3,10 @@ import { createJob, findAllJob, findJobBySearchTerm } from "../models/job/job.qu
 
 export async function postJob (req: Request, res: Response) {
     try {
-        const { jobRole, experience, skillTags, hourlyRate} = req.body;
+        const { jobRole, jobNature, jobDescription, experience, skillTags, hourlyRate, applicationDeadline, responsibilities} = req.body;
         if (jobRole && experience && skillTags && hourlyRate) {
             const job = await createJob({
-                jobRole, experience, skillTags, hourlyRate
+                jobRole, jobNature, jobDescription, experience, skillTags, hourlyRate, applicationDeadline, responsibilities
             });
             res.status(201).json(job);
         } else res.status(400).json({message: 'Invalid job fields.'})

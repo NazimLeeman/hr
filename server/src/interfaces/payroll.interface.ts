@@ -2,5 +2,7 @@ export interface IPayroll {
     id: number,
     employeeId: number,
     hourlyRate: number,
-    deductions: number
+    totalHours: number,
+    totalDeduction: number,
+    restaurantId: number
 }

@@ -26,9 +26,9 @@ const Applicant = sequelize.define<ApplicantInstance>('applicant', {
         allowNull: false
     },
     experience: {
-        type: DataTypes.TEXT,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
-        defaultValue: ''
+        defaultValue: []
     },
     phoneNumber: {
         type: DataTypes.INTEGER,
@@ -41,9 +41,9 @@ const Applicant = sequelize.define<ApplicantInstance>('applicant', {
         defaultValue: ''
     },
     skillTags: {
-        type: DataTypes.TEXT,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
-        defaultValue: ''
+        defaultValue: []
     },
     hourlyRate: {
         type: DataTypes.INTEGER,

@@ -23,9 +23,10 @@ import { updateEmployeePositionId } from "../models/employeeLogin/employeeLogin.
 
 export async function postPositionAccess (req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
-      const { services, position, restaurantId } = req.body;
-      const employee = await findEmployeeById(id);
+      // const id = Number(req.params.id);
+      const restaurantId = Number(req.params.restaurantId);
+      const { employeeId, services, position } = req.body;
+      const employee = await findEmployeeById(employeeId);
       if (employee && validateServices(services)) {
         const prevServiceAccess = await findEmployeeServiceAccess(employee.id);
         let access;
@@ -39,9 +40,8 @@ export async function postPositionAccess (req: Request, res: Response) {
           access = await updateEmployeeServiceAccess(prevServiceAccess.id, data);
         else
           access = await createEmployeeServiceAccess(data);
-          const positionId = access.id; // Access the positionId here
+          const positionId = access.id; 
 
-          // Update the employee's positionId
           await updateEmployeePositionId(employee.id, positionId);
   
         res.status(201).send({ status: "success", access });
