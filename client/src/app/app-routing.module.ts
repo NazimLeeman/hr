@@ -18,6 +18,7 @@ import { ApplicantTrackingComponent } from './applicant-tracking/applicant-track
 import { PayrollComponent } from './payroll/payroll.component';
 import { authGuard } from './auth.guard';
 import { DialogComponent } from './dialog/dialog.component';
+import { PositionComponent } from './position/position.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent},
@@ -26,11 +27,11 @@ const routes: Routes = [
   { path: 'profile/:applicantId', component: RegistrationSummaryComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminSummaryComponent },
   { path: 'createEmployee', component: CreateEmployeeComponent},
+  {path: 'position/:employeeId', component: PositionComponent},
   { path: 'createSchedule', component: ScheduleAdminComponent},
   { path: 'jobs', component: PostJobComponent },
   { path: 'applicant', component: ApplicantTrackingComponent },
   { path: 'payroll', component: PayrollComponent },
-  // { path: 'profile', component: ProfileComponent },
   { path: 'experience/:applicantId', component: ExperienceComponent, canActivate: [authGuard]  },
   { path: 'skills/:applicantId', component: SkillsComponent, canActivate: [authGuard]  },
   { path: 'applications/:applicantId', component: ApplicationsComponent, canActivate: [authGuard]  },

@@ -17,7 +17,7 @@
   input[type="text"] {
     margin-bottom: 1rem;
     border: 1px solid #cbd5e0;
-    background-color: #F3F4F6;
+    /* background-color: #F3F4F6; */
     color: black;
     outline: none;
     transition: all;
@@ -36,8 +36,8 @@
 
   #address {
     margin-left: 1rem;
-    width: 32rem;
-    padding-bottom: 8rem;
+    width: 24rem;
+    padding-bottom: 6rem;
   }
 
   #hourlyRate {

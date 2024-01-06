@@ -11,6 +11,7 @@ import { ApiClientService } from '../api-client.service';
 export class CreateEmployeeComponent {
   showForm: boolean = false;
   showFormTwo: boolean = false;
+  @Input() signInRoute: string = '/position';
   selectedService: string = 'INVENTORY';
   selectedServiceOptions: string = '';
 
@@ -21,10 +22,7 @@ export class CreateEmployeeComponent {
     password: FormControl<string>,
     phoneNumber: FormControl<string>,
     address: FormControl<string>;
-    // experience: FormControl<string>;
-    // skillTags: FormControl<string>;
     hourlyRate: FormControl<string>;
-    // serviceAccess: FormControl<string>;
   }>
   
   validateFormPartTwo: FormGroup<{
@@ -34,11 +32,15 @@ export class CreateEmployeeComponent {
 
   submitFormPartOne(): void {
     if (this.validateFormPartOne.valid) {
-      const userData = this.validateFormPartOne.value;
-      this.apiClientService.registerUser(userData).subscribe((response) => {
+      const employeeData = this.validateFormPartOne.value;
+      const name = `${employeeData.firstName} ${employeeData.lastName}`;
+      const updatedEmployeeData = { ...employeeData, name };
+      delete updatedEmployeeData.firstName;
+      delete updatedEmployeeData.lastName;
+      this.apiClientService.createEmployee(updatedEmployeeData).subscribe((response) => {
         console.log('Employee Created successfully:', response);
-        const applicantId = response.user.id
-        // this.router.navigate(['/successful']);
+        const employeeId = response.user.id
+        this.router.navigate([this.signInRoute +  '/' +  employeeId]);
       },
       (error) => {
         console.log("Error during resgistration", error)
@@ -53,26 +55,26 @@ export class CreateEmployeeComponent {
     }
   }
 
-  submitFormPartTwo(): void {
-    if (this.validateFormPartTwo.valid) {
-      const userData = this.validateFormPartTwo.value;
-      this.apiClientService.registerUser(userData).subscribe((response) => {
-        console.log('Applicant registered successfully:', response);
-        const applicantId = response.user.id
-        this.router.navigate(['/successful']);
-      },
-      (error) => {
-        console.log("Error during resgistration", error)
-      })
-    } else {
-      Object.values(this.validateFormPartTwo.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
-  }
+  // submitFormPartTwo(): void {
+  //   if (this.validateFormPartTwo.valid) {
+  //     const userData = this.validateFormPartTwo.value;
+  //     this.apiClientService.registerUser(userData).subscribe((response) => {
+  //       console.log('Position posted successfully:', response);
+  //       const applicantId = response.user.id
+  //       this.router.navigate(['/successful']);
+  //     },
+  //     (error) => {
+  //       console.log("Error during resgistration", error)
+  //     })
+  //   } else {
+  //     Object.values(this.validateFormPartTwo.controls).forEach(control => {
+  //       if (control.invalid) {
+  //         control.markAsDirty();
+  //         control.updateValueAndValidity({ onlySelf: true });
+  //       }
+  //     });
+  //   }
+  // }
 
   goToNextStep() {
     this.showForm = true;
@@ -90,10 +92,7 @@ export class CreateEmployeeComponent {
       password: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      // experience: ['', [Validators.required]],
-      // skillTags: ['', [Validators.required]],
       hourlyRate: ['', [Validators.required]],
-      // serviceAccess: ['', [Validators.required]],
     }),
     this.validateFormPartTwo = this.fb.group({
       position: ['', [Validators.required]],

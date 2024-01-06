@@ -1,0 +1,15 @@
+#position {
+  /* font-size: x-large; */
+  width: 32rem;
+  padding: .1rem;
+}
+
+nz-select {
+  font-size: x-large;
+  width: 32rem;
+  padding: 1.5rem;
+}
+
+#select:hover {
+  border-color: #2bb053
+}

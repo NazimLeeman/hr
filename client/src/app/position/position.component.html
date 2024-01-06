@@ -1,0 +1,34 @@
+<app-navbar-admin></app-navbar-admin>
+<!-- <h1 style="font-family: 'GTPressura'; margin-top: 1.5rem; margin-bottom: 1rem; text-align: center; font-size: 1.875rem;">Provide the neccessary Service Access for this employee.</h1> -->
+
+<div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura'">
+    <div style="padding: 1rem; margin-left: 4px;">
+    <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Position</h1>  
+    <p style="margin-top: 1rem; font-size:x-large; padding-left: .5rem;">Provide the neccessary Service Access for this employee.</p> 
+<div style=" font-family: 'GTPressura'">
+  <form nz-form style="padding: 2rem;" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <div>
+      <!-- <h1 style="font-size: x-large;">Position</h1> -->
+      <div>
+    <input nz-input type="text" style="font-size: x-large; margin-left: 8rem; " id="position" formControlName="position" placeholder="Position">
+          <nz-select id="select"
+          [nzMaxTagCount]="3"
+          [nzMaxTagPlaceholder]="tagPlaceHolder"
+          nzMode="multiple"
+          nzPlaceHolder="Please select"
+          formControlName="listOfSelectedValue"
+        >
+          <nz-option *ngFor="let item of listOfOption" [nzLabel]="item" [nzValue]="item"></nz-option>
+        </nz-select>
+        <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
+    </div>  
+        <div style="display: flex; justify-content: center;">
+            <button type="submit" (click)="submitForm()" nz-button style="font-family: 'GTPressura'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Give Access</button>
+        </div>
+        </div>
+    </form>
+    
+  </div>
+    
+</div>
+</div>

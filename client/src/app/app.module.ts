@@ -49,6 +49,10 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { PositionComponent } from './position/position.component';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+
 
 registerLocaleData(en);
 
@@ -76,7 +80,9 @@ registerLocaleData(en);
     ScheduleAdminComponent,
     ApplicantTrackingComponent,
     PayrollComponent,
-    DialogComponent
+    DialogComponent,
+    AdminProfileComponent,
+    PositionComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +108,8 @@ registerLocaleData(en);
     NzDatePickerModule,
     NzDescriptionsModule,
     NzTableModule,
-    NzDividerModule
+    NzDividerModule,
+    NzDropDownModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

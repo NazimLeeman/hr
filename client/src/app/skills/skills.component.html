@@ -6,11 +6,6 @@
       <nz-descriptions nzBordered nzLayout="vertical">
         <nz-descriptions-item nzTitle="Skill Tags">{{ skillTags }}</nz-descriptions-item>
       </nz-descriptions>
-      <!-- <div style=" background-color: hsl(126, 29%, 93%); font-size: larger; width: 40rem; height: 6rem; border-radius: 1rem; margin-bottom: 1rem;">
-        <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 2rem; list-style-type: none; font-size: larger;">
-          <p > {{skillTags}}</p>
-        </div>
-      </div> -->
     </div>   
     <p style="margin-top: 1rem; font-size:x-large; padding-left: .5rem;">Tell employers what skills you possess.</p> 
 <div style=" font-family: 'GTPressura'">
@@ -25,11 +20,6 @@
     
   </div>
   <div *ngIf="showSkillTagsForm">
-        <!-- <nz-form-item>
-            <nz-form-control nzErrorTip="Please input your skill Tags!" class="custom-error-tip">
-              <input nz-input style="font-size: large; width: 40rem; margin-top: 1rem;" type="text" id="skillTags" formControlName="skillTags" placeholder="Skill Tags" >
-            </nz-form-control>
-          </nz-form-item> -->
           <nz-select id="select"
           [nzMaxTagCount]="3"
           [nzMaxTagPlaceholder]="tagPlaceHolder"
