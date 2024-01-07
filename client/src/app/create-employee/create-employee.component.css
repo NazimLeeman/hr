@@ -11,13 +11,12 @@
     position: relative;
   }
   
-  input[type="email"],
+  /* input[type="email"],
   input[type="password"],
   input[type="number"],
   input[type="text"] {
     margin-bottom: 1rem;
     border: 1px solid #cbd5e0;
-    /* background-color: #F3F4F6; */
     color: black;
     outline: none;
     transition: all;
@@ -26,7 +25,7 @@
     padding-right: 1rem;
     padding-left: 1rem;
     border-radius: 10px;
-  }
+  } */
 
   /* #address {
     padding-right: 20rem;
