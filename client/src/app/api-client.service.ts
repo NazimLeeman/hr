@@ -31,8 +31,12 @@ export class ApiClientService {
   }
 
   postJob(userData:any): Observable<any> {
-    const url = `${this.apiUrl}/job/new`
+    const url = `${this.apiUrl}/job/new/1`
     return this.http.post(url,userData)
+  }
+
+  getAllJobForRestaurant(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/job/1`)
   }
 
   loginUser(loginData: any): Observable<any>{

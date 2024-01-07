@@ -9,7 +9,7 @@ import { ApiClientService } from '../api-client.service';
   styleUrl: './post-job.component.css'
 })
 export class PostJobComponent {
-
+  apiData: any[] = [];
   showForm: boolean = false;
   listOfOption: string[] = ['Customer Service',
   'Communication Skills',
@@ -41,6 +41,18 @@ export class PostJobComponent {
     datePicker: FormControl<[Date] | null>
   }>
 
+  ngOnInit(): void {
+    this.apiClientService.getAllJobForRestaurant().subscribe(
+      (data: any) => {
+        console.log('API Response:', data);
+        this.apiData = data.data;
+      },
+      (error) => {
+        console.error('Error fetching data from the API', error);
+      }
+    );
+  }
+
   submitForm(): void {
     console.log('clicked')
     if (this.validateForm.valid) {
@@ -48,6 +60,7 @@ export class PostJobComponent {
       console.log(userData)
       this.apiClientService.postJob(userData).subscribe((response) => {
         console.log('Job Posted successfully:', response);
+        location.reload();
         // this.router.navigate(['/dashboard']);
       },
       (error) => {
