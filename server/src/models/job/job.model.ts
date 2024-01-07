@@ -49,6 +49,10 @@ const Job = sequelize.define<JobInstance>('job', {
     responsibilities: {
         type: DataTypes.ARRAY(DataTypes.TEXT),
         allowNull: false
+    },
+    restaurantId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 })
 

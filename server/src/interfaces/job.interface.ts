@@ -7,7 +7,8 @@ export interface IJob {
   skillTags: [string];
   hourlyRate: number;
   applicationDeadline: Date; 
-  responsibilities: string[]; 
+  responsibilities: string[];
+  restaurantId: number; 
   // restaurantName: string;
   // restaurantInformation: string; 
   // restaurantLogoUrl: string; 

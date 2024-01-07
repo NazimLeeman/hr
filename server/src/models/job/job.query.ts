@@ -1,7 +1,7 @@
 import { Op } from "sequelize";
 import Job from "./job.model";
 
-export async function createJob(data: {
+export async function createJob(restaurantId: number, data: {
   jobRole: string;
   jobNature: string,
   jobDescription: string;
@@ -12,7 +12,7 @@ export async function createJob(data: {
   responsibilities: string[]
 }) {
   try {
-    const newJob = await Job.create(data);
+    const newJob = await Job.create({...data, restaurantId});
     return newJob
   }  catch (error) {
     throw new Error('Error creating new job.')
@@ -26,6 +26,20 @@ export async function findAllJob() {
     } catch (error) {
         throw new Error('Error finding job.')
     }
+}
+
+export async function findAllJobForRestaurant(restaurantId: number) {
+  try {
+    const job = await Job.findAll({
+      where: {
+        restaurantId: restaurantId
+      }
+    });
+
+    return job;
+  } catch (error) {
+    throw new Error('Error finding jobs in restaurant.');
+  }
 }
 
 export async function findJobBySearchTerm (searchTerm: string) {
