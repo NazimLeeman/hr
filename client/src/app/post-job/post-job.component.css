@@ -17,16 +17,16 @@
   input[type="text"] {
     margin-bottom: 1rem;
     margin-left: .5rem;
-    border: 1px solid #cbd5e0;
-    background-color: #F3F4F6;
+    /* border: 1px solid #cbd5e0; */
+    background-color: #ffffff;
     color: black;
     outline: none;
     transition: all;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: .1rem;
+    padding-bottom: .1rem;
     padding-right: 5rem;
     padding-left: 1rem;
-    border-radius: 10px;
+    /* border-radius: 10px; */
   }
 
   /* #address {
@@ -60,7 +60,7 @@
   #experience, #skillTags, #jobDescription {
     margin-left: 1rem;
     width: 24rem;
-    padding-bottom: 8rem;
+    padding-bottom: 6rem;
   }
   
   input[type="email"]:focus,
@@ -71,6 +71,21 @@ input[type="text"]:focus {
   border-color: #2bb053 !important;
 }
   
+input[type="text"]:hover {
+  border-color: #2bb053
+}
   
+nz-select, nz-date-picker {
+  margin-left: .5rem;
+  padding-bottom: .5rem;
+  width: 24rem;
+  font-size: 1.2rem;
+}
   
+nz-select:hover {
+  border-color: #2bb053!important;
+}
   
+#select:hover {
+  border-color: #2bb053!important;
+}

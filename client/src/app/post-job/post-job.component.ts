@@ -11,26 +11,47 @@ import { ApiClientService } from '../api-client.service';
 export class PostJobComponent {
 
   showForm: boolean = false;
+  listOfOption: string[] = ['Customer Service',
+  'Communication Skills',
+  'Menu Knowledge',
+  'Order Taking',
+  'Upselling',
+  'Table Service',
+  'Time Management',
+  'Multitasking',
+  'Problem-Solving',
+  'Culinary Creativity',
+  'Menu Planning and Development',
+  'Food Presentation',
+  'Cooking Techniques',
+  'Ingredient Knowledge',
+  'Time Management',
+  'Team Leadership'];
+  listOfSelectedValue = [];
+  responsibilities: string[] = [];
 
   validateForm: FormGroup<{
     jobRole: FormControl<string>,
     jobNature: FormControl<string>;
     jobDescription: FormControl<string>;
     experience: FormControl<string>;
-    skillTags: FormControl<string>;
+    responsibilities: FormControl<string[]>;
     hourlyRate: FormControl<string>;
+    listOfSelectedValue: FormControl<string[]>;
+    datePicker: FormControl<[Date] | null>
   }>
 
   submitForm(): void {
+    console.log('clicked')
     if (this.validateForm.valid) {
-      const userData = this.validateForm.value;
-      this.apiClientService.registerUser(userData).subscribe((response) => {
+      const userData = this.constructJobData();
+      console.log(userData)
+      this.apiClientService.postJob(userData).subscribe((response) => {
         console.log('Job Posted successfully:', response);
-        const applicantId = response.user.id
-        this.router.navigate(['/successful']);
+        // this.router.navigate(['/dashboard']);
       },
       (error) => {
-        console.log("Error during resgistration", error)
+        console.log("Error during posting", error)
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -42,14 +63,41 @@ export class PostJobComponent {
     }
   }
 
+  constructJobData(): any {
+    const {
+      jobRole,
+      jobNature,
+      jobDescription,
+      experience,
+      responsibilities,
+      hourlyRate,
+      listOfSelectedValue,
+      datePicker
+    } = this.validateForm.value;
+
+    const mergedData = {
+      jobRole,
+      jobNature,
+      jobDescription,
+      experience,
+      responsibilities: [responsibilities],
+      hourlyRate,
+      skillTags: listOfSelectedValue,
+      applicationDeadline: datePicker 
+    };
+    return mergedData;
+  }
+
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
       jobRole: ['', [Validators.required]],
       jobNature: ['', [Validators.required]],
       jobDescription: ['', [Validators.required]],
       experience: ['', [Validators.required]],
-      skillTags: ['', [Validators.required]],
+      responsibilities: [[] as string[], [Validators.required]],
       hourlyRate: ['', [Validators.required]],
+      listOfSelectedValue: [[] as string[], [Validators.required]],
+      datePicker: this.fb.control<[Date] | null>(null)
     })
   }
 }

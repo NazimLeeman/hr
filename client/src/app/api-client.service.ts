@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ApiClientService {
 
-  private apiUrl = 'http://localhost:4000';
-  // private apiUrl = 'https://hr-server-icl9.onrender.com';
+  // private apiUrl = 'http://localhost:4000';
+  private apiUrl = 'https://hr-server-icl9.onrender.com';
   private tokenKey = 'token';
 
   constructor(private http: HttpClient) { }
@@ -28,6 +28,11 @@ export class ApiClientService {
   postPosition( userData:any): Observable<any>{
     const url = `${this.apiUrl}/position/1`
     return this.http.post(url, userData);
+  }
+
+  postJob(userData:any): Observable<any> {
+    const url = `${this.apiUrl}/job/new`
+    return this.http.post(url,userData)
   }
 
   loginUser(loginData: any): Observable<any>{
