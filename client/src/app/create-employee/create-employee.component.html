@@ -118,7 +118,38 @@
 
 <div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura';">
   <div *ngIf="!showForm">
-    <h1 style="margin-top: 1.5rem; text-align: center; font-size: 1.875rem;">You don't have any Employee right now.</h1>
+    <h1 *ngIf="apiData.length === 0" style="margin-top: 1.5rem; text-align: center; font-size: 1.875rem;">You don't have any Employee right now.</h1>
+    <div *ngIf="apiData.length">
+      <h1 style="margin-top: 1.5rem; text-align: center; font-size: 1.875rem;">Employee Information</h1>
+    <nz-table #basicTable [nzData]="apiData">
+      <thead>
+        <tr>
+          <th>Employee Id</th>
+          <th>Name</th>
+          <!-- <th>Job Nature</th> -->
+          <th>Hourly Rate</th>
+          <th>Efficiency</th>
+          <th>Joining Date</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{data.id}}</td>
+          <td>{{data.name}}</td>
+          <!-- <td>{{data.jobNature}}</td> -->
+          <td>{{data.hourlyRate | currency}}</td>
+          <td>80%</td>
+          <td>{{data.createdAt | date: 'yyyy-MM-dd ' }}</td>
+          <td>
+            <span style="cursor: pointer;" nz-icon nzType="eye" nzTheme="outline"></span>
+            <!-- <a style="color: rgb(83, 161, 76);">Details</a> -->
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    </div>
+    
     <div style="display: flex; justify-content: center; margin-top: 1rem; padding: 2rem;">
         <button type="submit" nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 16rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
             [nzType]="'primary'" (click)="showForm = true">Create New Employee

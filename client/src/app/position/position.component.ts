@@ -31,7 +31,7 @@ export class PositionComponent {
       console.log('merged data:', updatedData)
       this.apiClientService.postPosition( updatedData).subscribe((response) => {
         console.log('Applicant position posted successfully:', response);
-        location.reload();
+        this.router.navigate(['/createEmployee'])
       },
       (error) => {
         console.log("Error during position posting", error)

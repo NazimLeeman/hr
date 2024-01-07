@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-employee',
@@ -10,7 +11,8 @@ import { ApiClientService } from '../api-client.service';
 })
 export class CreateEmployeeComponent {
   showForm: boolean = false;
-  showFormTwo: boolean = false;
+  // showFormTwo: boolean = false;
+  apiData: any[] = [];
   @Input() signInRoute: string = '/position';
   selectedService: string = 'INVENTORY';
   selectedServiceOptions: string = '';
@@ -29,6 +31,18 @@ export class CreateEmployeeComponent {
     position: FormControl<string>;
     selectedService: FormControl<string>;
   }>
+
+  ngOnInit(): void {
+    this.apiClientService.getAllEmployee().subscribe(
+      (data: any) => {
+        console.log('API Response:', data);
+        this.apiData = data.data;
+      },
+      (error) => {
+        console.error('Error fetching data from the API', error);
+      }
+    );
+  }
 
   submitFormPartOne(): void {
     if (this.validateFormPartOne.valid) {
@@ -84,7 +98,7 @@ export class CreateEmployeeComponent {
     this.selectedServiceOptions = selectedService;
   }
 
-  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
+  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute) {
     this.validateFormPartOne = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],

@@ -21,6 +21,10 @@ export class ApiClientService {
     return this.http.post(`${this.apiUrl}/employee/create/1`, userData);
   }
 
+  getAllEmployee(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/employee/restaurant/1`);
+  }
+
   postPosition( userData:any): Observable<any>{
     const url = `${this.apiUrl}/position/1`
     return this.http.post(url, userData);
