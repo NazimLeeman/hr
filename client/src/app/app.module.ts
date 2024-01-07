@@ -52,6 +52,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { PositionComponent } from './position/position.component';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 
 registerLocaleData(en);
@@ -109,7 +111,9 @@ registerLocaleData(en);
     NzDescriptionsModule,
     NzTableModule,
     NzDividerModule,
-    NzDropDownModule
+    NzDropDownModule,
+    NzSpinModule,
+    NzTimePickerModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

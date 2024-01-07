@@ -30,7 +30,7 @@
     position: relative;
   }
   
-  input[type="email"],
+  /* input[type="email"],
   input[type="password"],
   input[type="number"],
   input[type="text"] {
@@ -45,7 +45,7 @@
     padding-right: 5rem;
     padding-left: 1rem;
     border-radius: 10px;
-  }
+  } */
 
   /* #address {
     padding-right: 20rem;
@@ -96,3 +96,24 @@ input[type='text']:hover {
 * {
   font-size: large;
 }  
+
+nz-select {
+  margin-left: .5rem;
+  padding-bottom: .5rem;
+  width: 24rem;
+  font-size: 1.2rem;
+}
+  
+nz-select:hover {
+  border-color: #2bb053!important;
+}
+  
+#select:hover {
+  border-color: #2bb053!important;
+}
+
+nz-time-picker {
+  width: 24rem;
+  font-size: 1.2rem;
+}
+

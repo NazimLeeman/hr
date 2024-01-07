@@ -1,38 +1,60 @@
 <app-navbar-admin></app-navbar-admin>
 
-<div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura';">
-    <div *ngIf="showForm"> 
-      <div style="padding: 1rem; margin-left: 4px;">
-          <div>
-          <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Update Schedule</h1>
-          <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Search the Employee you want to update schedule.</p>
-          <div class="input-container">
-            <input style="font-size: large; " id="employeeId" placeholder="Employee Id">
-            <button class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50"><path d="M 21 4 C 11.082241 4 3 12.082241 3 22 C 3 31.917759 11.082241 40 21 40 C 24.62177 40 27.99231 38.91393 30.820312 37.0625 L 43.378906 49.621094 L 47.621094 45.378906 L 35.224609 32.982422 C 37.581469 29.938384 39 26.13473 39 22 C 39 12.082241 30.917759 4 21 4 z M 21 8 C 28.756241 8 35 14.243759 35 22 C 35 29.756241 28.756241 36 21 36 C 13.243759 36 7 29.756241 7 22 C 7 14.243759 13.243759 8 21 8 z"></path></svg></button>
-          </div>             
-        </div>
+<div [formGroup]="validateForm" style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura';">
+    <div *ngIf="!showForm"> 
+    <div style="padding: 1rem; margin-left: 4px;">
+      <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Update Schedule</h1>
+      <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Select the Employee you want to update schedule.</p>
+      <nz-select
+      formControlName="selectedUser"
+      (nzScrollToBottom)="loadMore()"
+      nzPlaceHolder="Select Employee"
+      nzAllowClear
+      [nzDropdownRender]="renderTemplate"
+    >
+      <nz-option *ngFor="let o of optionList" [nzValue]="o" [nzLabel]="formatUserOption(o)"></nz-option>
+    </nz-select>
+    <ng-template #renderTemplate>
+      <nz-spin *ngIf="isLoading"></nz-spin>
+    </ng-template>
     </div>
-        <form nz-form style="padding: 1.5rem; display: grid; grid-template-columns: repeat(3, 1fr);" [formGroup]="validateForm" (ngSubmit)="submitForm()">
-        <nz-form-item >
-            <label style="margin-bottom: 6px; font-size: large;">Day:</label>
-            <nz-form-control nzErrorTip="Please input Day!" class="custom-error-tip">
-                <input type="text" style="font-size: large;" nz-input id="day" formControlName="day" placeholder="Monday" > 
-              </nz-form-control>
-          </nz-form-item>  
+        <form nz-form style="padding: 1rem; margin: 1rem; display: flex; flex-direction: row; justify-content: space-around;" [formGroup]="validateForm" (ngSubmit)="submitForm()">  
           <nz-form-item >
+            <div>
+              <label style="margin-bottom: 6px; margin-left: .5rem; font-size: large;">Day:</label>
+            </div>
+          <nz-select nzMode="multiple" nzPlaceHolder="Monday" formControlName="listOfSelectedValue">
+            <nz-option
+              *ngFor="let option of listOfOption"
+              [nzLabel]="option"
+              [nzValue]="option"
+              [nzHide]="!isNotSelected(option)"
+            ></nz-option>
+          </nz-select>
+        </nz-form-item>
+        <nz-form-item>
+          <div>
             <label style="margin-bottom: 6px; font-size: large;">Slot Starts:</label>
-            <nz-form-control nzErrorTip="Please input the Starting Time!" class="custom-error-tip">
-              <input type="text" style="font-size: large;" nz-input id="slotStarts" formControlName="slotStarts" placeholder="8 am" > 
-            </nz-form-control>
-          </nz-form-item>
-          
-          <nz-form-item >
+          </div>
+    <nz-time-picker
+      formControlName="slotStarts"
+      [nzUse12Hours]="true"
+      (ngModelChange)="log($event)"
+      nzFormat="h:mm a"
+    ></nz-time-picker>
+        </nz-form-item>
+        <nz-form-item>
+          <div>
             <label style="margin-bottom: 6px; font-size: large;">Slot Ends:</label>
-            <nz-form-control nzErrorTip="Please input the Ending Time!" class="custom-error-tip">
-              <input type="text" style="font-size: large;" nz-input id="slotEnds" formControlName="slotEnds" placeholder="6 pm" > 
-            </nz-form-control>
-          </nz-form-item>
-    </form>
+          </div>
+    <nz-time-picker
+      formControlName="slotEnds"
+      [nzUse12Hours]="true"
+      (ngModelChange)="log($event)"
+      nzFormat="h:mm a"
+    ></nz-time-picker>
+        </nz-form-item>
+        </form>
     <div >
         
         <div style="display: flex; justify-content: center;  padding-bottom: 1rem;">
