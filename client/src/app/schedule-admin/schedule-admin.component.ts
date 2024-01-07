@@ -50,21 +50,28 @@ export class ScheduleAdminComponent {
   }
 
   submitForm(): void {
+    console.log("clicked")
     if (this.validateForm.valid) {
-      const id = this.selectedUser;
-      const { listOfSelectedValue, slotStarts, slotEnds } = this.validateForm.value;
-      if (slotStarts && slotEnds && listOfSelectedValue ) {
-      const slotStartsDate = slotStarts[0];
-      const slotEndsDate = slotEnds[0];
-        const userData = {
-        employeeId: id,
-        day: listOfSelectedValue[0], 
-        slotStart: slotStartsDate.getHours(),
-        slotEnds: slotEndsDate.getHours()
+      const selectedUser = this.validateForm.get('selectedUser');
+    const listOfSelectedValue = this.validateForm.get('listOfSelectedValue');
+    const slotStarts = this.validateForm.get('slotStarts');
+    const slotEnds = this.validateForm.get('slotEnds');
+
+    if (selectedUser && listOfSelectedValue ) {
+      // const slotStartsDate: Date | null = slotStarts.value[0];
+      // const slotEndsDate: Date | null = slotEnds.value[0];
+
+      const userData = {
+        employeeId: selectedUser.value?.id,
+        day: listOfSelectedValue.value[0],
+        // slotStart: slotStarts.value?.getHours() ?? null,
+        // slotEnds: slotEnds.value?.getHours() ?? null,
       };
-      this.apiClientService.registerUser(userData).subscribe((response) => {
-        console.log('Schedule Posted successfully:', response);
-      },
+      console.log(userData);
+      this.apiClientService.registerUser(userData).subscribe(
+        (response) => {
+          console.log('Schedule Posted successfully:', response);
+        },
       (error) => {
         console.log("Error during resgistration", error)
       })
@@ -83,10 +90,43 @@ export class ScheduleAdminComponent {
     return this.listOfSelectedValue.indexOf(value) === -1;
   }
 
+  constructJobData(): any {
+    const {
+      selectedUser,
+      slotStarts,
+      slotEnds,
+      listOfSelectedValue,
+    } = this.validateForm.value;
+
+    const mergedData = {
+      selectedUser,
+      skillTags: listOfSelectedValue,
+      slotStarts: slotStarts,
+      slotEnds: slotEnds
+    };
+    return mergedData;
+  }
   
 
-  log(value: Date): void {
-    console.log(value);
+  log1(value: Date): void {
+    const formattedTime = value.toLocaleTimeString('en-US', {
+      hour12: true,
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    });
+    console.log(formattedTime);
+  }
+
+  log2(value: Date): void {
+    const formattedTime = value.toLocaleTimeString('en-US', {
+      hour12: true,
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    });
+  
+    console.log(formattedTime);
   }
 
   formatUserOption(option: UserOption): string {

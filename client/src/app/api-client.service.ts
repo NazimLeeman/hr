@@ -35,6 +35,11 @@ export class ApiClientService {
     return this.http.post(url,userData)
   }
 
+  postSchedule(userData:any): Observable<any> {
+    const url = `${this.apiUrl}/schedule/1/restaurant`
+    return this.http.post(url,userData)
+  }
+
   getAllJobForRestaurant(): Observable<any> {
     return this.http.get(`${this.apiUrl}/job/1`)
   }
