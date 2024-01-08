@@ -77,7 +77,7 @@ export async function checkEmployeeServiceAccess(employeeId:number, service: str
           }
       })
       if (employeeServiceAccess) {
-          return (employeeServiceAccess.services.includes('all') || employeeServiceAccess.services.includes(service));        
+          return (employeeServiceAccess.services.includes('all') || employeeServiceAccess.services.includes(service.toUpperCase()));        
       }
       return false;
   } catch (error) {
