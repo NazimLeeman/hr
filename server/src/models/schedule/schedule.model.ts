@@ -26,11 +26,11 @@ const Schedule = sequelize.define<ScheduleInstance>('schedule', {
         allowNull: false,
     },
     slotStart: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DATE,
         allowNull: false,
     },
     slotEnds: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DATE,
         allowNull: false,
     },restaurantId: {
         type: DataTypes.INTEGER,

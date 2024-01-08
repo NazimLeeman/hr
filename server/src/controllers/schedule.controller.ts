@@ -11,8 +11,8 @@ export async function postScheduleToEmployee (req: Request, res: Response) {
         const { employeeId, day, slotStart, slotEnds } = req.body;
         if (
             typeof day === 'string' &&
-            typeof slotStart === 'number' &&
-            typeof slotEnds === 'number') {
+            typeof slotStart === 'object' &&
+            typeof slotEnds === 'object') {
           const schedule = await createScheduleForEmployee(employeeId, restaurantId, {day, slotStart, slotEnds});
           res.status(201).json(schedule);
         } else res.status(400).json({ message: "Invalid employee ID." });
@@ -63,8 +63,8 @@ export async function getAllScheduleOfRestaurant (req: Request, res: Response) {
             const { day, slotStart, slotEnds } = req.body;
             if (
                 typeof day === 'string' &&
-                typeof slotStart === 'number' &&
-                typeof slotEnds === 'number') {
+                typeof slotStart === 'object' &&
+                typeof slotEnds === 'object') {
               const schedule = await updateScheduleForEmployee( employeeId, scheduleId,{day, slotStart, slotEnds});
               res.status(201).json(schedule);
             } else res.status(400).json({ message: "Invalid employee ID." });

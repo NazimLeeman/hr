@@ -3,8 +3,8 @@ import Schedule from "./schedule.model";
 
 export async function createScheduleForEmployee (employeeId: number, restaurantId: number, data: { 
     day: string,
-    slotStart: number,
-    slotEnds: number,
+    slotStart: Date,
+    slotEnds: Date,
  }) {
   try {
     let employee = await Employee.findOne({
@@ -26,8 +26,8 @@ export async function createScheduleForEmployee (employeeId: number, restaurantI
 
 export async function updateScheduleForEmployee(employeeId: number, scheduleId: number, data: {
     day?: string,
-    slotStart?: number,
-    slotEnds?: number,
+    slotStart?: Date,
+    slotEnds?: Date,
 }) {
     try {
       let existingSchedule = await Schedule.findOne({
