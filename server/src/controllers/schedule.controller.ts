@@ -9,10 +9,7 @@ export async function postScheduleToEmployee (req: Request, res: Response) {
       // const employeeId = Number(req.params.employeeId);
       if (id && restaurantId) {
         const { employeeId, day, slotStart, slotEnds } = req.body;
-        if (
-            typeof day === 'string' &&
-            typeof slotStart === 'object' &&
-            typeof slotEnds === 'object') {
+        if (typeof day === 'string' ) {
           const schedule = await createScheduleForEmployee(employeeId, restaurantId, {day, slotStart, slotEnds});
           res.status(201).json(schedule);
         } else res.status(400).json({ message: "Invalid employee ID." });
