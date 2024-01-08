@@ -223,3 +223,18 @@ export async function serviceAccess(req: Request, res: Response) {
   res.status(500).json(error)
  } 
 }
+
+export async function CheckServiceAccess(req: Request, res: Response) {
+  try {
+    const {userId, service} = req.body;
+    const result = await checkEmployeeServiceAccess(userId, service) 
+    if (result) {
+      return res.status(200).json({ status: 'success', auth:true });
+  } else {
+      return res.status(404).json({ message: result });
+  }
+   } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+   } 
+}
