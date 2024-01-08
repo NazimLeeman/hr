@@ -16,11 +16,10 @@
   color: black;
   outline: none;
   transition: all;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+
   padding-left: 1rem;
   margin-bottom: 1rem;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   }
   
   input[type="email"]:focus,
@@ -41,7 +40,7 @@
   padding-right: 1rem;
   padding-left: 1rem;
   width: 32rem;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   font-size: x-large;
   }
 

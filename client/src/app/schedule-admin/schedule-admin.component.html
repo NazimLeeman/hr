@@ -18,19 +18,11 @@
       <nz-spin *ngIf="isLoading"></nz-spin>
     </ng-template>
     </div>
-        <form nz-form style="padding: 1rem; margin: 1rem; display: flex; flex-direction: row; justify-content: space-around;" [formGroup]="validateForm" (ngSubmit)="submitForm()">  
+        <form nz-form style="padding: 1rem;  display: flex; flex-direction: row; justify-content: space-around;" [formGroup]="validateForm" (ngSubmit)="submitForm()">  
           <nz-form-item >
             <div>
-              <label style="margin-bottom: 6px; margin-left: .5rem; font-size: large;">Day:</label>
+              <label style="margin-bottom: 6px;margin-left: .5rem; font-size: large;">Day:</label>
             </div>
-          <!-- <nz-select nzMode="multiple" nzPlaceHolder="Monday" formControlName="listOfSelectedValue">
-            <nz-option
-              *ngFor="let option of listOfOption"
-              [nzLabel]="option"
-              [nzValue]="option"
-              [nzHide]="!isNotSelected(option)"
-            ></nz-option>
-          </nz-select> -->
           <nz-select id="select" formControlName="day" nzAllowClear nzPlaceHolder="Full Time" >   
             <nz-option nzValue="Monday" nzLabel="Monday"></nz-option>
             <nz-option nzValue="Tuesday" nzLabel="Tuesday"></nz-option>        
@@ -107,84 +99,11 @@
               <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
             </tr>
           </tbody>
-          <tbody>
-            <tr style="text-align: center;">
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">2</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr style="text-align: center;">
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">3</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr style="text-align: center;">
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">4</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr style="text-align: center;">
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">5</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr style="text-align: center;">
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">6</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr style="text-align: center;">
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">7</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-              <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
-            </tr>
-          </tbody>
         </table> -->
       
-        <nz-table #basicTable [nzData]="apiData">
+        <!-- <nz-table #basicTable [nzData]="apiData">
           <thead>
-            <tr>
-              <th>Employee ID</th>
+            <tr >
               <th>Monday</th>
               <th>Tuesday</th>
               <th>Wednesday</th>
@@ -196,17 +115,92 @@
           </thead>
           <tbody>
             <tr *ngFor="let data of basicTable.data">
-              <td>{{data.employeeId}}</td>
-              <td *ngIf="data.day === 'Monday'">{{ parseDate(data.slotStart) | date: 'hh a' }} - {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
-              <td *ngIf="data.day === 'Tuesday'">{{ parseDate(data.slotStart) | date: 'hh a' }} - {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+              <ng-container *ngIf="data.day === 'Monday'">
+              <td>ID: {{data.employeeId}} From {{ parseDate(data.slotStart) | date: 'hh a' }} To {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
+              <td></td>
+            </ng-container>
+              <ng-container *ngIf="data.day === 'Tuesday'">
+              <td></td>
+              <td>ID: {{data.employeeId}} From {{ parseDate(data.slotStart) | date: 'hh a' }} To {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </ng-container>
+              <ng-container *ngIf="data.day === 'Wednesday'">
+              <td></td>
+              <td></td>
+              <td>ID: {{data.employeeId}} From {{ parseDate(data.slotStart) | date: 'hh a' }} To {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </ng-container>
+              <ng-container *ngIf="data.day === 'Thursday'">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>ID: {{data.employeeId}} From {{ parseDate(data.slotStart) | date: 'hh a' }} To {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </ng-container>
+              <ng-container *ngIf="data.day === 'Friday'">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>ID: {{data.employeeId}} From {{ parseDate(data.slotStart) | date: 'hh a' }} To {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+              <td></td>
+              <td></td>
+            </ng-container>
+              <ng-container *ngIf="data.day === 'Saturday'">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>ID: {{data.employeeId}} From {{ parseDate(data.slotStart) | date: 'hh a' }} To {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+              <td></td>
+            </ng-container>
+              <ng-container *ngIf="data.day === 'Sunday'">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>ID: {{data.employeeId}} From {{ parseDate(data.slotStart) | date: 'hh a' }} To {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+            </ng-container>
+            </tr>
+          </tbody>
+        </nz-table> -->
+
+        <nz-table #basicTable [nzData]="apiData">
+          <thead>
+            <tr>
+              <ng-container *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']">
+                <th>{{ day }}</th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']">
+                <ng-container *ngIf="data.day === day">
+                  ID: {{ data.employeeId }} From {{ parseDate(data.slotStart) | date: 'hh a' }} To {{ parseDate(data.slotEnds) | date: 'hh a' }}
+                </ng-container>
+              </td>
             </tr>
           </tbody>
         </nz-table>
+
 
       </div>
     

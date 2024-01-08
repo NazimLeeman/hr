@@ -1,21 +1,8 @@
-.input-container {
-  display: flex;
-  position: relative;
-}
+
 
 /* .input-container input {
   flex: 1;
 } */
-
-.btn-icon {
-  position: absolute;
-  top: 56%;
-  left: 22rem;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
 
 .custom-error-tip {
   color: red;
@@ -30,7 +17,7 @@ nz-form-control {
   position: relative;
 }
 
-input[type="text"] {
+/* input[type="text"] {
   margin-bottom: 1rem;
   border: 1px solid #cbd5e0;
   background-color: #F3F4F6;
@@ -43,7 +30,7 @@ input[type="text"] {
   padding-left: 1rem;
   border-radius: 10px;
   width: 24rem;
-}
+} */
 
 /* #address {
   padding-right: 20rem;
@@ -51,20 +38,6 @@ input[type="text"] {
   
 } */
  
-#employeeId {
-  /* margin-bottom: 1rem; */
-  border: 1px solid #cbd5e0;
-  background-color: #F3F4F6;
-  color: black;
-  outline: none;
-  transition: all;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  padding-right: 5rem;
-  padding-left: 1rem;
-  border-radius: 10px;
-  width: 24rem;
-}
 
 #hourlyRate, #totalHours, #totalDeduction {
   width: 24rem;
@@ -94,3 +67,10 @@ border-color: #2bb053
 * {
 font-size: large;
 }  
+
+nz-select {
+  margin-left: .5rem;
+  padding-bottom: .5rem;
+  width: 24rem;
+  font-size: 1.2rem;
+}

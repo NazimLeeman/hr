@@ -3,19 +3,6 @@
     position: relative;
   }
   
-  /* .input-container input {
-    flex: 1;
-  } */
-  
-  .btn-icon {
-    position: absolute;
-    top: 56%;
-    left: 22rem;
-    transform: translateY(-50%);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
 
   .custom-error-tip {
     color: red;
@@ -53,20 +40,7 @@
     
   } */
    
-  #employeeId {
-    /* margin-bottom: 1rem; */
-    border: 1px solid #cbd5e0;
-    background-color: #F3F4F6;
-    color: black;
-    outline: none;
-    transition: all;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    padding-right: 5rem;
-    padding-left: 1rem;
-    border-radius: 10px;
-    width: 24rem;
-  }
+
 
   #day, #slotStarts, #slotEnds {
     width: 24rem;
@@ -117,3 +91,22 @@ nz-time-picker {
   font-size: 1.2rem;
 }
 
+/* table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+} */

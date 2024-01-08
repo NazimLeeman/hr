@@ -44,8 +44,21 @@ export class ApiClientService {
     return this.http.get(`${this.apiUrl}/schedule/restaurant/1`)
   }
 
+  getAllScheduleOfEmployee(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/schedule/2/restaurant/1`)
+  }
+
   getAllJobForRestaurant(): Observable<any> {
     return this.http.get(`${this.apiUrl}/job/1`)
+  }
+
+  postPayroll(userData:any): Observable<any> {
+    const url = `${this.apiUrl}/payroll/1/`
+    return this.http.post(url,userData)
+  }
+
+  getPayroll(employeeId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/payroll/${employeeId}`)
   }
 
   loginUser(loginData: any): Observable<any>{

@@ -61,6 +61,10 @@ export class ScheduleAdminComponent {
     });
   }
 
+  // anotherOnInit(): void {
+  //   this.apiClientService.getAllScheduleOfEmployee(this.apiData.data.employeeId)
+  // }
+
   submitForm(): void {
     console.log("clicked")
     if (this.validateForm.valid) {
