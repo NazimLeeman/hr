@@ -59,9 +59,7 @@ export async function getAllScheduleOfRestaurant (req: Request, res: Response) {
         if (employeeId && scheduleId) {
             const { day, slotStart, slotEnds } = req.body;
             if (
-                typeof day === 'string' &&
-                typeof slotStart === 'object' &&
-                typeof slotEnds === 'object') {
+                typeof day === 'string') {
               const schedule = await updateScheduleForEmployee( employeeId, scheduleId,{day, slotStart, slotEnds});
               res.status(201).json(schedule);
             } else res.status(400).json({ message: "Invalid employee ID." });

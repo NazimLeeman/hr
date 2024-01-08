@@ -2,7 +2,7 @@ export interface ISchedule {
     id: number,
     employeeId?: number,
     day: string,
-    slotStart: Date,
-    slotEnds: Date,
+    slotStart: string,
+    slotEnds: string,
     restaurantId?: number,
 }
