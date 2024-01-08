@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteEmployee, getAllEmployeeOfRestaurant,  login, postApplicantToEmployee, postEmployeeToRestaurant, searchEmployee, updateEmployee } from "../controllers/employee.controller";
+import { deleteEmployee, getAllEmployeeOfRestaurant,  login, serviceAccess, postApplicantToEmployee, postEmployeeToRestaurant, searchEmployee, updateEmployee } from "../controllers/employee.controller";
 const router = Router();
 
 router.get('/restaurant/:id', getAllEmployeeOfRestaurant);
@@ -12,5 +12,6 @@ router.put('/update/:restaurantId/:employeeId', updateEmployee);
 router.delete('/delete/:restaurantId/:employeeId', deleteEmployee);
 router.get('/:restaurantId/search', searchEmployee);
 router.post('/login', login);
+router.get('/access/service/:userId', serviceAccess);
 
 export default router;

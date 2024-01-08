@@ -85,6 +85,22 @@ export async function checkEmployeeServiceAccess(employeeId:number, service: str
       throw new Error('Error while checking employee service access from database.')
   }
 }
+export async function getEmployeeServiceAccess(employeeId:number) {
+  try {
+      const employeeServiceAccess = await Position.findOne({
+          where: {
+              id: employeeId
+          }
+      })
+      if (employeeServiceAccess) {
+          return (employeeServiceAccess.services);        
+      }
+      return false;
+  } catch (error) {
+      console.log(error);
+      throw new Error('Error while checking employee service access from database.')
+  }
+}
 
 
 export async function findAllPositionInRestaurant (id: number) {
