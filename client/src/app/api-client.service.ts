@@ -40,6 +40,10 @@ export class ApiClientService {
     return this.http.post(url,userData)
   }
 
+  getAllScheduleForRestaurant(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/schedule/restaurant/1`)
+  }
+
   getAllJobForRestaurant(): Observable<any> {
     return this.http.get(`${this.apiUrl}/job/1`)
   }

@@ -23,14 +23,23 @@
             <div>
               <label style="margin-bottom: 6px; margin-left: .5rem; font-size: large;">Day:</label>
             </div>
-          <nz-select nzMode="multiple" nzPlaceHolder="Monday" formControlName="listOfSelectedValue">
+          <!-- <nz-select nzMode="multiple" nzPlaceHolder="Monday" formControlName="listOfSelectedValue">
             <nz-option
               *ngFor="let option of listOfOption"
               [nzLabel]="option"
               [nzValue]="option"
               [nzHide]="!isNotSelected(option)"
             ></nz-option>
-          </nz-select>
+          </nz-select> -->
+          <nz-select id="select" formControlName="day" nzAllowClear nzPlaceHolder="Full Time" >   
+            <nz-option nzValue="Monday" nzLabel="Monday"></nz-option>
+            <nz-option nzValue="Tuesday" nzLabel="Tuesday"></nz-option>        
+            <nz-option nzValue="Wednesday" nzLabel="Wednesday"></nz-option>        
+            <nz-option nzValue="Thursday" nzLabel="Thursday"></nz-option>        
+            <nz-option nzValue="Friday" nzLabel="Friday"></nz-option>        
+            <nz-option nzValue="Saturday" nzLabel="Saturday"></nz-option>        
+            <nz-option nzValue="Sunday" nzLabel="Sunday"></nz-option>        
+        </nz-select>
         </nz-form-item>
         <nz-form-item>
           <div>
@@ -73,7 +82,7 @@
                 [nzType]="'primary'" (click)="showForm = true">Edit Schedule
             </button>
           </div>
-        <table style="border-collapse: collapse; width: 100%;">
+        <!-- <table style="border-collapse: collapse; width: 100%;">
           <thead>
             <tr>
               <th style="border: 1px solid #cbd5e0; padding: 0.5rem;">Employee Id</th>
@@ -170,7 +179,35 @@
               <td style="border: 1px solid #cbd5e0; padding: 0.5rem;">8 am - 6 pm</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
+      
+        <nz-table #basicTable [nzData]="apiData">
+          <thead>
+            <tr>
+              <th>Employee ID</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+              <th>Sunday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td>{{data.employeeId}}</td>
+              <td *ngIf="data.day === 'Monday'">{{ parseDate(data.slotStart) | date: 'hh a' }} - {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+              <td *ngIf="data.day === 'Tuesday'">{{ parseDate(data.slotStart) | date: 'hh a' }} - {{ parseDate(data.slotEnds) | date: 'hh a' }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </nz-table>
+
       </div>
     
   </div>

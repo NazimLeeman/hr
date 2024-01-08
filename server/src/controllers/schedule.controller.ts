@@ -6,7 +6,6 @@ export async function postScheduleToEmployee (req: Request, res: Response) {
     try {
       let id = req.params.id;
       const restaurantId = Number(id);
-      // const employeeId = Number(req.params.employeeId);
       if (id && restaurantId) {
         const { employeeId, day, slotStart, slotEnds } = req.body;
         if (typeof day === 'string' ) {

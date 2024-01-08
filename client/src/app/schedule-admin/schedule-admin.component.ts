@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
+import { DatePipe } from '@angular/common';
 
 interface Employee {
   id: number;
@@ -24,18 +25,29 @@ export class ScheduleAdminComponent {
   optionList: UserOption[] = [];
   time: Date | null = null;
   selectedUser: UserOption | null = null;
+  apiData: any[] = [];
   isLoading = false;
   listOfOption = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   listOfSelectedValue: string[] = [];
   showForm: boolean = false;
   validateForm: FormGroup<{
     selectedUser: FormControl<UserOption | null>,
-    listOfSelectedValue: FormControl<string[]>,
+    // listOfSelectedValue: FormControl<string[]>,
+    day: FormControl<string>,
     slotStarts:FormControl<[Date] | null>,
     slotEnds:FormControl<[Date] | null>
   }>
 
   ngOnInit(): void {
+    this.apiClientService.getAllScheduleForRestaurant().subscribe(
+      (data: any) => {
+        console.log('API Response:', data);
+        this.apiData = data.data;
+      },
+      (error) => {
+        console.error('Error fetching data from the API', error);
+      }
+    );
     this.loadMore();
   }
 
@@ -52,30 +64,16 @@ export class ScheduleAdminComponent {
   submitForm(): void {
     console.log("clicked")
     if (this.validateForm.valid) {
-      const selectedUser = this.validateForm.get('selectedUser');
-    const listOfSelectedValue = this.validateForm.get('listOfSelectedValue');
-    const slotStarts = this.validateForm.get('slotStarts');
-    const slotEnds = this.validateForm.get('slotEnds');
-
-    if (selectedUser && listOfSelectedValue ) {
-      // const slotStartsDate: Date | null = slotStarts.value[0];
-      // const slotEndsDate: Date | null = slotEnds.value[0];
-
-      const userData = {
-        employeeId: selectedUser.value?.id,
-        day: listOfSelectedValue.value[0],
-        // slotStart: slotStarts.value?.getHours() ?? null,
-        // slotEnds: slotEnds.value?.getHours() ?? null,
-      };
-      console.log(userData);
-      this.apiClientService.registerUser(userData).subscribe(
+      const userData = this.constructJobData();
+      console.log(userData)
+      this.apiClientService.postSchedule(userData).subscribe(
         (response) => {
           console.log('Schedule Posted successfully:', response);
+          location.reload()
         },
       (error) => {
         console.log("Error during resgistration", error)
       })
-    }
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -95,13 +93,13 @@ export class ScheduleAdminComponent {
       selectedUser,
       slotStarts,
       slotEnds,
-      listOfSelectedValue,
+      day,
     } = this.validateForm.value;
 
     const mergedData = {
-      selectedUser,
-      skillTags: listOfSelectedValue,
-      slotStarts: slotStarts,
+      employeeId: selectedUser?.id,
+      day,
+      slotStart: slotStarts,
       slotEnds: slotEnds
     };
     return mergedData;
@@ -129,8 +127,13 @@ export class ScheduleAdminComponent {
     console.log(formattedTime);
   }
 
+
   formatUserOption(option: UserOption): string {
     return `${option.name} - ${option.id}`;
+  }
+
+  parseDate(dateString: string): Date {
+    return new Date(dateString);
   }
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
@@ -138,7 +141,7 @@ export class ScheduleAdminComponent {
       selectedUser:this.fb.control<UserOption | null>(null),
       slotStarts: this.fb.control<[Date] | null>(null),
       slotEnds: this.fb.control<[Date] | null>(null),
-      listOfSelectedValue: [[] as string[], [Validators.required]]
+      day: ['', [Validators.required]]
     })
   }
 }
