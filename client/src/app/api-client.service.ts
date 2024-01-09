@@ -86,7 +86,10 @@ export class ApiClientService {
 
   applyJob(selectedJobId:number, applicantId: number): Observable<any> {
     const url = `${this.apiUrl}/jobApplicant/applyJob/${applicantId}`
-    return this.http.post(url,selectedJobId)
+    const requestData = {
+      jobId: selectedJobId,
+    };
+    return this.http.post(url,requestData)
   }
 
   updateApplicantData(applicantId: number, mergedData: any): Observable<any> {

@@ -11,7 +11,7 @@ interface JobApplicantInstance extends Model<IJobApplicant, JobApplicantCreation
     updatedAt?: Date;
 }
 
-const JobApplicant = sequelize.define<JobApplicantInstance>('job', {
+const JobApplicant = sequelize.define<JobApplicantInstance>('jobApplicant', {
     id: {
         allowNull: false,
         autoIncrement: true,

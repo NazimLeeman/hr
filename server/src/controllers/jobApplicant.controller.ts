@@ -6,6 +6,9 @@ export async function applyJob(req: Request, res: Response) {
     try {
         const  applicantId  = Number(req.params.applicantId); 
         const { jobId } = req.body; 
+
+        console.log('jobId:', jobId);
+        console.log('applicantId:', applicantId);
     
         const job = await Job.findByPk(jobId);
         const applicant = await Applicant.findByPk(applicantId);
@@ -22,6 +25,8 @@ export async function applyJob(req: Request, res: Response) {
         return res.status(201).json({ message: 'Application successful.', jobApplicant });
       } catch (error) {
         console.error('Error applying for job:', error);
+        console.error('Request Body:', req.body);
+        console.error('Params:', req.params);
         return res.status(500).json({ error: 'Internal server error.' });
       }
   }
