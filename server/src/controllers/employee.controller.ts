@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { checkEmployeeServiceAccess, getEmployeeServiceAccess } from '../models/position/position.query';
+import { checkEmployeeServiceAccess, getEmployeeInfo, getEmployeeServiceAccess } from '../models/position/position.query';
 import { Request, Response } from "express";
 import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, deleteEmployeeById, deleteEmployeeLogin, findEmployeeBySearchTerm, updateEmployeeById, updateEmployeeInformation } from "../models/employee/employee.query";
 import { findEmployeeLoginByEmail, createEmployeeLogin } from "../models/employeeLogin/employeeLogin.query";
@@ -237,4 +237,19 @@ export async function CheckServiceAccess(req: Request, res: Response) {
     console.log(error);
     res.status(500).json(error)
    } 
+}
+
+export async function getUserInfo(req: Request, res: Response) {
+  try {
+    const employeeId = Number(req.params.userId);
+    const result = await getEmployeeInfo(employeeId)
+    if (result) {
+      return res.status(200).json({ message: result });
+  } else {
+      return res.status(404).json({ message: result });
+  }
+   } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+   }
 }

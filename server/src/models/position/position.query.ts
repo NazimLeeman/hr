@@ -115,3 +115,36 @@ export async function findAllPositionInRestaurant (id: number) {
     throw new Error('Error finding position in restaurant.');
   }
 }
+
+export async function getEmployeeInfo(employeeId: number) {
+  try {
+    const employeeInfo = await Employee.findOne({
+      where: { id: employeeId },
+      include: [Position],
+    });
+
+    if (employeeInfo) {
+      // Access the employeeServiceAccess.position through the association
+      const { positionId, ...employeeInformation } = employeeInfo.toJSON();
+      return { positionId, employeeInformation };
+    }
+    return false;
+    // const employeeServiceAccess = await Position.findOne({
+    //     where: {
+    //         id: employeeId
+    //     }
+    // })
+    // const employeeInformation = await Employee.findOne({
+    //     where: {
+    //         id: employeeId
+    //     }
+    // })
+    // if (employeeServiceAccess && employeeInformation) {
+    //     return (employeeServiceAccess.position && employeeInformation);        
+    // }
+    // return false;
+} catch (error) {
+    console.log(error);
+    throw new Error('Error while checking employee service access from database.')
+}
+}
