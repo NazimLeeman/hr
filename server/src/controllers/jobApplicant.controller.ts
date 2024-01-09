@@ -5,7 +5,7 @@ import JobApplicant from "../models/jobApplicant/jobApplicant.model";
 export async function applyJob(req: Request, res: Response) {
     try {
         const  applicantId  = Number(req.params.applicantId); 
-        const { jobId } = req.body; 
+        const { jobId, restaurantId } = req.body; 
 
         console.log('jobId:', jobId);
         console.log('applicantId:', applicantId);
@@ -20,6 +20,7 @@ export async function applyJob(req: Request, res: Response) {
         const jobApplicant = await JobApplicant.create({
           jobId: job.id,
           applicantId: applicant.id,
+          restaurantId: restaurantId
         });
     
         return res.status(201).json({ message: 'Application successful.', jobApplicant });

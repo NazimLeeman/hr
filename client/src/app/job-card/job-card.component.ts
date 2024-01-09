@@ -15,15 +15,17 @@ export class JobCardComponent {
  isVisible = false;
  isOkLoading = false;
  selectedJobId = 0;
+ selectedRestaurantId = 0;
  applicantId = 0;
 
  toggleCardDetails(card: any): void {
   card.showDetails = !card.showDetails;
 }
 
-showModal(jobId: number): void {
+showModal(jobId: number, restaurantId: number): void {
   this.isVisible = true;
   this.selectedJobId = jobId;
+  this.selectedRestaurantId = restaurantId;
 }
 
 ngOnInit(): void {
