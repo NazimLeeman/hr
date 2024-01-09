@@ -54,6 +54,7 @@ import { PositionComponent } from './position/position.component';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
 registerLocaleData(en);
@@ -113,7 +114,8 @@ registerLocaleData(en);
     NzDividerModule,
     NzDropDownModule,
     NzSpinModule,
-    NzTimePickerModule
+    NzTimePickerModule,
+    NzModalModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -1,1 +1,39 @@
 <app-navbar-admin></app-navbar-admin>
+<div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura'">
+    <div style="padding: 1rem; margin-left: 4px;">
+      <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Your Current Applicants</h1>
+      
+      <nz-table #basicTable [nzData]="listOfData">
+        <thead>
+          <tr>
+            <th>Applicant Name</th>
+            <th>Skill Tags</th>
+            <th>Experiences</th>
+            <th>Hourly Rate</th>
+            <th>Interview Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{data.restaurantName}}</td>
+            <td>{{data.restaurantType}}</td>
+            <td>{{data.jobNature}}</td>
+            <td>{{data.hourlyRate | currency}}</td>
+            <td>{{data.interviewDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{data.status}}</td>
+            <td>
+              <a style="color: green;">Approve</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a style="color: red;">Reject</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+  
+    <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
+      <button type="submit"  nz-button style="font-family: 'GTPressura'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Find Job</button>
+  </div>
+  </div>
+  </div>
