@@ -4,7 +4,7 @@ import Job from "../models/job/job.model";
 import JobApplicant from "../models/jobApplicant/jobApplicant.model";
 export async function applyJob(req: Request, res: Response) {
     try {
-        const { applicantId } = req.params; 
+        const  applicantId  = Number(req.params.applicantId); 
         const { jobId } = req.body; 
     
         const job = await Job.findByPk(jobId);

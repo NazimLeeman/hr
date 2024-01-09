@@ -75,9 +75,9 @@ export class DashboardComponent implements OnInit {
       this.selectCard(this.cards[0]);
     }
     this.anotherOnInit();
-    this.paramOnInit();
-    this.getApplicantData();
-    this.selectCard(this.cards[0]);
+    // this.paramOnInit();
+    // this.getApplicantData();
+    // this.selectCard(this.cards[0]);
   }
 
   anotherOnInit(): void {

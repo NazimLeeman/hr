@@ -34,6 +34,7 @@ ngOnInit(): void {
 
 handleOk(): void {
   const applicantId = this.applicantId;
+  console.log(this.selectedJobId, applicantId)
   this.apiClientService.applyJob(this.selectedJobId, applicantId ).subscribe(
     (response) => {
       console.log('Application submitted successfully:', response);
