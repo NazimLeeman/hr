@@ -124,25 +124,10 @@ export async function getEmployeeInfo(employeeId: number) {
     });
 
     if (employeeInfo) {
-      // Access the employeeServiceAccess.position through the association
       const { positionId, ...employeeInformation } = employeeInfo.toJSON();
       return { positionId, employeeInformation };
     }
     return false;
-    // const employeeServiceAccess = await Position.findOne({
-    //     where: {
-    //         id: employeeId
-    //     }
-    // })
-    // const employeeInformation = await Employee.findOne({
-    //     where: {
-    //         id: employeeId
-    //     }
-    // })
-    // if (employeeServiceAccess && employeeInformation) {
-    //     return (employeeServiceAccess.position && employeeInformation);        
-    // }
-    // return false;
 } catch (error) {
     console.log(error);
     throw new Error('Error while checking employee service access from database.')

@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ApiClientService } from '../api-client.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-job-card',
@@ -8,26 +11,58 @@ import { Component, Input } from '@angular/core';
 export class JobCardComponent {
  @Input() card: any;
  @Input() isSliced: boolean = true;
+ @Input() showButton: boolean = true;
  isVisible = false;
-
-
+ isOkLoading = false;
+ selectedJobId = 0;
+ applicantId = 0;
 
  toggleCardDetails(card: any): void {
   card.showDetails = !card.showDetails;
 }
 
-showModal(): void {
+showModal(jobId: number): void {
   this.isVisible = true;
+  this.selectedJobId = jobId;
+}
+
+ngOnInit(): void {
+  this.route.params.subscribe(params => {
+    this.applicantId = +params['applicantId'] || 0;
+  });
 }
 
 handleOk(): void {
-  console.log('Button ok clicked!');
-  this.isVisible = false;
+  const applicantId = this.applicantId;
+  this.apiClientService.applyJob(this.selectedJobId, applicantId ).subscribe(
+    (response) => {
+      console.log('Application submitted successfully:', response);
+      this.modalService.success({
+        nzTitle: 'Success',
+        nzContent: 'Application submitted successfully.',
+      });
+    },
+    (error) => {
+      console.error('Error submitting application:', error);
+      this.modalService.error({
+        nzTitle: 'Error',
+        nzContent: 'Error submitting application. Please try again.',
+      });
+    }
+  );
+
+
+  this.isOkLoading = true;
+  setTimeout(() => {
+    this.isVisible = false;
+    this.isOkLoading = false;
+  }, 3000);
 }
 
 handleCancel(): void {
-  console.log('Button cancel clicked!');
   this.isVisible = false;
 }
+
+constructor(private route: ActivatedRoute, private apiClientService: ApiClientService,private modalService: NzModalService) {}
  
 }

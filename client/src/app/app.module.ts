@@ -115,7 +115,7 @@ registerLocaleData(en);
     NzDropDownModule,
     NzSpinModule,
     NzTimePickerModule,
-    NzModalModule
+    NzModalModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

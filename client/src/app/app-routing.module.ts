@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'applications/:applicantId', component: ApplicationsComponent, canActivate: [authGuard]  },
   { path: 'settings/:applicantId', component: SettingsComponent, canActivate: [authGuard]  },
   { path: 'login', component: EmployeeLoginComponent},
-  { path: 'dashboard', component: DashboardComponent},
+  { path: 'dashboard/:applicantId', component: DashboardComponent, canActivate: [authGuard]},
   { path: 'success', component: SuccessDialogComponent},
   { path: '**', redirectTo: ''}
 ];

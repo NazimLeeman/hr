@@ -52,6 +52,10 @@ export class ApiClientService {
     return this.http.get(`${this.apiUrl}/job/1`)
   }
 
+  getAllJob(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/job/all`)
+  }
+
   postPayroll(userData:any): Observable<any> {
     const url = `${this.apiUrl}/payroll/1/`
     return this.http.post(url,userData)
@@ -78,6 +82,11 @@ export class ApiClientService {
   getApplicantData(applicantId: number): Observable<any> {
     const url = `${this.apiUrl}/applicant/${applicantId}`
     return this.http.get(url);
+  }
+
+  applyJob(userData:any, applicantId: number): Observable<any> {
+    const url = `${this.apiUrl}/applyJob/${applicantId}`
+    return this.http.post(url,userData)
   }
 
   updateApplicantData(applicantId: number, mergedData: any): Observable<any> {

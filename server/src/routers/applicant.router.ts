@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { postApplicant, searchApplicant, getAllApplicant, login, deleteApplicant, updateApplicant, getAllApplicantLogin, deleteApplicantLoginData, getApplicantLoginData, getApplicantById, addExperience, addSkillTags } from "../controllers/applicant.controller";
+import { applyJob } from "../controllers/jobApplicant.controller";
 const router = Router();
 
 router.post('/signup', postApplicant);
@@ -14,5 +15,6 @@ router.delete('/logindata/:applicantId', deleteApplicantLoginData);
 router.put('/:applicantId', updateApplicant);
 router.put('/experience/:applicantId', addExperience);
 router.put('/skillTags/:applicantId', addSkillTags);
+router.post('dashboard/:applicantId', applyJob);
 
 export default router;
