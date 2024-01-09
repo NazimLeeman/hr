@@ -84,12 +84,18 @@ export class ApiClientService {
     return this.http.get(url);
   }
 
-  applyJob(selectedJobId:number, applicantId: number): Observable<any> {
+  applyJob(selectedJobId:number, selectedRestaurantId: number, applicantId: number): Observable<any> {
     const url = `${this.apiUrl}/jobApplicant/applyJob/${applicantId}`
     const requestData = {
       jobId: selectedJobId,
+      restaurantId: selectedRestaurantId
     };
     return this.http.post(url,requestData)
+  }
+
+  getAppliedApplicant(): Observable<any> {
+    const url = `${this.apiUrl}/jobApplicant//applicantTracking/1`
+    return this.http.get(url);
   }
 
   updateApplicantData(applicantId: number, mergedData: any): Observable<any> {
