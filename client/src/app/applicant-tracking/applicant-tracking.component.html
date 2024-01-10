@@ -37,12 +37,12 @@
           </button>
           <nz-modal
       [(nzVisible)]="isVisible"
-      nzTitle="Confirm Apply"
+      nzTitle="Confirm Hiring"
       (nzOnCancel)="handleCancel()"
       (nzOnOk)="handleOk()"
       [nzOkLoading]="isOkLoading"
     >
-      <p *nzModalContent>You will be applying through your current profile info.</p>
+      <p *nzModalContent>Hire this applicant.</p>
           </nz-modal>
               <nz-divider nzType="vertical"></nz-divider>
               <a style="color: red;">Reject</a>

@@ -98,6 +98,19 @@ export class ApiClientService {
     return this.http.get(url);
   }
 
+  postApplicantToEmployee(applicantData:any, applicantId: number): Observable<any> {
+    const url = `${this.apiUrl}/employee/1/restaurant/${applicantId}`
+    const requestData = {
+      name: applicantData.name,
+      email: applicantData.email,
+      experience: applicantData.experience,
+      phoneNumber: applicantData.phoneNumber,
+      skillTags: applicantData.skillTags,
+      address: applicantData.address
+    }
+    return this.http.post(url,requestData)
+  }
+
   updateApplicantData(applicantId: number, mergedData: any): Observable<any> {
     const url = `${this.apiUrl}/applicant/${applicantId}`
     return this.http.put(url, mergedData);

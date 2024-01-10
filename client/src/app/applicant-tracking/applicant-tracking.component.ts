@@ -122,22 +122,22 @@ export class ApplicantTrackingComponent {
   handleOk(): void {
     const applicantId = this.selectedApplicantId;
     console.log(this.selectedApplicantData, applicantId)
-    // this.apiClientService.applyJob(this.selectedJobId, this.selectedRestaurantId, applicantId ).subscribe(
-    //   (response) => {
-    //     console.log('Application submitted successfully:', response);
-    //     this.modalService.success({
-    //       nzTitle: 'Success',
-    //       nzContent: 'Application submitted successfully.',
-    //     });
-    //   },
-    //   (error) => {
-    //     console.error('Error submitting application:', error);
-    //     this.modalService.error({
-    //       nzTitle: 'Error',
-    //       nzContent: 'Error submitting application. Please try again.',
-    //     });
-    //   }
-    // );
+    this.apiClientService.postApplicantToEmployee(this.selectedApplicantData, applicantId ).subscribe(
+      (response) => {
+        console.log('Applicant Hired successfully:', response);
+        this.modalService.success({
+          nzTitle: 'Success',
+          nzContent: 'Applicant Hired successfully.',
+        });
+      },
+      (error) => {
+        console.error('Error hiring applicant:', error);
+        this.modalService.error({
+          nzTitle: 'Error',
+          nzContent: 'Error hiring applicant. Please try again.',
+        });
+      }
+    );
   
   
     this.isOkLoading = true;
