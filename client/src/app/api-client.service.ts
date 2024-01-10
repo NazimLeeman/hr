@@ -94,7 +94,7 @@ export class ApiClientService {
   }
 
   getAppliedApplicant(): Observable<any> {
-    const url = `${this.apiUrl}/jobApplicant//applicantTracking/1`
+    const url = `${this.apiUrl}/jobApplicant/applicantTracking/1`
     return this.http.get(url);
   }
 

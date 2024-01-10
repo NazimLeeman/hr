@@ -35,12 +35,15 @@ export async function applyJob(req: Request, res: Response) {
   export async function getApplicantsForRestaurant(req: Request, res: Response) {
     try {
         const { restaurantId } = req.params;
-        const applicants = await Applicant.findAll({
+        const applicants = await JobApplicant.findAll({
           include: [
             {
-              model: Job,
-              through: { where: { restaurantId } }, 
-            },
+                model: Job,
+                where: { restaurantId },
+              },
+              {
+                model: Applicant,
+              },
           ],
         });
     

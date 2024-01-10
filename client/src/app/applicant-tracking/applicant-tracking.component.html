@@ -17,12 +17,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of basicTable.data">
-            <td>{{data.restaurantName}}</td>
-            <td>{{data.restaurantType}}</td>
-            <td>{{data.jobNature}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.skillTags}}</td>
+            <td>{{data.experience}}</td>
             <td>{{data.hourlyRate | currency}}</td>
-            <td>{{data.interviewDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
-            <td>{{data.status}}</td>
+            <!-- <td>{{data| date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{data.status}}</td> -->
             <td>
               <a style="color: green;">Approve</a>
               <nz-divider nzType="vertical"></nz-divider>

@@ -1,47 +1,80 @@
 import { Component } from '@angular/core';
+import { ApiClientService } from '../api-client.service';
 
 interface Application {
-  key: string;
-  restaurantName: string;
-  restaurantType: string;
-  jobNature: string;
+  name: string;
+  skillTags: string[];
+  experience: string[];
   hourlyRate: number;
-  interviewDate: Date;
-  status: string;
 }
+
+interface Applicant {
+  id: number;
+  name: string;
+  email: string;
+  experience: string[];
+  phoneNumber: number;
+  address: string;
+  skillTags: string[];
+  hourlyRate: number;
+  createdAt: string;
+  updatedAt: string;
+  jobs: Job[];
+}
+
+interface Job {
+  id: number;
+  jobRole: string;
+  jobNature: string;
+  jobDescription: string;
+  experience: string;
+  skillTags: string[];
+  hourlyRate: number;
+  applicationDeadline: string;
+  responsibilities: string[];
+  restaurantId: number;
+  createdAt: string;
+  updatedAt: string;
+  jobApplicant: JobApplicant;
+}
+
+interface JobApplicant {
+  id: number;
+  jobId: number;
+  applicantId: number;
+  restaurantId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 @Component({
   selector: 'app-applicant-tracking',
   templateUrl: './applicant-tracking.component.html',
   styleUrl: './applicant-tracking.component.css'
 })
 export class ApplicantTrackingComponent {
-  listOfData: Application[] = [
-    {
-      key: '1',
-      restaurantName: 'Cafe XYZ',
-      restaurantType: 'Cafe',
-      jobNature: 'Part Time',
-      hourlyRate: 15,
-      interviewDate: new Date('2024-01-15T10:30:00'),
-      status: 'Pending',
-    },
-    {
-      key: '2',
-      restaurantName: 'Pizza Palace',
-      restaurantType: 'Fast Food',
-      jobNature: 'Full Time',
-      hourlyRate: 20,
-      interviewDate: new Date('2024-02-01T14:00:00'),
-      status: 'Passed',
-    },
-    {
-      key: '3',
-      restaurantName: 'Fine Dining Grill',
-      restaurantType: 'Fine Dining',
-      jobNature: 'Full Time',
-      hourlyRate: 25,
-      interviewDate: new Date('2024-02-10T12:45:00'),
-      status: 'Failed',
-    },
-  ];
+  listOfData: Application[] = [];
+
+  constructor(private apiClientService: ApiClientService) {}
+
+  ngOnInit(): void {
+    this.loadApplicantsData();
+  }
+
+  loadApplicantsData(): void {
+    this.apiClientService.getAppliedApplicant().subscribe(
+      (data: { applicants: Applicant[] }) => {
+        console.log('API Response:', data);
+
+        const restaurantId = 1;
+
+        this.listOfData = data.applicants
+          .filter(applicant => applicant.jobs.some(job => job.restaurantId === restaurantId))
+          .map(({ name, skillTags, experience, hourlyRate, jobs }) => ({ name, skillTags, experience, hourlyRate, jobs }));
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
 }
