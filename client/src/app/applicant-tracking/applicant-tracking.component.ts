@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiClientService } from '../api-client.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 interface Application {
   id: number;
@@ -43,8 +44,12 @@ interface Application {
 })
 export class ApplicantTrackingComponent {
   listOfData: Application[] = [];
+  isVisible = false;
+ isOkLoading = false;
+ selectedApplicantId = 0;
+ selectedApplicantData = {};
 
-  constructor(private apiClientService: ApiClientService) {}
+  constructor(private apiClientService: ApiClientService, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.loadApplicantsData();
@@ -102,13 +107,48 @@ export class ApplicantTrackingComponent {
   }
 
   formatSkills(skillsStringArray: string[]): string[] {
-    // Assuming there's only one element in the array
     const skillsString = skillsStringArray[0];
-  
-    // Split the comma-separated string into an array
     const skillsArray = skillsString.split(',');
   
     return skillsArray;
+  }
+
+  showModal(applicantData: any, applicantId: number): void {
+    this.isVisible = true;
+    this.selectedApplicantId = applicantId;
+    this.selectedApplicantData = applicantData;
+  }
+
+  handleOk(): void {
+    const applicantId = this.selectedApplicantId;
+    console.log(this.selectedApplicantData, applicantId)
+    // this.apiClientService.applyJob(this.selectedJobId, this.selectedRestaurantId, applicantId ).subscribe(
+    //   (response) => {
+    //     console.log('Application submitted successfully:', response);
+    //     this.modalService.success({
+    //       nzTitle: 'Success',
+    //       nzContent: 'Application submitted successfully.',
+    //     });
+    //   },
+    //   (error) => {
+    //     console.error('Error submitting application:', error);
+    //     this.modalService.error({
+    //       nzTitle: 'Error',
+    //       nzContent: 'Error submitting application. Please try again.',
+    //     });
+    //   }
+    // );
+  
+  
+    this.isOkLoading = true;
+    setTimeout(() => {
+      this.isVisible = false;
+      this.isOkLoading = false;
+    }, 3000);
+  }
+  
+  handleCancel(): void {
+    this.isVisible = false;
   }
 
 }

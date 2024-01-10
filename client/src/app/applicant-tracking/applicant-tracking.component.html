@@ -23,7 +23,6 @@
                 <nz-tag [nzColor]="'green'" *ngFor="let skill of formatSkills(data.applicant.skillTags)">
                     {{ skill }}
                   </nz-tag>
-                <!-- <nz-tag [nzColor]="'green'">{{formatSkills(data.applicant.skillTags)}}</nz-tag> -->
             </td>
             <td *ngFor="let exp of data.applicant.experience">{{ formatExperience([exp]) }}</td>
             <td>{{data.applicant.hourlyRate | currency}}
@@ -31,10 +30,20 @@
                 {{data.job.hourlyRate | currency}}
             </td>
             <td>{{data.job.jobRole}}</td>
-            <!-- <td>{{data| date: 'yyyy-MM-dd HH:mm:ss' }}</td>
-            <td>{{data.status}}</td> -->
             <td>
-              <a style="color: green;">Approve</a>
+                <button type="submit" nz-button
+          style="font-family: 'GTPressura', sans-serif; border: none; background-color: #22c55e; color: #ffffff;"
+              [nzType]="'primary'" (click)="showModal(data.applicant, data.applicantId)">Approve
+          </button>
+          <nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="Confirm Apply"
+      (nzOnCancel)="handleCancel()"
+      (nzOnOk)="handleOk()"
+      [nzOkLoading]="isOkLoading"
+    >
+      <p *nzModalContent>You will be applying through your current profile info.</p>
+          </nz-modal>
               <nz-divider nzType="vertical"></nz-divider>
               <a style="color: red;">Reject</a>
             </td>
