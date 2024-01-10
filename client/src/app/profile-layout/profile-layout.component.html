@@ -1,5 +1,4 @@
-<router-outlet></router-outlet>
-<!-- <nz-layout class="app-layout">
+<nz-layout class="app-layout">
     <nz-sider
       class="menu-sidebar"
       nzCollapsible
@@ -22,30 +21,32 @@
         nzMode="inline"
         [nzInlineCollapsed]="isCollapsed"
       >
-        <li nz-submenu nzOpen nzTitle="Manage Employees " nzIcon="dashboard">
+        <li nz-submenu nzOpen nzTitle="Profile " nzIcon="dashboard">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/createEmployee">Employee Information</a>
+              <a [routerLink]="'/applicant/' + applicantId + '/profile/' + applicantId">Profile</a>
             </li>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/createSchedule">Schedule Management</a>
+              <a [routerLink]="'/applicant/' + applicantId + '/experience/' + applicantId">Experience</a>
             </li>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/payroll">Payroll Management</a>
+              <a [routerLink]="'/applicant/' + applicantId + '/skills/' + applicantId">Skill</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="'/applicant/' + applicantId + '/applications/' + applicantId">Applications</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="'/applicant/' + applicantId + '/settings/' + applicantId">Settings</a>
             </li>
           </ul>
         </li>
-        <li nz-submenu nzOpen nzTitle="Manage Applicant" nzIcon="dashboard">
+        <li nz-submenu nzOpen nzTitle="Find Job" nzIcon="dashboard">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/jobs">Post a Job</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="/applicant">Applicant Tracking</a>
+              <a [routerLink]="'/applicant/' + applicantId + '/dashboard/' + applicantId">Job</a>
             </li>
           </ul>
         </li>
-  
       </ul>
     </nz-sider>
     <nz-layout>
@@ -66,4 +67,4 @@
         </div>
       </nz-content>
     </nz-layout>
-  </nz-layout> -->
+  </nz-layout>

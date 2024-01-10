@@ -38,6 +38,7 @@ ngOnInit(): void {
   this.route.params.pipe(
       switchMap((params) => {
           this.applicantId = params['applicantId'];
+          console.log(this.applicantId)
           return this.apiClientService.getRegisterData(this.applicantId);
       })
   ).subscribe(

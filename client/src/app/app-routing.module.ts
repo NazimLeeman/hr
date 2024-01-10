@@ -19,25 +19,39 @@ import { PayrollComponent } from './payroll/payroll.component';
 import { authGuard } from './auth.guard';
 import { DialogComponent } from './dialog/dialog.component';
 import { PositionComponent } from './position/position.component';
+import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent},
   { path: 'signup', component: SignUpComponent},
   { path: 'successful', component: DialogComponent},
-  { path: 'profile/:applicantId', component: RegistrationSummaryComponent, canActivate: [authGuard] },
-  { path: 'admin', component: AdminSummaryComponent },
-  { path: 'createEmployee', component: CreateEmployeeComponent},
-  {path: 'position/:employeeId', component: PositionComponent},
-  { path: 'createSchedule', component: ScheduleAdminComponent},
-  { path: 'jobs', component: PostJobComponent },
-  { path: 'applicant', component: ApplicantTrackingComponent },
-  { path: 'payroll', component: PayrollComponent },
-  { path: 'experience/:applicantId', component: ExperienceComponent, canActivate: [authGuard]  },
-  { path: 'skills/:applicantId', component: SkillsComponent, canActivate: [authGuard]  },
-  { path: 'applications/:applicantId', component: ApplicationsComponent, canActivate: [authGuard]  },
-  { path: 'settings/:applicantId', component: SettingsComponent, canActivate: [authGuard]  },
+  {
+    path: 'admin',
+    component: AdminSummaryComponent,
+    children: [
+      { path: 'createEmployee', component: CreateEmployeeComponent },
+      {path: 'position/:employeeId', component: PositionComponent},
+      { path: 'createSchedule', component: ScheduleAdminComponent },
+      { path: 'jobs', component: PostJobComponent },
+      { path: 'applicant', component: ApplicantTrackingComponent },
+      { path: 'payroll', component: PayrollComponent },
+    ],
+  },
+  { 
+    path: 'applicant/:applicantId',
+    component: ProfileLayoutComponent,
+    canActivate: [authGuard] ,
+    children: [
+      { path: 'profile/:applicantId', component: RegistrationSummaryComponent, canActivate: [authGuard] },
+      { path: 'experience/:applicantId', component: ExperienceComponent, canActivate: [authGuard]  },
+      { path: 'skills/:applicantId', component: SkillsComponent, canActivate: [authGuard]  },
+      { path: 'applications/:applicantId', component: ApplicationsComponent, canActivate: [authGuard]  },
+      { path: 'settings/:applicantId', component: SettingsComponent, canActivate: [authGuard]  },
+      { path: 'dashboard/:applicantId', component: DashboardComponent, canActivate: [authGuard]},
+    ]
+  },
+  
   { path: 'login', component: EmployeeLoginComponent},
-  { path: 'dashboard/:applicantId', component: DashboardComponent, canActivate: [authGuard]},
   { path: 'success', component: SuccessDialogComponent},
   { path: '**', redirectTo: ''}
 ];

@@ -56,7 +56,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-
+import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 
 registerLocaleData(en);
 
@@ -86,7 +86,8 @@ registerLocaleData(en);
     PayrollComponent,
     DialogComponent,
     AdminProfileComponent,
-    PositionComponent
+    PositionComponent,
+    ProfileLayoutComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<app-navbar-admin></app-navbar-admin>
+<!-- <app-navbar-admin></app-navbar-admin> -->
 
   <!-- <div class="mx-60 border font-GTPressura">
     <div *ngIf="!showForm">
@@ -84,7 +84,7 @@
   </div>
 </div> -->
   
-<div style="margin-left: 15rem; margin-right: 15rem; border: 1px solid #cbd5e0; font-family: 'GTPressura';">
+<div style=" font-family: 'GTPressura';">
   <div *ngIf="!showForm">
       <h1 *ngIf="apiData.length === 0" style="margin-top: 1.5rem; text-align: center; font-size: 1.875rem;">You didn't post any Job.</h1>
       <div *ngIf="apiData.length">
@@ -135,14 +135,12 @@
           <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Create by filling in these information.</p>
       </div>
       <form nz-form style="padding: 2rem; display: grid; grid-template-columns: repeat(3, 1fr);" [formGroup]="validateForm" (ngSubmit)="submitForm()">
-          <div style="padding: 1rem;">
+          <div style="padding: 1rem; display: flex; flex-direction: column;">
               <label style="font-size: large;">Job Role</label>
               <input nz-input type="text" style="font-size: large;" id="jobRole" formControlName="jobRole" placeholder="Chef">
           </div>
 
           <div style="padding: 1rem; display: flex; flex-direction: column;">
-              <!-- <label style="font-size: large;">Job Nature</label>
-              <input nz-input type="text" style="font-size: large;" id="jobNature" formControlName="jobNature" placeholder="Full-Time"> -->
               <label style="font-size: large;">Job Nature</label>
               <div>
               <nz-select id="select" formControlName="jobNature" nzAllowClear nzPlaceHolder="Full Time" >   
@@ -157,7 +155,7 @@
               <input nz-input type="text" style="font-size: large;" id="hourlyRate" formControlName="hourlyRate" placeholder="20$">
           </div>
           
-          <div style="padding: 1rem; margin-top: .5rem;">
+          <div style="padding: 1rem; margin-top: .5rem; display: flex; flex-direction: column;">
             <!-- <input nz-input type="text" style="font-size: large;" id="skillTags" formControlName="skillTags" placeholder="Skill Tags">  -->
             <label style="font-size: large;">Skill Tags</label>
             <nz-select id="select"

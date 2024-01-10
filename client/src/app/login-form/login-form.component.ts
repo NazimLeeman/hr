@@ -14,7 +14,7 @@ export class LoginFormComponent {
   @Input() signInLabel: string = 'Sign in';
   @Input() signUpLabel: string = 'Sign Up';
   @Input() showSignUpButton: boolean = true;
-  @Input() signInRoute: string = '/profile';
+  @Input() signInRoute: string = '/applicant/';
 
   validateForm: FormGroup<{
     email: FormControl<string>;
@@ -43,6 +43,8 @@ export class LoginFormComponent {
         const jwtToken = response.token;
         localStorage.setItem('token', jwtToken);
         let applicantId = response.applicant.id
+        console.log(applicantId);
+        console.log('signInRoute:', this.signInRoute);
         this.router.navigate([this.signInRoute +  '/' +  applicantId]);
       },
       (error) => {
