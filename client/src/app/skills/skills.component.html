@@ -4,7 +4,11 @@
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Skills</h1>
     <div *ngIf="skillTags && skillTags.length > 0" style="display: flex; flex-direction: column;">
       <nz-descriptions nzBordered nzLayout="vertical">
-        <nz-descriptions-item nzTitle="Skill Tags">{{ skillTags }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Skill Tags">
+          <nz-tag [nzColor]="'green'" *ngFor="let skill of formatSkills(skillTags)">
+            {{ skill }}
+          </nz-tag>
+        </nz-descriptions-item>
       </nz-descriptions>
     </div>   
     <p style="margin-top: 1rem; font-size:x-large; padding-left: .5rem;">Tell employers what skills you possess.</p> 

@@ -88,6 +88,16 @@ export class SkillsComponent implements OnInit {
     return mergedData;
   }
 
+  formatSkills(skillsStringArray: string[]): string[] {
+    // Assuming there's only one element in the array
+    const skillsString = skillsStringArray[0];
+  
+    // Split the comma-separated string into an array
+    const skillsArray = skillsString.split(',');
+  
+    return skillsArray;
+  }
+
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute) {
     this.validateForm = this.fb.group({
       listOfSelectedValue: [[] as string[], [Validators.required]],

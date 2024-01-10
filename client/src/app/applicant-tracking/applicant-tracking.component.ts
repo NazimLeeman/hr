@@ -2,49 +2,38 @@ import { Component } from '@angular/core';
 import { ApiClientService } from '../api-client.service';
 
 interface Application {
-  name: string;
-  skillTags: string[];
-  experience: string[];
-  hourlyRate: number;
-}
-
-interface Applicant {
-  id: number;
-  name: string;
-  email: string;
-  experience: string[];
-  phoneNumber: number;
-  address: string;
-  skillTags: string[];
-  hourlyRate: number;
-  createdAt: string;
-  updatedAt: string;
-  jobs: Job[];
-}
-
-interface Job {
-  id: number;
-  jobRole: string;
-  jobNature: string;
-  jobDescription: string;
-  experience: string;
-  skillTags: string[];
-  hourlyRate: number;
-  applicationDeadline: string;
-  responsibilities: string[];
-  restaurantId: number;
-  createdAt: string;
-  updatedAt: string;
-  jobApplicant: JobApplicant;
-}
-
-interface JobApplicant {
   id: number;
   jobId: number;
   applicantId: number;
   restaurantId: number;
   createdAt: string;
   updatedAt: string;
+  job: {
+    id: number;
+    jobRole: string;
+    jobNature: string;
+    jobDescription: string;
+    experience: string;
+    skillTags: string[];
+    hourlyRate: number;
+    applicationDeadline: string;
+    responsibilities: string[];
+    restaurantId: number;
+    createdAt: string;
+    updatedAt: string;
+  };
+  applicant: {
+    id: number;
+    name: string;
+    email: string;
+    experience: string[];
+    phoneNumber: number;
+    address: string;
+    skillTags: string[];
+    hourlyRate: number;
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 
 @Component({
@@ -63,18 +52,63 @@ export class ApplicantTrackingComponent {
 
   loadApplicantsData(): void {
     this.apiClientService.getAppliedApplicant().subscribe(
-      (data: { applicants: Applicant[] }) => {
+      (data: any) => {
         console.log('API Response:', data);
 
         const restaurantId = 1;
 
-        this.listOfData = data.applicants
-          .filter(applicant => applicant.jobs.some(job => job.restaurantId === restaurantId))
-          .map(({ name, skillTags, experience, hourlyRate, jobs }) => ({ name, skillTags, experience, hourlyRate, jobs }));
+        this.listOfData = data.applicants.filter((applicant: Application) => 
+        applicant.restaurantId === restaurantId
+      );
       },
       (error) => {
         console.error('Error fetching data:', error);
       }
     );
   }
+
+  formatExperience(experience: string[]): string {
+    if (!experience || experience.length === 0) {
+      return 'No experience available';
+    }
+  
+    const formattedExperiences = experience.map((exp) => {
+      const dateRange = this.formatDateRange(exp);
+      return `${exp.split('-')[0].trim()} ${dateRange}`;
+    });
+  
+    return formattedExperiences.join(', ');
+  }
+  
+  formatDateRange(dateRange: string): string {
+    const dateParts = dateRange.split(',');
+    const startDate = new Date(dateParts[0]);
+    const endDate = new Date(dateParts[1]);
+  
+    const formattedStartDate = this.formatDate(startDate);
+    const formattedEndDate = this.formatDate(endDate);
+  
+    return `From ${formattedStartDate} to ${formattedEndDate}`;
+  }
+  
+  formatDate(date: Date): string {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+    const day = date.getDate();
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+  
+    return `${month} ${day} ${year}`;
+  }
+
+  formatSkills(skillsStringArray: string[]): string[] {
+    // Assuming there's only one element in the array
+    const skillsString = skillsStringArray[0];
+  
+    // Split the comma-separated string into an array
+    const skillsArray = skillsString.split(',');
+  
+    return skillsArray;
+  }
+
 }

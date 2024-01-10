@@ -7,24 +7,25 @@
       <thead>
         <tr>
           <th>Restaurant Name</th>
-          <th>Category</th>
+          <th>Job Role</th>
           <th>Job Nature</th>
           <th>Hourly Rate</th>
-          <th>Interview Date</th>
-          <th>Status</th>
+          <!-- <th>Skill Tags</th> -->
+          <!-- <th>Interview Date</th> -->
+          <!-- <th>Status</th> -->
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{data.restaurantName}}</td>
-          <td>{{data.restaurantType}}</td>
-          <td>{{data.jobNature}}</td>
-          <td>{{data.hourlyRate | currency}}</td>
-          <td>{{data.interviewDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
-          <td>{{data.status}}</td>
+          <td>{{data.restaurantId}}</td>
+          <td>{{data.job.jobRole}}</td>
+          <td>{{data.job.jobNature}}</td>
+          <td>{{data.job.hourlyRate | currency}}</td>
+          <!-- <td>{{data.interviewDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{data.status}}</td> -->
           <td>
-            <a style="color: red;">Delete</a>
+            <a style="color: red;">Cancel</a>
           </td>
         </tr>
       </tbody>

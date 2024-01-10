@@ -10,17 +10,27 @@
             <th>Skill Tags</th>
             <th>Experiences</th>
             <th>Hourly Rate</th>
-            <th>Interview Date</th>
-            <th>Status</th>
+            <th>Job Position</th>
+            <!-- <th>Interview Date</th>
+            <th>Status</th> -->
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of basicTable.data">
-            <td>{{data.name}}</td>
-            <td>{{data.skillTags}}</td>
-            <td>{{data.experience}}</td>
-            <td>{{data.hourlyRate | currency}}</td>
+            <td>{{data.applicant.name}}</td>
+            <td >
+                <nz-tag [nzColor]="'green'" *ngFor="let skill of formatSkills(data.applicant.skillTags)">
+                    {{ skill }}
+                  </nz-tag>
+                <!-- <nz-tag [nzColor]="'green'">{{formatSkills(data.applicant.skillTags)}}</nz-tag> -->
+            </td>
+            <td *ngFor="let exp of data.applicant.experience">{{ formatExperience([exp]) }}</td>
+            <td>{{data.applicant.hourlyRate | currency}}
+                <nz-divider nzType="vertical"></nz-divider>
+                {{data.job.hourlyRate | currency}}
+            </td>
+            <td>{{data.job.jobRole}}</td>
             <!-- <td>{{data| date: 'yyyy-MM-dd HH:mm:ss' }}</td>
             <td>{{data.status}}</td> -->
             <td>

@@ -1,13 +1,40 @@
 import { Component } from '@angular/core';
+import { ApiClientService } from '../api-client.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface Application {
-  key: string;
-  restaurantName: string;
-  restaurantType: string;
-  jobNature: string;
-  hourlyRate: number;
-  interviewDate: Date;
-  status: string;
+  id: number;
+  jobId: number;
+  applicantId: number;
+  restaurantId: number;
+  createdAt: string;
+  updatedAt: string;
+  job: {
+    id: number;
+    jobRole: string;
+    jobNature: string;
+    jobDescription: string;
+    experience: string;
+    skillTags: string[];
+    hourlyRate: number;
+    applicationDeadline: string;
+    responsibilities: string[];
+    restaurantId: number;
+    createdAt: string;
+    updatedAt: string;
+  };
+  applicant: {
+    id: number;
+    name: string;
+    email: string;
+    experience: string[];
+    phoneNumber: number;
+    address: string;
+    skillTags: string[];
+    hourlyRate: number;
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 @Component({
   selector: 'app-applications',
@@ -16,33 +43,31 @@ interface Application {
 })
 export class ApplicationsComponent {
 
-  listOfData: Application[] = [
-    {
-      key: '1',
-      restaurantName: 'Cafe XYZ',
-      restaurantType: 'Cafe',
-      jobNature: 'Part Time',
-      hourlyRate: 15,
-      interviewDate: new Date('2024-01-15T10:30:00'),
-      status: 'Pending',
-    },
-    {
-      key: '2',
-      restaurantName: 'Pizza Palace',
-      restaurantType: 'Fast Food',
-      jobNature: 'Full Time',
-      hourlyRate: 20,
-      interviewDate: new Date('2024-02-01T14:00:00'),
-      status: 'Approved',
-    },
-    {
-      key: '3',
-      restaurantName: 'Fine Dining Grill',
-      restaurantType: 'Fine Dining',
-      jobNature: 'Full Time',
-      hourlyRate: 25,
-      interviewDate: new Date('2024-02-10T12:45:00'),
-      status: 'Rejected',
-    },
-  ];
+  listOfData: Application[] = [];
+
+  constructor(private apiClientService: ApiClientService, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      const applicantId = Number(params['applicantId']);
+      this.loadApplicantsData(applicantId);
+    });
+  }
+
+  loadApplicantsData(applicantId: number): void {
+    this.apiClientService.getAppliedApplicant().subscribe(
+      (data: any) => {
+        console.log('API Response:', data);
+
+        // const applicantId = 1;
+
+        this.listOfData = data.applicants.filter((applicant: Application) => 
+        applicant.applicantId === applicantId
+      );
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
 }
