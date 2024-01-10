@@ -34,6 +34,9 @@ const JobApplicant = sequelize.define<JobApplicantInstance>('jobApplicant', {
     }
 })
 
+JobApplicant.belongsTo(Job);
+JobApplicant.belongsTo(Applicant);
+
 Job.belongsToMany(Applicant, { through: JobApplicant });
 Applicant.belongsToMany(Job, { through: JobApplicant });
 
