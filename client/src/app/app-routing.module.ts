@@ -47,10 +47,10 @@ const routes: Routes = [
       { path: 'skills/:applicantId', component: SkillsComponent, canActivate: [authGuard]  },
       { path: 'applications/:applicantId', component: ApplicationsComponent, canActivate: [authGuard]  },
       { path: 'settings/:applicantId', component: SettingsComponent, canActivate: [authGuard]  },
-      { path: 'dashboard/:applicantId', component: DashboardComponent, canActivate: [authGuard]},
     ]
   },
   
+  { path: 'dashboard/:applicantId', component: DashboardComponent, canActivate: [authGuard]},
   { path: 'login', component: EmployeeLoginComponent},
   { path: 'success', component: SuccessDialogComponent},
   { path: '**', redirectTo: ''}
