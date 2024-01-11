@@ -7,6 +7,7 @@ export interface IApplicant {
   address?: string,
   skillTags?: [string],
   hourlyRate?: number,
+  imageUrl?: string,
   restaurantId?: number,
   positionId?: number,
   applicantId?: number

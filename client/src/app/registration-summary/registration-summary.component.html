@@ -68,11 +68,11 @@
       <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Start by filling in some basic profile and contact information.</p>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr);">
         <div style="display: flex; flex-direction: column;">
-        <img style="padding-bottom: 1rem; width: 12rem;" src="../../assets/images/user-profile-default.png" alt="">
+        <img style="padding-bottom: 1rem; width: 12rem;" [src]="uploadedImageUrl || '../../assets/images/user-profile-default.png'" alt="">
         
           <nz-upload style="margin-left: 1.5rem;"
-      nzAction="https://hr-server-icl9.onrender.com/cloud/upload"   
-      (nzChange)="handleChange($event)"
+      nzAction="''"   
+      (nzChange)="selectFile($event)"
     >
       <button nz-button>
         <span nz-icon nzType="upload"></span>

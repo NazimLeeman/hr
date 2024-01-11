@@ -19,7 +19,8 @@ export async function createApplicant(data: {
     phoneNumber?: number,
     address?: string,
     skillTags?: [string],
-    hourlyRate?: number
+    hourlyRate?: number,
+    imageUrl?: string
 }) {
     try {
         const newApplicant = await Applicant.create(data);
@@ -117,7 +118,8 @@ export async function findApplicantBySearchTerm (searchTerm: string) {
     phoneNumber?: number,
     address?: string,
     skillTags?: [string],
-    hourlyRate?: number
+    hourlyRate?: number,
+    imageUrl?: string
   })  {
     try {
       const result = await Applicant.update(updatedData, {

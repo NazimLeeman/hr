@@ -65,6 +65,11 @@ const Employee = sequelize.define<EmployeeInstance>('employee', {
         type: DataTypes.TEXT,
         allowNull: true,
         defaultValue: ''
+    },
+    imageUrl: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: ''
     }
     // positionId: {
     //     type: DataTypes.INTEGER,

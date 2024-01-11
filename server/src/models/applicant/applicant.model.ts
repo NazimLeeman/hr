@@ -49,6 +49,11 @@ const Applicant = sequelize.define<ApplicantInstance>('applicant', {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
+    },
+    imageUrl: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: ''
     }
 })
 

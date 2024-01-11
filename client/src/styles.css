@@ -47,4 +47,15 @@ nz-descriptions .ant-descriptions-title {
     font-size: large;
   }
 
+
+  .ant-upload-list-item-name {
+    display: none;
+  }
+
+  .ant-upload-span {
+    display: none;
+  }
   
+  .ant-upload-list-text {
+    display: none;
+  }

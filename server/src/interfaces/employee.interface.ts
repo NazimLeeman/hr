@@ -10,6 +10,7 @@ export interface IEmployee {
     skillTags?: [string],
     hourlyRate?: number,
     efficiency?: string,
+    imageUrl?: string,
     positionId?: number,
     // position: string,
     applicantId?: number,

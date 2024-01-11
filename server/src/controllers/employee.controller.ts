@@ -45,8 +45,8 @@ export async function getAllEmployeeOfRestaurant (req: Request, res: Response) {
   export async function postEmployeeToRestaurant (req: Request, res: Response) {
     try {
       const restaurantId = Number(req.params.restaurantId);
-      const { name, email, password, phoneNumber, address, hourlyRate } = req.body;
-      const data = { name, email, phoneNumber, address, hourlyRate };
+      const { name, email, password, phoneNumber, address, hourlyRate, imageUrl } = req.body;
+      const data = { name, email, phoneNumber, address, hourlyRate, imageUrl };
   
       if (validateEmployeeData({ name, email, password })) {
         const loginCheck = await findEmployeeLoginByEmail(email);
@@ -109,12 +109,12 @@ export async function login (req: Request, res: Response) {
       const restaurantId = Number(id);
       const applicantId = Number(req.params.applicantId);
       if (id && applicantId && restaurantId) {
-        const { name, email, experience, phoneNumber, address, skillTags, hourlyRate} = req.body;
+        const { name, email, experience, phoneNumber, address, skillTags, hourlyRate, imageUrl} = req.body;
         if (
             typeof name === 'string' &&
             typeof email === 'string' &&
             typeof phoneNumber === 'number') {
-          const employee = await addApplicantToEmployee(applicantId, restaurantId, {name, email, experience, phoneNumber, address, skillTags, hourlyRate});
+          const employee = await addApplicantToEmployee(applicantId, restaurantId, {name, email, experience, phoneNumber, address, skillTags, hourlyRate, imageUrl});
           res.status(201).json(employee);
         } else res.status(400).json({ message: "Invalid employee information." });
       } else res.status(400).json({ message: "Invalid applicant or restaurant ID." });
@@ -129,12 +129,12 @@ export async function login (req: Request, res: Response) {
     try {
         const employeeId = Number(req.params.employeeId);
         if (employeeId) {
-            const { restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId } = req.body;
+            const { restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId, imageUrl } = req.body;
             if (
                 typeof restaurantId === 'number' &&
                 typeof name === 'string' &&
                 typeof email === 'string') {
-              const information = await updateEmployeeInformation( employeeId, {restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId});
+              const information = await updateEmployeeInformation( employeeId, {restaurantId, name, email, experience, phoneNumber, address, skillTags, hourlyRate, positionId, imageUrl});
               res.status(201).json(information);
             } else res.status(400).json({ message: "Invalid employee ID." });
           } else res.status(400).json({ message: "Invalid information ID." });

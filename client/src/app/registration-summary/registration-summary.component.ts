@@ -33,6 +33,7 @@ export class RegistrationSummaryComponent implements OnInit {
   hourlyRate: number = 0;
   phoneNumber: string = '';
   password: string = '';
+  imageUrl = '';
 
   validateForm: FormGroup<{
     phoneNumber: FormControl<string>,
@@ -84,6 +85,7 @@ additionOnInit(): void {
         }
       }
 
+      this.imageUrl = data.data.imageUrl;
       this.hourlyRate = data.data.hourlyRate;
       this.address = data.data.address;
       this.phoneNumber = data.data.phoneNumber;
@@ -115,47 +117,8 @@ additionOnInit(): void {
     }
   }
 
-  // beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
-  //   new Observable((observer: Observer<boolean>) => {
-  //     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-  //     if (!isJpgOrPng) {
-  //       this.msg.error('You can only upload JPG file!');
-  //       observer.complete();
-  //       return;
-  //     }
-  //     const isLt2M = file.size! / 1024 / 1024 < 2;
-  //     if (!isLt2M) {
-  //       this.msg.error('Image must smaller than 2MB!');
-  //       observer.complete();
-  //       return;
-  //     }
-  //     observer.next(isJpgOrPng && isLt2M);
-  //     observer.complete();
-  //   });
-
-  // private getBase64(img: File, callback: (img: string) => void): void {
-  //   const reader = new FileReader();
-  //   reader.addEventListener('load', () => callback(reader.result!.toString()));
-  //   reader.readAsDataURL(img);
-  // }
-
-  // handleChange(info: { file: NzUploadFile }): void {
-  //   switch (info.file.status) {
-  //     case 'uploading':
-  //       this.loading = true;
-  //       break;
-  //     case 'done':
-  //       this.getBase64(info.file!.originFileObj!, (img: string) => {
-  //         this.loading = false;
-  //         this.avatarUrl = img;
-  //       });
-  //       break;
-  //     case 'error':
-  //       this.msg.error('Network error');
-  //       this.loading = false;
-  //       break;
-  //   }
-  // }
+  uploadedImageUrl: string | undefined;
+  private successMessageDisplayed = false;
 
   handleChange(info: NzUploadChangeParam): void {
     if (info.file.status !== 'uploading') {
@@ -163,48 +126,54 @@ additionOnInit(): void {
       console.log('File information:', info.file);
     console.log('File list:', info.fileList);
     }
-    if (info.file.status === 'done') {
+    if (info.file.status === 'done' && !this.successMessageDisplayed) {
       this.msg.success(`${info.file.name} file uploaded successfully`);
+      this.successMessageDisplayed = true;
       console.log('Upload response:', info.file.response);
-    } else if (info.file.status === 'error') {
-      this.msg.error(`${info.file.name} file upload failed.`);
-      console.error('Upload error:', info.file.error);
-    }
+      this.uploadedImageUrl = info.file.response.url; 
+    } 
+    // else if (info.file.status === 'error') {
+    //   this.msg.error(`${info.file.name} file upload failed.`);
+    //   console.error('Upload error:', info.file.error);
+    // }
   }
 
-  // selectFile(event: any): void {
-  //   const file = event?.file?.originFileObj;
+
+  selectFile(event: any): void {
+    const file = event?.file?.originFileObj;
+
+      this.cloudinary.cloudUpload(file, 'user123') 
+      .subscribe(
+        (response) => {
+          console.log('Cloudinary API Response:', response);
+          const fakeEvent: NzUploadChangeParam = {
+            file: {
+              ...event.file,
+              status: 'done',
+              response: response,
+            },
+            fileList: [...event.fileList],
+          };
   
-  //   this.cloudinary.cloudUpload(file, 'user123') 
-  //     .subscribe(
-  //       (response) => {
-  //         console.log('Cloudinary API Response:', response);
-  //         const fakeEvent: NzUploadChangeParam = {
-  //           file: {
-  //             ...event.file,
-  //             status: 'done',
-  //             response: response,
-  //           },
-  //           fileList: [...event.fileList],
-  //         };
+          this.handleChange(fakeEvent);
+        },
+        (error) => {
+          console.error('Cloudinary API Error:', error);
+          const fakeEvent: NzUploadChangeParam = {
+            file: {
+              ...event.file,
+              status: 'error',
+              response: error,
+            },
+            fileList: [...event.fileList],
+          };
   
-  //         this.handleChange(fakeEvent);
-  //       },
-  //       (error) => {
-  //         console.error('Cloudinary API Error:', error);
-  //         const fakeEvent: NzUploadChangeParam = {
-  //           file: {
-  //             ...event.file,
-  //             status: 'error',
-  //             response: error,
-  //           },
-  //           fileList: [...event.fileList],
-  //         };
+          this.handleChange(fakeEvent);
+        }
+      );
   
-  //         this.handleChange(fakeEvent);
-  //       }
-  //     );
-  // }
+    
+  }
   
 
   // selectFile(event: any) {
@@ -232,7 +201,7 @@ additionOnInit(): void {
   //   );
   // }
 
-  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService ) {
+  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService) {
     this.validateForm = this.fb.group({
       phoneNumber: ['', [Validators.required]],
       address: ['', [Validators.required]],

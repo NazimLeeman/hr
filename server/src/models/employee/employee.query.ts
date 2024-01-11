@@ -27,7 +27,8 @@ export async function addEmployeeToRestaurant (restaurantId: number,data: {
     address: string,
     skillTags?: [string],
     hourlyRate: number,
-    efficiency?: string
+    efficiency?: string,
+    imageUrl?: string
  }) {
   try {
     const newEmployee = await Employee.create({...data, restaurantId});
@@ -46,7 +47,8 @@ export async function addApplicantToEmployee (applicantId: number, restaurantId:
   phoneNumber: number,
   address: string,
   skillTags: [string],
-  hourlyRate: number
+  hourlyRate: number,
+  imageUrl?: string
 }) {
 try {
   let applicant = await Applicant.findOne({
@@ -84,7 +86,8 @@ export async function updateEmployeeInformation(employeeId: number, data: {
     address?: string,
     skillTags?: [string],
     hourlyRate?: number,
-    positionId?: number
+    positionId?: number,
+    imageUrl?: string
 }) {
   try {
     let existingEmployee = await Employee.findOne({
@@ -129,7 +132,8 @@ export async function updateEmployeeById(emlpoyeeId: number, updatedData: {
     address?: string,
     skillTags?: [string],
     hourlyRate?: number,
-    efficiency?: string
+    efficiency?: string,
+    imageUrl?: string
 })  {
   try {
     const result = await Employee.update(updatedData, {
