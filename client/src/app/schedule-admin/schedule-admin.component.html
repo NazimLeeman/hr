@@ -182,7 +182,7 @@
           </tbody>
         </nz-table> -->
 
-        <nz-table #basicTable [nzData]="apiData">
+        <!-- <nz-table #basicTable [nzData]="apiData">
           <thead>
             <tr>
               <ng-container *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']">
@@ -199,8 +199,93 @@
               </td>
             </tr>
           </tbody>
-        </nz-table>
+        </nz-table> -->
 
+
+        <!-- <nz-alert nzMessage="Your selected date: {{ selectedDate | date: 'yyyy-MM-dd' }}"></nz-alert>
+    <nz-calendar 
+    formControlName="selectedDate" 
+    (nzSelectChange)="selectChange($event)"
+>
+    </nz-calendar> -->
+
+    <!-- <nz-calendar>
+      <ul *nzDateCell="let date" class="events">
+        <ng-container [ngSwitch]="date.getDate()">
+          <ng-container *ngSwitchCase="8">
+            <li *ngFor="let item of listDataMap.eight">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="10">
+            <li *ngFor="let item of listDataMap.ten">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="11">
+            <li *ngFor="let item of listDataMap.eleven">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+      <ng-container *nzMonthCell="let month">
+        <div *ngIf="getMonthData(month) as monthData" class="notes-month">
+          <section>{{ monthData }}</section>
+          <span>Backlog number</span>
+        </div>
+      </ng-container>
+    </nz-calendar> -->
+
+
+    <nz-calendar>
+      <ul *nzDateCell="let date" class="events">
+        <ng-container [ngSwitch]="date.getDay()">
+          <ng-container *ngSwitchCase="0"> <!-- Sunday -->
+            <li *ngFor="let item of listDataMap.sunday">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="1"> <!-- Monday -->
+            <li *ngFor="let item of listDataMap.monday">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="2"> <!-- Tuesday -->
+            <li *ngFor="let item of listDataMap.tuesday">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="3"> <!-- Wednesday -->
+            <li *ngFor="let item of listDataMap.wednesday">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="4"> <!-- Thursday -->
+            <li *ngFor="let item of listDataMap.thursday">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="5"> <!-- Friday -->
+            <li *ngFor="let item of listDataMap.friday">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="6"> <!-- Saturday -->
+            <li *ngFor="let item of listDataMap.saturday">
+              <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+      <ng-container *nzMonthCell="let month">
+        <div *ngIf="getMonthData(month) as monthData" class="notes-month">
+          <section>{{ monthData }}</section>
+          <span>Backlog number</span>
+        </div>
+      </ng-container>
+    </nz-calendar>
+    
 
       </div>
     

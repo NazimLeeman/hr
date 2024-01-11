@@ -16,29 +16,6 @@
   nz-form-control {
     position: relative;
   }
-  
-  /* input[type="email"],
-  input[type="password"],
-  input[type="number"],
-  input[type="text"] {
-    margin-bottom: 1rem;
-    border: 1px solid #cbd5e0;
-    background-color: #F3F4F6;
-    color: black;
-    outline: none;
-    transition: all;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    padding-right: 5rem;
-    padding-left: 1rem;
-    border-radius: 10px;
-  } */
-
-  /* #address {
-    padding-right: 20rem;
-    padding-bottom: 8rem;
-    
-  } */
    
 
 
@@ -91,22 +68,25 @@ nz-time-picker {
   font-size: 1.2rem;
 }
 
-/* table {
+.events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.events .ant-badge-status {
+  overflow: hidden;
+  white-space: nowrap;
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+  text-overflow: ellipsis;
+  font-size: 12px;
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.notes-month {
   text-align: center;
+  font-size: 28px;
 }
 
-th {
-  background-color: #f2f2f2;
+.notes-month section {
+  font-size: 28px;
 }
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-} */

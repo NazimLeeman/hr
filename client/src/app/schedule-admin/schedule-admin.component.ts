@@ -2,8 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
-import { DatePipe } from '@angular/common';
-
+import { NzCalendarMode } from 'ng-zorro-antd/calendar';
 interface Employee {
   id: number;
   restaurantId: number;
@@ -27,12 +26,13 @@ export class ScheduleAdminComponent {
   selectedUser: UserOption | null = null;
   apiData: any[] = [];
   isLoading = false;
+  // calendarMode = NzCalendarMode;
   listOfOption = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   listOfSelectedValue: string[] = [];
   showForm: boolean = false;
   validateForm: FormGroup<{
     selectedUser: FormControl<UserOption | null>,
-    // listOfSelectedValue: FormControl<string[]>,
+    selectedDate: FormControl<[Date] | null>,
     day: FormControl<string>,
     slotStarts:FormControl<[Date] | null>,
     slotEnds:FormControl<[Date] | null>
@@ -60,10 +60,6 @@ export class ScheduleAdminComponent {
       this.optionList = [...this.optionList, ...users];
     });
   }
-
-  // anotherOnInit(): void {
-  //   this.apiClientService.getAllScheduleOfEmployee(this.apiData.data.employeeId)
-  // }
 
   submitForm(): void {
     console.log("clicked")
@@ -140,9 +136,76 @@ export class ScheduleAdminComponent {
     return new Date(dateString);
   }
 
+  // selectedDate = new Date('2017-01-25');
+
+  // selectChange(select: Date): void {
+  //   console.log(`Select value: ${select}`);
+  // }
+
+  // listDataMap = {
+  //   eight: [
+  //     { type: 'warning', content: 'This is warning event.' },
+  //     { type: 'success', content: 'This is usual event.' }
+  //   ],
+  //   ten: [
+  //     { type: 'warning', content: 'This is warning event.' },
+  //     { type: 'success', content: 'This is usual event.' },
+  //     { type: 'error', content: 'This is error event.' }
+  //   ],
+  //   eleven: [
+  //     { type: 'warning', content: 'This is warning event' },
+  //     { type: 'success', content: 'This is very long usual event........' },
+  //     { type: 'error', content: 'This is error event 1.' },
+  //     { type: 'error', content: 'This is error event 2.' },
+  //     { type: 'error', content: 'This is error event 3.' },
+  //     { type: 'error', content: 'This is error event 4.' }
+  //   ]
+  // };
+
+  listDataMap = {
+    sunday: [
+      { type: 'success', content: 'Meeting with Team A' },
+      { type: 'error', content: 'Project deadline' }
+    ],
+    monday: [
+      { type: 'warning', content: 'Client call' },
+      { type: 'success', content: 'Project review' }
+    ],
+    tuesday: [
+      { type: 'success', content: 'Training session' },
+      { type: 'info', content: 'Lunch with colleagues' }
+    ],
+    wednesday: [
+      { type: 'success', content: 'Workshop on Angular' },
+      { type: 'error', content: 'Client meeting' }
+    ],
+    thursday: [
+      { type: 'warning', content: 'Team brainstorming' },
+      { type: 'success', content: 'Project planning' }
+    ],
+    friday: [
+      { type: 'info', content: 'Casual Friday' },
+      { type: 'success', content: 'Release deployment' }
+    ],
+    saturday: [
+      { type: 'success', content: 'Family outing' },
+      { type: 'error', content: 'Personal project work' }
+    ]
+  };
+  
+
+  getMonthData(date: Date): number | null {
+    if (date.getMonth() === 8) {
+      return 1394;
+    }
+    return null;
+  }
+
+
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
       selectedUser:this.fb.control<UserOption | null>(null),
+      selectedDate: this.fb.control<[Date] | null>(null),
       slotStarts: this.fb.control<[Date] | null>(null),
       slotEnds: this.fb.control<[Date] | null>(null),
       day: ['', [Validators.required]]

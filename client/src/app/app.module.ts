@@ -57,6 +57,9 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
+import { NzCalendarModule } from 'ng-zorro-antd/calendar';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 registerLocaleData(en);
 
@@ -118,7 +121,10 @@ registerLocaleData(en);
     NzSpinModule,
     NzTimePickerModule,
     NzModalModule,
-    NzTagModule
+    NzTagModule,
+    NzCalendarModule,
+    NzAlertModule,
+    NzBadgeModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
