@@ -23,6 +23,24 @@ body {
     font-family: 'Proxima Nova','Arial' ,'sans-serif'; 
 }; */
 
+@font-face {
+  font-family: 'Proxima Nova'; 
+  src: url('./assets/fonts/proximanova-regular-webfont.woff2') format('woff2'); 
+  font-weight: normal;
+  font-style: normal;
+};
+
+@font-face {
+  font-family: 'GT Pressura';
+  src: url('./assets/fonts/GT-Pressura-Extended-Black.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+};
+
+body {
+  font-family: 'Proxima Nova','Arial' ,'sans-serif'; 
+}; 
+
 nz-descriptions .ant-descriptions-title {
     font-size: 24px; /* Adjust the font size as needed */
   }
@@ -32,7 +50,7 @@ nz-descriptions .ant-descriptions-title {
   }
 
   nz-descriptions .ant-descriptions-item-content {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .ant-table {

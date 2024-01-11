@@ -40,6 +40,7 @@ export class RegistrationSummaryComponent implements OnInit {
     address: FormControl<string>;
     hourlyRate: FormControl<number>;
     phoneNumberPrefix: FormControl<'+86' | '+87'>;
+    imageUrl: FormControl<string>;
   }>
 
 ngOnInit(): void {
@@ -85,7 +86,7 @@ additionOnInit(): void {
         }
       }
 
-      this.imageUrl = data.data.imageUrl;
+      this.uploadedImageUrl = data.data.imageUrl;
       this.hourlyRate = data.data.hourlyRate;
       this.address = data.data.address;
       this.phoneNumber = data.data.phoneNumber;
@@ -99,7 +100,8 @@ additionOnInit(): void {
   submitForm(): void {
     if (this.validateForm.valid) {
       const updatedData = this.validateForm.value;
-      // console.log(updatedData)
+      updatedData.imageUrl = this.uploadedImageUrl;
+      console.log(updatedData)
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
         console.log('Applicant updated successfully:', response);
         location.reload();
@@ -205,6 +207,7 @@ additionOnInit(): void {
     this.validateForm = this.fb.group({
       phoneNumber: ['', [Validators.required]],
       address: ['', [Validators.required]],
+      imageUrl: [''],
       hourlyRate: [0, [Validators.required]],
       phoneNumberPrefix: '+86' as '+86' | '+87'
     })

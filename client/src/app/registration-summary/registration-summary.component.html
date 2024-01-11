@@ -62,13 +62,13 @@
     </div>
   </div> -->
 
-  <div style="font-family: 'GTPressura';">
+  <div style="font-family: 'Proxima Nova';">
     <div style="padding: 1rem; margin-left: 4px;">
       <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Contact Info</h1>
       <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Start by filling in some basic profile and contact information.</p>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr);">
         <div style="display: flex; flex-direction: column;">
-        <img style="padding-bottom: 1rem; width: 12rem;" [src]="uploadedImageUrl || '../../assets/images/user-profile-default.png'" alt="">
+        <img style="padding-bottom: 1rem; width: 12rem; border-radius: 100px;" [src]="uploadedImageUrl || '../../assets/images/user-profile-default.png'" alt="">
         
           <nz-upload style="margin-left: 1.5rem;"
       nzAction="''"   
@@ -81,41 +81,41 @@
     </nz-upload>
         </div>
         <div style="display: flex; flex-direction: column; justify-content: center; padding-left: 1rem;">
-          <label style="margin-bottom: 6px; font-size: large;">First Name
+          <label style="margin-bottom: 6px; font-size: medium;">First Name
             <input style="background-color: #F3F4F6;" type="text" [value]="firstName" readonly></label>
-          <label style="margin-bottom: 6px; font-size: large;" for="email">Email
+          <label style="margin-bottom: 6px; font-size: medium;" for="email">Email
             <input style="background-color: #F3F4F6;" type="text" [value]="email" readonly></label>
         </div>
         <div style="display: flex; flex-direction: column; justify-content: center;">
-          <label style="margin-bottom: 6px; font-size: large;">Last Name
+          <label style="margin-bottom: 6px; font-size: medium;">Last Name
             <input style="background-color: #F3F4F6;" type="text" [value]="lastName" readonly></label>
-          <label style=" margin-bottom: 6px; font-size: large;" for="password">Password
+          <label style=" margin-bottom: 6px; font-size: medium;" for="password">Password
             <input style="background-color: #F3F4F6;" type="password" [value]="password" readonly></label>
         </div>
       </div>
     </div>
     <form nz-form style="padding: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr);" [formGroup]="validateForm" (ngSubmit)="submitForm()">
      <nz-form-item>
-        <label style="font-size: large;" >Enter your phone number to connect with others</label>
+        <label style="font-size: medium;" >Enter your phone number to connect with others</label>
         <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
-          <input nz-input style="font-size: large; margin-top: .5rem;"  [value]="phoneNumber" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" >
+          <input nz-input style="font-size: medium; margin-top: .5rem;"  [value]="phoneNumber" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" >
         </nz-form-control>
       </nz-form-item>
       <nz-form-item >
-        <label style="font-size: large;">Enter your expected hourly rate</label>
+        <label style="font-size: medium;">Enter your expected hourly rate</label>
         <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
-          <input nz-input style="font-size: large; margin-top: .5rem;"  [value]="hourlyRate" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" >
+          <input nz-input style="font-size: medium; margin-top: .5rem;"  [value]="hourlyRate" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" >
         </nz-form-control>
       </nz-form-item>
       <nz-form-item >
-        <label style="font-size: large;">Entering your address allows us to find jobs closest to you!</label>
+        <label style="font-size: medium;">Entering your address allows us to find jobs closest to you!</label>
         <nz-form-control nzErrorTip="Please input an address!" class="custom-error-tip">
-          <textarea nz-input style="font-size: large; margin-top: .5rem;"  [value]="address" id="address" formControlName="address" placeholder="Address"></textarea>
+          <textarea nz-input style="font-size: medium; margin-top: .5rem;"  [value]="address" id="address" formControlName="address" placeholder="Address"></textarea>
         </nz-form-control>
       </nz-form-item>
     </form>
     <div style="display: flex; justify-content: center;  padding-bottom: 1rem;">
-      <button class="my-btn" type="submit" (click)="submitForm()" nz-button style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Save</button>
+      <button class="my-btn" type="submit" (click)="submitForm()" nz-button style=" background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Save</button>
   </div>
   </div>
    
