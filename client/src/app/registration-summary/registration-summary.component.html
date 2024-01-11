@@ -67,7 +67,19 @@
       <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Contact Info</h1>
       <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Start by filling in some basic profile and contact information.</p>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr);">
-        <img style="padding-bottom: 1rem;" src="../../assets/images/user-profile-default.png" alt="">
+        <div style="display: flex; flex-direction: column;">
+        <img style="padding-bottom: 1rem; width: 12rem;" src="../../assets/images/user-profile-default.png" alt="">
+        
+          <nz-upload style="margin-left: 1.5rem;"
+      nzAction="https://hr-server-icl9.onrender.com/cloud/upload"   
+      (nzChange)="handleChange($event)"
+    >
+      <button nz-button>
+        <span nz-icon nzType="upload"></span>
+        Click to Upload
+      </button>
+    </nz-upload>
+        </div>
         <div style="display: flex; flex-direction: column; justify-content: center; padding-left: 1rem;">
           <label style="margin-bottom: 6px; font-size: large;">First Name
             <input style="background-color: #F3F4F6;" type="text" [value]="firstName" readonly></label>
