@@ -17,10 +17,11 @@ const Schedule = sequelize.define<ScheduleInstance>('schedule', {
         type: DataTypes.INTEGER,
         unique: true
     },
-    employeeId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
+    // employeeId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: true,
+    //     defaultValue: 0
+    // },
     day: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -35,6 +36,15 @@ const Schedule = sequelize.define<ScheduleInstance>('schedule', {
     },restaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    shift: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    employees: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
+        defaultValue: []
     },
 })
 

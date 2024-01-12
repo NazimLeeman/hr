@@ -21,19 +21,30 @@ interface UserOption {
   styleUrl: './schedule-admin.component.css'
 })
 export class ScheduleAdminComponent {
+  employeeIds = ['12', '6', '5']; 
+
+dayShiftStartTime = '09:00 AM';
+dayShiftEndTime = '05:00 PM';
+nightShiftStartTime = '07:00 PM';
+nightShiftEndTime = '03:00 AM';
   optionList: UserOption[] = [];
   time: Date | null = null;
   selectedUser: UserOption | null = null;
   apiData: any[] = [];
   isLoading = false;
   // calendarMode = NzCalendarMode;
+  listOfOptionOfEmployee = ['Apples', 'Nails', 'Bananas', 'Helicopters'];
+  listOfSelectedEmployees: string[] = [];
+
   listOfOption = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   listOfSelectedValue: string[] = [];
   showForm: boolean = false;
   validateForm: FormGroup<{
-    selectedUser: FormControl<UserOption | null>,
+    // selectedUser: FormControl<UserOption | null>,
+    listOfSelectedEmployees: FormControl<string[]>,
     selectedDate: FormControl<[Date] | null>,
     day: FormControl<string>,
+    shift: FormControl<string>,
     slotStarts:FormControl<[Date] | null>,
     slotEnds:FormControl<[Date] | null>
   }>
@@ -60,6 +71,11 @@ export class ScheduleAdminComponent {
       this.optionList = [...this.optionList, ...users];
     });
   }
+
+  
+  // employeeIsNotSelected(value: string): boolean {
+  //   return this.listOfSelectedValue.indexOf(value) === -1;
+  // }
 
   submitForm(): void {
     console.log("clicked")
@@ -90,17 +106,19 @@ export class ScheduleAdminComponent {
 
   constructJobData(): any {
     const {
-      selectedUser,
+      listOfSelectedEmployees,
       slotStarts,
       slotEnds,
       day,
+      shift
     } = this.validateForm.value;
 
     const mergedData = {
-      employeeId: selectedUser?.id,
+      employees: listOfSelectedEmployees,
       day,
       slotStart: slotStarts,
-      slotEnds: slotEnds
+      slotEnds: slotEnds,
+      shift
     };
     return mergedData;
   }
@@ -136,60 +154,34 @@ export class ScheduleAdminComponent {
     return new Date(dateString);
   }
 
-  // selectedDate = new Date('2017-01-25');
-
-  // selectChange(select: Date): void {
-  //   console.log(`Select value: ${select}`);
-  // }
-
-  // listDataMap = {
-  //   eight: [
-  //     { type: 'warning', content: 'This is warning event.' },
-  //     { type: 'success', content: 'This is usual event.' }
-  //   ],
-  //   ten: [
-  //     { type: 'warning', content: 'This is warning event.' },
-  //     { type: 'success', content: 'This is usual event.' },
-  //     { type: 'error', content: 'This is error event.' }
-  //   ],
-  //   eleven: [
-  //     { type: 'warning', content: 'This is warning event' },
-  //     { type: 'success', content: 'This is very long usual event........' },
-  //     { type: 'error', content: 'This is error event 1.' },
-  //     { type: 'error', content: 'This is error event 2.' },
-  //     { type: 'error', content: 'This is error event 3.' },
-  //     { type: 'error', content: 'This is error event 4.' }
-  //   ]
-  // };
-
   listDataMap = {
     sunday: [
-      { type: 'success', content: 'Meeting with Team A' },
-      { type: 'error', content: 'Project deadline' }
+      { type: 'success', content:  "ID: 1,2,3,7,8"  },
+      { type: 'error', content: "ID: 3,4,5,10" }
     ],
     monday: [
-      { type: 'warning', content: 'Client call' },
-      { type: 'success', content: 'Project review' }
+      { type: 'success', content:  "ID: 1,2,3,7,8"  },
+      { type: 'error', content: "ID: 3,4,5,10" }
     ],
     tuesday: [
-      { type: 'success', content: 'Training session' },
-      { type: 'info', content: 'Lunch with colleagues' }
+      { type: 'success', content:  "ID: 1,2,3,7,8"  },
+      { type: 'error', content: "ID: 3,4,5,10" }
     ],
     wednesday: [
-      { type: 'success', content: 'Workshop on Angular' },
-      { type: 'error', content: 'Client meeting' }
+      { type: 'success', content:  "ID: 1,2,3,7,8"  },
+      { type: 'error', content: "ID: 3,4,5,10" }
     ],
     thursday: [
-      { type: 'warning', content: 'Team brainstorming' },
-      { type: 'success', content: 'Project planning' }
+      { type: 'success', content:  "ID: 1,2,3,7,8"  },
+      { type: 'error', content: "ID: 3,4,5,10" }
     ],
     friday: [
-      { type: 'info', content: 'Casual Friday' },
-      { type: 'success', content: 'Release deployment' }
+      { type: 'success', content:  "ID: 1,2,3,7,8"  },
+      { type: 'error', content: "ID: 3,4,5,10" }
     ],
     saturday: [
-      { type: 'success', content: 'Family outing' },
-      { type: 'error', content: 'Personal project work' }
+      { type: 'success', content:  "ID: 1,2,3,7,8"  },
+      { type: 'error', content: "ID: 3,4,5,10" }
     ]
   };
   
@@ -204,11 +196,13 @@ export class ScheduleAdminComponent {
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
     this.validateForm = this.fb.group({
-      selectedUser:this.fb.control<UserOption | null>(null),
+      // selectedUser:this.fb.control<UserOption | null>(null),
+      listOfSelectedEmployees: [[] as string[], [Validators.required]],
       selectedDate: this.fb.control<[Date] | null>(null),
       slotStarts: this.fb.control<[Date] | null>(null),
       slotEnds: this.fb.control<[Date] | null>(null),
-      day: ['', [Validators.required]]
+      day: ['', [Validators.required]],
+      shift: ['', [Validators.required]],
     })
   }
 }

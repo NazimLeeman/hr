@@ -1,28 +1,45 @@
 import Employee from "../employee/employee.model";
 import Schedule from "./schedule.model";
 
-export async function createScheduleForEmployee (employeeId: number, restaurantId: number, data: { 
+export async function createSchedule ( restaurantId: number, data: { 
     day: string,
     slotStart: string,
     slotEnds: string,
+    shift: string,
+    employees: [string],
  }) {
   try {
-    let employee = await Employee.findOne({
-      where: {
-        id: employeeId,
-        restaurantId: restaurantId
-      }
-    })
-    if (!employee) {
-      throw new Error('Employee not found.');
-    }
-    const newSchedule = await Schedule.create({ ...data, employeeId, restaurantId });
+
+    const newSchedule = await Schedule.create({ ...data, restaurantId });
     return newSchedule;
   } catch (error) {
     console.log(error)
     throw new Error('Error creating schedule for employee.');
   }
 }
+
+// export async function createScheduleForEmployee (employeeId: number, restaurantId: number, data: { 
+//     day: string,
+//     slotStart: string,
+//     slotEnds: string,
+//  }) {
+//   try {
+//     let employee = await Employee.findOne({
+//       where: {
+//         id: employeeId,
+//         restaurantId: restaurantId
+//       }
+//     })
+//     if (!employee) {
+//       throw new Error('Employee not found.');
+//     }
+//     const newSchedule = await Schedule.create({ ...data, employeeId, restaurantId });
+//     return newSchedule;
+//   } catch (error) {
+//     console.log(error)
+//     throw new Error('Error creating schedule for employee.');
+//   }
+// }
 
 export async function updateScheduleForEmployee(employeeId: number, scheduleId: number, data: {
     day?: string,

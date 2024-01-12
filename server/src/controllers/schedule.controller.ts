@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createScheduleForEmployee, updateScheduleForEmployee, findAllScheduleOfEmployee, findAllScheduleInRestaurant } from "../models/schedule/schedule.query";
+import { createSchedule, updateScheduleForEmployee, findAllScheduleOfEmployee, findAllScheduleInRestaurant } from "../models/schedule/schedule.query";
 
 
 export async function postScheduleToEmployee (req: Request, res: Response) {
@@ -7,9 +7,9 @@ export async function postScheduleToEmployee (req: Request, res: Response) {
       let id = req.params.id;
       const restaurantId = Number(id);
       if (id && restaurantId) {
-        const { employeeId, day, slotStart, slotEnds } = req.body;
+        const { employees, day, slotStart, slotEnds, shift } = req.body;
         if (typeof day === 'string' ) {
-          const schedule = await createScheduleForEmployee(employeeId, restaurantId, {day, slotStart, slotEnds});
+          const schedule = await createSchedule( restaurantId, {employees, day, slotStart, slotEnds, shift});
           res.status(201).json(schedule);
         } else res.status(400).json({ message: "Invalid employee ID." });
       } else res.status(400).json({ message: "Invalid restaurant ID." });

@@ -35,11 +35,11 @@ body {
   src: url('./assets/fonts/GT-Pressura-Extended-Black.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
-};
+}
 
 body {
   font-family: 'Proxima Nova','Arial' ,'sans-serif'; 
-}; 
+} 
 
 nz-descriptions .ant-descriptions-title {
     font-size: 24px; /* Adjust the font size as needed */
