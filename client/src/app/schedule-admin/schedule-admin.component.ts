@@ -53,7 +53,9 @@ nightShiftEndTime = '03:00 AM';
     this.apiClientService.getAllScheduleForRestaurant().subscribe(
       (data: any) => {
         console.log('API Response:', data);
-        this.apiData = data.data;
+        this.apiData = this.transformApiResponse(data.data);
+        this.listDataMap = this.transformApiResponse(data.data);
+        console.log('Modified Response:', this.apiData)
       },
       (error) => {
         console.error('Error fetching data from the API', error);
@@ -70,6 +72,29 @@ nightShiftEndTime = '03:00 AM';
       this.isLoading = false;
       this.optionList = [...this.optionList, ...users];
     });
+  }
+
+  private transformApiResponse(apiResponse: any[]): any[] {
+    const transformedData: any = {};
+
+    apiResponse.forEach(item => {
+      const day = item.day.toLowerCase();
+      const shiftType = item.shift.toLowerCase();
+      const employeeIds = item.employees.map((employee:any) => JSON.parse(employee).id);
+
+      const entry = {
+        type: shiftType === 'day' ? 'success' : 'error',
+        content: `ID: ${employeeIds.join(',')}`
+      };
+
+      if (!transformedData[day]) {
+        transformedData[day] = [entry];
+      } else {
+        transformedData[day].push(entry);
+      }
+    });
+
+    return transformedData;
   }
 
   
@@ -113,6 +138,8 @@ nightShiftEndTime = '03:00 AM';
       shift
     } = this.validateForm.value;
 
+    // const transformedEmployees = listOfSelectedEmployees?.map(employee => String(employee.id));
+
     const mergedData = {
       employees: listOfSelectedEmployees,
       day,
@@ -154,7 +181,7 @@ nightShiftEndTime = '03:00 AM';
     return new Date(dateString);
   }
 
-  listDataMap = {
+  listDataMap: any = {
     sunday: [
       { type: 'success', content:  "ID: 1,2,3,7,8"  },
       { type: 'error', content: "ID: 3,4,5,10" }
@@ -182,6 +209,37 @@ nightShiftEndTime = '03:00 AM';
     saturday: [
       { type: 'success', content:  "ID: 1,2,3,7,8"  },
       { type: 'error', content: "ID: 3,4,5,10" }
+    ]
+  };
+
+  apiDataMap = {
+    sunday: [
+      { type: '', content:  ""  },
+      { type: '', content: "" }
+    ],
+    monday: [
+      { type: '', content:  ""  },
+      { type: '', content: "" }
+    ],
+    tuesday: [
+      { type: '', content:  ""  },
+      { type: '', content: "" }
+    ],
+    wednesday: [
+      { type: '', content:  ""  },
+      { type: '', content: "" }
+    ],
+    thursday: [
+      { type: '', content:  ""  },
+      { type: '', content: "" }
+    ],
+    friday: [
+      { type: '', content:  ""  },
+      { type: '', content: "" }
+    ],
+    saturday: [
+      { type: '', content:  ""  },
+      { type: '', content: "" }
     ]
   };
   

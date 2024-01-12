@@ -1,9 +1,9 @@
 <!-- <app-navbar-admin></app-navbar-admin> -->
 
 <div [formGroup]="validateForm" style=" font-family: 'Proxima Nova';">
-    <div *ngIf="!showForm"> 
+    <div *ngIf="showForm"> 
     <div style="padding: 1rem; margin-left: 4px;">
-      <h1 style="font-size: 1.875rem; font-weight: bold;">Update Schedule</h1>
+      <h1 style="font-size: 1.875rem; font-weight: bold;">Schedule Mangement</h1>
       <p style="margin-left: .5rem; font-size: x-large; ">Set the schedule for a Day.</p>
       <!-- <nz-select
       formControlName="selectedUser"
@@ -41,7 +41,7 @@
             <nz-option nzValue="Sunday" nzLabel="Sunday"></nz-option>        
         </nz-select>
         </nz-form-item>
-        <div style="">
+        <div>
           <label style="font-size: medium;">Select Shift</label>
           <div>
           <nz-select id="select" formControlName="shift" nzAllowClear nzPlaceHolder="Day" >   
@@ -312,7 +312,9 @@
         </div>
       </ng-container>
     </nz-calendar>
-    
+    <div>
+      
+    </div>
 
       </div>
     
