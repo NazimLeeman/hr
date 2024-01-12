@@ -211,37 +211,6 @@ nightShiftEndTime = '03:00 AM';
       { type: 'error', content: "ID: 3,4,5,10" }
     ]
   };
-
-  apiDataMap = {
-    sunday: [
-      { type: '', content:  ""  },
-      { type: '', content: "" }
-    ],
-    monday: [
-      { type: '', content:  ""  },
-      { type: '', content: "" }
-    ],
-    tuesday: [
-      { type: '', content:  ""  },
-      { type: '', content: "" }
-    ],
-    wednesday: [
-      { type: '', content:  ""  },
-      { type: '', content: "" }
-    ],
-    thursday: [
-      { type: '', content:  ""  },
-      { type: '', content: "" }
-    ],
-    friday: [
-      { type: '', content:  ""  },
-      { type: '', content: "" }
-    ],
-    saturday: [
-      { type: '', content:  ""  },
-      { type: '', content: "" }
-    ]
-  };
   
 
   getMonthData(date: Date): number | null {

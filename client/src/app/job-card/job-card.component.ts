@@ -66,6 +66,13 @@ handleCancel(): void {
   this.isVisible = false;
 }
 
+formatSkills(skillsStringArray: string[]): string[] {
+  // const skillsString = skillsStringArray[0];
+  const skillsArray = skillsStringArray.flatMap(skillString => skillString.split(','));
+  console.log(skillsArray)
+  return skillsArray;
+}
+
 constructor(private route: ActivatedRoute, private apiClientService: ApiClientService,private modalService: NzModalService) {}
  
 }

@@ -89,10 +89,7 @@ export class SkillsComponent implements OnInit {
   }
 
   formatSkills(skillsStringArray: string[]): string[] {
-    // Assuming there's only one element in the array
     const skillsString = skillsStringArray[0];
-  
-    // Split the comma-separated string into an array
     const skillsArray = skillsString.split(',');
   
     return skillsArray;

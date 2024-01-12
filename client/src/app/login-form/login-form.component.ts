@@ -45,7 +45,7 @@ export class LoginFormComponent {
         let applicantId = response.applicant.id
         console.log(applicantId);
         console.log('signInRoute:', this.signInRoute);
-        this.router.navigate([this.signInRoute +  '/' +  applicantId]);
+        this.router.navigate([this.signInRoute +  '/' +  applicantId ]);
       },
       (error) => {
         console.log("Error during login", error)
