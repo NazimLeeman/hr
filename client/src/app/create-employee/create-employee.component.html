@@ -26,7 +26,7 @@
           <td>80%</td>
           <td>{{data.createdAt | date: 'yyyy-MM-dd ' }}</td>
           <td>
-            <button nz-button [nzType]="'primary'" (click)="showModal(data.id, data.skillTags)"><span>View Skills</span></button>
+            <button nz-button style="background-color: #22c55e; border: none;" [nzType]="'primary'" (click)="showModal(data.id, data.skillTags)"><span>View Skills</span></button>
             <nz-modal [(nzVisible)]="isVisible" nzTitle="Skill Tags" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
               <ng-container *nzModalContent>
                 <p *ngIf="selectedEmployeeSkill.length > 0; else noSkill">{{ selectedEmployeeSkill.join(', ') }}</p>
