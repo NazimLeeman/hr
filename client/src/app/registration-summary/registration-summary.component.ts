@@ -178,32 +178,6 @@ additionOnInit(): void {
   
     
   }
-  
-
-  // selectFile(event: any) {
-  //   const file = event.target.files[0];
-  //   this.cloudinary.cloudUpload(file, 'user123') 
-  //     .subscribe(response => {
-  //       this.handleChange({ file, status: 'done' });
-  //     }, error => {
-  //       this.handleChange({ file, status: 'error' });
-  //     });
-  // }
-  
-
-  // onFileSelected(event: any) {
-  //   const file: File = event.target.files[0];
-  //   const fileId: string = 'unique_id_for_your_file';
-
-  //   this.cloudinary.cloudUpload(file, fileId).subscribe(
-  //     (response) => {
-  //       console.log('File uploaded successfully!', response);
-  //     },
-  //     (error) => {
-  //       console.error('Error uploading file:', error);
-  //     }
-  //   );
-  // }
 
   constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService) {
     this.validateForm = this.fb.group({

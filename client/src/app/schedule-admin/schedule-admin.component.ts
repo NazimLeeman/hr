@@ -15,6 +15,18 @@ interface UserOption {
   name: string;
 }
 
+interface Schedule {
+  id: number;
+  day: string;
+  slotStart: string;
+  slotEnds: string;
+  restaurantId: number;
+  shift: string;
+  employees: { id: number; name: string }[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 @Component({
   selector: 'app-schedule-admin',
   templateUrl: './schedule-admin.component.html',
@@ -22,7 +34,7 @@ interface UserOption {
 })
 export class ScheduleAdminComponent {
   employeeIds = ['12', '6', '5']; 
-
+  scheduleData: Schedule[] = [];
 dayShiftStartTime = '09:00 AM';
 dayShiftEndTime = '05:00 PM';
 nightShiftStartTime = '07:00 PM';
@@ -53,6 +65,7 @@ nightShiftEndTime = '03:00 AM';
     this.apiClientService.getAllScheduleForRestaurant().subscribe(
       (data: any) => {
         console.log('API Response:', data);
+        this.scheduleData = data.data;
         this.apiData = this.transformApiResponse(data.data);
         this.listDataMap = this.transformApiResponse(data.data);
         console.log('Modified Response:', this.apiData)
@@ -80,11 +93,14 @@ nightShiftEndTime = '03:00 AM';
     apiResponse.forEach(item => {
       const day = item.day.toLowerCase();
       const shiftType = item.shift.toLowerCase();
+      const slotStart = new Date(item.slotStart);
+      const slotEnds = new Date(item.slotEnds);
       const employeeIds = item.employees.map((employee:any) => JSON.parse(employee).id);
 
       const entry = {
         type: shiftType === 'day' ? 'success' : 'error',
-        content: `ID: ${employeeIds.join(',')}`
+        content: ` ID: ${employeeIds.join(',')}`
+        // content: `${slotStart.toLocaleTimeString()} - ${slotEnds.toLocaleTimeString()} ID: ${employeeIds.join(',')}`
       };
 
       if (!transformedData[day]) {
@@ -96,11 +112,6 @@ nightShiftEndTime = '03:00 AM';
 
     return transformedData;
   }
-
-  
-  // employeeIsNotSelected(value: string): boolean {
-  //   return this.listOfSelectedValue.indexOf(value) === -1;
-  // }
 
   submitForm(): void {
     console.log("clicked")
@@ -137,8 +148,6 @@ nightShiftEndTime = '03:00 AM';
       day,
       shift
     } = this.validateForm.value;
-
-    // const transformedEmployees = listOfSelectedEmployees?.map(employee => String(employee.id));
 
     const mergedData = {
       employees: listOfSelectedEmployees,
@@ -183,7 +192,7 @@ nightShiftEndTime = '03:00 AM';
 
   listDataMap: any = {
     sunday: [
-      { type: 'success', content:  "ID: 1,2,3,7,8"  },
+      { type: 'success', content:  "12 AM to 7AM ID: 1,2,3,7,8"  },
       { type: 'error', content: "ID: 3,4,5,10" }
     ],
     monday: [

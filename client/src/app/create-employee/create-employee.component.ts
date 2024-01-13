@@ -13,6 +13,9 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrl: './create-employee.component.css'
 })
 export class CreateEmployeeComponent {
+  selectedEmployeeId = 0;
+  isVisible: boolean =false;
+  isOkLoading = false;
   showForm: boolean = false;
   // showFormTwo: boolean = false;
   apiData: any[] = [];
@@ -74,26 +77,6 @@ export class CreateEmployeeComponent {
     }
   }
 
-  // submitFormPartTwo(): void {
-  //   if (this.validateFormPartTwo.valid) {
-  //     const userData = this.validateFormPartTwo.value;
-  //     this.apiClientService.registerUser(userData).subscribe((response) => {
-  //       console.log('Position posted successfully:', response);
-  //       const applicantId = response.user.id
-  //       this.router.navigate(['/successful']);
-  //     },
-  //     (error) => {
-  //       console.log("Error during resgistration", error)
-  //     })
-  //   } else {
-  //     Object.values(this.validateFormPartTwo.controls).forEach(control => {
-  //       if (control.invalid) {
-  //         control.markAsDirty();
-  //         control.updateValueAndValidity({ onlySelf: true });
-  //       }
-  //     });
-  //   }
-  // }
 
   goToNextStep() {
     this.showForm = true;
@@ -157,8 +140,22 @@ export class CreateEmployeeComponent {
           this.handleChange(fakeEvent);
         }
       );
-  
-    
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    this.isOkLoading = true;
+    setTimeout(() => {
+      this.isVisible = false;
+      this.isOkLoading = false;
+    }, 3000);
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
   }
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private cloudinary: CloudinaryService, private msg: NzMessageService) {
