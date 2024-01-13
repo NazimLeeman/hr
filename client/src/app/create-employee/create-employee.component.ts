@@ -17,7 +17,8 @@ export class CreateEmployeeComponent {
   isVisible: boolean =false;
   isOkLoading = false;
   showForm: boolean = false;
-  selectedEmployeeSkill: [] = [];
+  selectedEmployeeSkill: string[] = [];
+  skillTags: string[] = [];
   // showFormTwo: boolean = false;
   apiData: any[] = [];
   @Input() signInRoute: string = '/admin/position';
@@ -143,11 +144,12 @@ export class CreateEmployeeComponent {
       );
   }
 
-  showModal(employeeId: number): void {
+  showModal(employeeId: number, skillTags: string[]): void {
     this.selectedEmployeeId = employeeId;
-    // this.selectedEmployeeSkill = skillTag;
+    this.selectedEmployeeSkill = skillTags;
     this.isVisible = true;
     console.log(this.selectedEmployeeId)
+    console.log(this.selectedEmployeeSkill)
   }
 
   handleOk(): void {

@@ -26,12 +26,11 @@
           <td>80%</td>
           <td>{{data.createdAt | date: 'yyyy-MM-dd ' }}</td>
           <td>
-            <!-- <span style="cursor: pointer;" nz-icon nzType="eye" nzTheme="outline" (click)="showModal()"></span> -->
-            <button nz-button [nzType]="'primary'" (click)="showModal(data.id)"><span>View Skills</span></button>
+            <button nz-button [nzType]="'primary'" (click)="showModal(data.id, data.skillTags)"><span>View Skills</span></button>
             <nz-modal [(nzVisible)]="isVisible" nzTitle="Skill Tags" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
               <ng-container *nzModalContent>
-                <p >{{ data.email }}</p>
-                <!-- <p *ngFor="let skilltag of getEmployeeSkillTags(selectedEmployeeId)">{{ skilltag }}</p> -->
+                <p *ngIf="selectedEmployeeSkill.length > 0; else noSkill">{{ selectedEmployeeSkill.join(', ') }}</p>
+<ng-template #noSkill>No skill added</ng-template>
               </ng-container>
             </nz-modal>
           </td>
