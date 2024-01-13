@@ -106,7 +106,9 @@ export class ApiClientService {
       experience: applicantData.experience,
       phoneNumber: applicantData.phoneNumber,
       skillTags: applicantData.skillTags,
-      address: applicantData.address
+      address: applicantData.address,
+      hourlyRate: applicantData.hourlyRate,
+      imageUrl: applicantData.imageUrl
     }
     return this.http.post(url,requestData)
   }
