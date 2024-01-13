@@ -17,6 +17,7 @@ export class CreateEmployeeComponent {
   isVisible: boolean =false;
   isOkLoading = false;
   showForm: boolean = false;
+  selectedEmployeeSkill: [] = [];
   // showFormTwo: boolean = false;
   apiData: any[] = [];
   @Input() signInRoute: string = '/admin/position';
@@ -142,20 +143,28 @@ export class CreateEmployeeComponent {
       );
   }
 
-  showModal(): void {
+  showModal(employeeId: number): void {
+    this.selectedEmployeeId = employeeId;
+    // this.selectedEmployeeSkill = skillTag;
     this.isVisible = true;
+    console.log(this.selectedEmployeeId)
   }
 
   handleOk(): void {
-    this.isOkLoading = true;
-    setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-    }, 3000);
+    console.log('Button ok clicked!');
+    this.isVisible = false;
   }
 
   handleCancel(): void {
+    console.log('Button cancel clicked!');
     this.isVisible = false;
+  }
+
+  formatSkills(skillsStringArray: string[]): string[] {
+    const skillsString = skillsStringArray[0];
+    const skillsArray = skillsString.split(',');
+  
+    return skillsArray;
   }
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private cloudinary: CloudinaryService, private msg: NzMessageService) {

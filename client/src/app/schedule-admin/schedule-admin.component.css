@@ -90,3 +90,11 @@ nz-time-picker {
 .notes-month section {
   font-size: 28px;
 }
+
+.events .ant-badge-status {
+  overflow: hidden;
+  white-space: normal; /* Use 'normal' for text wrapping */
+  width: 100%;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}

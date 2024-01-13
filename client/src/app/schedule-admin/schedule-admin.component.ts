@@ -99,8 +99,8 @@ nightShiftEndTime = '03:00 AM';
 
       const entry = {
         type: shiftType === 'day' ? 'success' : 'error',
-        content: ` ID: ${employeeIds.join(',')}`
-        // content: `${slotStart.toLocaleTimeString()} - ${slotEnds.toLocaleTimeString()} ID: ${employeeIds.join(',')}`
+        // content: ` ID: ${employeeIds.join(',')}`
+        content: `${slotStart.toLocaleTimeString()} To ${slotEnds.toLocaleTimeString()} ID: ${employeeIds.join(',')}`
       };
 
       if (!transformedData[day]) {

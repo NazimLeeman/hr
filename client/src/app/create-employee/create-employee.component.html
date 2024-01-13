@@ -13,7 +13,7 @@
           <th>Hourly Rate</th>
           <th>Efficiency</th>
           <th>Joining Date</th>
-          <th>Details</th>
+          <th>Skill Tags</th>
         </tr>
       </thead>
       <tbody>
@@ -26,16 +26,14 @@
           <td>80%</td>
           <td>{{data.createdAt | date: 'yyyy-MM-dd ' }}</td>
           <td>
-            <span style="cursor: pointer;" nz-icon nzType="eye" nzTheme="outline" (click)="showModal()"></span>
-            <nz-modal
-      [(nzVisible)]="isVisible"
-      nzTitle="Employee Information"
-      (nzOnCancel)="handleCancel()"
-      (nzOnOk)="handleOk()"
-      [nzOkLoading]="isOkLoading"
-    >
-      <p *nzModalContent>{{data.name}}</p>
-    </nz-modal>
+            <!-- <span style="cursor: pointer;" nz-icon nzType="eye" nzTheme="outline" (click)="showModal()"></span> -->
+            <button nz-button [nzType]="'primary'" (click)="showModal(data.id)"><span>View Skills</span></button>
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="Skill Tags" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+              <ng-container *nzModalContent>
+                <p >{{ data.email }}</p>
+                <!-- <p *ngFor="let skilltag of getEmployeeSkillTags(selectedEmployeeId)">{{ skilltag }}</p> -->
+              </ng-container>
+            </nz-modal>
           </td>
         </tr>
       </tbody>
