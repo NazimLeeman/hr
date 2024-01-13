@@ -60,6 +60,8 @@ import { ProfileLayoutComponent } from './profile-layout/profile-layout.componen
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NgChartsModule } from 'ng2-charts';
+import { GraphComponent } from './graph/graph.component';
 
 
 registerLocaleData(en);
@@ -91,7 +93,8 @@ registerLocaleData(en);
     DialogComponent,
     AdminProfileComponent,
     PositionComponent,
-    ProfileLayoutComponent
+    ProfileLayoutComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +128,8 @@ registerLocaleData(en);
     NzTagModule,
     NzCalendarModule,
     NzAlertModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NgChartsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -20,6 +20,7 @@ import { authGuard } from './auth.guard';
 import { DialogComponent } from './dialog/dialog.component';
 import { PositionComponent } from './position/position.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
+import { GraphComponent } from './graph/graph.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent},
@@ -35,6 +36,7 @@ const routes: Routes = [
       { path: 'jobs', component: PostJobComponent },
       { path: 'applicant', component: ApplicantTrackingComponent },
       { path: 'payroll', component: PayrollComponent },
+      { path: 'graph', component: GraphComponent}
     ],
   },
   { 
