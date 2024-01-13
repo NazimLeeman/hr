@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
+  isLoading: boolean = false;
   validateForm: FormGroup<{
     email: FormControl<string>;
     password: FormControl<string>;
@@ -24,12 +25,15 @@ export class SignUpComponent {
   }>;
 
   submitForm(): void {
+    this.isLoading = true;
     if (this.validateForm.valid) {
       const userData = this.validateForm.value;
+      
       this.apiClientService.registerUser(userData).subscribe((response) => {
         console.log('Applicant registered successfully:', response);
         const applicantId = response.user.id
         this.router.navigate(['/successful']);
+        this.isLoading = false;
       },
       (error) => {
         console.log("Error during resgistration", error)

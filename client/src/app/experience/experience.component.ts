@@ -11,6 +11,7 @@ import { getISOWeek } from 'date-fns';
   styleUrl: './experience.component.css'
 })
 export class ExperienceComponent implements OnInit {
+  isLoading: boolean = false;
   applicantId: number = 0;
   experience: string[] = [];
   name: string ='';
@@ -41,6 +42,7 @@ export class ExperienceComponent implements OnInit {
           this.position = experienceParts[1];
           this.careerDuration = experienceParts[2];
           this.responsibilities = experienceParts[3];
+          this.isLoading = true;
       },
       (error) => {
           console.error('Error fetching data from the API', error);

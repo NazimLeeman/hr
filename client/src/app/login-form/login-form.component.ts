@@ -15,6 +15,7 @@ export class LoginFormComponent {
   @Input() signUpLabel: string = 'Sign Up';
   @Input() showSignUpButton: boolean = true;
   @Input() signInRoute: string = '/applicant/';
+  isLoading: boolean = false;
 
   validateForm: FormGroup<{
     email: FormControl<string>;
@@ -36,6 +37,7 @@ export class LoginFormComponent {
   }
 
   submitForm(): void {
+    this.isLoading = true;
     if (this.validateForm.valid) {
       const loginData = this.validateForm.value;
       this.apiClientService.loginUser(loginData).subscribe((response) => {
@@ -45,7 +47,7 @@ export class LoginFormComponent {
         let applicantId = response.applicant.id
         console.log(applicantId);
         console.log('signInRoute:', this.signInRoute);
-        this.router.navigate([this.signInRoute +  '/' +  applicantId ]);
+        this.router.navigate([this.signInRoute +  '/' +  applicantId + '/profile/' + applicantId ]);
       },
       (error) => {
         console.log("Error during login", error)

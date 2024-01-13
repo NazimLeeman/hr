@@ -1,68 +1,5 @@
-      <!-- <app-navbar-profile></app-navbar-profile> -->
-      <!-- <div class="mx-60 border font-GTPressura">
-      <div class="p-4 ml-4">
-          <h1 class="text-3xl pb-4">Contact Info</h1>
-          <p class="mx-2 pb-4">Start by filling in some basic profile and contact information.</p>
-          <div class="grid grid-cols-3">
-            <img class=" pb-4" src="../../assets/images/user-profile-default.png">
-            <div class="flex flex-col justify-center">              
-                <label class="mb-6" for="">First Name
-                    <input type="text" [value]="firstName" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
-                </label>
-                <label class=""  for="email">Email
-                    <input type="text" [value]="email" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
-                </label>
-            </div>
-
-            <div class="flex flex-col justify-center">
-                <label class="mb-6" for="">Last Name
-                    <input type="text" [value]="lastName" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
-                </label>
-                <label class=""  for="password">Password
-                    <input type="password" [value]="password" class="border bg-gray-100 rounded-lg p-2 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all">
-                </label>
-                
-            </div>
-            
-          </div>
-        
-    </div>
-        <form nz-form class="p-8 grid grid-cols-2 " [formGroup]="validateForm" (ngSubmit)="submitForm()">
-        <nz-form-item class="p-3">
-            <nz-form-label>Enter your phone number to connect with others</nz-form-label>
-            <nz-form-control  nzErrorTip="Please input your phone number!" class="custom-error-tip">
-              <input nz-input [value]="phoneNumber" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;">
-            </nz-form-control>
-          </nz-form-item>
-    
-          <nz-form-item class="p-3">
-            <nz-form-label>Enter your expected hourly rate</nz-form-label>
-            <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
-              <input nz-input [value]="hourlyRate" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" class="border bg-gray-100  text-gray-700 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: .5rem;  border-radius: 10px;"> 
-            </nz-form-control>
-          </nz-form-item>
-    
-          <nz-form-item class="p-3">
-            <nz-form-label>Entering your address allows us to find jobs closest to you!</nz-form-label>
-            <nz-form-control nzErrorTip="Please input a address!" class="custom-error-tip">
-              <textarea nz-input [value]="address" id="address" formControlName="address" placeholder="Address" class="border bg-gray-100  text-gray-700 focus:w-96 focus:border-green-500 focus:outline-none focus:ring focus:ring-green-200 transition-all" style="padding-left: 2px; padding: 1rem;  border-radius: 10px;">
-              </textarea>
-            </nz-form-control>
-          </nz-form-item>
-    
-    </form>
-    <div >
-        
-        <div class=" flex justify-center p-16">
-          <button type="submit" nz-button
-              class="font-GTPressura bg-green-500 text-white rounded-md px-3 py-1 w-40 h-12 text-xl hover:bg-green-600"
-              [nzType]="'primary'" (click)="submitForm()">Save
-          </button>
-        </div>
-    </div>
-  </div> -->
-
-  <div style="font-family: 'Proxima Nova';">
+<nz-skeleton *ngIf="!isLoading"></nz-skeleton>
+<div *ngIf="isLoading" style="font-family: 'Proxima Nova';">
     <div style="padding: 1rem; margin-left: 4px;">
       <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Contact Info</h1>
       <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Start by filling in some basic profile and contact information.</p>
@@ -118,6 +55,6 @@
       <button class="my-btn" type="submit" (click)="submitForm()" nz-button style=" background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Save</button>
   </div>
   </div>
-   
+
 
 

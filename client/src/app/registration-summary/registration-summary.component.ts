@@ -23,6 +23,7 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
   styleUrl: './registration-summary.component.css'
 })
 export class RegistrationSummaryComponent implements OnInit {
+  isLoading = false;
   loading = false;
   avatarUrl?: string;
   applicantId: number = 0;
@@ -57,6 +58,7 @@ ngOnInit(): void {
           this.password = '********';
 
           this.additionOnInit();
+          this.isLoading = true
       },
       (error) => {
           console.error('Error fetching data from the API', error);
