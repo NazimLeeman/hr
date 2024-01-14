@@ -59,7 +59,7 @@ export async function findEmployeeServiceAccess(employeeId:number) {
   try {
       const access = await Position.findOne({
           where: {
-              id: employeeId
+              employeeId: employeeId
           }
       })
       return access;
@@ -73,7 +73,7 @@ export async function checkEmployeeServiceAccess(employeeId:number, service: str
   try {
       const employeeServiceAccess = await Position.findOne({
           where: {
-              id: employeeId
+              employeeId: employeeId
           }
       })
       if (employeeServiceAccess) {
