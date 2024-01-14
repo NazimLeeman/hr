@@ -44,7 +44,7 @@ export async function findAllJobForRestaurant(restaurantId: number) {
 
 export async function findJobBySearchTerm (searchTerm: string) {
   try {
-    const job = await Job.findOne({
+    const job = await Job.findAll({
       where: { 
           [Op.or]: [
               { jobRole: {[Op.iLike]: `%${searchTerm}%`} },
