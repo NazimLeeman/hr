@@ -39,10 +39,10 @@ export async function getAllJobForRestaurant(req: Request, res: Response) {
 
 export async function searchJob (req: Request, res: Response) {
     try {
-        const search = req.query.searchTerm;
-        const searchTerm = search?.toString();
+        const searchTerm = req.query.searchTerm as string;
         console.log(searchTerm)
         if (searchTerm) {
+            console.log(searchTerm)
           const job = await findJobBySearchTerm(searchTerm);
           res.json({ data: job });
         } else res.json({ data: [] });

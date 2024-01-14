@@ -130,6 +130,9 @@ export class DashboardComponent implements OnInit {
         this.apiClientService.searchJob(element.value).subscribe(
           (data) => {
             this.jobs = data
+          },
+          (error) => {
+            console.error('Error during job search:', error);
           }
         )
       }
