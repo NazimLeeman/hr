@@ -63,6 +63,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NgChartsModule } from 'ng2-charts';
 import { GraphComponent } from './graph/graph.component';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 
 registerLocaleData(en);
@@ -131,7 +132,8 @@ registerLocaleData(en);
     NzAlertModule,
     NzBadgeModule,
     NgChartsModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    NzRadioModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

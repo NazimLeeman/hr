@@ -56,6 +56,11 @@ export class ApiClientService {
     return this.http.get(`${this.apiUrl}/job/all`)
   }
 
+  searchJob(searchTerm: string): Observable<any> {
+    console.log(searchTerm);
+    return this.http.get(`${this.apiUrl}/job/search?searchTerm=${searchTerm}`);
+  }
+
   postPayroll(userData:any): Observable<any> {
     const url = `${this.apiUrl}/payroll/1/`
     return this.http.post(url,userData)

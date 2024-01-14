@@ -1,12 +1,12 @@
-.input-container {
+/* .input-container {
     display: flex;
     position: relative;
-  }
+  } */
   
   /* .input-container input {
     flex: 1;
   } */
-  
+/*   
   .btn-icon {
     position: absolute;
     top: 56%;
@@ -15,9 +15,9 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-  }
+  } */
 
-  #serachbox {
+  /* #serachbox {
     margin-left: 1rem;
     border: 1px solid #cbd5e0;
     background-color: #F3F4F6;
@@ -30,7 +30,7 @@
     padding-left: 1rem;
     border-radius: 10px;
     width: 16rem;
-  }
+  } */
 
   #serachbox:hover {
     border-color: #2bb053;
@@ -45,3 +45,14 @@
     font-size: large;
     }  
     
+
+    nz-select {
+      /* margin-left: .5rem; */
+      /* padding-bottom: .5rem; */
+      width: 24rem;
+      /* font-size: 1.2rem; */
+    }
+
+    .ant-input-search-button {
+      height: 2.1em;
+    }
