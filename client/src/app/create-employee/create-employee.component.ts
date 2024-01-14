@@ -21,6 +21,8 @@ export class CreateEmployeeComponent {
   skillTags: string[] = [];
   // showFormTwo: boolean = false;
   apiData: any[] = [];
+  currentPage: number = 1; 
+  pageSize: number = 7;
   @Input() signInRoute: string = '/admin/position';
   selectedService: string = 'INVENTORY';
   selectedServiceOptions: string = '';
@@ -167,6 +169,10 @@ export class CreateEmployeeComponent {
     const skillsArray = skillsString.split(',');
   
     return skillsArray;
+  }
+
+  handlePageIndexChange(pageIndex: number): void {
+    this.currentPage = pageIndex;
   }
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private cloudinary: CloudinaryService, private msg: NzMessageService) {

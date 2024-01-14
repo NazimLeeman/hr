@@ -64,6 +64,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { GraphComponent } from './graph/graph.component';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 
 registerLocaleData(en);
@@ -133,7 +134,8 @@ registerLocaleData(en);
     NzBadgeModule,
     NgChartsModule,
     NzSkeletonModule,
-    NzRadioModule
+    NzRadioModule,
+    NzPaginationModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
