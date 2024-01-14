@@ -65,6 +65,7 @@ import { GraphComponent } from './graph/graph.component';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { MapComponent } from './map/map.component';
 
 
 registerLocaleData(en);
@@ -97,7 +98,8 @@ registerLocaleData(en);
     AdminProfileComponent,
     PositionComponent,
     ProfileLayoutComponent,
-    GraphComponent
+    GraphComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

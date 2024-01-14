@@ -21,6 +21,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { PositionComponent } from './position/position.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { GraphComponent } from './graph/graph.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent},
@@ -51,7 +52,7 @@ const routes: Routes = [
       { path: 'settings/:applicantId', component: SettingsComponent, canActivate: [authGuard]  },
     ]
   },
-  
+  { path: 'map', component: MapComponent},
   { path: 'dashboard/:applicantId', component: DashboardComponent, canActivate: [authGuard]},
   { path: 'login', component: EmployeeLoginComponent},
   { path: 'success', component: SuccessDialogComponent},
