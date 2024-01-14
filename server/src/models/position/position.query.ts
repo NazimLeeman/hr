@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Employee from "../employee/employee.model";
 import Position from "./position.model";
 
@@ -132,4 +133,36 @@ export async function getEmployeeInfo(employeeId: number) {
     console.log(error);
     throw new Error('Error while checking employee service access from database.')
 }
+}
+
+export async function findAllChefsInRestaurant(restaurantId: number) {
+  try {
+    const chefs = await Position.findAll({
+      where: {
+        restaurantId: restaurantId,
+        position: {
+          [Op.iLike]: '%Chef%',
+        },
+      }
+    });
+    return chefs;
+  } catch (error) {
+    throw new Error('Error finding position in restaurant.');
+  }
+}
+
+export async function findAllWaitersInRestaurant(restaurantId: number) {
+  try {
+    const waiters = await Position.findAll({
+      where: {
+        restaurantId: restaurantId,
+        position: {
+          [Op.iLike]: '%Waiter%',
+        },
+      }
+    });
+    return waiters;
+  } catch (error) {
+    throw new Error('Error finding position in restaurant.');
+  }
 }

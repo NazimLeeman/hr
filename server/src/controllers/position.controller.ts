@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createEmployeeServiceAccess, findEmployeeServiceAccess, updateEmployeeServiceAccess, findAllPositionInRestaurant } from "../models/position/position.query";
+import { createEmployeeServiceAccess, findAllChefsInRestaurant, findEmployeeServiceAccess, updateEmployeeServiceAccess, findAllPositionInRestaurant, findAllWaitersInRestaurant } from "../models/position/position.query";
 import { validateServices } from "../utils/validation.helper";
 import { findEmployeeById } from "../models/employee/employee.query";
 import { updateEmployeePositionId } from "../models/employeeLogin/employeeLogin.query";
@@ -79,4 +79,30 @@ export async function getAllPositionsFromRestaurant (req: Request, res: Response
         console.log(error);
         res.status(500).json(error);
     }
+}
+
+export async function getAllChefsFromRestaurant (req: Request, res: Response) {
+  try {
+    const restaurantId = Number(req.params.restaurantId);
+    if(restaurantId) {
+        const position = await findAllChefsInRestaurant(restaurantId);
+        res.json({ data: position});
+    } else res.status(400).json({ message: "Invalid restaurant Id."})
+} catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+}
+}
+
+export async function getAllWaitersFromRestaurant ( req: Request, res: Response) {
+  try {
+    const restaurantId = Number(req.params.restaurantId);
+    if(restaurantId) {
+        const position = await findAllWaitersInRestaurant(restaurantId);
+        res.json({ data: position});
+    } else res.status(400).json({ message: "Invalid restaurant Id."})
+} catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+}
 }
