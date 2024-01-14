@@ -26,6 +26,8 @@ export class CreateEmployeeComponent {
   @Input() signInRoute: string = '/admin/position';
   selectedService: string = 'INVENTORY';
   selectedServiceOptions: string = '';
+  sortColumn: string = 'id';
+  sortOrder: 'asc' | 'desc' = 'asc';
 
   validateFormPartOne: FormGroup<{
     firstName: FormControl<string>,
@@ -173,6 +175,26 @@ export class CreateEmployeeComponent {
 
   handlePageIndexChange(pageIndex: number): void {
     this.currentPage = pageIndex;
+  }
+
+  handleSort(sort: { key: string; value: 'ascend' | 'descend' }) {
+    this.sortColumn = sort.key;
+    this.sortOrder = sort.value === 'ascend' ? 'asc' : 'desc';
+    this.sortData();
+  }
+  
+  // Method to sort the data based on current sort column and order
+  sortData() {
+    this.apiData = this.apiData.sort((a, b) => {
+      const aValue = a[this.sortColumn];
+      const bValue = b[this.sortColumn];
+  
+      if (this.sortOrder === 'asc') {
+        return aValue < bValue ? -1 : 1;
+      } else {
+        return aValue > bValue ? -1 : 1;
+      }
+    });
   }
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private cloudinary: CloudinaryService, private msg: NzMessageService) {
