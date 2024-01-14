@@ -127,47 +127,6 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // searchJob(query: KeyboardEvent){
-  //   console.log('clicked')
-  //   if (query) {
-  //     const element = query.target as HTMLInputElement;
-  //     if (element.value.length > 0) {
-  //       this.apiClientService.searchJob(element.value).subscribe(
-  //         (data) => {
-  //           this.jobs = data
-  //         },
-  //         (error) => {
-  //           console.error('Error during job search:', error);
-  //         }
-  //       )
-  //     }
-  //   }
-  // }
-
-  // search(value: string): void {
-  //   this.apiClientService.getAllJobForRestaurant().subscribe(
-  //     (data: any) => {
-  //       if (data) {
-  //         this.apiData = data.data;
-  //         const filteredOptions: Array<{ value: string; text: string }> = data.data
-  //           .filter((item: any) => item.jobRole.toLowerCase().includes(value.toLowerCase()))
-  //           .map((item: any) => (
-  //             {
-  //             value: item.jobRole,
-  //             text: `${item.jobRole}`
-  //           }));
-  //         this.listOfOption = filteredOptions;
-  //         console.log(this.listOfOption);
-  //       } else {
-  //         console.error('Invalid response format:', data);
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error('Error during restaurant job search:', error);
-  //     }
-  //   );
-  // }
-
   search(value: string): void {
     this.apiClientService.getAllJobForRestaurant().subscribe(
       (data: any) => {
