@@ -22,7 +22,7 @@ export class CreateEmployeeComponent {
   // showFormTwo: boolean = false;
   apiData: any[] = [];
   currentPage: number = 1; 
-  pageSize: number = 7;
+  pageSize: number = 6;
   @Input() signInRoute: string = '/admin/position';
   selectedService: string = 'INVENTORY';
   selectedServiceOptions: string = '';
