@@ -68,6 +68,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { MapComponent } from './map/map.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import {NzDrawerModule} from 'ng-zorro-antd/drawer';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 
 registerLocaleData(en);
@@ -102,7 +103,8 @@ registerLocaleData(en);
     ProfileLayoutComponent,
     GraphComponent,
     MapComponent,
-    AvailabilityComponent
+    AvailabilityComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,

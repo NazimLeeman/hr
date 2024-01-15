@@ -16,7 +16,8 @@ export class GraphComponent {
       x: {
         ticks: {
           font: {
-            size: 32,
+            size: 12,
+            family: 'Proxima'
           },
         },
       },
@@ -24,7 +25,8 @@ export class GraphComponent {
         min: 10,
         ticks: {
           font: {
-            size: 32, 
+            size: 12, 
+            family: 'Proxima'
           },
         },  
       },
@@ -37,7 +39,8 @@ export class GraphComponent {
         anchor: 'end',
         align: 'end',
         font: {
-          size: 32,
+          size: 12,
+          family: 'Proxima'
         }
       } ,
     },
@@ -75,12 +78,12 @@ export class GraphComponent {
   public randomize(): void {
     this.barChartData.datasets[0].data = [
       Math.round(Math.random() * 100),
-      59,
-      80,
+      21,
+      19,
       Math.round(Math.random() * 100),
-      56,
+      15,
       Math.round(Math.random() * 100),
-      40,
+      14,
     ];
 
     this.chart?.update();
