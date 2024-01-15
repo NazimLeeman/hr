@@ -77,3 +77,48 @@ nz-descriptions .ant-descriptions-title {
   .ant-upload-list-text {
     display: none;
   }
+
+  .ant-radio-button {
+    background-color: #22c55e;
+    border-color: #22c55e;
+  }
+
+  .ant-radio-button::selection {
+    background-color: #22c55e;
+    border-color: #22c55e;
+  }
+  
+  .ant-radio-button:focus {
+    background-color: #22c55e;
+    border-color: #22c55e;
+  }
+  
+  .ant-radio-button:hover {
+    background-color: #22c55e;
+    border-color: #22c55e;
+  }
+
+  .ant-btn-primary{
+    background-color: #22c55e;
+    border-color: #22c55e;
+  }
+
+  .ant-btn-primary::selection {
+    background-color: #22c55e;
+    border-color: #22c55e;
+  }
+
+  .ant-btn-primary:hover {
+    background-color: #22c55e;
+    border-color: #22c55e;
+  }
+
+  .ant-btn-primary:focus {
+    background-color: #22c55e;
+    border-color: #22c55e;
+  }
+
+  ::selection {
+    background: #22c55e;
+    color: #fff;
+  }
