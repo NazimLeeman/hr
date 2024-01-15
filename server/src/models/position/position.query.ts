@@ -143,7 +143,10 @@ export async function findAllChefsInRestaurant(restaurantId: number) {
         position: {
           [Op.iLike]: '%Chef%',
         },
-      }
+      },
+      include: [{
+        model: Employee
+      }],
     });
     return chefs;
   } catch (error) {
@@ -159,7 +162,10 @@ export async function findAllWaitersInRestaurant(restaurantId: number) {
         position: {
           [Op.iLike]: '%Waiter%',
         },
-      }
+      },
+      include: [{
+        model: Employee
+      }],
     });
     return waiters;
   } catch (error) {
