@@ -69,6 +69,8 @@ import { MapComponent } from './map/map.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import {NzDrawerModule} from 'ng-zorro-antd/drawer';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { AddressComponent } from './address/address.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 registerLocaleData(en);
@@ -104,7 +106,8 @@ registerLocaleData(en);
     GraphComponent,
     MapComponent,
     AvailabilityComponent,
-    BarChartComponent
+    BarChartComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,
@@ -143,7 +146,8 @@ registerLocaleData(en);
     NzSkeletonModule,
     NzRadioModule,
     NzPaginationModule,
-    NzDrawerModule
+    NzDrawerModule,
+    GoogleMapsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

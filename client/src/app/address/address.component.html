@@ -1,0 +1,30 @@
+<!-- <section style="margin-left: 5vw; margin-top: 5vh;" >
+    <form
+        style="width: 90vw;"
+        [formGroup]="addressForm"
+        (ngSubmit)="handleLoginClick()"
+    >
+        <h3 style="margin-top: 4vh; font-size: 1.25rem; font-weight: bold;" >Addresses</h3>
+
+        <div style="width: 90vw;" >
+            <input
+                #mapSearchField
+                type="text"
+                placeholder="address"
+                style="margin-top: 4vh; width: 100%; border: 1px solid #000;"
+                formControlName="address"
+                [style.border-color]="isFieldInvalid('address') ? 'red' : 'black'"
+                required
+            />
+        </div>
+
+        <div style="text-align: end; margin-top: 2px; width: 100%;" >
+            <button
+                style="background-color: #000; color: #fff; padding: 0.75rem 1.5rem; margin-top: 60vh;"
+                [disabled]="isFieldInvalid('address') || !addressForm.get('address')?.valid"
+            >
+                Save
+            </button>
+        </div>
+    </form>
+</section> -->
