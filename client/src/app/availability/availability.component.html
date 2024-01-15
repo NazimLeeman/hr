@@ -5,27 +5,33 @@
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Availability</h1>
       <h1 style="margin-top: 1rem; margin-left: .5rem; font-size:x-large;">Let employers know when you are available. This will help them match you with their desired shifts.</h1>
       <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1rem;">
-          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Monday</p>
+          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Monday</p>
             <p style="font-size: 1rem; text-align: center;">Unavailable</p>
         </div>
-          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Tuesday</p>
+          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Tuesday</p>
+            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
         </div>
-          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Wednesday</p>
+          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Wednesday</p>
+            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
         </div>
-          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Thursday</p>
+          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Thursday</p>
+            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
         </div>
-          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Friday</p>
+          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Friday</p>
+            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
         </div>
-          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Saturday</p>
+          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Saturday</p>
+            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
         </div>
-          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Sunday</p>
+          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Sunday</p>
+            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
         </div>
       </div>
       <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
@@ -35,7 +41,7 @@
       <nz-drawer
       [nzBodyStyle]="{ overflow: 'auto' }"
       [nzMaskClosable]="false"
-      [nzWidth]="720"
+      [nzWidth]="400"
       [nzVisible]="visible"
       nzTitle="Availability"
       [nzFooter]="footerTpl"
@@ -46,8 +52,8 @@
           <div nz-col nzSpan="24">
             <nz-form-item>
               <nz-form-label>Monday</nz-form-label>
-              <nz-form-control>
-                <nz-radio-group formControlName="Monday" nzButtonStyle="solid">
+              <nz-form-control >
+                <nz-radio-group style="float: right;" formControlName="Monday" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="A">On</label>
                     <label nz-radio-button nzValue="B">Off</label>
                   </nz-radio-group>
@@ -58,7 +64,7 @@
             <nz-form-item>
               <nz-form-label>Tuesday</nz-form-label>
               <nz-form-control>
-                <nz-radio-group formControlName="Tuesday" nzButtonStyle="solid">
+                <nz-radio-group style="float: right;"  formControlName="Tuesday" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="A">On</label>
                     <label nz-radio-button nzValue="B">Off</label>
                   </nz-radio-group>
@@ -69,7 +75,7 @@
             <nz-form-item>
               <nz-form-label>Wednesday</nz-form-label>
               <nz-form-control>
-                <nz-radio-group formControlName="Wednesday" nzButtonStyle="solid">
+                <nz-radio-group style="float: right;"  formControlName="Wednesday" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="A">On</label>
                     <label nz-radio-button nzValue="B">Off</label>
                   </nz-radio-group>
@@ -80,7 +86,7 @@
             <nz-form-item>
               <nz-form-label>Thursday</nz-form-label>
               <nz-form-control>
-                <nz-radio-group formControlName="Thursday" nzButtonStyle="solid">
+                <nz-radio-group style="float: right;"  formControlName="Thursday" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="A">On</label>
                     <label nz-radio-button nzValue="B">Off</label>
                   </nz-radio-group>
@@ -91,7 +97,7 @@
             <nz-form-item>
               <nz-form-label>Friday</nz-form-label>
               <nz-form-control>
-                <nz-radio-group formControlName="Friday" nzButtonStyle="solid">
+                <nz-radio-group style="float: right;"  formControlName="Friday" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="A">On</label>
                     <label nz-radio-button nzValue="B">Off</label>
                   </nz-radio-group>
@@ -102,7 +108,7 @@
             <nz-form-item>
               <nz-form-label>Saturday</nz-form-label>
               <nz-form-control>
-                <nz-radio-group formControlName="Saturday" nzButtonStyle="solid">
+                <nz-radio-group style="float: right;"  formControlName="Saturday" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="A">On</label>
                     <label nz-radio-button nzValue="B">Off</label>
                   </nz-radio-group>
@@ -113,7 +119,7 @@
             <nz-form-item>
               <nz-form-label>Sunday</nz-form-label>
               <nz-form-control>
-                <nz-radio-group formControlName="Sunday" nzButtonStyle="solid">
+                <nz-radio-group style="float: right;"  formControlName="Sunday" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="A">On</label>
                     <label nz-radio-button nzValue="B">Off</label>
                   </nz-radio-group>
