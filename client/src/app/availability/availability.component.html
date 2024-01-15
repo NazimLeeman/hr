@@ -1,0 +1,135 @@
+<nz-skeleton *ngIf="isLoading"></nz-skeleton>
+
+<div style=" font-family: 'Proxima Nova'">
+  <div style="padding: 1rem; margin-left: 4px;">
+    <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Availability</h1>
+      <h1 style="margin-top: 1rem; margin-left: .5rem; font-size:x-large;">Let employers know when you are available. This will help them match you with their desired shifts.</h1>
+      <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1rem;">
+          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Monday</p>
+            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
+        </div>
+          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Tuesday</p>
+        </div>
+          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Wednesday</p>
+        </div>
+          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Thursday</p>
+        </div>
+          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Friday</p>
+        </div>
+          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Saturday</p>
+        </div>
+          <div style="width: 140px; height: 5rem; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; text-align: center;">Sunday</p>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
+        <button class="my-btn" type="submit" (click)="submitForm()" nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Edit Availability</button>
+      </div>
+      <!-- <button style=" font-family: 'Proxima Nova'; background-color: #22c55e; border: none;" nz-button nzType="primary" (click)="open()">Edit Availability</button> -->
+      <nz-drawer
+      [nzBodyStyle]="{ overflow: 'auto' }"
+      [nzMaskClosable]="false"
+      [nzWidth]="720"
+      [nzVisible]="visible"
+      nzTitle="Availability"
+      [nzFooter]="footerTpl"
+      (nzOnClose)="close()"
+    >
+      <form nz-form *nzDrawerContent [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <div nz-row [nzGutter]="8">
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Monday</nz-form-label>
+              <nz-form-control>
+                <nz-radio-group formControlName="Monday" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="A">On</label>
+                    <label nz-radio-button nzValue="B">Off</label>
+                  </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Tuesday</nz-form-label>
+              <nz-form-control>
+                <nz-radio-group formControlName="Tuesday" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="A">On</label>
+                    <label nz-radio-button nzValue="B">Off</label>
+                  </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Wednesday</nz-form-label>
+              <nz-form-control>
+                <nz-radio-group formControlName="Wednesday" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="A">On</label>
+                    <label nz-radio-button nzValue="B">Off</label>
+                  </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Thursday</nz-form-label>
+              <nz-form-control>
+                <nz-radio-group formControlName="Thursday" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="A">On</label>
+                    <label nz-radio-button nzValue="B">Off</label>
+                  </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Friday</nz-form-label>
+              <nz-form-control>
+                <nz-radio-group formControlName="Friday" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="A">On</label>
+                    <label nz-radio-button nzValue="B">Off</label>
+                  </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Saturday</nz-form-label>
+              <nz-form-control>
+                <nz-radio-group formControlName="Saturday" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="A">On</label>
+                    <label nz-radio-button nzValue="B">Off</label>
+                  </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Sunday</nz-form-label>
+              <nz-form-control>
+                <nz-radio-group formControlName="Sunday" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="A">On</label>
+                    <label nz-radio-button nzValue="B">Off</label>
+                  </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </form>
+
+      <ng-template #footerTpl>
+        <div style="float: right">
+          <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
+          <button nz-button nzType="primary" (click)="close()">Submit</button>
+        </div>
+      </ng-template>
+    </nz-drawer>    
+    </div>
+  </div>
+

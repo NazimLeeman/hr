@@ -5,7 +5,6 @@
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Experiences</h1>
     
     <div *ngIf="experience && experience.length > 0" style="display: flex; flex-direction: column;">
-      <!-- <h1 style="margin-left: .5rem; font-size:xx-large;">Current Experiences</h1> -->
       <nz-descriptions *ngFor="let exp of experience"  nzBordered nzLayout="vertical">
         <nz-descriptions-item nzTitle="Restaurant Name" >{{ getExperiencePart(exp, 0) }}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Position">{{ getExperiencePart(exp, 1) }}</nz-descriptions-item>
@@ -14,11 +13,6 @@
           {{ getExperiencePart(exp, 2) }}
         </nz-descriptions-item>
       </nz-descriptions>
-      <!-- <div *ngFor="let exp of experience" style=" background-color: hsl(126, 29%, 93%);  font-size: larger; width: 40rem; height: 6rem; border-radius: 1rem; margin-bottom: 1rem;">
-        <div  style="display: flex; flex-direction: row; justify-content: space-between; padding: 2rem; list-style-type: none; font-size: larger;">
-          <p > {{exp}}</p>
-        </div>
-      </div> -->
     </div>
     
     <div>
@@ -45,9 +39,7 @@
           <h1 style="font-size: medium; padding: .5rem;">Responsibilites</h1>
           <input nz-input type="text" style="font-size: medium; " id="responsibilities" formControlName="responsibilities" placeholder="Responsibilites">
           <h1 style="font-size: medium; padding: .5rem;">Employment Tenure</h1>
-          <!-- <input nz-input type="text" style="font-size: large; " id="years" formControlName="years" placeholder="Years"> -->
         <nz-form-item>
-          <!-- <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>RangePicker</nz-form-label> -->
         <nz-form-control [nzSm]="16" [nzXs]="24">
           <nz-range-picker id="rangePicker" formControlName="rangePicker"></nz-range-picker>
         </nz-form-control>
@@ -58,9 +50,6 @@
         </div>
       </div>
     </form>
-    <!-- <div>
-      <nz-range-picker nzMode="month" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
-    </div> -->
     </div>
   </div>
 </div>

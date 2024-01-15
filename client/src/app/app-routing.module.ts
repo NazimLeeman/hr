@@ -22,6 +22,7 @@ import { PositionComponent } from './position/position.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { GraphComponent } from './graph/graph.component';
 import { MapComponent } from './map/map.component';
+import { AvailabilityComponent } from './availability/availability.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent},
@@ -49,6 +50,7 @@ const routes: Routes = [
       { path: 'experience/:applicantId', component: ExperienceComponent, canActivate: [authGuard]  },
       { path: 'skills/:applicantId', component: SkillsComponent, canActivate: [authGuard]  },
       { path: 'applications/:applicantId', component: ApplicationsComponent, canActivate: [authGuard]  },
+      { path: 'availability/:applicantId', component: AvailabilityComponent, canActivate: [authGuard]  },
       { path: 'settings/:applicantId', component: SettingsComponent, canActivate: [authGuard]  },
     ]
   },

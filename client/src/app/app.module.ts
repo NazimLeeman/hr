@@ -66,6 +66,8 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { MapComponent } from './map/map.component';
+import { AvailabilityComponent } from './availability/availability.component';
+import {NzDrawerModule} from 'ng-zorro-antd/drawer';
 
 
 registerLocaleData(en);
@@ -99,7 +101,8 @@ registerLocaleData(en);
     PositionComponent,
     ProfileLayoutComponent,
     GraphComponent,
-    MapComponent
+    MapComponent,
+    AvailabilityComponent
   ],
   imports: [
     BrowserModule,
@@ -137,7 +140,8 @@ registerLocaleData(en);
     NgChartsModule,
     NzSkeletonModule,
     NzRadioModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzDrawerModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
