@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ApiClientService } from '../api-client.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-card',
@@ -23,9 +23,14 @@ export class JobCardComponent {
 }
 
 showModal(jobId: number, restaurantId: number): void {
-  this.isVisible = true;
-  this.selectedJobId = jobId;
-  this.selectedRestaurantId = restaurantId;
+  if(this.applicantId === 0) {
+    this.router.navigate(['/signup']);
+  } else {
+    this.isVisible = true;
+    this.selectedJobId = jobId;
+    this.selectedRestaurantId = restaurantId;
+  }
+   
 }
 
 ngOnInit(): void {
@@ -73,6 +78,6 @@ formatSkills(skillsStringArray: string[]): string[] {
   return skillsArray;
 }
 
-constructor(private route: ActivatedRoute, private apiClientService: ApiClientService,private modalService: NzModalService) {}
+constructor(private router: Router, private route: ActivatedRoute, private apiClientService: ApiClientService,private modalService: NzModalService) {}
  
 }

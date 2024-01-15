@@ -71,6 +71,7 @@ import {NzDrawerModule} from 'ng-zorro-antd/drawer';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { AddressComponent } from './address/address.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { TalentMarketComponent } from './talent-market/talent-market.component';
 
 
 registerLocaleData(en);
@@ -107,7 +108,8 @@ registerLocaleData(en);
     MapComponent,
     AvailabilityComponent,
     BarChartComponent,
-    AddressComponent
+    AddressComponent,
+    TalentMarketComponent
   ],
   imports: [
     BrowserModule,
