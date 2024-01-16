@@ -3,6 +3,14 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 
+interface Details {
+  key: string;
+  employees: number;
+  orders: number;
+  sales: number;
+  efficiency: number;
+}
+
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
@@ -51,7 +59,7 @@ export class GraphComponent {
   public barChartData: ChartData<'bar'> = {
     labels: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'],
     datasets: [
-      { data: [12, 16, 19, 15, 11, 12, 20], label: 'Series A' },
+      { data: [12, 16, 19, 15, 11, 12, 20], label: 'Employees' },
       { data: [12, 16, 19, 15, 11, 12, 21], label: 'Series B' },
     ],
   };
@@ -88,4 +96,36 @@ export class GraphComponent {
 
     this.chart?.update();
   }
+
+  listOfData: Details[] = [
+    {
+      key: '1',
+      employees: 25,
+      orders: 32,
+      sales: 42599,
+      efficiency: .8
+    },
+    {
+      key: '2',
+      employees: 25,
+      orders: 32,
+      sales: 42599,
+      efficiency: .5
+    },
+    {
+      key: '3',
+      employees: 25,
+      orders: 32,
+      sales: 42599,
+      efficiency: 1
+    }
+  ];
+  date = null;
+  isEnglish = false;
+
+
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
+  }
+
 }

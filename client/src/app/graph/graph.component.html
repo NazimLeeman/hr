@@ -1,5 +1,9 @@
 <div style="display: flex; flex-direction: row; justify-content: space-around;">
 <div>
+  <div><nz-date-picker nzMode="month" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker></div>
+  <div style="margin-top: 1rem;">
+    <h1>Prediction Graph</h1>
+  </div>
   <canvas
   baseChart
   class="chart"
@@ -19,6 +23,32 @@
 
 <app-bar-chart></app-bar-chart>
 </div>
-<div>
-  
+<div style="margin-top: 1rem;">
+  <h1>Details regarding Graphs</h1>
+</div>
+<div style="font-family: 'Proxima'; margin-top: 1rem;">
+  <nz-table #basicTable [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th>Number of Employees</th>
+        <th>Total Orders</th>
+        <th>Gross Sale</th>
+        <th>Gross Effiecieny</th>
+        <!-- <th>Action</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.employees }}</td>
+        <td>{{ data.orders }}</td>
+        <td>{{ data.sales |  currency:'CAD':'symbol-narrow':'4.2-2'}}</td>
+        <td>{{ data.efficiency | percent }}</td>
+        <!-- <td>
+          <a>Action 一 {{ data.name }}</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Delete</a>
+        </td> -->
+      </tr>
+    </tbody>
+  </nz-table>
 </div>
