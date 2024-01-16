@@ -1,5 +1,9 @@
-<div style="margin-top: 3.2rem;">
+<div style="margin-top: 3.2rem; display: flex; justify-content: space-between;">
   <h1>Capacity Graph</h1>
+  <nz-radio-group [(ngModel)]="radioValue" nzButtonStyle="solid" (ngModelChange)="shiftChange()">
+    <label nz-radio-button nzValue="A">Day</label>
+    <label nz-radio-button nzValue="B">Night</label>
+  </nz-radio-group>
 </div>
 <canvas
   baseChart

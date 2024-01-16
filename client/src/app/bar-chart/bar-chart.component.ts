@@ -10,6 +10,7 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrl: './bar-chart.component.css'
 })
 export class BarChartComponent {
+  radioValue = 'A';
   private newLabel? = 'New label';
 
   constructor() {
@@ -19,8 +20,8 @@ export class BarChartComponent {
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
-        data: [28, 48, 40, 19, 86, 27, 90],
-        label: 'Series B',
+        data: [280, 580, 750, 500, 900, 300, 350],
+        label: 'Order Volume',
         backgroundColor: 'rgba(77,83,96,0.2)',
         borderColor: 'rgba(77,83,96,1)',
         pointBackgroundColor: 'rgba(77,83,96,1)',
@@ -31,8 +32,8 @@ export class BarChartComponent {
       },
       {
         data: [180, 480, 770, 90, 1000, 270, 400],
-        label: 'Series C',
-        yAxisID: 'y1',
+        label: 'Chef Capacity',
+        yAxisID: 'y',
         backgroundColor: 'rgba(255,0,0,0.3)',
         borderColor: 'red',
         pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -59,44 +60,44 @@ export class BarChartComponent {
           display: true, 
           text: 'Time in minutes', 
           font: {
-            size: 14,
+            size: 12,
             family: 'Proxima'
           },
         } 
       },
-      y1: {
-        position: 'right',
-        grid: {
-          color: 'rgba(255,0,0,0.3)',
-        },
-        ticks: {
-          color: 'red',
-        },
-      },
+      // y1: {
+      //   position: 'right',
+      //   grid: {
+      //     color: 'rgba(255,0,0,0.3)',
+      //   },
+      //   ticks: {
+      //     color: 'red',
+      //   },
+      // },
     },
 
     plugins: {
       legend: { display: true },
-      annotation: {
-        annotations: [
-          {
-            type: 'line',
-            scaleID: 'x',
-            value: '',
-            borderColor: 'orange',
-            borderWidth: 2,
-            label: {
-              display: true,
-              position: 'center',
-              color: 'orange',
-              content: 'LineAnno',
-              font: {
-                weight: 'bold',
-              },
-            },
-          },
-        ],
-      },
+      // annotation: {
+      //   annotations: [
+      //     {
+      //       type: 'line',
+      //       scaleID: 'x',
+      //       value: '',
+      //       borderColor: 'orange',
+      //       borderWidth: 2,
+      //       label: {
+      //         display: true,
+      //         position: 'center',
+      //         color: 'orange',
+      //         content: 'LineAnno',
+      //         font: {
+      //           weight: 'bold',
+      //         },
+      //       },
+      //     },
+      //   ],
+      // },
     },
   };
 
@@ -169,5 +170,9 @@ export class BarChartComponent {
     this.lineChartData.datasets[2].label = tmp;
 
     this.chart?.update();
+  }
+
+  shiftChange(): void {
+    this.randomize()
   }
 }

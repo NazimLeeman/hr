@@ -1,7 +1,7 @@
 <div style="display: flex; flex-direction: row; justify-content: space-around;">
 <div>
   <div>
-    <nz-date-picker nzMode="month" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+    <nz-date-picker nzMode="week" [(ngModel)]="date" (ngModelChange)="getWeek($event)"></nz-date-picker>
   </div>
   
   <div style="margin-top: 1rem;">
@@ -33,7 +33,8 @@
   <nz-table #basicTable [nzData]="listOfData">
     <thead>
       <tr>
-        <th>Total Employees</th>
+        <th>Date</th>
+        <th>Active Employees</th>
         <th>Total Orders</th>
         <th>Gross Sale</th>
         <th>Gross Effiecieny</th>
@@ -42,6 +43,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
+        <td>24.03.23</td>
         <td>{{ data.employees }}</td>
         <td>{{ data.orders }}</td>
         <td>{{ data.sales |  currency:'CAD':'symbol-narrow':'4.2-2'}}</td>

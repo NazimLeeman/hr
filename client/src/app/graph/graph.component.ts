@@ -144,6 +144,7 @@ export class GraphComponent {
 
   getWeek(result: Date): void {
     console.log('week: ', getISOWeek(result));
+    this.randomize()
   }
 
 }
