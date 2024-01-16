@@ -2,13 +2,22 @@ import Employee from "./employee.model";
 import Applicant from "../applicant/applicant.model";
 import EmployeeLogin from "../employeeLogin/employeeLogin.model";
 import { Op } from "sequelize";
+import Position from "../position/position.model";
 
 export async function findAllEmployeeInRestaurant (id: number) {
   try {
     const employee = await Employee.findAll({
       where: {
         restaurantId: id
+      },
+      include: [
+        {
+        model: Position
+      },
+      {
+        model: Applicant
       }
+    ],
     });
 
     return employee;
