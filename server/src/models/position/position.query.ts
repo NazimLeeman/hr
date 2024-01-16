@@ -137,7 +137,7 @@ export async function getEmployeeInfo(employeeId: number) {
 
 export async function findAllChefsInRestaurant(restaurantId: number) {
   try {
-    const chefs = await Position.findAll({
+    const chefsInfo = await Position.findAll({
       where: {
         restaurantId: restaurantId,
         position: {
@@ -148,7 +148,14 @@ export async function findAllChefsInRestaurant(restaurantId: number) {
         model: Employee
       }],
     });
-    return chefs;
+    if (chefsInfo && chefsInfo.length > 0) {
+      const chefsData = chefsInfo.map(chef => {
+        const { id, ...employeeInformation } = chef.toJSON();
+        return { id, employeeInformation };
+      });
+      return chefsData
+    }
+    return false;
   } catch (error) {
     throw new Error('Error finding position in restaurant.');
   }

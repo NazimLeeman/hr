@@ -106,3 +106,34 @@ export async function getAllWaitersFromRestaurant ( req: Request, res: Response)
     res.status(500).json(error);
 }
 }
+
+interface Employee {
+  id: number;
+  restaurantId: number;
+  name: string;
+  email: string;
+  experience: any[]; // You might want to replace 'any[]' with a more specific type
+  phoneNumber: number;
+  address: string;
+  skillTags: any[]; // You might want to replace 'any[]' with a more specific type
+  hourlyRate: number;
+  efficiency: string;
+  imageUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+  positionId: number;
+  applicantId: any; // You might want to replace 'any' with a more specific type
+}
+
+interface DataItem {
+  id: number;
+  position: string;
+  employeeId: number;
+  restaurantId: number;
+  services: string[];
+  createdAt: string;
+  updatedAt: string;
+  employees: Employee[];
+}
+
+const inputData: DataItem[] = [];
