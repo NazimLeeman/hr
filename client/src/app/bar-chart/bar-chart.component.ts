@@ -19,17 +19,6 @@ export class BarChartComponent {
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
-        data: [65, 59, 80, 81, 56, 55, 40],
-        label: 'Series A',
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-        fill: 'origin',
-      },
-      {
         data: [28, 48, 40, 19, 86, 27, 90],
         label: 'Series B',
         backgroundColor: 'rgba(77,83,96,0.2)',
@@ -53,7 +42,7 @@ export class BarChartComponent {
         fill: 'origin',
       },
     ],
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'],
   };
 
   public lineChartOptions: ChartConfiguration['options'] = {
@@ -66,6 +55,14 @@ export class BarChartComponent {
       // We use this empty structure as a placeholder for dynamic theming.
       y: {
         position: 'left',
+        title: {
+          display: true, 
+          text: 'Time in minutes', 
+          font: {
+            size: 14,
+            family: 'Proxima'
+          },
+        } 
       },
       y1: {
         position: 'right',

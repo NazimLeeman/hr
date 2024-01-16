@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import { getISOWeek } from 'date-fns';
 
 interface Details {
   key: string;
@@ -36,7 +37,15 @@ export class GraphComponent {
             size: 12, 
             family: 'Proxima'
           },
-        },  
+        },
+        title: {
+          display: true, 
+          text: 'Number of Employees', 
+          font: {
+            size: 12,
+            family: 'Proxima'
+          },
+        } 
       },
     },
     plugins: {
@@ -59,8 +68,8 @@ export class GraphComponent {
   public barChartData: ChartData<'bar'> = {
     labels: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'],
     datasets: [
-      { data: [12, 16, 19, 15, 11, 12, 20], label: 'Employees' },
-      { data: [12, 16, 19, 15, 11, 12, 21], label: 'Series B' },
+      { data: [12, 16, 19, 15, 11, 12, 20], label: 'Day Shift' },
+      { data: [12, 16, 19, 15, 11, 12, 21], label: 'Night Shift' },
     ],
   };
   public chartClicked({
@@ -126,6 +135,10 @@ export class GraphComponent {
 
   onChange(result: Date): void {
     console.log('onChange: ', result);
+  }
+
+  getWeek(result: Date): void {
+    console.log('week: ', getISOWeek(result));
   }
 
 }
