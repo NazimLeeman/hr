@@ -82,7 +82,7 @@ export class BarChartComponent {
           {
             type: 'line',
             scaleID: 'x',
-            value: 'March',
+            value: '',
             borderColor: 'orange',
             borderWidth: 2,
             label: {

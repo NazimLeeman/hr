@@ -12,7 +12,7 @@
           <th>Hourly Rate</th>
           <!-- <th>Skill Tags</th> -->
           <!-- <th>Interview Date</th> -->
-          <!-- <th>Status</th> -->
+          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -22,6 +22,7 @@
           <td>{{data.job.jobRole}}</td>
           <td>{{data.job.jobNature}}</td>
           <td>{{data.job.hourlyRate | currency}}</td>
+          <td><nz-tag [nzColor]="'gold'">Pending</nz-tag></td>
           <!-- <td>{{data.interviewDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
           <td>{{data.status}}</td> -->
           <td>

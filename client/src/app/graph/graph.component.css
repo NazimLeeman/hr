@@ -4,3 +4,19 @@ canvas{
     width:600px !important;
     height:400px !important;
   }
+
+  nz-date-picker {
+    width: 12vw;
+  }  
+
+  nz-date-picker:hover {
+    border-color: #26a366;
+  }
+
+  nz-date-picker:focus {
+    border-color: #26a366;
+  }
+
+  nz-date-picker::selection {
+    border-color: #26a366;
+  }

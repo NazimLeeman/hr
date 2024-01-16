@@ -40,7 +40,7 @@ export class GraphComponent {
         },
         title: {
           display: true, 
-          text: 'Number of Employees', 
+          text: 'Total Employees', 
           font: {
             size: 12,
             family: 'Proxima'
@@ -94,12 +94,12 @@ export class GraphComponent {
 
   public randomize(): void {
     this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
+      Math.round(Math.random() * 22),
       21,
       19,
-      Math.round(Math.random() * 100),
+      Math.round(Math.random() * 22),
       15,
-      Math.round(Math.random() * 100),
+      Math.round(Math.random() * 22),
       14,
     ];
 
@@ -132,9 +132,14 @@ export class GraphComponent {
   date = null;
   isEnglish = false;
 
+  ngOnInit():void {
+    
+  }
+
 
   onChange(result: Date): void {
     console.log('onChange: ', result);
+    this.randomize()
   }
 
   getWeek(result: Date): void {
