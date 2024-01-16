@@ -1,4 +1,4 @@
- <div style="margin-left: 1rem;">
+ <div style="margin-left: 1rem; box-shadow: 0 4px 6px -1px rgba(46, 129, 83, 0.4), 0 2px 4px -1px rgba(46, 129, 83, 0.06); border-radius: 0.375rem;  ">
   <div style="border: 1px solid #48bb78; cursor: pointer; border-radius: 0.375rem; margin: 0.5rem 0; width: 40rem; padding: 1rem;">
     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
       <div >
@@ -7,7 +7,7 @@
         <div style="display: flex; flex-direction: row; justify-content: space-between;">
           <h3 style='font-size:1.5rem; line-height:2rem'>{{card.role}}</h3>
           <button *ngIf="!showButton" type="submit" nz-button
-          style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 10rem; height: 3rem; font-size: 1.25rem; margin-top: .5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
+          style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem;  padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 10rem; height: 3rem; font-size: 1.25rem; margin-top: .5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
               [nzType]="'primary'" (click)="showModal(card.jobId, card.restaurantId)">Apply
           </button>
         </div>
