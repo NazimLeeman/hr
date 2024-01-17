@@ -37,6 +37,7 @@
         <th>Active Employees</th>
         <th>Total Orders</th>
         <th>Gross Sale</th>
+        <th>Employee Cost</th>
         <th>Gross Effiecieny</th>
         <!-- <th>Action</th> -->
       </tr>
@@ -47,6 +48,7 @@
         <td>{{ data.employees }}</td>
         <td>{{ data.orders }}</td>
         <td>{{ data.sales |  currency:'CAD':'symbol-narrow':'4.2-2'}}</td>
+        <td>{{ data.employeeCost |  currency:'CAD':'symbol-narrow':'4.2-2'}}</td>
         <td>{{ data.efficiency | percent }}</td>
         <!-- <td>
           <a>Action 一 {{ data.name }}</a>

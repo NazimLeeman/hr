@@ -9,6 +9,7 @@ interface Details {
   employees: number;
   orders: number;
   sales: number;
+  employeeCost: number,
   efficiency: number;
 }
 
@@ -68,8 +69,8 @@ export class GraphComponent {
   public barChartData: ChartData<'bar'> = {
     labels: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'],
     datasets: [
-      { data: [12, 16, 19, 15, 11, 12, 20], label: 'Day Shift' },
-      { data: [12, 16, 19, 15, 11, 12, 21], label: 'Night Shift' },
+      { data: [12, 16, 19, 15, 11, 12, 20], label: 'Current Employees' },
+      { data: [12, 16, 19, 15, 11, 12, 21], label: 'Predicted Employees' },
     ],
   };
   public chartClicked({
@@ -112,6 +113,7 @@ export class GraphComponent {
       employees: 25,
       orders: 32,
       sales: 42599,
+      employeeCost: 2500,
       efficiency: .8
     },
     {
@@ -119,6 +121,7 @@ export class GraphComponent {
       employees: 25,
       orders: 32,
       sales: 42599,
+      employeeCost: 2500,
       efficiency: .5
     },
     {
@@ -126,6 +129,7 @@ export class GraphComponent {
       employees: 25,
       orders: 32,
       sales: 42599,
+      employeeCost: 2500,
       efficiency: 1
     }
   ];

@@ -1,34 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-/* 
-@layer base {
-@font-face {
-    font-family: 'Proxima Nova'; 
-    src: url('./assets/fonts/proximanova-regular-webfont.woff2') format('woff2'); 
-    font-weight: normal;
-    font-style: normal;
-};
 
-@font-face {
-    font-family: 'GT Pressura';
-    src: url('./assets/fonts/GT-Pressura-Extended-Black.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-};
-};
-
-body {
-    font-family: 'Proxima Nova','Arial' ,'sans-serif'; 
-}; */
 
 @font-face {
   font-family: 'Proxima Nova'; 
   src: url('./assets/fonts/proximanova-regular-webfont.woff2') format('woff2'); 
   font-weight: normal;
   font-style: normal;
-};
+}
 
 @font-face {
   font-family: 'GT Pressura';
@@ -121,4 +98,11 @@ nz-descriptions .ant-descriptions-title {
   ::selection {
     background: #22c55e;
     color: #fff;
+  }
+
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    z-index: 1;
+    color: #fff;
+    background: #fff;
+    border-color: #26a366;
   }
