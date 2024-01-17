@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   apiData: any[] = [];
   jobs: any[] = [];
   radioValue = 'C';
-  // selectedJobType: string = 'C';
+  selectedJobType: string = 'C';
   selectedValue = null;
   listOfOption: Array<{ value: string; text: string }> = [];
   nzFilterOption = (): boolean => true;
