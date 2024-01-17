@@ -140,7 +140,6 @@ export class GraphComponent {
     
   }
 
-
   onChange(result: Date): void {
     console.log('onChange: ', result);
     this.randomize()
