@@ -1,4 +1,4 @@
-function getDayAndShift(unixTimestamp) {
+export function getDayAndShift(unixTimestamp) {
     const date = new Date(unixTimestamp);
     const hours = date.getHours();
   
@@ -16,7 +16,7 @@ function getDayAndShift(unixTimestamp) {
   }
   
   
-  function groupOrdersByDayAndShift(orders) {
+export function groupOrdersByDayAndShift(orders) {
     const ordersByDayAndShift = {};
   
     orders.forEach(order => {
@@ -39,3 +39,12 @@ function getDayAndShift(unixTimestamp) {
   
     return accumulatedPrepTimeByDayAndShift;
   }
+
+ export const sampleOrders = [{
+    Datetime: 1705508684181,
+      OrderId: 116,
+      PreparationTime: 47
+  }]
+
+  const ordersByDay = groupOrdersByDayAndShift(sampleOrders);
+console.log(ordersByDay);

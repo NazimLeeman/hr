@@ -29,6 +29,7 @@ interface Application {
     email: string;
     experience: string[];
     phoneNumber: number;
+    imageUrl: string;
     address: string;
     skillTags: string[];
     hourlyRate: number;

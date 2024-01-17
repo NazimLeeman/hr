@@ -6,7 +6,8 @@
       <nz-table #basicTable [nzData]="listOfData">
         <thead>
           <tr>
-            <th>Applicant Name</th>
+            <th>Applicant</th>
+            <th>Name</th>
             <th>Skill Tags</th>
             <th>Experiences</th>
             <th>Hourly Rate</th>
@@ -16,6 +17,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of basicTable.data">
+            <td><img src="{{data.applicant.imageUrl}}" style="width: 4rem; border-radius: 100px;" alt=""></td>
             <td>{{data.applicant.name}}</td>
             <td >
                 <nz-tag [nzColor]="'green'" *ngFor="let skill of formatSkills(data.applicant.skillTags)">
@@ -23,8 +25,9 @@
                   </nz-tag>
             </td>
             <td *ngFor="let exp of data.applicant.experience">{{ formatExperience([exp]) }}</td>
-            <td>{{data.applicant.hourlyRate | currency}}
-                <nz-divider nzType="vertical"></nz-divider>
+            <td>
+              <!-- {{data.applicant.hourlyRate | currency}}
+                <nz-divider nzType="vertical"></nz-divider> -->
                 {{data.job.hourlyRate | currency}}
             </td>
             <td>{{data.job.jobRole}}</td>

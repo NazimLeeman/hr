@@ -3,6 +3,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { getISOWeek } from 'date-fns';
+import { HelperService } from '../helper.service';
 
 interface Details {
   key: string;
@@ -137,7 +138,8 @@ export class GraphComponent {
   isEnglish = false;
 
   ngOnInit():void {
-    
+    console.log(this.employeePrediction)
+    console.log(this.ordersByDay)
   }
 
   onChange(result: Date): void {
@@ -150,4 +152,18 @@ export class GraphComponent {
     this.randomize()
   }
 
+  sampleOrders = [{
+    Datetime: 1705508684181,
+      OrderId: 116,
+      PreparationTime: 2200
+  }]
+  employees = 6;
+
+  ordersByDay = this.groupOrder.groupOrdersByDayAndShift(this.sampleOrders);
+  totalOrderPreparationTime = this.ordersByDay['Wednesday - Night Shift'] || 0;
+  employeePrediction = this.groupOrder.predict(this.employees, this.totalOrderPreparationTime);
+
+  constructor(private groupOrder: HelperService) {
+
+  }
 }
