@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApiClientService } from '../api-client.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { Router } from '@angular/router';
 
 interface Application {
   id: number;
@@ -49,8 +50,9 @@ export class ApplicantTrackingComponent {
  isOkLoading = false;
  selectedApplicantId = 0;
  selectedApplicantData = {};
+ @Input() signInRoute: string = '/admin/position';
 
-  constructor(private apiClientService: ApiClientService, private modalService: NzModalService) {}
+  constructor(private router: Router, private apiClientService: ApiClientService, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.loadApplicantsData();
@@ -126,6 +128,8 @@ export class ApplicantTrackingComponent {
     this.apiClientService.postApplicantToEmployee(this.selectedApplicantData, applicantId ).subscribe(
       (response) => {
         console.log('Applicant Hired successfully:', response);
+        const employeeId = response.id
+        this.router.navigate([this.signInRoute +  '/' +  employeeId]);
         this.modalService.success({
           nzTitle: 'Success',
           nzContent: 'Applicant Hired successfully.',

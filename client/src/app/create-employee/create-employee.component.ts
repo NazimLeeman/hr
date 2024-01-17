@@ -50,6 +50,7 @@ export class CreateEmployeeComponent {
       (data: any) => {
         console.log('API Response:', data);
         this.apiData = data.data;
+        this.apiData.sort((a: any, b: any) => a.id - b.id);
       },
       (error) => {
         console.error('Error fetching data from the API', error);

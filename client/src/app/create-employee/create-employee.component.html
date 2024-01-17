@@ -9,6 +9,7 @@
           <th>Employee</th>
           <th >Id</th>
           <th>Name</th>
+          <th>Position</th>
           <!-- <th>Job Nature</th> -->
           <th>Hourly Rate</th>
           <th>Efficiency</th>
@@ -38,23 +39,25 @@
           <td>{{data.id}}</td>
           <td>{{data.name}}</td>
           <!-- <td>{{data.jobNature}}</td> -->
+          <td>{{data.position?.position}}</td>
           <td>{{data.hourlyRate | currency}}</td>
           <td>80%</td>
           <td>{{data.createdAt | date: 'yyyy-MM-dd ' }}</td>
           <td>
-            <button nz-button style="background-color: #22c55e; border: none;" [nzType]="'primary'" (click)="showModal(data.id, data.skillTags)"><span>View Skills</span></button>
-            <nz-modal [(nzVisible)]="isVisible" nzTitle="Skill Tags" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-              <ng-container *nzModalContent>
-                <p *ngIf="selectedEmployeeSkill.length > 0; else noSkill">{{ selectedEmployeeSkill.join(', ') }}</p>
-<ng-template #noSkill>No skill added</ng-template>
-              </ng-container>
-            </nz-modal>
+            <button nz-button [nzType]="'primary'" (click)="showModal(data.id, data.skillTags)"><span>View Skills</span></button>
+            
+            
           </td>
         </tr>
       </tbody>
     </nz-table>
     </div>
-    
+    <div><nz-modal [(nzVisible)]="isVisible" nzTitle="Skill Tags" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <ng-container *nzModalContent>
+        <p *ngIf="selectedEmployeeSkill.length > 0; else noSkill">{{ selectedEmployeeSkill.join(', ') }}</p>
+<ng-template #noSkill>No skill added</ng-template>
+      </ng-container>
+    </nz-modal></div>
     <div style="display: flex; justify-content: center; padding: .1rem;">
         <button type="submit" nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 16rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
             [nzType]="'primary'" (click)="showForm = true">Create New Employee

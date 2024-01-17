@@ -36,22 +36,25 @@
           style="font-family: 'Proxima Nova'; border: none; background-color: #22c55e; color: #ffffff;"
               [nzType]="'primary'" (click)="showModal(data.applicant, data.applicantId)">Approve
           </button>
-          <nz-modal
-      [(nzVisible)]="isVisible"
-      nzTitle="Confirm Hiring"
-      (nzOnCancel)="handleCancel()"
-      (nzOnOk)="handleOk()"
-      [nzOkLoading]="isOkLoading"
-    >
-      <p *nzModalContent>Hire this applicant.</p>
-          </nz-modal>
+          
+          
               <nz-divider nzType="vertical"></nz-divider>
               <a style="color: red;">Reject</a>
             </td>
           </tr>
         </tbody>
       </nz-table>
-  
+      <div>
+        <nz-modal
+        [(nzVisible)]="isVisible"
+        nzTitle="Confirm Hiring"
+        (nzOnCancel)="handleCancel()"
+        (nzOnOk)="handleOk()"
+        [nzOkLoading]="isOkLoading"
+      >
+        <p *nzModalContent>Hire this applicant.</p>
+            </nz-modal>
+      </div>
     <!-- <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
       <button type="submit"  nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Find Job</button>
   </div> -->
