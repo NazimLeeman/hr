@@ -88,3 +88,21 @@ export async function findAllFullTimeJob() {
       throw new Error('Error finding fullTime job.')
   }
 }
+
+export async function deleteJob(jobId: number) {
+  try {
+    const result  = await Job.destroy({
+      where: {
+        id: jobId
+      }
+    })
+    if(result === 1) {
+      return { success: true, message: 'Job Info deleted successfully.'}
+    } else {
+      return { success: false, message: 'Job Info not found'};
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error While deleteing Job Info by ID in database.')
+  }
+}

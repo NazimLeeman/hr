@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createJob, findAllFullTimeJob, findAllJob, findAllJobForRestaurant, findAllPartTimeJob, findJobBySearchTerm } from "../models/job/job.query";
+import { createJob, deleteJob, findAllFullTimeJob, findAllJob, findAllJobForRestaurant, findAllPartTimeJob, findJobBySearchTerm } from "../models/job/job.query";
 
 export async function postJob (req: Request, res: Response) {
     try {
@@ -70,4 +70,19 @@ export async function searchJob (req: Request, res: Response) {
         console.log(error);
         res.status(500).json(error);
       }
+}
+
+export async function deleteJobInfo (req: Request, res: Response) {
+    const jobId = Number(req.params.jobId);
+    try {
+        const result = await deleteJob(jobId);
+          if (result.success) {
+              return res.status(200).json({ message: result.message });
+          } else {
+              return res.status(404).json({ message: result.message });
+          }
+    } catch(error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
 }
