@@ -55,6 +55,14 @@ export class ApiClientService {
   getAllJob(): Observable<any> {
     return this.http.get(`${this.apiUrl}/job/all`)
   }
+  
+  getAllFullTimeJob(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/job/allFullTime`)
+  }
+  
+  getAllPartTimeJob(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/job/allPartTime`)
+  }
 
   searchJob(searchTerm: string): Observable<any> {
     console.log(searchTerm);

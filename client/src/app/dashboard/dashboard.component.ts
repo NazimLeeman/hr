@@ -13,17 +13,13 @@ export class DashboardComponent implements OnInit {
   apiData: any[] = [];
   jobs: any[] = [];
   radioValue = 'C';
-  selectedJobType: string = 'C';
+  // selectedJobType: string = 'C';
   selectedValue = null;
   listOfOption: Array<{ value: string; text: string }> = [];
   nzFilterOption = (): boolean => true;
+  filteredJobs: any[] = [];
 
   cards: any[] = [];
-  // cards = [
-  //   { title: 'Kacchi Bhai', jobId: 1, jobNature: '', skillTags: [''], restaurantId: 1, role: 'Chef', salary: '50', description: 'As a Position Title at Restaurant Name, you will play a crucial role in ensuring the seamless operation of our restaurant. From culinary excellence to customer service, you will contribute to the overall success of our establishment. We are seeking passionate individuals who share our dedication to delivering exceptional service and creating memorable dining experiences.Responsibilities: Culinary Excellence: Prepare and cook a variety of dishes with precision and attention to detail.Ensure food quality meets our high standards and is consistently delivered to guests.Customer Service:Provide excellent customer service, ensuring guests have a positive and enjoyable dining experience.Attend to guest needs and inquiries with professionalism and courtesy.Team Collaboration:Work collaboratively with kitchen and front-of-house teams to maintain a harmonious and efficient working environment.Communicate effectively with team members to ensure smooth service operations.Cleanliness and Hygiene:Maintain a clean and organized workspace, adhering to food safety and sanitation guidelines.Contribute to overall cleanliness and hygiene standards within the restaurant.Menu Knowledge:Stay informed about menu items, specials, and ingredients to provide accurate information to guests.Assist guests with menu selections and accommodate special requests.Your dedication to these responsibilities will not only enhance the reputation of our restaurant but also contribute to the satisfaction of our valued guests. We look forward to welcoming a dynamic individual like you to our team, where your passion and commitment will undoubtedly make a lasting impact.', showDetails: false },
-  //   { title: 'McDonalds', jobId: 2, jobNature: '', skillTags: [''], restaurantId: 1, role: 'Waiter', salary: '60', description: 'As a Position Title at Restaurant Name, you will play a crucial role in ensuring the seamless operation of our restaurant. From culinary excellence to customer service, you will contribute to the overall success of our establishment. We are seeking passionate individuals who share our dedication to delivering exceptional service and creating memorable dining experiences.Responsibilities: Culinary Excellence: Prepare and cook a variety of dishes with precision and attention to detail.Ensure food quality meets our high standards and is consistently delivered to guests.Customer Service:Provide excellent customer service, ensuring guests have a positive and enjoyable dining experience.Attend to guest needs and inquiries with professionalism and courtesy.Team Collaboration:Work collaboratively with kitchen and front-of-house teams to maintain a harmonious and efficient working environment.Communicate effectively with team members to ensure smooth service operations.Cleanliness and Hygiene:Maintain a clean and organized workspace, adhering to food safety and sanitation guidelines.Contribute to overall cleanliness and hygiene standards within the restaurant.Menu Knowledge:Stay informed about menu items, specials, and ingredients to provide accurate information to guests.Assist guests with menu selections and accommodate special requests.', showDetails: false },
-  //   { title: 'McDonalds', jobId: 2, jobNature: '', skillTags: [''], restaurantId: 1, role: 'Waiter', salary: '60', description: 'As a Position Title at Restaurant Name, you will play a crucial role in ensuring the seamless operation of our restaurant. From culinary excellence to customer service, you will contribute to the overall success of our establishment. We are seeking passionate individuals who share our dedication to delivering exceptional service and creating memorable dining experiences.Responsibilities: Culinary Excellence: Prepare and cook a variety of dishes with precision and attention to detail.Ensure food quality meets our high standards and is consistently delivered to guests.Customer Service:Provide excellent customer service, ensuring guests have a positive and enjoyable dining experience.Attend to guest needs and inquiries with professionalism and courtesy.Team Collaboration:Work collaboratively with kitchen and front-of-house teams to maintain a harmonious and efficient working environment.Communicate effectively with team members to ensure smooth service operations.Cleanliness and Hygiene:Maintain a clean and organized workspace, adhering to food safety and sanitation guidelines.Contribute to overall cleanliness and hygiene standards within the restaurant.Menu Knowledge:Stay informed about menu items, specials, and ingredients to provide accurate information to guests.Assist guests with menu selections and accommodate special requests.', showDetails: false },
-  // ];
 
 
   applicantId: number = 0;
@@ -129,16 +125,20 @@ export class DashboardComponent implements OnInit {
       (data: any) => {
         console.log('API Response:', data);
         this.apiData = data.data;
+        this.cards = [];
   
         if (this.apiData.length > 0) {
-          // Clear existing cards
-          this.cards = [];
-          
+          let filteredData = this.apiData;
   
-          // Create new cards based on API data
-          this.apiData.forEach((apiDataItem, index) => {
+          // Filter based on radioValue
+          if (this.radioValue === 'A') {
+            filteredData = filteredData.filter(item => item.jobNature === 'Part-Time');
+          } else if (this.radioValue === 'B') {
+            filteredData = filteredData.filter(item => item.jobNature === 'Full-Time');
+          }
+  
+          filteredData.forEach((apiDataItem, index) => {
             const newCard = {
-              // title: apiDataItem.jobRole || 'Default Title',
               jobId: apiDataItem.id || -1,
               jobNature: apiDataItem.jobNature || '',
               skillTags: apiDataItem.skillTags || [],
@@ -150,15 +150,13 @@ export class DashboardComponent implements OnInit {
             };
   
             console.log(`New Card ${index + 1}:`, newCard);
-
+  
             if (this.cards.length > 0) {
               this.selectCard(this.cards[0]);
             }
   
-            // Add the new card to the cards array
             this.cards.push(newCard);
   
-            // Update selectedCard if it matches the new card
             if (this.selectedCard && this.selectedCard === apiDataItem) {
               this.selectCard(newCard);
             }
@@ -170,6 +168,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+  
   
 
   search(value: string): void {
@@ -222,8 +221,6 @@ export class DashboardComponent implements OnInit {
   //     }, 1000); 
   //   }
   // }
-
-
 }
 
 
