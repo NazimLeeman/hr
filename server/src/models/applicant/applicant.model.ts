@@ -54,6 +54,11 @@ const Applicant = sequelize.define<ApplicantInstance>('applicant', {
         type: DataTypes.TEXT,
         allowNull: true,
         defaultValue: ''
+    },
+    availability: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
+        defaultValue: []
     }
 })
 
