@@ -119,7 +119,8 @@ export async function findApplicantBySearchTerm (searchTerm: string) {
     address?: string,
     skillTags?: [string],
     hourlyRate?: number,
-    imageUrl?: string
+    imageUrl?: string,
+    availability?: [string]
   })  {
     try {
       const result = await Applicant.update(updatedData, {
