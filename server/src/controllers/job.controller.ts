@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createJob, findAllJob, findAllJobForRestaurant, findJobBySearchTerm } from "../models/job/job.query";
+import { createJob, findAllFullTimeJob, findAllJob, findAllJobForRestaurant, findAllPartTimeJob, findJobBySearchTerm } from "../models/job/job.query";
 
 export async function postJob (req: Request, res: Response) {
     try {
@@ -19,6 +19,26 @@ export async function postJob (req: Request, res: Response) {
 export async function getAllJob (req: Request, res: Response) {
     try {
         const jobs = await findAllJob();
+        res.json({ data: jobs });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }    
+}
+
+export async function getAllPartTimeJobs (req: Request, res: Response) {
+    try {
+        const jobs = await findAllPartTimeJob();
+        res.json({ data: jobs });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }    
+}
+
+export async function getAllFullTimeJobs (req: Request, res: Response) {
+    try {
+        const jobs = await findAllFullTimeJob();
         res.json({ data: jobs });
       } catch (error) {
         console.log(error);

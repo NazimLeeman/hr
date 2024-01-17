@@ -58,3 +58,33 @@ export async function findJobBySearchTerm (searchTerm: string) {
     throw new Error ('Error searching for job.')
   }
 }
+
+export async function findAllPartTimeJob() {
+  try {
+      const job = await Job.findAll({
+        where: {
+          jobNature: {
+            [Op.iLike]: '%Part-Time%',
+          }
+        } 
+      });
+      return job;
+  } catch (error) {
+      throw new Error('Error finding partTime job.')
+  }
+}
+
+export async function findAllFullTimeJob() {
+  try {
+    const job = await Job.findAll({
+      where: {
+        jobNature: {
+          [Op.iLike]: '%Full-Time%',
+        }
+      } 
+    });
+    return job;
+  } catch (error) {
+      throw new Error('Error finding fullTime job.')
+  }
+}
