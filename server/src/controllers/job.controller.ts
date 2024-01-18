@@ -58,9 +58,9 @@ export async function getAllJobForRestaurant(req: Request, res: Response) {
 }
 
 export async function searchJob (req: Request, res: Response) {
+    const searchTerm = req.query.searchTerm as string;
+    console.log(searchTerm)
     try {
-        const searchTerm = req.query.searchTerm as string;
-        console.log(searchTerm)
         if (searchTerm) {
             console.log(searchTerm)
           const job = await findJobBySearchTerm(searchTerm);
@@ -68,6 +68,7 @@ export async function searchJob (req: Request, res: Response) {
         } else res.json({ data: [] });
       } catch (error) {
         console.log(error);
+        console.log('Hello');
         res.status(500).json(error);
       }
 }

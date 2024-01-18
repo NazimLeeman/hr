@@ -8,6 +8,6 @@ router.get('/allFullTime', getAllFullTimeJobs);
 router.post('/new/:restaurantId', postJob);
 router.delete('/delete/:jobId', deleteJobInfo);
 router.get('/:restaurantId', getAllJobForRestaurant);
-router.get('/search', searchJob);
+router.get('/search/jobs', searchJob);
  
 export default router;
