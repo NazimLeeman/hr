@@ -52,9 +52,9 @@
       </div>
         <nz-form-item>
           <div>
-            <label style="margin-bottom: 6px; font-size: medium;">Shift Starts:</label>
+            <label style="margin-bottom: 6px; margin-left: .5rem; font-size: medium;">Shift Starts:</label>
           </div>
-    <nz-time-picker
+    <nz-time-picker style="margin-left: .5rem;"
       formControlName="slotStarts"
       [nzUse12Hours]="true"
       (ngModelChange)="log1($event)"
@@ -63,17 +63,17 @@
         </nz-form-item>
         <nz-form-item>
           <div>
-            <label style="margin-bottom: 6px; font-size: medium;">Shift Ends:</label>
+            <label style="margin-bottom: 6px;margin-left: .5rem; font-size: medium;">Shift Ends:</label>
           </div>
-    <nz-time-picker
+    <nz-time-picker style="margin-left: .5rem;"
       formControlName="slotEnds"
       [nzUse12Hours]="true"
       (ngModelChange)="log2($event)"
       nzFormat="h:mm a"
     ></nz-time-picker>
   </nz-form-item>
-  <div>
-        <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Select the Employees you want to assign to this schedule.</p>
+  <div style="margin-top: 1rem;">
+        <p style="margin-left: .5rem;  font-size: x-large; padding-bottom: 1rem;">Select the Employees you want to assign to this schedule.</p>
         <nz-select nzMode="multiple" nzPlaceHolder="Employees" formControlName="listOfSelectedEmployees">
           <nz-option
             *ngFor="let o of optionList"

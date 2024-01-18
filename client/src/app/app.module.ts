@@ -72,6 +72,7 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { AddressComponent } from './address/address.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { TalentMarketComponent } from './talent-market/talent-market.component';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 
 registerLocaleData(en);
@@ -149,7 +150,8 @@ registerLocaleData(en);
     NzRadioModule,
     NzPaginationModule,
     NzDrawerModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    NzPopconfirmModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
