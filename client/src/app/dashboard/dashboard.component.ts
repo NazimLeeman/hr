@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   listOfOption: Array<{ value: string; text: string }> = [];
   nzFilterOption = (): boolean => true;
   filteredJobs: any[] = [];
+  searchTerm = '';
 
   cards: any[] = [];
 
@@ -81,44 +82,6 @@ export class DashboardComponent implements OnInit {
     // this.getApplicantData();
     // this.selectCard(this.cards[0]);
   }
-
-  // anotherOnInit(): void {
-  //   this.apiClientService.getAllJobForRestaurant().subscribe(
-  //     (data: any) => {
-  //       console.log('API Response:', data);
-  //       this.apiData = data.data;
-  //       if (this.cards.length > 0 && this.apiData.length > 0) {
-  //         this.cards.forEach((card, index) => {
-  //           const apiDataItem = this.apiData[index];
-  
-  //           console.log(`Card ${index + 1}:`, card);
-  //           console.log(`API Data ${index + 1}:`, apiDataItem);
-  
-  //           if (apiDataItem) {
-  //             card.role = apiDataItem.jobRole || card.role;
-  //             card.salary = apiDataItem.hourlyRate || card.salary;
-  //             card.description = apiDataItem.jobDescription || card.description;
-  //             card.jobId = apiDataItem.id || card.jobId
-  //             card.restaurantId = apiDataItem.restaurantId || card.restaurantId
-  //             card.jobNature = apiDataItem.jobNature
-  //             card.skillTags = apiDataItem.skillTags
-
-  //             console.log(`Updated Card ${index + 1}:`, card);
-
-  //             if (this.selectedCard && this.selectedCard === card) {
-  //               this.selectCard(card);
-  //             }
-  //           } else {
-  //             console.error(`Error: API data for Card ${index + 1} is undefined.`);
-  //           }
-  //         })       
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching data from the API', error);
-  //     }
-  //   );
-  // }
 
   anotherOnInit(): void {
     this.apiClientService.getAllJobForRestaurant().subscribe(
@@ -317,18 +280,32 @@ export class DashboardComponent implements OnInit {
   }
   
   // searchJobs() {
-  //   if (this.query.trim() === '') {
+  //   console.log('clicked')
+  //   if (this.searchTerm.trim() === '') {
   //     this.jobs = [];
   //     return;
   //   } else {
   //     setTimeout(() => {
-  //       this.vendorProducts = [];
-  //       this.selectedVendorId = '';
-  //       this.vendorsService.searchVendorsByNameAndProducts(this.query).subscribe((vendors) => {
-  //         this.vendors = vendors;
-  //         console.log('Vendors:', vendors);
+  //       this.jobs = [];
+  //       this.apiClientService.searchJob(this.searchTerm).subscribe((jobs) => {
+  //         this.jobs = jobs;
+  //         console.log('Jobs:', jobs);
   //       });
   //     }, 1000); 
+  //   }
+  // }
+  // searchJobs(searchTerm: KeyboardEvent) {
+  //   console.log('clicked')
+  //   if (searchTerm) {
+  //     const element = searchTerm.target as HTMLInputElement;
+  //     if (element.value.length > 0) {
+  //       this.apiClientService.searchJob(element.value).subscribe(
+  //         (data) => {
+  //           this.jobs = data
+  //           console.log(this.jobs)
+  //         }
+  //       )
+  //     }
   //   }
   // }
 }
