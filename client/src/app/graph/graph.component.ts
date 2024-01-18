@@ -163,7 +163,5 @@ export class GraphComponent {
   totalOrderPreparationTime = this.ordersByDay['Wednesday - Night Shift'] || 0;
   employeePrediction = this.groupOrder.predict(this.employees, this.totalOrderPreparationTime);
 
-  constructor(private groupOrder: HelperService) {
-
-  }
+  constructor(private groupOrder: HelperService) {}
 }
