@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   nzFilterOption = (): boolean => true;
   filteredJobs: any[] = [];
   searchTerm = '';
+  value = '';
 
   cards: any[] = [];
 
@@ -112,7 +113,7 @@ export class DashboardComponent implements OnInit {
               showDetails: false,
             };
   
-            console.log(`New Card ${index + 1}:`, newCard);
+            // console.log(`New Card ${index + 1}:`, newCard);
   
             if (this.cards.length > 0) {
               this.selectCard(this.cards[0]);
@@ -159,6 +160,41 @@ export class DashboardComponent implements OnInit {
   
           this.listOfOption = filteredOptions;
           console.log(this.listOfOption);
+          console.log(this.selectedValue);
+          // this.value = this.listOfOption[0].text
+          // this.apiClientService.searchJob(this.value).subscribe(
+          //   (data: any) => {
+          //     console.log('API Response:', data);
+          //     this.apiData = data.data;
+          //     this.cards = [];
+          //     this.apiData.forEach((apiDataItem, index) => {
+          //       const newCard = {
+          //         jobId: apiDataItem.id || -1,
+          //         jobNature: apiDataItem.jobNature || '',
+          //         skillTags: apiDataItem.skillTags || [],
+          //         restaurantId: apiDataItem.restaurantId || -1,
+          //         role: apiDataItem.jobRole || 'Default Role',
+          //         salary: apiDataItem.hourlyRate || 'Default Salary',
+          //         description: apiDataItem.jobDescription || 'Default Description',
+          //         showDetails: false,
+          //       };
+      
+          //       // console.log(`New Card ${index + 1}:`, newCard);
+      
+          //       if (this.cards.length > 0) {
+          //         this.selectCard(this.cards[0]);
+          //       }
+      
+          //       this.cards.push(newCard);
+      
+          //       if (this.selectedCard && this.selectedCard === apiDataItem) {
+          //         this.selectCard(newCard);
+          //       }
+          //     })
+          //   }, (error) => {
+          //     console.error('Error fetching data from the API', error);
+          //   }
+          // );
         } else {
           console.error('Invalid response format:', data);
         }
@@ -167,6 +203,43 @@ export class DashboardComponent implements OnInit {
         console.error('Error during restaurant job search:', error);
       }
     );
+  }
+
+  onOptionSelected(newValue: string): void {
+    console.log('Selected value:', newValue);
+    this.apiClientService.searchJob(newValue).subscribe(
+            (data: any) => {
+              console.log('API Response:', data);
+              this.apiData = data.data;
+              this.cards = [];
+              this.apiData.forEach((apiDataItem, index) => {
+                const newCard = {
+                  jobId: apiDataItem.id || -1,
+                  jobNature: apiDataItem.jobNature || '',
+                  skillTags: apiDataItem.skillTags || [],
+                  restaurantId: apiDataItem.restaurantId || -1,
+                  role: apiDataItem.jobRole || 'Default Role',
+                  salary: apiDataItem.hourlyRate || 'Default Salary',
+                  description: apiDataItem.jobDescription || 'Default Description',
+                  showDetails: false,
+                };
+      
+                // console.log(`New Card ${index + 1}:`, newCard);
+      
+                if (this.cards.length > 0) {
+                  this.selectCard(this.cards[0]);
+                }
+      
+                this.cards.push(newCard);
+      
+                if (this.selectedCard && this.selectedCard === apiDataItem) {
+                  this.selectCard(newCard);
+                }
+              })
+            }, (error) => {
+              console.error('Error fetching data from the API', error);
+            }
+          );
   }
 
   onJobTypeChange(): void {
@@ -188,7 +261,7 @@ export class DashboardComponent implements OnInit {
               showDetails: false,
             };
   
-            console.log(`New Card ${index + 1}:`, newCard);
+            // console.log(`New Card ${index + 1}:`, newCard);
   
             if (this.cards.length > 0) {
               this.selectCard(this.cards[0]);
@@ -223,7 +296,7 @@ export class DashboardComponent implements OnInit {
               showDetails: false,
             };
   
-            console.log(`New Card ${index + 1}:`, newCard);
+            // console.log(`New Card ${index + 1}:`, newCard);
   
             if (index === 0) {
               // Select the first card by default

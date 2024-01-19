@@ -21,6 +21,7 @@
       [nzShowArrow]="false"
       [nzFilterOption]="nzFilterOption"
       (nzOnSearch)="search($event)"
+      (ngModelChange)="onOptionSelected($event)"
     >
       <nz-option *ngFor="let o of listOfOption" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
     </nz-select>
