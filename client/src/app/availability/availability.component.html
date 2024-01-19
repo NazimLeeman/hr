@@ -9,34 +9,6 @@
           <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">{{ dayData.day }}</p>
           <p style="font-size: 1rem; text-align: center;">{{ dayData.availability }}</p>
         </div>  
-        <!-- <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Monday</p>
-            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
-        </div>
-          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Tuesday</p>
-            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
-        </div>
-          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Wednesday</p>
-            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
-        </div>
-          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Thursday</p>
-            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
-        </div>
-          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Friday</p>
-            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
-        </div>
-          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Saturday</p>
-            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
-        </div>
-          <div style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">Sunday</p>
-            <p style="font-size: 1rem; text-align: center;">Unavailable</p>
-        </div> -->
       </div>
       <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
         <button class="my-btn" type="submit" (click)="open()" nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Edit Availability</button>
@@ -55,12 +27,14 @@
         <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="24">
             <nz-form-item>
-              <nz-form-label>Monday</nz-form-label>
+              <!-- <nz-form-label>Monday</nz-form-label> -->
+              <label nz-checkbox [(ngModel)]="checked">MON</label>
               <nz-form-control >
-                <nz-radio-group style="float: right;" formControlName="Monday" nzButtonStyle="solid">
+                <!-- <nz-time-picker [(ngModel)]="time" (ngModelChange)="log($event)"></nz-time-picker> -->
+                <!-- <nz-radio-group style="float: right;" formControlName="Monday" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="A">On</label>
                     <label nz-radio-button nzValue="B">Off</label>
-                  </nz-radio-group>
+                  </nz-radio-group> -->
               </nz-form-control>
             </nz-form-item>
           </div>

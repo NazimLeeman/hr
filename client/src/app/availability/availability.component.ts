@@ -11,6 +11,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrl: './availability.component.css'
 })
 export class AvailabilityComponent {
+  checked = true;
+  time: Date | null = null;
   isLoading: boolean = false;
   visible = false;
   radioValue = 'A';
@@ -95,6 +97,10 @@ export class AvailabilityComponent {
         }
       });
     }
+  }
+
+  log(time: Date): void {
+    console.log(time && time.toTimeString());
   }
 
   generateAvailabilityStructure(): any[] {

@@ -73,6 +73,7 @@ import { AddressComponent } from './address/address.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { TalentMarketComponent } from './talent-market/talent-market.component';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 
 registerLocaleData(en);
@@ -151,7 +152,8 @@ registerLocaleData(en);
     NzPaginationModule,
     NzDrawerModule,
     GoogleMapsModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzCheckboxModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
