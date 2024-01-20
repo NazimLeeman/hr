@@ -46,9 +46,12 @@
       </nz-form-item>
       <nz-form-item >
         <label style="font-size: medium;">Entering your address allows us to find jobs closest to you!</label>
-        <nz-form-control nzErrorTip="Please input an address!" class="custom-error-tip">
+        <!-- <nz-form-control nzErrorTip="Please input an address!" class="custom-error-tip">
           <textarea nz-input style="font-size: medium; margin-top: .5rem;"  [value]="address" id="address" formControlName="address" placeholder="Address"></textarea>
-        </nz-form-control>
+        </nz-form-control> -->
+        <div style="margin-left: 1rem; margin-top: .5rem;">
+          <app-address></app-address>
+        </div>
       </nz-form-item>
     </form>
     <div style="display: flex; justify-content: center;  padding-bottom: 1rem;">

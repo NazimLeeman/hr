@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './address.component.css'
 })
 export class AddressComponent {
+  @Input() formGroup: FormGroup = new FormGroup({});
+  @Output() addressFormReady = new EventEmitter<FormGroup>();
   addressForm: FormGroup;
 
   constructor(
@@ -17,6 +19,7 @@ export class AddressComponent {
     this.addressForm = this.formBuilder.group({
       address: ['', [Validators.required]],
     });
+    
   }
 
   @ViewChild('mapSearchField') searchField: ElementRef | undefined;
@@ -37,6 +40,7 @@ export class AddressComponent {
           place.geometry?.location?.lng()
         );
       });
+      this.addressFormReady.emit(this.addressForm);
     });
   }
   /**
@@ -57,6 +61,7 @@ export class AddressComponent {
   handleLoginClick(): void {
     if (this.addressForm.valid) {
       const loginData = this.addressForm.value;
+      console.log(loginData)
     }
   }
 }

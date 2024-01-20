@@ -38,7 +38,7 @@ export class RegistrationSummaryComponent implements OnInit {
 
   validateForm: FormGroup<{
     phoneNumber: FormControl<string>,
-    address: FormControl<string>;
+    // address: FormControl<string>;
     hourlyRate: FormControl<number>;
     phoneNumberPrefix: FormControl<'+86' | '+87'>;
     imageUrl: FormControl<string>;
@@ -182,7 +182,7 @@ additionOnInit(): void {
   constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService) {
     this.validateForm = this.fb.group({
       phoneNumber: ['', [Validators.required]],
-      address: ['', [Validators.required]],
+      // address: ['', [Validators.required]],
       imageUrl: [''],
       hourlyRate: [0, [Validators.required]],
       phoneNumberPrefix: '+86' as '+86' | '+87'
