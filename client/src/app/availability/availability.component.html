@@ -5,10 +5,18 @@
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Availability</h1>
       <h1 style="margin-top: 1rem; margin-left: .5rem; font-size:x-large;">Let employers know when you are available. This will help them match you with their desired shifts.</h1>
       <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1rem;">
-        <div *ngFor="let dayData of generateAvailabilityStructure()" style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+        <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1rem;">
+          <div *ngFor="let dayData of this.availability" style="width: 11vw; height: 10vh; margin: .5rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: medium; margin-top: .5rem; text-align: center;" [innerHTML]="formatAvailabilityData(dayData)"></p>
+          </div>
+        </div>        
+        <!-- <div *ngFor="let dayData of generateAvailabilityStructure()" style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
           <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">{{ dayData.day }}</p>
+          <div *ngFor="let dayData of generateAvailabilityStructure()" style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
+            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">{{ formatAvailabilityData(dayData) }}</p>
+          </div>
           <p style="font-size: 1rem; text-align: center;">{{ dayData.availability }}</p>
-        </div>  
+        </div>   -->
       </div>
       <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
         <button class="my-btn" type="submit" (click)="open()" nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Edit Availability</button>
@@ -27,81 +35,93 @@
         <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="24">
             <nz-form-item>
-              <!-- <nz-form-label>Monday</nz-form-label> -->
-              <label nz-checkbox [(ngModel)]="checked">MON</label>
-              <nz-form-control >
-                <!-- <nz-time-picker [(ngModel)]="time" (ngModelChange)="log($event)"></nz-time-picker> -->
-                <!-- <nz-radio-group style="float: right;" formControlName="Monday" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="A">On</label>
-                    <label nz-radio-button nzValue="B">Off</label>
-                  </nz-radio-group> -->
-              </nz-form-control>
+              <div style="display: flex; flex-direction: column; ">
+                <label nz-checkbox (change)="onCheckboxChange('Monday')">MON</label>
+                <div style="display: flex; flex-direction: row; margin-top: 1rem;" *ngIf="isChecked">
+                  <p style="margin-right: .5rem; margin-top: .5rem;">FROM</p>
+                    <nz-time-picker style="margin-right: .5rem;" formControlName="MondayFrom" nzFormat="HH:mm"></nz-time-picker>
+                  <p style="margin-right: .5rem; margin-top: .5rem;">TO</p>
+                    <nz-time-picker formControlName="MondayTo" nzFormat="HH:mm"></nz-time-picker>
+                </div>
+              </div>
             </nz-form-item>
           </div>
           <div nz-col nzSpan="24">
             <nz-form-item>
-              <nz-form-label>Tuesday</nz-form-label>
-              <nz-form-control>
-                <nz-radio-group style="float: right;"  formControlName="Tuesday" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="A">On</label>
-                    <label nz-radio-button nzValue="B">Off</label>
-                  </nz-radio-group>
-              </nz-form-control>
+              <div style="display: flex; flex-direction: column; ">
+                <label nz-checkbox (change)="onCheckboxChange('Tuesday')">TUE</label>
+                <div style="display: flex; flex-direction: row; margin-top: 1rem;" *ngIf="tuesdayChecked">
+                  <p style="margin-right: .5rem; margin-top: .5rem;">FROM</p>
+                    <nz-time-picker style="margin-right: .5rem;" formControlName="TuesdayFrom" nzFormat="HH:mm"></nz-time-picker>
+                  <p style="margin-right: .5rem; margin-top: .5rem;">TO</p>
+                    <nz-time-picker formControlName="TuesdayTo" nzFormat="HH:mm"></nz-time-picker>
+                </div>
+              </div>
             </nz-form-item>
           </div>
           <div nz-col nzSpan="24">
             <nz-form-item>
-              <nz-form-label>Wednesday</nz-form-label>
-              <nz-form-control>
-                <nz-radio-group style="float: right;"  formControlName="Wednesday" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="A">On</label>
-                    <label nz-radio-button nzValue="B">Off</label>
-                  </nz-radio-group>
-              </nz-form-control>
+              <div style="display: flex; flex-direction: column; ">
+                <label nz-checkbox (change)="onCheckboxChange('Wednesday')">WED</label>
+                <div style="display: flex; flex-direction: row; margin-top: 1rem;" *ngIf="wednesdayChecked">
+                  <p style="margin-right: .5rem; margin-top: .5rem;">FROM</p>
+                    <nz-time-picker style="margin-right: .5rem;" formControlName="WednesdayFrom" nzFormat="HH:mm"></nz-time-picker>
+                  <p style="margin-right: .5rem; margin-top: .5rem;">TO</p>
+                    <nz-time-picker formControlName="WednesdayTo" nzFormat="HH:mm"></nz-time-picker>
+                </div>
+              </div>
             </nz-form-item>
           </div>
           <div nz-col nzSpan="24">
             <nz-form-item>
-              <nz-form-label>Thursday</nz-form-label>
-              <nz-form-control>
-                <nz-radio-group style="float: right;"  formControlName="Thursday" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="A">On</label>
-                    <label nz-radio-button nzValue="B">Off</label>
-                  </nz-radio-group>
-              </nz-form-control>
+              <div style="display: flex; flex-direction: column; ">
+                <label nz-checkbox (change)="onCheckboxChange('Thursday')">THU</label>
+                <div style="display: flex; flex-direction: row; margin-top: 1rem;" *ngIf="thursdayChecked">
+                  <p style="margin-right: .5rem; margin-top: .5rem;">FROM</p>
+                    <nz-time-picker style="margin-right: .5rem;" formControlName="ThursdayFrom" nzFormat="HH:mm"></nz-time-picker>
+                  <p style="margin-right: .5rem; margin-top: .5rem;">TO</p>
+                    <nz-time-picker formControlName="ThursdayTo" nzFormat="HH:mm"></nz-time-picker>
+                </div>
+              </div>
             </nz-form-item>
           </div>
           <div nz-col nzSpan="24">
             <nz-form-item>
-              <nz-form-label>Friday</nz-form-label>
-              <nz-form-control>
-                <nz-radio-group style="float: right;"  formControlName="Friday" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="A">On</label>
-                    <label nz-radio-button nzValue="B">Off</label>
-                  </nz-radio-group>
-              </nz-form-control>
+              <div style="display: flex; flex-direction: column; ">
+                <label nz-checkbox (change)="onCheckboxChange('Friday')">FRI</label>
+                <div style="display: flex; flex-direction: row; margin-top: 1rem;" *ngIf="fridayChecked">
+                  <p style="margin-right: .5rem; margin-top: .5rem;">FROM</p>
+                    <nz-time-picker style="margin-right: .5rem;" formControlName="FridayFrom" nzFormat="HH:mm"></nz-time-picker>
+                  <p style="margin-right: .5rem; margin-top: .5rem;">TO</p>
+                    <nz-time-picker formControlName="FridayTo" nzFormat="HH:mm"></nz-time-picker>
+                </div>
+              </div>
             </nz-form-item>
           </div>
           <div nz-col nzSpan="24">
             <nz-form-item>
-              <nz-form-label>Saturday</nz-form-label>
-              <nz-form-control>
-                <nz-radio-group style="float: right;"  formControlName="Saturday" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="A">On</label>
-                    <label nz-radio-button nzValue="B">Off</label>
-                  </nz-radio-group>
-              </nz-form-control>
+              <div style="display: flex; flex-direction: column; ">
+                <label nz-checkbox (change)="onCheckboxChange('Saturday')">SAT</label>
+                <div style="display: flex; flex-direction: row; margin-top: 1rem;" *ngIf="saturdayChecked">
+                  <p style="margin-right: .5rem; margin-top: .5rem;">FROM</p>
+                    <nz-time-picker style="margin-right: .5rem;" formControlName="SaturdayFrom" nzFormat="HH:mm"></nz-time-picker>
+                  <p style="margin-right: .5rem; margin-top: .5rem;">TO</p>
+                    <nz-time-picker formControlName="SaturdayTo" nzFormat="HH:mm"></nz-time-picker>
+                </div>
+              </div>
             </nz-form-item>
           </div>
           <div nz-col nzSpan="24">
             <nz-form-item>
-              <nz-form-label>Sunday</nz-form-label>
-              <nz-form-control>
-                <nz-radio-group style="float: right;"  formControlName="Sunday" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="A">On</label>
-                    <label nz-radio-button nzValue="B">Off</label>
-                  </nz-radio-group>
-              </nz-form-control>
+              <div style="display: flex; flex-direction: column; ">
+                <label nz-checkbox (change)="onCheckboxChange('Sunday')">SUN</label>
+                <div style="display: flex; flex-direction: row; margin-top: 1rem;" *ngIf="sundayChecked">
+                  <p style="margin-right: .5rem; margin-top: .5rem;">FROM</p>
+                    <nz-time-picker style="margin-right: .5rem;" formControlName="SundayFrom" nzFormat="HH:mm"></nz-time-picker>
+                  <p style="margin-right: .5rem; margin-top: .5rem;">TO</p>
+                    <nz-time-picker formControlName="SundayTo" nzFormat="HH:mm"></nz-time-picker>
+                </div>
+              </div>
             </nz-form-item>
           </div>
         </div>
