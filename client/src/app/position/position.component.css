@@ -1,13 +1,12 @@
-#position {
-  /* font-size: x-large; */
+/* #position {
   width: 32rem;
   padding: .1rem;
-}
+} */
 
 nz-select {
-  font-size: x-large;
+  font-size: 1.2rem;
   width: 32rem;
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
 }
 
 #select:hover {

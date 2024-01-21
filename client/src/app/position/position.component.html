@@ -9,8 +9,26 @@
   <form nz-form style="padding: 2rem;" [formGroup]="validateForm" (ngSubmit)="submitForm()">
   <div>
       <!-- <h1 style="font-size: x-large;">Position</h1> -->
-      <div>
-    <input nz-input type="text" style="font-size: x-large; margin-left: 8rem; " id="position" formControlName="position" placeholder="Position">
+      <div style="display: flex; flex-direction: row; justify-content: space-around;">
+    <!-- <input nz-input type="text" style="font-size: x-large; margin-left: 8rem; " id="position" formControlName="position" placeholder="Position"> -->
+    <nz-select id="select" formControlName="position" nzAllowClear nzPlaceHolder="Chef" >   
+      <nz-option nzValue="Chef" nzLabel="Chef"></nz-option>
+      <nz-option nzValue="Waiter" nzLabel="Waiter"></nz-option>
+      <nz-option nzValue="Exective Chef" nzLabel="Exective Chef"></nz-option>
+      <nz-option nzValue="Prep Cook" nzLabel="Prep Cook"></nz-option>
+      <nz-option nzValue="Cashier" nzLabel="Cashier"></nz-option>
+      <nz-option nzValue="Manager" nzLabel="Manager"></nz-option>        
+      <nz-option nzValue="Bartender" nzLabel="Bartender"></nz-option>        
+      <nz-option nzValue="Dishwasher" nzLabel="Dishwasher"></nz-option>        
+      <nz-option nzValue="Server" nzLabel="Server"></nz-option>        
+      <nz-option nzValue="Line Cook" nzLabel="Line Cook"></nz-option>        
+      <nz-option nzValue="Assistant Manager" nzLabel="Assistant Manager"></nz-option>        
+      <nz-option nzValue="Kitchen Manager" nzLabel="Kitchen Manager"></nz-option>        
+      <nz-option nzValue="General Manager" nzLabel="General Manager"></nz-option>        
+      <nz-option nzValue="Pastry Chef" nzLabel="Pastry Chef"></nz-option>        
+      <nz-option nzValue="Beverage Manager" nzLabel="Beverage Manager"></nz-option>        
+      <nz-option nzValue="Busser" nzLabel="Busser"></nz-option>        
+  </nz-select>
           <nz-select id="select"
           [nzMaxTagCount]="3"
           [nzMaxTagPlaceholder]="tagPlaceHolder"
@@ -22,7 +40,7 @@
         </nz-select>
         <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
     </div>  
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center; margin-top: 5rem;">
             <button type="submit" (click)="submitForm()" nz-button style="font-family: 'GTPressura'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Give Access</button>
         </div>
         </div>
