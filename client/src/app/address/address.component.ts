@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiClientService } from '../api-client.service';
 
 @Component({
   selector: 'app-address',
@@ -14,12 +15,13 @@ export class AddressComponent {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private apiClientService: ApiClientService
   ) {
     this.addressForm = this.formBuilder.group({
       address: ['', [Validators.required]],
     });
-    
+    this.addressFormReady.emit(this.addressForm);
   }
 
   @ViewChild('mapSearchField') searchField: ElementRef | undefined;
@@ -40,7 +42,7 @@ export class AddressComponent {
           place.geometry?.location?.lng()
         );
       });
-      this.addressFormReady.emit(this.addressForm);
+      
     });
   }
   /**
@@ -62,6 +64,8 @@ export class AddressComponent {
     if (this.addressForm.valid) {
       const loginData = this.addressForm.value;
       console.log(loginData)
+      // this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
+      //   console.log('Applicant updated successfully:', response);
     }
   }
 }

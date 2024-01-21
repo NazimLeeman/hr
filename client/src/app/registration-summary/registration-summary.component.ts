@@ -40,7 +40,7 @@ export class RegistrationSummaryComponent implements OnInit {
     phoneNumber: FormControl<string>,
     // address: FormControl<string>;
     hourlyRate: FormControl<number>;
-    phoneNumberPrefix: FormControl<'+86' | '+87'>;
+    phoneNumberPrefix: FormControl<'+86' | '+87' | '+880'>;
     imageUrl: FormControl<string>;
   }>
 
@@ -185,7 +185,7 @@ additionOnInit(): void {
       // address: ['', [Validators.required]],
       imageUrl: [''],
       hourlyRate: [0, [Validators.required]],
-      phoneNumberPrefix: '+86' as '+86' | '+87'
+      phoneNumberPrefix: ['+880', Validators.required as any],
     })
   }
 

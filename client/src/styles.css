@@ -106,3 +106,7 @@ nz-descriptions .ant-descriptions-title {
     background: #fff;
     border-color: #26a366;
   }
+
+  .ant-select-single.ant-select-show-arrow .ant-select-selection-item, .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+    padding-right: 12px !important;
+  }
