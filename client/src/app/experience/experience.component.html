@@ -5,14 +5,29 @@
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Experiences</h1>
     
     <div *ngIf="experience && experience.length > 0" style="display: flex; flex-direction: column;">
-      <nz-descriptions *ngFor="let exp of experience"  nzBordered nzLayout="vertical">
+      <!-- <nz-descriptions *ngFor="let exp of experience"  nzBordered nzLayout="vertical">
         <nz-descriptions-item nzTitle="Restaurant Name" >{{ getExperiencePart(exp, 0) }}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Position">{{ getExperiencePart(exp, 1) }}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Employment Tenure">{{ formatDateRange(exp) }}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Responsibilites" [nzSpan]="2">
           {{ getExperiencePart(exp, 2) }}
         </nz-descriptions-item>
-      </nz-descriptions>
+      </nz-descriptions> -->
+      <div *ngFor="let exp of experience" style="background-color: #fafafa; width: auto; height: 16vh; margin-bottom: 1rem;">
+        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+          <div style="display: flex; margin-left: 1rem; margin-top: 1rem;">
+            <h1 style="font-size: x-large;">{{ getExperiencePart(exp, 1) }} at {{ getExperiencePart(exp, 0) }}</h1>
+          </div>
+          <div style="display: flex; margin-right: 1rem; margin-top: 1rem;">
+            <h2>{{ formatDateRange(exp) }}</h2>
+          </div>
+        </div> 
+        <div style="display: flex; margin-left: 2rem;">
+          <li style="font-size: 1.2rem;">
+            {{ getExperiencePart(exp, 2) }}
+          </li>
+        </div>
+      </div>
     </div>
     
     <div>
