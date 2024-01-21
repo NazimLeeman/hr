@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
   filteredJobs: any[] = [];
   searchTerm = '';
   value = '';
+  value1 = 1;
+  value2 = 0;
 
   cards: any[] = [];
 
