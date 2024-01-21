@@ -55,7 +55,7 @@
 
   #hourlyRate {
     margin-left: 1rem;
-    width: 24rem;
+    width: 16vw;
   }
 
   #phoneNumber {
@@ -95,4 +95,8 @@ input[type="number"] {
   /* border-radius: 10px; */
 }
   
-  
+  #select {
+    width: 6vw;
+    padding-top: .5rem;
+    /* margin-left: 1rem; */
+  }

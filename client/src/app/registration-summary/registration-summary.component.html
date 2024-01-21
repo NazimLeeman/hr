@@ -53,10 +53,15 @@
           <input nz-input style="font-size: medium; margin-top: .5rem;"  [value]="phoneNumber" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" >
         </nz-form-control>
       </nz-form-item> -->
-      <nz-form-item >
+      <nz-form-item style="margin-left: 12rem;">
         <label style="font-size: medium;">Enter your expected hourly rate</label>
         <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
-          <input nz-input style="font-size: medium; margin-top: .5rem;"  [value]="hourlyRate" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" >
+          <div style="display: flex;">
+            <input nz-input style="font-size: medium; margin-top: .5rem;"  [value]="hourlyRate" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" >
+            <!-- <nz-select id="select" nzAllowClear nzPlaceHolder="USD">
+              <nz-option *ngFor="let option of currencyOptions" [nzValue]="option.name" [nzLabel]="option.name"></nz-option>
+            </nz-select> -->
+          </div>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item >
@@ -68,6 +73,10 @@
           <app-address></app-address>
         </div>
       </nz-form-item>
+      <div style="display: flex; flex-direction: column; margin-left: 12rem;">
+        <label style="font-size: medium;">This would be your approximate Monthly Salary</label>
+        <input style="background-color: #F3F4F6; margin-top: .5rem; margin-left: 1rem; width: 16vw;" type="text" [value]="salaryCal()" readonly>
+      </div>
      
     </form>
     <div style="display: flex; justify-content: center;  padding-bottom: 1rem;">

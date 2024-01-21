@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -16,6 +16,7 @@ import { CloudinaryService } from '../cloudinary.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { CurrencyService } from '../currency.service';
 
 @Component({
   selector: 'app-registration-summary',
@@ -35,6 +36,17 @@ export class RegistrationSummaryComponent implements OnInit {
   phoneNumber: string = '';
   password: string = '';
   imageUrl = '';
+  currencyOptions: any[] = [];
+  selectedCurrency = '';
+  selectedCurrencySymbol: string = '';
+
+  public isDataAvailable = false;
+  public failedToLoad = false;
+  private from: any;
+  private to: any;
+  public amountValue: any;
+  @ViewChild('from') fromCmp: any;
+  @ViewChild('to') toCmp: any;
 
   validateForm: FormGroup<{
     phoneNumber: FormControl<string>,
@@ -58,6 +70,7 @@ ngOnInit(): void {
           this.password = '********';
 
           this.additionOnInit();
+          this.currencyOnInit();
           this.isLoading = true
       },
       (error) => {
@@ -121,6 +134,23 @@ additionOnInit(): void {
     }
   }
 
+  currencyOnInit(): void {
+    this.currency.getCurrenciesPromise().then((data) => {
+      this.from = data[0];
+      this.to = data[1];
+      this.currencyOptions = data; 
+      this.isDataAvailable = true
+      console.log(this.currencyOptions)
+    },
+      () =>{
+      this.failedToLoad = true;
+      }
+    );
+
+    let localAmount = localStorage.getItem("amount");
+    this.amountValue= localAmount ? localAmount : (1).toFixed(2);
+  }
+
   uploadedImageUrl: string | undefined;
   private successMessageDisplayed = false;
 
@@ -175,11 +205,21 @@ additionOnInit(): void {
           this.handleChange(fakeEvent);
         }
       );
-  
-    
   }
 
-  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService) {
+  salaryCal() {
+    const result = this.hourlyRate * 172;
+    return `${result}$`
+  }
+
+  currencySelectionChanged(event: Event): void {
+    console.log('event');
+    const selectedValue: any =  ''
+
+    this.selectedCurrencySymbol = selectedValue ? selectedValue.symbol || '' : '';
+  }
+
+  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService, private currency: CurrencyService) {
     this.validateForm = this.fb.group({
       phoneNumber: ['', [Validators.required]],
       // address: ['', [Validators.required]],
@@ -188,5 +228,4 @@ additionOnInit(): void {
       phoneNumberPrefix: ['+880', Validators.required as any],
     })
   }
-
 }
