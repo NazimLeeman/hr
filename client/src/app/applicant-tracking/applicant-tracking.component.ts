@@ -46,10 +46,13 @@ interface Application {
 })
 export class ApplicantTrackingComponent {
   listOfData: Application[] = [];
+  apiData: any[] = [];
   isVisible = false;
+  isVisibleExperience = false;
  isOkLoading = false;
  selectedApplicantId = 0;
  selectedApplicantData = {};
+ selectedApplicantExperience: any[] = [];
  @Input() signInRoute: string = '/admin/position';
 
   constructor(private router: Router, private apiClientService: ApiClientService, private modalService: NzModalService) {}
@@ -61,7 +64,8 @@ export class ApplicantTrackingComponent {
   loadApplicantsData(): void {
     this.apiClientService.getAppliedApplicant().subscribe(
       (data: any) => {
-        console.log('API Response:', data);
+          this.apiData = data.applicants[0].applicant.experience;
+        console.log('API Response:', data, this.apiData);
 
         const restaurantId = 1;
 
@@ -154,6 +158,19 @@ export class ApplicantTrackingComponent {
   
   handleCancel(): void {
     this.isVisible = false;
+    this.isVisibleExperience = false;
+  }
+
+  showModalExp(applicantId: number, experience: string[]): void {
+    this.selectedApplicantId = applicantId;
+    this.selectedApplicantExperience = experience;
+    this.isVisibleExperience = true;
+    console.log(this.selectedApplicantId)
+    console.log(this.selectedApplicantExperience)
+  }
+
+  close() {
+    this.isVisibleExperience = false;
   }
 
 }

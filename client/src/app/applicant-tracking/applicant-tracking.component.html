@@ -24,10 +24,11 @@
                     {{ skill }}
                   </nz-tag>
             </td>
-            <td *ngFor="let exp of data.applicant.experience">{{ formatExperience([exp]) }}</td>
             <td>
-              <!-- {{data.applicant.hourlyRate | currency}}
-                <nz-divider nzType="vertical"></nz-divider> -->
+              <button nz-button [nzType]="'primary'" (click)="showModalExp(data.applicant.id, data.applicant.experience)"><span>View Experience</span></button>        
+            </td>
+            <!-- <td *ngFor="let exp of data.applicant.experience">{{ formatExperience([exp]) }}</td> -->
+            <td>
                 {{data.job.hourlyRate | currency}}
             </td>
             <td>{{data.job.jobRole}}</td>
@@ -54,6 +55,13 @@
       >
         <p *nzModalContent>Hire this applicant.</p>
             </nz-modal>
+      </div>
+      <div>
+        <nz-modal [(nzVisible)]="isVisibleExperience" nzTitle="Experiences" (nzOnCancel)="close()" (nzOnOk)="handleCancel()">
+          <ng-container *nzModalContent>
+            <p *ngFor="let exp of apiData">{{ formatExperience([exp]) }}</p>
+          </ng-container>
+        </nz-modal>
       </div>
     <!-- <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
       <button type="submit"  nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Find Job</button>
