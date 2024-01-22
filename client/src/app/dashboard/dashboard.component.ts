@@ -22,6 +22,9 @@ export class DashboardComponent implements OnInit {
   value = '';
   value1 = 1;
   value2 = 0;
+  skillData: any[] = [];
+  listOfSkillOption: Array<{ value: string, text: string}> = [];
+  selectedSkillValue = null;
 
   cards: any[] = [];
 
@@ -163,40 +166,6 @@ export class DashboardComponent implements OnInit {
           this.listOfOption = filteredOptions;
           console.log(this.listOfOption);
           console.log(this.selectedValue);
-          // this.value = this.listOfOption[0].text
-          // this.apiClientService.searchJob(this.value).subscribe(
-          //   (data: any) => {
-          //     console.log('API Response:', data);
-          //     this.apiData = data.data;
-          //     this.cards = [];
-          //     this.apiData.forEach((apiDataItem, index) => {
-          //       const newCard = {
-          //         jobId: apiDataItem.id || -1,
-          //         jobNature: apiDataItem.jobNature || '',
-          //         skillTags: apiDataItem.skillTags || [],
-          //         restaurantId: apiDataItem.restaurantId || -1,
-          //         role: apiDataItem.jobRole || 'Default Role',
-          //         salary: apiDataItem.hourlyRate || 'Default Salary',
-          //         description: apiDataItem.jobDescription || 'Default Description',
-          //         showDetails: false,
-          //       };
-      
-          //       // console.log(`New Card ${index + 1}:`, newCard);
-      
-          //       if (this.cards.length > 0) {
-          //         this.selectCard(this.cards[0]);
-          //       }
-      
-          //       this.cards.push(newCard);
-      
-          //       if (this.selectedCard && this.selectedCard === apiDataItem) {
-          //         this.selectCard(newCard);
-          //       }
-          //     })
-          //   }, (error) => {
-          //     console.error('Error fetching data from the API', error);
-          //   }
-          // );
         } else {
           console.error('Invalid response format:', data);
         }
@@ -354,35 +323,66 @@ export class DashboardComponent implements OnInit {
     }
   }
   
-  // searchJobs() {
-  //   console.log('clicked')
-  //   if (this.searchTerm.trim() === '') {
-  //     this.jobs = [];
-  //     return;
-  //   } else {
-  //     setTimeout(() => {
-  //       this.jobs = [];
-  //       this.apiClientService.searchJob(this.searchTerm).subscribe((jobs) => {
-  //         this.jobs = jobs;
-  //         console.log('Jobs:', jobs);
-  //       });
-  //     }, 1000); 
-  //   }
-  // }
-  // searchJobs(searchTerm: KeyboardEvent) {
-  //   console.log('clicked')
-  //   if (searchTerm) {
-  //     const element = searchTerm.target as HTMLInputElement;
-  //     if (element.value.length > 0) {
-  //       this.apiClientService.searchJob(element.value).subscribe(
-  //         (data) => {
-  //           this.jobs = data
-  //           console.log(this.jobs)
-  //         }
-  //       )
-  //     }
-  //   }
-  // }
+  searchSkill(value: string): void {
+    this.apiClientService.getAllJobForRestaurant().subscribe(
+      (data: any) => {
+        if (data) {
+          this.listOfSkillOption = data.data
+  .flatMap((item: any) => item.skillTags) 
+  .filter((tag: string) => tag.toLowerCase().includes(value.toLowerCase())) 
+  .map((tag: string) => ({ value: tag, text: tag })); 
+
+this.listOfSkillOption = this.listOfSkillOption.filter(
+  (tag, index, self) =>
+    index ===
+    self.findIndex((t) => t.value.toLowerCase() === tag.value.toLowerCase())
+);
+          console.log('Skills:', this.listOfSkillOption);
+          console.log(this.selectedSkillValue);
+        } else {
+          console.error('Invalid response format:', data);
+        }
+      },
+      (error) => {
+        console.error('Error during skill Tags search:', error);
+      }
+    );
+  }
+
+  onSkillOptionSelected(newValue: string): void {
+    console.log('Selected value:', newValue);
+    this.apiClientService.searchJob(newValue).subscribe(
+            (data: any) => {
+              console.log('API Response:', data);
+              this.apiData = data.data;
+              this.cards = [];
+              this.apiData.forEach((apiDataItem, index) => {
+                const newCard = {
+                  jobId: apiDataItem.id || -1,
+                  jobNature: apiDataItem.jobNature || '',
+                  skillTags: apiDataItem.skillTags || [],
+                  restaurantId: apiDataItem.restaurantId || -1,
+                  role: apiDataItem.jobRole || 'Default Role',
+                  salary: apiDataItem.hourlyRate || 'Default Salary',
+                  description: apiDataItem.jobDescription || 'Default Description',
+                  showDetails: false,
+                };
+      
+                // console.log(`New Card ${index + 1}:`, newCard);
+                this.cards.push(newCard);
+      
+                if (this.selectedCard && this.selectedCard === apiDataItem) {
+                  this.selectCard(newCard);
+                }
+              })
+              if (this.cards.length > 0) {
+                this.selectCard(this.cards[0]);
+              }
+            }, (error) => {
+              console.error('Error fetching data from the API', error);
+            }
+          );
+  }
 }
 
 

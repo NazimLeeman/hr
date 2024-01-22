@@ -110,3 +110,7 @@ nz-descriptions .ant-descriptions-title {
   .ant-select-single.ant-select-show-arrow .ant-select-selection-item, .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
     padding-right: 12px !important;
   }
+
+  /* .ant-slider-rail {
+    width: 12rem;
+  } */
