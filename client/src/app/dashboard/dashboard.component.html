@@ -88,6 +88,9 @@
 <div style="background-color: #F3F4F6; height: .1rem; width: 50%; position: relative; left: 25%;">
 </div>
 </div>
+<div style="height: 1.2rem; margin-top: .5rem; margin-left: 19rem;">
+  <h1 style="color: #020202; font-weight: bold;">These are Best Matches for you....</h1>
+</div>
   <div style="display: flex; justify-content: center; margin-top: .5rem; ">
     <div>
       <app-job-card *ngFor="let card of cards" [card]="card" [isSliced]="true" [showButton]="true" (click)="selectCard(card)" ></app-job-card>

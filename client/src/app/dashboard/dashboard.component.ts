@@ -183,7 +183,7 @@ export class DashboardComponent implements OnInit {
   onOptionSelected(newValue: string): void {
     console.log('Selected value:', newValue);
     if(this.filteredDataJobType.length > 0 || this.filteredDataSkills.length > 0) {
-      let mergedData = [...this.filteredDataJobType, ... this.filteredDataSkills];
+      let mergedData = Array.from(new Set([...this.filteredDataJobType, ... this.filteredDataSkills]));
       console.log('mergeData:',mergedData)
       this.filteredDataJobRole = mergedData.filter((apiDataItem:any) => {
         return apiDataItem.jobRole.toLowerCase().includes(newValue.toLowerCase());  
@@ -331,7 +331,7 @@ export class DashboardComponent implements OnInit {
 
   onJobTypeChange(): void {
     if(this.filteredDataJobRole.length > 0 || this.filteredDataSkills.length > 0) {
-      let mergedData = [...this.filteredDataJobRole,...this.filteredDataSkills]
+      let mergedData = Array.from(new Set([...this.filteredDataJobRole,...this.filteredDataSkills]));
       if(this.selectedJobType === 'C') {
         this.filteredDataJobType = mergedData.filter((apiDataItem: any) => {
           return apiDataItem.jobNature === 'Part-Time' || apiDataItem.jobNature === 'Full-Time';
@@ -448,7 +448,7 @@ this.listOfSkillOption = this.listOfSkillOption.filter(
   onSkillOptionSelected(newValue: string): void {
     console.log('Selected value:', newValue);
     if (this.filteredDataJobType.length > 0 || this.filteredDataJobRole.length > 0) {
-      let mergedData = [...this.filteredDataJobType, ...this.filteredDataJobRole]
+      let mergedData = Array.from(new Set([...this.filteredDataJobType, ...this.filteredDataJobRole]));
       this.filteredDataSkills = mergedData.filter((apiDataItem: any) =>
         apiDataItem.skillTags.includes(newValue)
       );
