@@ -3,6 +3,7 @@ import { ApiClientService } from '../api-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { switchMap } from 'rxjs/operators';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,12 +26,15 @@ export class DashboardComponent implements OnInit {
   skillData: any[] = [];
   listOfSkillOption: Array<{ value: string, text: string}> = [];
   selectedSkillValue = null;
+  filteredDataJobType: any[] = [];
+  filteredDataJobRole: any[] = [];
+  filteredDataSkills: any[] = [];
 
   cards: any[] = [];
 
 
   applicantId: number = 0;
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private apiClientService: ApiClientService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private apiClientService: ApiClientService, private modal: NzModalService) {}
   paramOnInit(): void {
       this.route.params.subscribe(params => {
         this.applicantId = +params['applicantId'] || 0;
@@ -178,12 +182,23 @@ export class DashboardComponent implements OnInit {
 
   onOptionSelected(newValue: string): void {
     console.log('Selected value:', newValue);
-    this.apiClientService.searchJob(newValue).subscribe(
-            (data: any) => {
-              console.log('API Response:', data);
-              this.apiData = data.data;
+    if(this.filteredDataJobType.length > 0 || this.filteredDataSkills.length > 0) {
+      let mergedData = [...this.filteredDataJobType, ... this.filteredDataSkills];
+      console.log('mergeData:',mergedData)
+      this.filteredDataJobRole = mergedData.filter((apiDataItem:any) => {
+        return apiDataItem.jobRole.toLowerCase().includes(newValue.toLowerCase());  
+      })
+    } else {
+      this.filteredDataJobRole = this.apiData.filter((apiDataItem: any) => {
+        return apiDataItem.jobRole.toLowerCase().includes(newValue.toLowerCase());
+      });
+    }
+    console.log('Filtered Data:', this.filteredDataJobRole);
+            if(!this.filteredDataJobRole.length) {
+              this.error();
+            }
               this.cards = [];
-              this.apiData.forEach((apiDataItem, index) => {
+              this.filteredDataJobRole.forEach((apiDataItem, index) => {
                 const newCard = {
                   jobId: apiDataItem.id || -1,
                   jobNature: apiDataItem.jobNature || '',
@@ -194,12 +209,7 @@ export class DashboardComponent implements OnInit {
                   description: apiDataItem.jobDescription || 'Default Description',
                   showDetails: false,
                 };
-      
-                // console.log(`New Card ${index + 1}:`, newCard);
-      
-                if (this.cards.length > 0) {
-                  this.selectCard(this.cards[0]);
-                }
+                
       
                 this.cards.push(newCard);
       
@@ -207,119 +217,171 @@ export class DashboardComponent implements OnInit {
                   this.selectCard(newCard);
                 }
               })
-            }, (error) => {
-              console.error('Error fetching data from the API', error);
-            }
-          );
+              if (this.cards.length > 0) {
+                this.selectCard(this.cards[0]);
+              }
   }
 
+  // onJobTypeChange(): void {
+  //   if (this.selectedJobType === 'A') {
+  //     this.apiClientService.getAllPartTimeJob().subscribe(
+  //       (data: any) => {
+  //         console.log('API Response:', data);
+  //         this.apiData = data.data;
+  //         this.cards = [];
+  //         this.apiData.forEach((apiDataItem, index) => {
+  //           const newCard = {
+  //             jobId: apiDataItem.id || -1,
+  //             jobNature: apiDataItem.jobNature || '',
+  //             skillTags: apiDataItem.skillTags || [],
+  //             restaurantId: apiDataItem.restaurantId || -1,
+  //             role: apiDataItem.jobRole || 'Default Role',
+  //             salary: apiDataItem.hourlyRate || 'Default Salary',
+  //             description: apiDataItem.jobDescription || 'Default Description',
+  //             showDetails: false,
+  //           };
+  
+  
+  //           if (this.cards.length > 0) {
+  //             this.selectCard(this.cards[0]);
+  //           }
+  
+  //           this.cards.push(newCard);
+  
+  //           if (this.selectedCard && this.selectedCard === apiDataItem) {
+  //             this.selectCard(newCard);
+  //           }
+  //         })
+  //       },
+  //     (error) => {
+  //       console.error('Error fetching data from the API', error);
+  //     }
+  //   );
+  //   } else if (this.selectedJobType === 'B') {
+  //     this.apiClientService.getAllFullTimeJob().subscribe(
+  //       (data: any) => {
+  //         console.log('API Response:', data);
+  //         this.apiData = data.data;
+  //         this.cards = [];
+  //         this.apiData.forEach((apiDataItem, index) => {
+  //           const newCard = {
+  //             jobId: apiDataItem.id || -1,
+  //             jobNature: apiDataItem.jobNature || '',
+  //             skillTags: apiDataItem.skillTags || [],
+  //             restaurantId: apiDataItem.restaurantId || -1,
+  //             role: apiDataItem.jobRole || 'Default Role',
+  //             salary: apiDataItem.hourlyRate || 'Default Salary',
+  //             description: apiDataItem.jobDescription || 'Default Description',
+  //             showDetails: false,
+  //           };
+  
+  
+  //           if (index === 0) {
+  //             this.selectCard(newCard);
+  //           }
+  
+  //           this.cards.push(newCard);
+  
+  //           if (this.selectedCard && this.selectedCard === apiDataItem) {
+  //             this.selectCard(newCard);
+  //           }
+  //         })
+  //       },
+  //     (error) => {
+  //       console.error('Error fetching data from the API', error);
+  //     }
+  //   );
+  //   } else if (this.selectedJobType === 'C') {
+  //     this.apiClientService.getAllJobForRestaurant().subscribe(
+  //       (data: any) => {
+  //         console.log('API Response:', data);
+  //         this.apiData = data.data;
+  //         this.cards = [];
+  //         this.apiData.forEach((apiDataItem, index) => {
+  //           const newCard = {
+  //             jobId: apiDataItem.id || -1,
+  //             jobNature: apiDataItem.jobNature || '',
+  //             skillTags: apiDataItem.skillTags || [],
+  //             restaurantId: apiDataItem.restaurantId || -1,
+  //             role: apiDataItem.jobRole || 'Default Role',
+  //             salary: apiDataItem.hourlyRate || 'Default Salary',
+  //             description: apiDataItem.jobDescription || 'Default Description',
+  //             showDetails: false,
+  //           };
+  
+  //           console.log(`New Card ${index + 1}:`, newCard);
+  
+  //           if (this.cards.length > 0) {
+  //             this.selectCard(this.cards[0]);
+  //           }
+  
+  //           this.cards.push(newCard);
+  
+  //           if (this.selectedCard && this.selectedCard === apiDataItem) {
+  //             this.selectCard(newCard);
+  //           }
+  //         })
+  //       },
+  //     (error) => {
+  //       console.error('Error fetching data from the API', error);
+  //     }
+  //   );
+  //   }
+  // }
+
   onJobTypeChange(): void {
-    if (this.selectedJobType === 'A') {
-      this.apiClientService.getAllPartTimeJob().subscribe(
-        (data: any) => {
-          console.log('API Response:', data);
-          this.apiData = data.data;
-          this.cards = [];
-          this.apiData.forEach((apiDataItem, index) => {
-            const newCard = {
-              jobId: apiDataItem.id || -1,
-              jobNature: apiDataItem.jobNature || '',
-              skillTags: apiDataItem.skillTags || [],
-              restaurantId: apiDataItem.restaurantId || -1,
-              role: apiDataItem.jobRole || 'Default Role',
-              salary: apiDataItem.hourlyRate || 'Default Salary',
-              description: apiDataItem.jobDescription || 'Default Description',
-              showDetails: false,
-            };
-  
-            // console.log(`New Card ${index + 1}:`, newCard);
-  
-            if (this.cards.length > 0) {
-              this.selectCard(this.cards[0]);
-            }
-  
-            this.cards.push(newCard);
-  
-            if (this.selectedCard && this.selectedCard === apiDataItem) {
-              this.selectCard(newCard);
-            }
-          })
-        },
-      (error) => {
-        console.error('Error fetching data from the API', error);
+    if(this.filteredDataJobRole.length > 0 || this.filteredDataSkills.length > 0) {
+      let mergedData = [...this.filteredDataJobRole,...this.filteredDataSkills]
+      if(this.selectedJobType === 'C') {
+        this.filteredDataJobType = mergedData.filter((apiDataItem: any) => {
+          return apiDataItem.jobNature === 'Part-Time' || apiDataItem.jobNature === 'Full-Time';
+        });
       }
-    );
-    } else if (this.selectedJobType === 'B') {
-      this.apiClientService.getAllFullTimeJob().subscribe(
-        (data: any) => {
-          console.log('API Response:', data);
-          this.apiData = data.data;
-          this.cards = [];
-          this.apiData.forEach((apiDataItem, index) => {
-            const newCard = {
-              jobId: apiDataItem.id || -1,
-              jobNature: apiDataItem.jobNature || '',
-              skillTags: apiDataItem.skillTags || [],
-              restaurantId: apiDataItem.restaurantId || -1,
-              role: apiDataItem.jobRole || 'Default Role',
-              salary: apiDataItem.hourlyRate || 'Default Salary',
-              description: apiDataItem.jobDescription || 'Default Description',
-              showDetails: false,
-            };
-  
-            // console.log(`New Card ${index + 1}:`, newCard);
-  
-            if (index === 0) {
-              // Select the first card by default
-              this.selectCard(newCard);
-            }
-  
-            this.cards.push(newCard);
-  
-            if (this.selectedCard && this.selectedCard === apiDataItem) {
-              this.selectCard(newCard);
-            }
-          })
-        },
-      (error) => {
-        console.error('Error fetching data from the API', error);
+      else
+      {
+        this.filteredDataJobType = mergedData.filter((apiDataItem: any) => {
+          return apiDataItem.jobNature === this.selectedJobType;
+        });
       }
-    );
-    } else if (this.selectedJobType === 'C') {
-      this.apiClientService.getAllJobForRestaurant().subscribe(
-        (data: any) => {
-          console.log('API Response:', data);
-          this.apiData = data.data;
-          this.cards = [];
-          this.apiData.forEach((apiDataItem, index) => {
-            const newCard = {
-              jobId: apiDataItem.id || -1,
-              jobNature: apiDataItem.jobNature || '',
-              skillTags: apiDataItem.skillTags || [],
-              restaurantId: apiDataItem.restaurantId || -1,
-              role: apiDataItem.jobRole || 'Default Role',
-              salary: apiDataItem.hourlyRate || 'Default Salary',
-              description: apiDataItem.jobDescription || 'Default Description',
-              showDetails: false,
-            };
-  
-            console.log(`New Card ${index + 1}:`, newCard);
-  
-            if (this.cards.length > 0) {
-              this.selectCard(this.cards[0]);
-            }
-  
-            this.cards.push(newCard);
-  
-            if (this.selectedCard && this.selectedCard === apiDataItem) {
-              this.selectCard(newCard);
-            }
-          })
-        },
-      (error) => {
-        console.error('Error fetching data from the API', error);
+        console.log('Filtered Data Job Type:', this.filteredDataJobType)
+    } else {
+        if(this.selectedJobType === 'C') {
+          this.filteredDataJobType = this.apiData.filter((apiDataItem: any) => {
+            return apiDataItem.jobNature === 'Part-Time' || apiDataItem.jobNature === 'Full-Time';
+          });
+        }
+        else
+        {
+          this.filteredDataJobType = this.apiData.filter((apiDataItem: any) => {
+            return apiDataItem.jobNature === this.selectedJobType;
+          });
+        }
+          console.log('Filtered Data Job Type:', this.filteredDataJobType)
+    }
+    console.log('Filtered Data:', this.filteredDataJobRole);
+    if(!this.filteredDataJobType.length) {
+      this.error();
+    }
+      this.cards = [];
+      this.filteredDataJobType.forEach((apiDataItem, index) => {
+      const newCard = {
+        jobId: apiDataItem.id || -1,
+        jobNature: apiDataItem.jobNature || '',
+        skillTags: apiDataItem.skillTags || [],
+        restaurantId: apiDataItem.restaurantId || -1,
+        role: apiDataItem.jobRole || 'Default Role',
+        salary: apiDataItem.hourlyRate || 'Default Salary',
+        description: apiDataItem.jobDescription || 'Default Description',
+        showDetails: false,
+      };
+      this.cards.push(newCard);
+
+      if (this.selectedCard && this.selectedCard === apiDataItem) {
+        this.selectCard(newCard);
       }
-    );
+    });
+    if (this.cards.length > 0) {
+      this.selectCard(this.cards[0]);
     }
   }
   
@@ -349,14 +411,58 @@ this.listOfSkillOption = this.listOfSkillOption.filter(
     );
   }
 
+  // onSkillOptionSelected(newValue: string): void {
+  //   console.log('Selected value:', newValue);
+  //   this.apiClientService.searchJob(newValue).subscribe(
+  //           (data: any) => {
+  //             console.log('API Response:', data);
+  //             this.apiData = data.data;
+  //             this.cards = [];
+  //             this.apiData.forEach((apiDataItem, index) => {
+  //               const newCard = {
+  //                 jobId: apiDataItem.id || -1,
+  //                 jobNature: apiDataItem.jobNature || '',
+  //                 skillTags: apiDataItem.skillTags || [],
+  //                 restaurantId: apiDataItem.restaurantId || -1,
+  //                 role: apiDataItem.jobRole || 'Default Role',
+  //                 salary: apiDataItem.hourlyRate || 'Default Salary',
+  //                 description: apiDataItem.jobDescription || 'Default Description',
+  //                 showDetails: false,
+  //               };
+      
+  //               // console.log(`New Card ${index + 1}:`, newCard);
+  //               this.cards.push(newCard);
+      
+  //               if (this.selectedCard && this.selectedCard === apiDataItem) {
+  //                 this.selectCard(newCard);
+  //               }
+  //             })
+  //             if (this.cards.length > 0) {
+  //               this.selectCard(this.cards[0]);
+  //             }
+  //           }, (error) => {
+  //             console.error('Error fetching data from the API', error);
+  //           }
+  //         );
+  // }
   onSkillOptionSelected(newValue: string): void {
     console.log('Selected value:', newValue);
-    this.apiClientService.searchJob(newValue).subscribe(
-            (data: any) => {
-              console.log('API Response:', data);
-              this.apiData = data.data;
-              this.cards = [];
-              this.apiData.forEach((apiDataItem, index) => {
+    if (this.filteredDataJobType.length > 0 || this.filteredDataJobRole.length > 0) {
+      let mergedData = [...this.filteredDataJobType, ...this.filteredDataJobRole]
+      this.filteredDataSkills = mergedData.filter((apiDataItem: any) =>
+        apiDataItem.skillTags.includes(newValue)
+      );
+    } else {
+      this.filteredDataSkills = this.apiData.filter((apiDataItem: any) =>
+        apiDataItem.skillTags.includes(newValue)
+      );
+    }
+    console.log('filteredSkills:',this.filteredDataSkills)
+    if(!this.filteredDataSkills.length) {
+      this.error();
+    }
+    this.cards = [];
+              this.filteredDataSkills.forEach((apiDataItem, index) => {
                 const newCard = {
                   jobId: apiDataItem.id || -1,
                   jobNature: apiDataItem.jobNature || '',
@@ -378,11 +484,21 @@ this.listOfSkillOption = this.listOfSkillOption.filter(
               if (this.cards.length > 0) {
                 this.selectCard(this.cards[0]);
               }
-            }, (error) => {
-              console.error('Error fetching data from the API', error);
-            }
-          );
   }
+
+  error(): void {
+    this.modal.error({
+      nzTitle: 'Sorry',
+      nzContent: 'No Matches were found....',
+      nzOnOk: () => {
+        location.reload();
+      },
+      nzOnCancel: () => {
+        location.reload();
+      },
+    });
+  }
+  
 }
 
 

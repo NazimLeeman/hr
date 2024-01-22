@@ -63,12 +63,12 @@
   <div >
   <label style="font-weight: bold; margin-right: 1rem;">Job Type</label>
   <nz-radio-group  nzButtonStyle="solid" [(ngModel)]="selectedJobType" (ngModelChange)="onJobTypeChange()">
-    <label nz-radio-button nzValue="A">Part-Time</label>
-    <label nz-radio-button nzValue="B">Full-Time</label>
+    <label nz-radio-button nzValue="Part-Time">Part-Time</label>
+    <label nz-radio-button nzValue="Full-Time">Full-Time</label>
     <label nz-radio-button nzValue="C">Both</label>
   </nz-radio-group>
 </div>
-<div style="display: flex; margin-left: 1rem;">
+<div style="display: flex;margin-right: 3rem;">
   <label style="font-weight: bold; margin-right: 1rem;">Distance</label>
           <nz-row [ngStyle]="{ width: '24rem' }">
             <nz-col nzSpan="12">
