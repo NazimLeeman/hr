@@ -29,6 +29,8 @@ export class DashboardComponent implements OnInit {
   filteredDataJobType: any[] = [];
   filteredDataJobRole: any[] = [];
   filteredDataSkills: any[] = [];
+  applicantData: any;
+  skillsForCompare: any[] = []
 
   cards: any[] = [];
 
@@ -45,21 +47,22 @@ export class DashboardComponent implements OnInit {
 
   
 
-  getApplicantData(): void {
-    this.route.params.pipe(
-      switchMap((params) => {
-          this.applicantId = params['applicantId'];
-          return this.apiClientService.getRegisterData(this.applicantId);
-      })
-  ).subscribe(
-      (data: any) => {
-        console.log('Applicant Data Response:', data);
-      },
-      (error) => {
-          console.error('Error fetching data from the API', error);
-      }
-  );
-  }
+  // getApplicantData(): void {
+  //   this.route.params.pipe(
+  //     switchMap((params) => {
+  //         this.applicantId = params['applicantId'];
+  //         return this.apiClientService.getApplicantData(this.applicantId);
+  //     })
+  // ).subscribe(
+  //     (data: any) => {
+  //       this.applicantData = data.data.skillTags;
+  //       console.log('Applicant Data Response:', this.applicantData);
+  //     },
+  //     (error) => {
+  //         console.error('Error fetching data from the API', error);
+  //     }
+  // );
+  // }
   
   selectCard(card: any) {
     this.selectedCard = card;
@@ -86,10 +89,23 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params.pipe(
+      switchMap((params) => {
+          this.applicantId = params['applicantId'];
+          return this.apiClientService.getApplicantData(this.applicantId);
+      })
+  ).subscribe(
+      (data: any) => {
+        this.applicantData = data.data.skillTags;
+        console.log('Applicant Data Response:', this.applicantData);
+      },
+      (error) => {
+          console.error('Error fetching data from the API', error);
+      }
+  );
     
-    this.anotherOnInit();
     this.paramOnInit();
-    // this.getApplicantData();
+    this.anotherOnInit();
     // this.selectCard(this.cards[0]);
   }
 
@@ -98,12 +114,16 @@ export class DashboardComponent implements OnInit {
       (data: any) => {
         console.log('API Response:', data);
         this.apiData = data.data;
+        this.skillsForCompare = data.data
         this.cards = [];
-  
+
+        console.log('comparing:',this.applicantData, this.skillsForCompare);
+        // let percentage = this.calculateMatchingPercentage(this.jobs, this.skillsForCompare)
+        // console.log('Percentage:',percentage)
+        console.log('matching',this.calculateAndPrintMatchingPercentage())
         if (this.apiData.length > 0) {
           let filteredData = this.apiData;
   
-          // Filter based on radioValue
           if (this.radioValue === 'A') {
             filteredData = filteredData.filter(item => item.jobNature === 'Part-Time');
           } else if (this.radioValue === 'B') {
@@ -121,8 +141,6 @@ export class DashboardComponent implements OnInit {
               description: apiDataItem.jobDescription || 'Default Description',
               showDetails: false,
             };
-  
-            // console.log(`New Card ${index + 1}:`, newCard);
   
             if (this.cards.length > 0) {
               this.selectCard(this.cards[0]);
@@ -498,6 +516,33 @@ this.listOfSkillOption = this.listOfSkillOption.filter(
       },
     });
   }
+
+  calculateMatchingPercentage(job: any, applicantSkills: string[]): number {
+    const jobSkills = job.skillTags;
+    console.log('jobskills:',jobSkills, applicantSkills)
+    if (!jobSkills) {
+      return 0; 
+    }
+  
+    const commonSkills = jobSkills.filter((skill:any) => applicantSkills.includes(skill));
+    const matchingPercentage = (commonSkills.length / applicantSkills.length) * 100;
+    console.log('commonSKills', commonSkills)
+    return matchingPercentage;
+  }
+  
+  calculateAndPrintMatchingPercentage(): void {
+    if (!this.applicantData) {
+      console.error('Applicant skills not available.');
+      return;
+    }
+  
+    this.skillsForCompare.forEach(job => {
+      const matchingPercentage = this.calculateMatchingPercentage(job, this.applicantData);
+      console.log(`Job ID ${job.id}: Matching Percentage - ${matchingPercentage}%`);
+    });
+  }
+  
+  
   
 }
 

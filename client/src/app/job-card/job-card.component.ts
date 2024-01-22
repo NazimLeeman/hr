@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ApiClientService } from '../api-client.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-job-card',
@@ -17,6 +18,7 @@ export class JobCardComponent {
  selectedJobId = 0;
  selectedRestaurantId = 0;
  applicantId = 0;
+ applicantData:any;
 
  toggleCardDetails(card: any): void {
   card.showDetails = !card.showDetails;
@@ -37,7 +39,25 @@ ngOnInit(): void {
   this.route.params.subscribe(params => {
     this.applicantId = +params['applicantId'] || 0;
   });
+  // this.getApplicantData();
 }
+
+// getApplicantData(): void {
+//   this.route.params.pipe(
+//     switchMap((params) => {
+//         this.applicantId = params['applicantId'];
+//         return this.apiClientService.getApplicantData(this.applicantId);
+//     })
+// ).subscribe(
+//     (data: any) => {
+//       console.log('Applicant Data from job card Response:', data.data.skillTags, this.card.skillTags);
+//       this.applicantData = data.data.skillTags;
+//     },
+//     (error) => {
+//         console.error('Error fetching data from the API', error);
+//     }
+// );
+// }
 
 handleOk(): void {
   const applicantId = this.applicantId;
