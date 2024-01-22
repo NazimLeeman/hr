@@ -42,35 +42,25 @@
     </nz-select>
     </div>
   </div>
-  <div>
+  <div >
     <div style="padding: 1rem; ">
       <label style="font-weight: bold;">Your address</label>
       <app-address></app-address>
       <!-- <input nz-input type="text" style="font-size: medium;" id="hourlyRate"  placeholder=" Dhaka, Bangladesh"> -->
     </div>
   </div>
-  <!-- <div>
-    <label style="font-weight: bold;">Distance</label>
-              <div>
-              <nz-select id="select" nzAllowClear nzPlaceHolder="10 Mile" >   
-                  <nz-option nzValue="5 mile" nzLabel="5 mile"></nz-option>
-                  <nz-option nzValue="10 mile" nzLabel="10 mile"></nz-option>        
-                  <nz-option nzValue="15 mile" nzLabel="15 mile"></nz-option>        
-              </nz-select>
-            </div>
-  </div> -->
 </div>
 <div style="background-color: #F3F4F6; height: .1rem; width: 70%; position: relative; left: 15%;">
 </div>
-<div style="text-align: center; margin: 1rem; height: 2rem; display: flex; flex-direction: row; justify-content: space-around;">
-  <!-- <div>
+<div style="text-align: center; margin-left: 10rem; margin-top: 1rem; margin-bottom: 1rem; height: 2rem; display: flex; flex-direction: row; justify-content: space-evenly;">
+  <div style="margin-right: 1rem;">
   <label style="font-weight: bold; margin-right: 1rem;">Hourly Rate</label>
-  <nz-radio-group  nzButtonStyle="solid" [(ngModel)]="selectedHourlyRate" (ngModelChange)="onHourlyRateChange()">
+  <nz-radio-group  nzButtonStyle="solid" >
     <label nz-radio-button nzValue="Flexible">Flexible</label>
     <label nz-radio-button nzValue="Fixed">Fixed</label>
   </nz-radio-group>
-</div> -->
-  <div>
+</div>
+  <div >
   <label style="font-weight: bold; margin-right: 1rem;">Job Type</label>
   <nz-radio-group  nzButtonStyle="solid" [(ngModel)]="selectedJobType" (ngModelChange)="onJobTypeChange()">
     <label nz-radio-button nzValue="A">Part-Time</label>
@@ -78,7 +68,7 @@
     <label nz-radio-button nzValue="C">Both</label>
   </nz-radio-group>
 </div>
-<div style="display: flex;">
+<div style="display: flex; margin-left: 1rem;">
   <label style="font-weight: bold; margin-right: 1rem;">Distance</label>
           <nz-row [ngStyle]="{ width: '24rem' }">
             <nz-col nzSpan="12">
