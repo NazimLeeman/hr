@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config';
+import { IUser } from '../interfaces/user.interface';
 
 export async function getTokenFromCode(code:string) {
     try {
@@ -9,4 +10,14 @@ export async function getTokenFromCode(code:string) {
         console.log(error);
         throw new Error("Error getting token from code.")
     }
+}
+
+export async function getUserFromToken(token:string) {
+    try {
+        const res = await axios.get<{ user: IUser }>(config.SKELETON_BE_URL + '/service-auth/user-from-token', { headers: { 'Authrization': token } })
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error getting user from token.")
+    } 
 }
