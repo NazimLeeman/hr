@@ -3,4 +3,5 @@ export interface IJobApplicant {
     jobId: number,
     applicantId: number,
     restaurantId?: number,
+    status?: string
 }

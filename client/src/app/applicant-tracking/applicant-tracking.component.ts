@@ -120,10 +120,11 @@ export class ApplicantTrackingComponent {
     return skillsArray;
   }
 
-  showModal(applicantData: any, applicantId: number): void {
+  showModal(applicantData: any, applicantId: number, data:any): void {
     this.isVisible = true;
     this.selectedApplicantId = applicantId;
     this.selectedApplicantData = applicantData;
+    console.log(data)
   }
 
   handleOk(): void {

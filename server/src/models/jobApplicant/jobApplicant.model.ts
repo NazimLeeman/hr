@@ -31,6 +31,11 @@ const JobApplicant = sequelize.define<JobApplicantInstance>('jobApplicant', {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
+    },
+    status: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: ''
     }
 })
 
