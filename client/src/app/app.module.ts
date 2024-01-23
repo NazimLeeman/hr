@@ -75,6 +75,8 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { AuthRedirectComponent } from './auth-redirect/auth-redirect.component';
+import { SpashLogoComponent } from './spash-logo/spash-logo.component';
 
 
 registerLocaleData(en);
@@ -111,7 +113,9 @@ registerLocaleData(en);
     AvailabilityComponent,
     BarChartComponent,
     AddressComponent,
-    TalentMarketComponent
+    TalentMarketComponent,
+    AuthRedirectComponent,
+    SpashLogoComponent
   ],
   imports: [
     BrowserModule,

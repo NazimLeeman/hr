@@ -24,9 +24,11 @@ import { GraphComponent } from './graph/graph.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { AddressComponent } from './address/address.component';
 import { TalentMarketComponent } from './talent-market/talent-market.component';
+import { AuthRedirectComponent } from './auth-redirect/auth-redirect.component';
 
 const routes: Routes = [
-  { path: '', component: ApplicantLoginComponent},
+  { path: '', component: ApplicantLoginComponent },
+  { path: 'auth-redirect', component: AuthRedirectComponent},
   { path: 'signup', component: SignUpComponent},
   { path: 'successful', component: DialogComponent},
   {

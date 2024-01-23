@@ -131,6 +131,11 @@ export class ApiClientService {
     return this.http.put(url, mergedData);
   }
 
+  authenticate(code: string) {
+    const url = `${this.apiUrl}/auth/token/${code}`;
+    return this.http.get(url)
+  }
+
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem(this.tokenKey);
     return new HttpHeaders({
