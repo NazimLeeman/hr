@@ -9,7 +9,7 @@ import { registerLocaleData } from '@angular/common';
 // import en from '@angular/common/locales/en';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -77,6 +77,8 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { AuthRedirectComponent } from './auth-redirect/auth-redirect.component';
 import { SpashLogoComponent } from './spash-logo/spash-logo.component';
+import { AuthInterceptor } from './interceptors/auth/auth.service';
+import { TokenInterceptor } from './interceptors/token/token.service';
 
 
 registerLocaleData(en);
@@ -161,7 +163,18 @@ registerLocaleData(en);
     NzSliderModule,
     NzInputNumberModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
