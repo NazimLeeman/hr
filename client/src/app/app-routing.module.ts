@@ -21,7 +21,6 @@ import { DialogComponent } from './dialog/dialog.component';
 import { PositionComponent } from './position/position.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { GraphComponent } from './graph/graph.component';
-import { MapComponent } from './map/map.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { AddressComponent } from './address/address.component';
 import { TalentMarketComponent } from './talent-market/talent-market.component';
@@ -56,7 +55,6 @@ const routes: Routes = [
       { path: 'settings/:applicantId', component: SettingsComponent, canActivate: [authGuard]  },
     ]
   },
-  { path: 'map', component: MapComponent},
   { path: 'address', component: AddressComponent},
   { path: 'jobs', component: TalentMarketComponent},
   { path: 'dashboard/:applicantId', component: DashboardComponent, canActivate: [authGuard]},

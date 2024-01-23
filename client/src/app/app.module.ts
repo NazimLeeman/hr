@@ -65,7 +65,6 @@ import { GraphComponent } from './graph/graph.component';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { MapComponent } from './map/map.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import {NzDrawerModule} from 'ng-zorro-antd/drawer';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
@@ -109,7 +108,6 @@ registerLocaleData(en);
     PositionComponent,
     ProfileLayoutComponent,
     GraphComponent,
-    MapComponent,
     AvailabilityComponent,
     BarChartComponent,
     AddressComponent,
