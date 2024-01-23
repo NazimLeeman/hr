@@ -35,7 +35,7 @@ const JobApplicant = sequelize.define<JobApplicantInstance>('jobApplicant', {
     status: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultValue: ''
+        defaultValue: 'Pending'
     }
 })
 
