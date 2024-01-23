@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/operators';
 export class PositionComponent {
   employeeId: number = 0;
   serviceAccess: string[] = [];
-  listOfOption: string[] = ['INVENTORY','MENU BUILDER', 'KDS', 'POS', 'MARKETPLACE'];
+  listOfOption: string[] = ['INVENTORY','MENU BUILDER', 'KDS', 'POS', 'MARKETPLACE', 'HR'];
   listOfSelectedValue = [];
   validateForm: FormGroup<{
     position: FormControl<string>;

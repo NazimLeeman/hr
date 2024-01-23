@@ -124,7 +124,7 @@ export class ApplicantTrackingComponent {
     this.isVisible = true;
     this.selectedApplicantId = applicantId;
     this.selectedApplicantData = applicantData;
-    console.log(data)
+    console.log(data.status)
   }
 
   handleOk(): void {
