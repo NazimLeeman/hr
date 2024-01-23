@@ -162,14 +162,12 @@ export class ApplicantTrackingComponent {
   handleOk(): void {
   const applicantId = this.selectedApplicantId;
   
-  // First API call to hire the applicant
   this.apiClientService.postApplicantToEmployee(this.selectedApplicantData, applicantId).subscribe(
     (response) => {
       console.log('Applicant Hired successfully:', response);
       const employeeId = response.id;
 
-      // Second API call to update job applicant data
-      this.apiClientService.updateJobApplicantData(this.selectedJobApplicantId, { status: 'success' }).subscribe(
+      this.apiClientService.updateJobApplicantData(this.selectedJobApplicantId, { status: 'Success' }).subscribe(
         () => {
           console.log('Job Applicant Data updated successfully.');
           this.router.navigate([this.signInRoute + '/' + employeeId]);

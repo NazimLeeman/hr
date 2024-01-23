@@ -66,13 +66,13 @@ export async function updateJobStatus(req: Request, res: Response) {
       }
     });
     if (result[0] === 1) {
-      return { success: true, message: 'Job applicant updated successfully.' };
+      res.status(200).json({ success: true, message: 'Job applicant updated.'})
     } else {
-      return { success: false, message: 'Job applicant not found or no changes applied.' };
+      res.status(404).json({ success: false, message: 'Job applicant not found .'})
     }
   } catch (error) {
     console.error(error);
-    throw new Error('Error while updating Job applicant by ID in database.');
+    res.status(500).json({ success: false, message: 'Error while updating job applicant by ID.'})
   }
 }
   
