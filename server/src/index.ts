@@ -15,7 +15,7 @@ import authRouter from './routers/auth.router';
 const app: Express = express();
 
 app.use(cors({
-  origin: config.CORS_ORIGIN
+  origin: config.CORS_ORIGIN.split(',')
 }));
 
 app.use(express.json());
