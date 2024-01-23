@@ -3,7 +3,7 @@
     <h1 *ngIf="apiData.length === 0" style="margin-top: 1rem; text-align: center; font-size: 1.875rem;">You don't have any Employee right now.</h1>
     <div *ngIf="apiData.length">
       <h1 style="margin-top: 1rem; text-align: center; font-size: 1.875rem;">Employee Information</h1>
-    <nz-table #basicTable [nzData]="apiData" [nzPageIndex]="currentPage" [nzPageSize]="pageSize" (nzPageIndexChange)="handlePageIndexChange($event)">
+    <nz-table #basicTable style="max-width: 90vw;" [nzData]="apiData" [nzPageIndex]="currentPage" [nzPageSize]="pageSize" (nzPageIndexChange)="handlePageIndexChange($event)">
       <thead>
         <tr>
           <th>Employee</th>

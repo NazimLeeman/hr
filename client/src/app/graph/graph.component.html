@@ -1,6 +1,6 @@
 <div style="display: flex; flex-direction: row; justify-content: space-around;">
 <div>
-  <div>
+  <div style="margin-top: 1rem;">
     <nz-date-picker nzMode="week" [(ngModel)]="date" (ngModelChange)="getWeek($event)"></nz-date-picker>
   </div>
   
@@ -26,11 +26,11 @@
 
 <app-bar-chart></app-bar-chart>
 </div>
-<div style="margin-top: 1rem;">
+<div style="margin: 1rem;">
   <h1>Details regarding Graphs</h1>
 </div>
 <div style="font-family: 'Proxima'; margin-top: 1rem;">
-  <nz-table #basicTable [nzData]="listOfData">
+  <nz-table style="max-width: 90vw;" #basicTable [nzData]="listOfData">
     <thead>
       <tr>
         <th>Date</th>

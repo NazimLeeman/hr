@@ -1,4 +1,4 @@
-:host {
+/* :host {
   display: flex;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -77,4 +77,10 @@ nz-content {
   padding: 24px;
   background: #fff;
   height: 100%;
+} */
+
+ul {
+  width: fit-content;
+  min-width: 10dw;
+  height: 90dvh;
 }

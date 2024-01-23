@@ -1,4 +1,4 @@
-<nz-layout class="app-layout" style="font-family: 'Proxima Nova';">
+<!-- <nz-layout class="app-layout" style="font-family: 'Proxima Nova';">
     <nz-sider
       class="menu-sidebar"
       nzCollapsible
@@ -65,4 +65,27 @@
         </div>
       </nz-content>
     </nz-layout>
-  </nz-layout>
+  </nz-layout> -->
+  <app-navbar-admin></app-navbar-admin>
+  <div style="display: flex;">
+    <ul nz-menu nzMode="inline">
+      <li nz-menu-item [nzSelected]="true" nzMatchRouter>
+              <a routerLink="/admin/createEmployee">Employee Information</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+              <a routerLink="/admin/createSchedule">Schedule Management</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/admin/payroll">Payroll Management</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/admin/jobs">Post a Job</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/admin/applicant">Applicant Tracking</a>
+            </li>
+    </ul>
+    <div style="flex-grow: 1;">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
