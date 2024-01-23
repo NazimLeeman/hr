@@ -71,4 +71,8 @@ export class ApplicationsComponent {
       }
     );
   }
+
+  getColorForStatus(status: string): string {
+    return status === 'Success' || 'success' ? 'green' : 'gold';
+  }
 }
