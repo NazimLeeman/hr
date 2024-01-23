@@ -9,6 +9,7 @@ interface Application {
   restaurantId: number;
   createdAt: string;
   updatedAt: string;
+  status: string;
   job: {
     id: number;
     jobRole: string;

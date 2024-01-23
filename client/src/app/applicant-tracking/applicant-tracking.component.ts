@@ -52,7 +52,8 @@ export class ApplicantTrackingComponent {
  isOkLoading = false;
  selectedApplicantId = 0;
  selectedApplicantData = {};
- selectedApplicantExperience: any[] = [];
+  selectedApplicantExperience: any[] = [];
+  selectedJobApplicantId = 0;
  @Input() signInRoute: string = '/admin/position';
 
   constructor(private router: Router, private apiClientService: ApiClientService, private modalService: NzModalService) {}
@@ -124,38 +125,78 @@ export class ApplicantTrackingComponent {
     this.isVisible = true;
     this.selectedApplicantId = applicantId;
     this.selectedApplicantData = applicantData;
-    console.log(data.status)
+    this.selectedJobApplicantId = data.id;
+    console.log(this.selectedJobApplicantId)
   }
 
+  // handleOk(): void {
+  //   const applicantId = this.selectedApplicantId;
+  //   console.log(this.selectedApplicantData, applicantId)
+  //   this.apiClientService.postApplicantToEmployee(this.selectedApplicantData, applicantId ).subscribe(
+  //     (response) => {
+  //       console.log('Applicant Hired successfully:', response);
+  //       const employeeId = response.id
+  //       this.router.navigate([this.signInRoute +  '/' +  employeeId]);
+  //       this.modalService.success({
+  //         nzTitle: 'Success',
+  //         nzContent: 'Applicant Hired successfully.',
+  //       });
+  //     },
+  //     (error) => {
+  //       console.error('Error hiring applicant:', error);
+  //       this.modalService.error({
+  //         nzTitle: 'Error',
+  //         nzContent: 'Error hiring applicant. Please try again.',
+  //       });
+  //     }
+  //   );
+  
+  
+  //   this.isOkLoading = true;
+  //   setTimeout(() => {
+  //     this.isVisible = false;
+  //     this.isOkLoading = false;
+  //   }, 3000);
+  // }
+
   handleOk(): void {
-    const applicantId = this.selectedApplicantId;
-    console.log(this.selectedApplicantData, applicantId)
-    this.apiClientService.postApplicantToEmployee(this.selectedApplicantData, applicantId ).subscribe(
-      (response) => {
-        console.log('Applicant Hired successfully:', response);
-        const employeeId = response.id
-        this.router.navigate([this.signInRoute +  '/' +  employeeId]);
-        this.modalService.success({
-          nzTitle: 'Success',
-          nzContent: 'Applicant Hired successfully.',
-        });
-      },
-      (error) => {
-        console.error('Error hiring applicant:', error);
-        this.modalService.error({
-          nzTitle: 'Error',
-          nzContent: 'Error hiring applicant. Please try again.',
-        });
-      }
-    );
+  const applicantId = this.selectedApplicantId;
   
-  
-    this.isOkLoading = true;
-    setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-    }, 3000);
-  }
+  // First API call to hire the applicant
+  this.apiClientService.postApplicantToEmployee(this.selectedApplicantData, applicantId).subscribe(
+    (response) => {
+      console.log('Applicant Hired successfully:', response);
+      const employeeId = response.id;
+
+      // Second API call to update job applicant data
+      this.apiClientService.updateJobApplicantData(this.selectedJobApplicantId, { status: 'success' }).subscribe(
+        () => {
+          console.log('Job Applicant Data updated successfully.');
+          this.router.navigate([this.signInRoute + '/' + employeeId]);
+          this.modalService.success({
+            nzTitle: 'Success',
+            nzContent: 'Applicant Hired successfully.',
+          });
+        },
+        (updateError) => {
+          console.error('Error updating job applicant data:', updateError);
+          this.modalService.error({
+            nzTitle: 'Error',
+            nzContent: 'Error updating job applicant data. Please try again.',
+          });
+        }
+      );
+    },
+    (hireError) => {
+      console.error('Error hiring applicant:', hireError);
+      this.modalService.error({
+        nzTitle: 'Error',
+        nzContent: 'Error hiring applicant. Please try again.',
+      });
+    }
+  );
+}
+
   
   handleCancel(): void {
     this.isVisible = false;

@@ -136,6 +136,11 @@ export class ApiClientService {
     return this.http.get(url)
   }
 
+  updateJobApplicantData(jobApplicantId: number, mergedData: any): Observable<any> {
+    const url = `${this.apiUrl}/jobApplicant/${jobApplicantId}`;
+    return this.http.put(url, mergedData);
+  }
+
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem(this.tokenKey);
     return new HttpHeaders({
