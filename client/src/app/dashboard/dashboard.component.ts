@@ -30,7 +30,9 @@ export class DashboardComponent implements OnInit {
   filteredDataJobRole: any[] = [];
   filteredDataSkills: any[] = [];
   applicantData: any;
-  skillsForCompare: any[] = []
+  skillsForCompare: any[] = [];
+  percentageJob: any;
+  // commonSKillsByJob: {[key: number]: string[]} = {};
 
   cards: any[] = [];
 
@@ -46,23 +48,6 @@ export class DashboardComponent implements OnInit {
   selectedCard: any; 
 
   
-
-  // getApplicantData(): void {
-  //   this.route.params.pipe(
-  //     switchMap((params) => {
-  //         this.applicantId = params['applicantId'];
-  //         return this.apiClientService.getApplicantData(this.applicantId);
-  //     })
-  // ).subscribe(
-  //     (data: any) => {
-  //       this.applicantData = data.data.skillTags;
-  //       console.log('Applicant Data Response:', this.applicantData);
-  //     },
-  //     (error) => {
-  //         console.error('Error fetching data from the API', error);
-  //     }
-  // );
-  // }
   
   selectCard(card: any) {
     this.selectedCard = card;
@@ -105,7 +90,10 @@ export class DashboardComponent implements OnInit {
   );
     
     this.paramOnInit();
-    this.anotherOnInit();
+    setTimeout(() => {
+      this.anotherOnInit();
+  }, 1000);
+  
     // this.selectCard(this.cards[0]);
   }
 
@@ -118,9 +106,10 @@ export class DashboardComponent implements OnInit {
         this.cards = [];
 
         console.log('comparing:',this.applicantData, this.skillsForCompare);
-        // let percentage = this.calculateMatchingPercentage(this.jobs, this.skillsForCompare)
-        // console.log('Percentage:',percentage)
-        console.log('matching',this.calculateAndPrintMatchingPercentage())
+        // console.log('matching',this.calculateAndPrintMatchingPercentage())
+        this.percentageJob = this.calculateAndPrintMatchingPercentage();
+        console.log('result:', this.percentageJob)
+
         if (this.apiData.length > 0) {
           let filteredData = this.apiData;
   
@@ -131,18 +120,23 @@ export class DashboardComponent implements OnInit {
           }
   
           filteredData.forEach((apiDataItem, index) => {
+            const jobId = apiDataItem.id || -1;
+            const percentage = this.calculatePercentageForJobId(jobId);
+            console.log('percentage:', percentage)
             const newCard = {
-              jobId: apiDataItem.id || -1,
+              jobId: jobId,
               jobNature: apiDataItem.jobNature || '',
               skillTags: apiDataItem.skillTags || [],
               restaurantId: apiDataItem.restaurantId || -1,
               role: apiDataItem.jobRole || 'Default Role',
               salary: apiDataItem.hourlyRate || 'Default Salary',
               description: apiDataItem.jobDescription || 'Default Description',
+              percentage: percentage,
               showDetails: false,
             };
   
             if (this.cards.length > 0) {
+              this.cards.sort((a, b) => b.percentage - a.percentage);
               this.selectCard(this.cards[0]);
             }
   
@@ -217,14 +211,17 @@ export class DashboardComponent implements OnInit {
             }
               this.cards = [];
               this.filteredDataJobRole.forEach((apiDataItem, index) => {
+                const jobId = apiDataItem.id || -1;
+                const percentage = this.calculatePercentageForJobId(jobId);
                 const newCard = {
-                  jobId: apiDataItem.id || -1,
+                  jobId: jobId,
                   jobNature: apiDataItem.jobNature || '',
                   skillTags: apiDataItem.skillTags || [],
                   restaurantId: apiDataItem.restaurantId || -1,
                   role: apiDataItem.jobRole || 'Default Role',
                   salary: apiDataItem.hourlyRate || 'Default Salary',
                   description: apiDataItem.jobDescription || 'Default Description',
+                  percentage: percentage,
                   showDetails: false,
                 };
                 
@@ -236,6 +233,7 @@ export class DashboardComponent implements OnInit {
                 }
               })
               if (this.cards.length > 0) {
+                this.cards.sort((a, b) => b.percentage - a.percentage);
                 this.selectCard(this.cards[0]);
               }
   }
@@ -382,14 +380,17 @@ export class DashboardComponent implements OnInit {
     }
       this.cards = [];
       this.filteredDataJobType.forEach((apiDataItem, index) => {
+      const jobId = apiDataItem.id || -1;
+      const percentage = this.calculatePercentageForJobId(jobId);
       const newCard = {
-        jobId: apiDataItem.id || -1,
+        jobId: jobId,
         jobNature: apiDataItem.jobNature || '',
         skillTags: apiDataItem.skillTags || [],
         restaurantId: apiDataItem.restaurantId || -1,
         role: apiDataItem.jobRole || 'Default Role',
         salary: apiDataItem.hourlyRate || 'Default Salary',
         description: apiDataItem.jobDescription || 'Default Description',
+        percentage: percentage,
         showDetails: false,
       };
       this.cards.push(newCard);
@@ -399,6 +400,7 @@ export class DashboardComponent implements OnInit {
       }
     });
     if (this.cards.length > 0) {
+      this.cards.sort((a, b) => b.percentage - a.percentage);
       this.selectCard(this.cards[0]);
     }
   }
@@ -429,40 +431,6 @@ this.listOfSkillOption = this.listOfSkillOption.filter(
     );
   }
 
-  // onSkillOptionSelected(newValue: string): void {
-  //   console.log('Selected value:', newValue);
-  //   this.apiClientService.searchJob(newValue).subscribe(
-  //           (data: any) => {
-  //             console.log('API Response:', data);
-  //             this.apiData = data.data;
-  //             this.cards = [];
-  //             this.apiData.forEach((apiDataItem, index) => {
-  //               const newCard = {
-  //                 jobId: apiDataItem.id || -1,
-  //                 jobNature: apiDataItem.jobNature || '',
-  //                 skillTags: apiDataItem.skillTags || [],
-  //                 restaurantId: apiDataItem.restaurantId || -1,
-  //                 role: apiDataItem.jobRole || 'Default Role',
-  //                 salary: apiDataItem.hourlyRate || 'Default Salary',
-  //                 description: apiDataItem.jobDescription || 'Default Description',
-  //                 showDetails: false,
-  //               };
-      
-  //               // console.log(`New Card ${index + 1}:`, newCard);
-  //               this.cards.push(newCard);
-      
-  //               if (this.selectedCard && this.selectedCard === apiDataItem) {
-  //                 this.selectCard(newCard);
-  //               }
-  //             })
-  //             if (this.cards.length > 0) {
-  //               this.selectCard(this.cards[0]);
-  //             }
-  //           }, (error) => {
-  //             console.error('Error fetching data from the API', error);
-  //           }
-  //         );
-  // }
   onSkillOptionSelected(newValue: string): void {
     console.log('Selected value:', newValue);
     if (this.filteredDataJobType.length > 0 || this.filteredDataJobRole.length > 0) {
@@ -481,14 +449,17 @@ this.listOfSkillOption = this.listOfSkillOption.filter(
     }
     this.cards = [];
               this.filteredDataSkills.forEach((apiDataItem, index) => {
+                const jobId = apiDataItem.id || -1;
+                const percentage = this.calculatePercentageForJobId(jobId);
                 const newCard = {
-                  jobId: apiDataItem.id || -1,
+                  jobId: jobId,
                   jobNature: apiDataItem.jobNature || '',
                   skillTags: apiDataItem.skillTags || [],
                   restaurantId: apiDataItem.restaurantId || -1,
                   role: apiDataItem.jobRole || 'Default Role',
                   salary: apiDataItem.hourlyRate || 'Default Salary',
                   description: apiDataItem.jobDescription || 'Default Description',
+                  percentage: percentage,
                   showDetails: false,
                 };
       
@@ -500,6 +471,7 @@ this.listOfSkillOption = this.listOfSkillOption.filter(
                 }
               })
               if (this.cards.length > 0) {
+                this.cards.sort((a, b) => b.percentage - a.percentage);
                 this.selectCard(this.cards[0]);
               }
   }
@@ -530,19 +502,48 @@ this.listOfSkillOption = this.listOfSkillOption.filter(
     return matchingPercentage;
   }
   
-  calculateAndPrintMatchingPercentage(): void {
+  calculateAndPrintMatchingPercentage(): any {
     if (!this.applicantData) {
       console.error('Applicant skills not available.');
       return;
     }
-  
-    this.skillsForCompare.forEach(job => {
-      const matchingPercentage = this.calculateMatchingPercentage(job, this.applicantData);
-      console.log(`Job ID ${job.id}: Matching Percentage - ${matchingPercentage}%`);
+    const applicantSkills = this.applicantData;
+    const jobSkills = this.skillsForCompare;
+    console.log('before comparing:',applicantSkills,jobSkills)
+    const array2Skills: string[] = jobSkills.flatMap((item:any) => item.skillTags);
+    const splittedArray1 = this.applicantData;
+    const arrayString = splittedArray1.toString();
+    const joined = arrayString.split(',')
+
+const results: { id: number; commonSkills: string[]; percentage: number }[] = [];
+
+jobSkills.forEach((job) => {
+    const array2Skills: string[] = job.skillTags;
+    const commonSkills: string[] = joined.filter((applicantSkill:any) => array2Skills.includes(applicantSkill));
+
+    const percentage = Math.max(Math.ceil((commonSkills.length / joined.length) * 100), 10);
+
+    results.push({
+        id: job.id,
+        commonSkills,
+        percentage,
     });
+});
+return results;
   }
   
-  
+  calculatePercentageForJobId(jobId: number): any {
+    const matchingPercentage = this.percentageJob.filter((item: any) => {
+        return item.id === jobId;
+    });
+
+    if (matchingPercentage.length > 0) {
+        return matchingPercentage[0].percentage;
+    }
+
+    return 0;
+}
+
   
 }
 

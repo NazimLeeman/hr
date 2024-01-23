@@ -93,7 +93,7 @@
 </div>
   <div style="display: flex; justify-content: center; margin-top: .5rem; ">
     <div>
-      <app-job-card *ngFor="let card of cards" [card]="card" [isSliced]="true" [showButton]="true" (click)="selectCard(card)" ></app-job-card>
+      <app-job-card *ngFor="let card of cards" [percentageJob]="card.percentage" [card]="card" [isSliced]="true" [showButton]="true" (click)="selectCard(card)" ></app-job-card>
     </div>
     <div class="selected-card">
       <app-job-card *ngIf="selectedCard" [card]="selectedCard" [isSliced]="false" [showButton]="false"></app-job-card>

@@ -13,6 +13,7 @@ export class JobCardComponent {
  @Input() card: any;
  @Input() isSliced: boolean = true;
  @Input() showButton: boolean = true;
+ @Input() percentageJob:any;
  isVisible = false;
  isOkLoading = false;
  selectedJobId = 0;
@@ -39,25 +40,7 @@ ngOnInit(): void {
   this.route.params.subscribe(params => {
     this.applicantId = +params['applicantId'] || 0;
   });
-  // this.getApplicantData();
 }
-
-// getApplicantData(): void {
-//   this.route.params.pipe(
-//     switchMap((params) => {
-//         this.applicantId = params['applicantId'];
-//         return this.apiClientService.getApplicantData(this.applicantId);
-//     })
-// ).subscribe(
-//     (data: any) => {
-//       console.log('Applicant Data from job card Response:', data.data.skillTags, this.card.skillTags);
-//       this.applicantData = data.data.skillTags;
-//     },
-//     (error) => {
-//         console.error('Error fetching data from the API', error);
-//     }
-// );
-// }
 
 handleOk(): void {
   const applicantId = this.applicantId;
