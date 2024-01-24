@@ -15,8 +15,8 @@ export class AuthRedirectComponent {
       this.apiClientSerivce.authenticate(code).subscribe({
         next: () => this.router.navigateByUrl('/admin/createEmployee'),
         // error: (error) => console.log(error)
-        error: () => window.location.href = 'https://bento-client.vercel.app/login'
+        error: () => window.location.href = 'https://getbento.vercel.app/login'
       })
-    } else window.location.href = 'https://bento-client.vercel.app/login'
+    } else window.location.href = 'https://getbento.vercel.app/login'
   }
 }
