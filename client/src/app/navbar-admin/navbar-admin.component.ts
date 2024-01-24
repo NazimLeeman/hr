@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './navbar-admin.component.css'
 })
 export class NavbarAdminComponent {
-
+  logout() {
+    localStorage.removeItem('accessToken');
+    window.location.href = 'https://bento-client.vercel.app/logout';
+  }
 }
