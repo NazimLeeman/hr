@@ -1,4 +1,5 @@
 import Employee from "../employee/employee.model";
+import Position from "../position/position.model";
 import Attendance from "./attendance.model";
 
 export async function createCheckInTimeForEmployee (employeeId: number, restaurantId: number, data: { 
@@ -39,6 +40,26 @@ export async function CheckOutTimeForEmployee(employeeId: number, attendanceId: 
         const updatedAttexistingAttendance = await existingAttendance.update(data);
         return updatedAttexistingAttendance;
     } catch (error) {
+        throw new Error('Error while checking out.'); 
+    }
+}
+
+export async function gettingAllActiveChefs(restaurantId: number) {
+try {
+      let activeChefs = await Attendance.findAll({
+        include: [{
+          model: Employee,
+          include: [{
+            model: Position
+          }]
+        }],
+        where: {
+          restaurantId: restaurantId
+        }
+      })
+  return activeChefs;
+} catch (error) {
+  console.log(error);
         throw new Error('Error while checking out.'); 
     }
 }
