@@ -244,9 +244,9 @@ export async function getUserInfo(req: Request, res: Response) {
     const employeeId = Number(req.params.userId);
     const result = await getEmployeeInfo(employeeId)
     if (result) {
-      return res.status(200).json({ message: result });
+      return res.status(200).json({ user: result });
   } else {
-      return res.status(404).json({ message: result });
+      return res.status(404).json({ user: result });
   }
    } catch (error) {
     console.log(error);
