@@ -2,7 +2,8 @@ import Employee from "../employee/employee.model";
 import Attendance from "./attendance.model";
 
 export async function createCheckInTimeForEmployee (employeeId: number, restaurantId: number, data: { 
-    day: string, checkInTime: number, checkOutTime?: number
+  // day: string, checkInTime: number, checkOutTime?: number
+  isCheckedIn: boolean
  }) {
   try {
     let employee = await Employee.findOne({
@@ -23,7 +24,8 @@ export async function createCheckInTimeForEmployee (employeeId: number, restaura
 }
 
 export async function CheckOutTimeForEmployee(employeeId: number, attendanceId: number, data: {
-    day?: string, checkInTime?: number, checkOutTime: number
+  // day?: string, checkInTime?: number, checkOutTime: number
+  isCheckedIn: boolean
 }) {
     try {
       let existingAttendance = await Attendance.findOne({

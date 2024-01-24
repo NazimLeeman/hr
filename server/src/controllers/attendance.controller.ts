@@ -6,9 +6,9 @@ export async function postAttendanceToEmployee (req: Request, res: Response) {
         const restaurantId = Number(req.params.id);
         const employeeId = Number(req.params.employeeId);
         if (employeeId && restaurantId) {
-            const { day, checkInTime, checkOutTime } = req.body;
-            if( typeof day === "string") {
-                const position = await createCheckInTimeForEmployee(employeeId, restaurantId, {day, checkInTime, checkOutTime});
+            const { isCheckedIn } = req.body;
+            if( typeof isCheckedIn === "boolean") {
+                const position = await createCheckInTimeForEmployee(employeeId, restaurantId, {isCheckedIn});
                 res.status(201).json(position);
             }else res.status(400).json({ message: "Invalid employee ID."})
         }else res.status(400).json({ message: "Invalid restaurant ID."})
@@ -23,9 +23,9 @@ export async function updateAttendanceOfEmployee (req: Request, res: Response) {
         const employeeId = Number(req.params.employeeId);
         const attendanceId = Number(req.params.attendanceId);
         if (employeeId && attendanceId) {
-            const { checkOutTime } = req.body;
-            if ( typeof checkOutTime === 'number') {
-              const attendance = await CheckOutTimeForEmployee( employeeId, attendanceId,{checkOutTime});
+            const { isCheckedIn } = req.body;
+            if ( typeof isCheckedIn === 'boolean') {
+              const attendance = await CheckOutTimeForEmployee( employeeId, attendanceId,{isCheckedIn});
               res.status(201).json(attendance);
             } else res.status(400).json({ message: "Invalid employee ID." });
           } else res.status(400).json({ message: "Invalid attendance ID." });

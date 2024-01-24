@@ -2,7 +2,7 @@ import { Model, DataTypes, Optional } from "sequelize";
 import { IAttendance } from "../../interfaces/attendence.interface";
 import sequelize from "..";
 
-interface AttendanceCreationAttributes extends Optional<IAttendance, 'id' | 'checkOutTime'> {};
+interface AttendanceCreationAttributes extends Optional<IAttendance, 'id'> {};
 
 interface AttendanceInstance extends Model<IAttendance, AttendanceCreationAttributes>, IAttendance {
     createdAt?: Date;
@@ -21,18 +21,23 @@ const Attendance = sequelize.define<AttendanceInstance>('attendance', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    day: {
-        type: DataTypes.TEXT,
+    // day: {
+    //     type: DataTypes.TEXT,
+    //     allowNull: false
+    // },
+    // checkInTime: {
+    //     type: DataTypes.DATE,
+    //     allowNull: false,
+    // },
+    // checkOutTime: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: true,
+    // },
+    isCheckedIn: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    checkInTime: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    checkOutTime: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    },restaurantId: {
+    restaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false
     }

@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class NavbarAdminComponent {
   logout() {
     localStorage.removeItem('accessToken');
-    window.location.href = 'https://bento-client.vercel.app/logout';
+    window.location.href = 'https://getbento.vercel.app/logout';
   }
 }

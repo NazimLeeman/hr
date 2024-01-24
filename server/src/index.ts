@@ -11,6 +11,7 @@ import attendanceRouter from './routers/attendance.router';
 import payrollRouter from './routers/payroll.router';
 import jobApplicantRouter from './routers/jobApplicant.router';
 import authRouter from './routers/auth.router';
+import chefRouter from './routers/chef.router';
 
 const app: Express = express();
 
@@ -30,6 +31,7 @@ app.use('/attendance', attendanceRouter);
 app.use('/payroll', payrollRouter);
 app.use('/jobApplicant', jobApplicantRouter);
 app.use('/auth', authRouter);
+app.use('/chef', chefRouter);
 // app.use('/cloud', cloudinaryRouter);
 
 (async function bootstrap () {
