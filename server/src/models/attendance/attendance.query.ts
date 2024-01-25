@@ -1,3 +1,4 @@
+import { Op, Sequelize } from "sequelize";
 import Employee from "../employee/employee.model";
 import Position from "../position/position.model";
 import Attendance from "./attendance.model";
@@ -45,16 +46,21 @@ export async function CheckOutTimeForEmployee(employeeId: number, attendanceId: 
 }
 
 export async function gettingAllActiveChefs(restaurantId: number) {
-try {
-      let activeChefs = await Attendance.findAll({
+  try {
+  const currentDate = new Date().toISOString().split('T')[0]
+  let activeChefs = await Attendance.findAll({
         include: [{
           model: Employee,
           include: [{
-            model: Position
+            model: Position,
+            where: {
+              position: 'Chef'
+            }
           }]
         }],
         where: {
-          restaurantId: restaurantId
+          restaurantId: restaurantId,
+          isCheckedIn: true
         }
       })
   return activeChefs;
