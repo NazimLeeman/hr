@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-post-job',
@@ -29,6 +30,7 @@ export class PostJobComponent {
   'Team Leadership'];
   listOfSelectedValue = [];
   responsibilities: string[] = [];
+  isLoading = false;
 
   validateForm: FormGroup<{
     jobRole: FormControl<string>,
@@ -55,12 +57,17 @@ export class PostJobComponent {
 
   submitForm(): void {
     console.log('clicked')
+    this.isLoading = true;
     if (this.validateForm.valid) {
       const userData = this.constructJobData();
       console.log(userData)
       this.apiClientService.postJob(userData).subscribe((response) => {
         console.log('Job Posted successfully:', response);
         location.reload();
+        this.modalService.success({
+          nzTitle: 'Success',
+          nzContent: 'Job Created successfully.',
+        });
         // this.router.navigate(['/dashboard']);
       },
       (error) => {
@@ -101,7 +108,7 @@ export class PostJobComponent {
     return mergedData;
   }
 
-  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
+  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private modalService: NzModalService) {
     this.validateForm = this.fb.group({
       jobRole: ['', [Validators.required]],
       jobNature: ['', [Validators.required]],

@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { CloudinaryService } from '../cloudinary.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-create-employee',
@@ -28,6 +29,7 @@ export class CreateEmployeeComponent {
   selectedServiceOptions: string = '';
   sortColumn: string = 'id';
   sortOrder: 'asc' | 'desc' = 'asc';
+  isLoading = false;
 
   validateFormPartOne: FormGroup<{
     firstName: FormControl<string>,
@@ -59,6 +61,7 @@ export class CreateEmployeeComponent {
   }
 
   submitFormPartOne(): void {
+    this.isLoading = true;
     if (this.validateFormPartOne.valid) {
       const employeeData = this.validateFormPartOne.value;
       const name = `${employeeData.firstName} ${employeeData.lastName}`;
@@ -70,6 +73,10 @@ export class CreateEmployeeComponent {
         console.log('Employee Created successfully:', response);
         const employeeId = response.user.id
         this.router.navigate([this.signInRoute +  '/' +  employeeId]);
+        this.modalService.success({
+          nzTitle: 'Success',
+          nzContent: 'Employee Created successfully.',
+        });
       },
       (error) => {
         console.log("Error during resgistration", error)
@@ -198,7 +205,7 @@ export class CreateEmployeeComponent {
     });
   }
 
-  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private cloudinary: CloudinaryService, private msg: NzMessageService) {
+  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private cloudinary: CloudinaryService, private msg: NzMessageService, private modalService: NzModalService) {
     this.validateFormPartOne = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],

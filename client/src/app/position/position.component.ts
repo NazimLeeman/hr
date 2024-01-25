@@ -3,6 +3,7 @@ import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
 import { switchMap } from 'rxjs/operators';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-position',
@@ -14,6 +15,7 @@ export class PositionComponent {
   serviceAccess: string[] = [];
   listOfOption: string[] = ['INVENTORY','MENUBUILDER', 'KDS', 'POS', 'MARKETPLACE', 'HR'];
   listOfSelectedValue = [];
+  isLoading = false;
   validateForm: FormGroup<{
     position: FormControl<string>;
     listOfSelectedValue: FormControl<string[]>;
@@ -26,12 +28,17 @@ export class PositionComponent {
   }
 
   submitForm(): void {
+    this.isLoading = true;
     if (this.validateForm.valid) {
       const updatedData = this.suitableData();
       console.log('merged data:', updatedData)
       this.apiClientService.postPosition( updatedData).subscribe((response) => {
         console.log('Applicant position posted successfully:', response);
-        this.router.navigate(['/admin/createEmployee'])
+        this.router.navigate(['/admin/createEmployee']);
+        this.modalService.success({
+          nzTitle: 'Success',
+          nzContent: 'Employee Position posted successfully.',
+        });
       },
       (error) => {
         console.log("Error during position posting", error)
@@ -58,7 +65,7 @@ export class PositionComponent {
   
     return mergedData;
   }
-    constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute) {
+    constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private modalService: NzModalService) {
       this.validateForm = this.fb.group({
         listOfSelectedValue: [[] as string[], [Validators.required]],
         position: ['', [Validators.required]]

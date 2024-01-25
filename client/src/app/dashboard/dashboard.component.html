@@ -93,7 +93,8 @@
 <div style="height: 1.2rem; margin-top: .5rem; margin-left: 19rem;">
   <h1 style="color: #020202; font-weight: bold;">These are Best Matches for you....</h1>
 </div>
-  <div style="display: flex; justify-content: center; margin-top: .5rem; ">
+<div style="display: flex; justify-content: center; margin-top: .5rem; ">
+  <nz-spin *ngIf="!cards || cards.length === 0" nzSimple [nzSize]="'large'"></nz-spin>
     <div>
       <app-job-card *ngFor="let card of cards" [percentageJob]="card.percentage" [card]="card" [isSliced]="true" [showButton]="true" (click)="selectCard(card)" ></app-job-card>
     </div>

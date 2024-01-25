@@ -64,3 +64,6 @@
       z-index: 100; 
     } */
     
+    nz-spin {
+      display: inline-block;
+    }
