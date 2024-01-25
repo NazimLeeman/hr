@@ -20,8 +20,8 @@ export class CloudinaryService {
     formData.append("upload_preset", this.cloudinaryPreset);
     formData.append("public_id", public_id);
 
-    const headers = new HttpHeaders();
+    // const headers = new HttpHeaders();
 
-    return this.http.post(this.cloudinaryRootUrl, formData, { headers});
+    return this.http.post(this.cloudinaryRootUrl, formData);
   }
 }
