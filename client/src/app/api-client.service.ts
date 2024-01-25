@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class ApiClientService {
 
   // private apiUrl = 'http://localhost:4000';
-  private apiUrl = 'https://hr-server-icl9.onrender.com';
+  // private apiUrl = 'https://hr-server-icl9.onrender.com';
+  private apiUrl = 'https://bento-hr.fly.dev'; //flyIo
   private tokenKey = 'token';
 
   constructor(private http: HttpClient) { }
