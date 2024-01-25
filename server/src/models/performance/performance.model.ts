@@ -22,10 +22,10 @@ const PerformanceKds = sequelize.define<PerformanceKdsInstance>('performanceKds'
         allowNull: false
     },
     orderId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: false
     },
-    orderServedOnTime: {
+    servedOnTime: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     }

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { gettingAllActiveChefs } from "../models/attendance/attendance.query";
+import { createEmployeeEfficiency } from "../models/performance/performance.query";
 
 export async function getAllChefs(req: Request, res: Response) {
     try {
@@ -23,6 +24,21 @@ export async function getAllChefs(req: Request, res: Response) {
       } else res.status(400).json({ message: "Invalid restaurant ID." });
     } catch (error) {
         console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+export async function postChefEfficiency(req: Request, res: Response) {
+    try {
+        const { chefId, orderId, servedOnTime } = req.body;
+        const efficiency = await createEmployeeEfficiency({ employeeId: chefId, orderId, servedOnTime })
+        if (efficiency) {
+            res.json({ efficiency: efficiency})
+        } else {
+        res.status(400).json({ message: "Invalid Chef ID." });
+        }
+    } catch (error) {
+        console.log(error)
         res.status(500).json(error);
     }
 }
