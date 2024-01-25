@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,8 @@ export class CloudinaryService {
     formData.append("upload_preset", this.cloudinaryPreset);
     formData.append("public_id", public_id);
 
-    return this.http.post(this.cloudinaryRootUrl, formData);
+    const headers = new HttpHeaders();
+
+    return this.http.post(this.cloudinaryRootUrl, formData, { headers});
   }
 }
