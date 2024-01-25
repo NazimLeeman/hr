@@ -18,7 +18,7 @@ const PerformanceWaiter = sequelize.define<PerformanceWaiterInstance>('performan
         unique: true
     },
     date: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false
     },
     orderId: {
@@ -30,15 +30,15 @@ const PerformanceWaiter = sequelize.define<PerformanceWaiterInstance>('performan
         allowNull: false
     },
     orderReadyToServeTime: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
     },
     bill: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
     },
     occupiedToCompleteTime: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
     },
     employeeId: {
