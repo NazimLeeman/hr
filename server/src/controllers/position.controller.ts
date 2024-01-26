@@ -38,8 +38,9 @@ export async function postPositionAccess (req: Request, res: Response) {
         }
         if (prevServiceAccess)
           access = await updateEmployeeServiceAccess(prevServiceAccess.id, data);
-        else
+        else {
           access = await createEmployeeServiceAccess(data);
+        }
           const positionId = access.id; 
 
           await updateEmployeePositionId(employee.id, positionId);
