@@ -47,17 +47,18 @@ interface Application {
 export class ApplicationsComponent {
 
   listOfData: Application[] = [];
+  applicantId = 0;
 
   constructor(private apiClientService: ApiClientService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const applicantId = Number(params['applicantId']);
-      this.loadApplicantsData(applicantId);
+      this.applicantId = Number(params['applicantId']);
+      this.loadApplicantsData(this.applicantId);
     });
     this.apiClientService.getUpdateObservable().pipe(takeUntil(this.destroy$)).subscribe(() => {
-      // React to updates, e.g., reload data
-      this.loadApplicantsData();
+      console.log('Received update. Reacting...');
+      this.loadApplicantsData(this.applicantId);
     });
   }
 

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ApiClientService } from '../api-client.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 interface Application {
   id: number;
@@ -65,6 +65,10 @@ export class ApplicantTrackingComponent {
 
   ngOnInit(): void {
     this.loadApplicantsData();
+    this.apiClientService.getUpdateObservable().pipe(takeUntil(this.destroy$)).subscribe(() => {
+      console.log('Received update. Reacting...');
+      this.loadApplicantsData();
+    });
   }
 
   loadApplicantsData(): void {
@@ -148,7 +152,9 @@ export class ApplicantTrackingComponent {
       this.apiClientService.updateJobApplicantData(this.selectedJobApplicantId, { status: 'Success' }).subscribe(
         () => {
           console.log('Job Applicant Data updated successfully.');
-          this.statusUpdateSubject.next('Success');
+          // this.statusUpdateSubject.next('Success');
+          // this.apiClientService.triggerUpdate();
+          // console.log('triggerUpdate executed');
           this.router.navigate([this.signInRoute + '/' + employeeId]);
           this.modalService.success({
             nzTitle: 'Success',
@@ -192,9 +198,9 @@ export class ApplicantTrackingComponent {
     this.isVisibleExperience = false;
   }
 
-  getStatusUpdateObservable() {
-    return this.statusUpdateSubject.asObservable();
-  }
+  // getStatusUpdateObservable() {
+  //   return this.statusUpdateSubject.asObservable();
+  // }
 
   showPastHistory() {
     this.pastHistory = true;
@@ -203,5 +209,12 @@ export class ApplicantTrackingComponent {
   showCurrentHistory() {
     this.pastHistory = false;
   }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private destroy$ = new Subject<void>();
 
 }

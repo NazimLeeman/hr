@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, catchError, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ApiClientService {
   // private apiUrl = 'https://hr-server-icl9.onrender.com';
   private apiUrl = 'https://bento-hr.fly.dev'; //flyIo
   private tokenKey = 'token';
-  private updateSubject = new Subject<void>();
+  private updateSubject = new Subject<any>();
 
   constructor(private http: HttpClient) { }
 
@@ -51,7 +51,17 @@ export class ApiClientService {
   }
 
   getAllJobForRestaurant(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/job/1`)
+    // return this.http.get(`${this.apiUrl}/job/1`)
+    const url = `${this.apiUrl}/job/1`
+    return this.http.get(url).pipe(
+      catchError((error) => {
+        console.error('Error fetching applied applicant:', error);
+        throw error;
+      }),
+      tap((data) => {
+        this.updateSubject.next(data);
+      })
+    );
   }
 
   getAllJob(): Observable<any> {
@@ -110,7 +120,16 @@ export class ApiClientService {
 
   getAppliedApplicant(): Observable<any> {
     const url = `${this.apiUrl}/jobApplicant/applicantTracking/1`
-    return this.http.get(url);
+    // return this.http.get(url);
+    return this.http.get(url).pipe(
+      catchError((error) => {
+        console.error('Error fetching applied applicant:', error);
+        throw error;
+      }),
+      tap((data) => {
+        this.updateSubject.next(data);
+      })
+    );
   }
 
   postApplicantToEmployee(applicantData:any, applicantId: number): Observable<any> {
@@ -147,9 +166,9 @@ export class ApiClientService {
     return this.updateSubject.asObservable();
   }
 
-  triggerUpdate() {
-    this.updateSubject.next();
-  }
+  // triggerUpdate() {
+  //   this.updateSubject.next();
+  // }
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem(this.tokenKey);

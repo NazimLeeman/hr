@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiClientService } from '../api-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -88,6 +89,11 @@ export class DashboardComponent implements OnInit {
           console.error('Error fetching data from the API', error);
       }
   );
+
+  // this.apiClientService.getUpdateObservable().pipe(takeUntil(this.destroy$)).subscribe(() => {
+  //   console.log('Received update. Reacting...');
+  //   this.anotherOnInit();
+  // });
     
     this.paramOnInit();
     setTimeout(() => {
@@ -135,15 +141,15 @@ export class DashboardComponent implements OnInit {
               showDetails: false,
             };
   
+            
+            this.cards.push(newCard);
+            
+            if (this.selectedCard && this.selectedCard === apiDataItem) {
+              this.selectCard(newCard);
+            }
             if (this.cards.length > 0) {
               this.cards.sort((a, b) => b.percentage - a.percentage);
               this.selectCard(this.cards[0]);
-            }
-  
-            this.cards.push(newCard);
-  
-            if (this.selectedCard && this.selectedCard === apiDataItem) {
-              this.selectCard(newCard);
             }
           });
         }
@@ -437,6 +443,13 @@ return results;
 
     return 0;
 }
+
+ngOnDestroy(): void {
+  this.destroy$.next();
+  this.destroy$.complete();
+}
+
+private destroy$ = new Subject<void>();
 
   
 }
