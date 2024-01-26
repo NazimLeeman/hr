@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class ApiClientService {
   // private apiUrl = 'https://hr-server-icl9.onrender.com';
   private apiUrl = 'https://bento-hr.fly.dev'; //flyIo
   private tokenKey = 'token';
+  private updateSubject = new Subject<void>();
 
   constructor(private http: HttpClient) { }
 
@@ -140,6 +141,14 @@ export class ApiClientService {
   updateJobApplicantData(jobApplicantId: number, mergedData: any): Observable<any> {
     const url = `${this.apiUrl}/jobApplicant/${jobApplicantId}`;
     return this.http.put(url, mergedData);
+  }
+
+  getUpdateObservable(): Observable<void> {
+    return this.updateSubject.asObservable();
+  }
+
+  triggerUpdate() {
+    this.updateSubject.next();
   }
 
   private getHeaders(): HttpHeaders {

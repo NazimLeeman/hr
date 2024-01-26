@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ApiClientService } from '../api-client.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 interface Application {
   id: number;
@@ -10,6 +11,7 @@ interface Application {
   restaurantId: number;
   createdAt: string;
   updatedAt: string;
+  status: string
   job: {
     id: number;
     jobRole: string;
@@ -46,6 +48,7 @@ interface Application {
 })
 export class ApplicantTrackingComponent {
   listOfData: Application[] = [];
+  pastData: Application[] = [];
   apiData: any[] = [];
   isVisible = false;
   isVisibleExperience = false;
@@ -54,6 +57,8 @@ export class ApplicantTrackingComponent {
  selectedApplicantData = {};
   selectedApplicantExperience: any[] = [];
   selectedJobApplicantId = 0;
+  private statusUpdateSubject = new Subject<string>();
+  pastHistory = false;
  @Input() signInRoute: string = '/admin/position';
 
   constructor(private router: Router, private apiClientService: ApiClientService, private modalService: NzModalService) {}
@@ -71,7 +76,10 @@ export class ApplicantTrackingComponent {
         const restaurantId = 1;
 
         this.listOfData = data.applicants.filter((applicant: Application) => 
-        applicant.restaurantId === restaurantId
+        applicant.restaurantId === restaurantId && applicant.status === 'Pending'
+      );
+        this.pastData = data.applicants.filter((applicant: Application) => 
+        applicant.restaurantId === restaurantId && applicant.status === 'Success'
       );
       },
       (error) => {
@@ -129,36 +137,6 @@ export class ApplicantTrackingComponent {
     console.log(this.selectedJobApplicantId)
   }
 
-  // handleOk(): void {
-  //   const applicantId = this.selectedApplicantId;
-  //   console.log(this.selectedApplicantData, applicantId)
-  //   this.apiClientService.postApplicantToEmployee(this.selectedApplicantData, applicantId ).subscribe(
-  //     (response) => {
-  //       console.log('Applicant Hired successfully:', response);
-  //       const employeeId = response.id
-  //       this.router.navigate([this.signInRoute +  '/' +  employeeId]);
-  //       this.modalService.success({
-  //         nzTitle: 'Success',
-  //         nzContent: 'Applicant Hired successfully.',
-  //       });
-  //     },
-  //     (error) => {
-  //       console.error('Error hiring applicant:', error);
-  //       this.modalService.error({
-  //         nzTitle: 'Error',
-  //         nzContent: 'Error hiring applicant. Please try again.',
-  //       });
-  //     }
-  //   );
-  
-  
-  //   this.isOkLoading = true;
-  //   setTimeout(() => {
-  //     this.isVisible = false;
-  //     this.isOkLoading = false;
-  //   }, 3000);
-  // }
-
   handleOk(): void {
   const applicantId = this.selectedApplicantId;
   
@@ -170,6 +148,7 @@ export class ApplicantTrackingComponent {
       this.apiClientService.updateJobApplicantData(this.selectedJobApplicantId, { status: 'Success' }).subscribe(
         () => {
           console.log('Job Applicant Data updated successfully.');
+          this.statusUpdateSubject.next('Success');
           this.router.navigate([this.signInRoute + '/' + employeeId]);
           this.modalService.success({
             nzTitle: 'Success',
@@ -211,6 +190,18 @@ export class ApplicantTrackingComponent {
 
   close() {
     this.isVisibleExperience = false;
+  }
+
+  getStatusUpdateObservable() {
+    return this.statusUpdateSubject.asObservable();
+  }
+
+  showPastHistory() {
+    this.pastHistory = true;
+  }
+  
+  showCurrentHistory() {
+    this.pastHistory = false;
   }
 
 }

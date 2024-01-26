@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ApiClientService } from '../api-client.service';
 import { ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 interface Application {
   id: number;
@@ -53,15 +55,16 @@ export class ApplicationsComponent {
       const applicantId = Number(params['applicantId']);
       this.loadApplicantsData(applicantId);
     });
+    this.apiClientService.getUpdateObservable().pipe(takeUntil(this.destroy$)).subscribe(() => {
+      // React to updates, e.g., reload data
+      this.loadApplicantsData();
+    });
   }
 
-  loadApplicantsData(applicantId: number): void {
+  loadApplicantsData(applicantId?: number): void {
     this.apiClientService.getAppliedApplicant().subscribe(
       (data: any) => {
         console.log('API Response:', data);
-
-        // const applicantId = 1;
-
         this.listOfData = data.applicants.filter((applicant: Application) => 
         applicant.applicantId === applicantId
       );
@@ -75,4 +78,11 @@ export class ApplicationsComponent {
   getColorForStatus(status: string): string {
     return status === 'Success' || 'success' ? 'green' : 'gold';
   }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private destroy$ = new Subject<void>();
 }
