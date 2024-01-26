@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
+import { EmailService } from '../email.service';
 
 interface Employee {
   id: number;
@@ -128,7 +129,21 @@ export class PayrollComponent {
     return mergedData;
   }
 
-  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
+  sendPayrollEmail(employeeEmail: string, payrollData: any): void {
+    const subject = 'Payroll Information';
+    const content = `Hourly Rate: ${payrollData.hourlyRate}, Total Hours: ${payrollData.totalHours}, Total Deduction: ${payrollData.totalDeduction}, NetPayable: ${payrollData.netPayable}`; 
+
+    this.emailService.sendPayrollEmail(employeeEmail, subject, content).subscribe(
+      (response) => {
+        console.log('Email sent successfully', response);
+      },
+      (error) => {
+        console.error('Error sending email', error);
+      }
+    );
+  }
+
+  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private emailService: EmailService) {
     this.validateForm = this.fb.group({
       selectedUser:this.fb.control<UserOption | null>(null),
       totalHours: ['', [Validators.required]],
