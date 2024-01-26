@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { createPayrollForEmployee, findPayrollOfEmployee } from "../models/payroll/payroll.query";
-
+import { sendPayrollEmail } from "../services/nodeMailer/emailSender";
 
 export async function postPayrollToEmployee (req: Request, res: Response) {
     try {
@@ -36,5 +36,16 @@ export async function postPayrollToEmployee (req: Request, res: Response) {
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
+    }
+  }
+
+  export async function sendPayroll(req: Request, res: Response) {
+    try {
+      const { to, subject, content } = req.body;
+      sendPayrollEmail(to, subject, content);
+      res.status(200).send('Email sent successfully');
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error)
     }
   }
