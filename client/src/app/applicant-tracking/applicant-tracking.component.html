@@ -1,8 +1,8 @@
 <!-- <app-navbar-admin></app-navbar-admin> -->
 <div style=" font-family: 'Proxima Nova'">
     <div style="padding: 1rem; margin-left: 4px;">
-      <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Your Current Applicants</h1>
-      
+      <h1 *ngIf="!pastHistory" style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Your Current Applicants</h1>
+      <h1 *ngIf="pastHistory" style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Applicants History</h1>
       <nz-table *ngIf="!pastHistory" #basicTable [nzData]="listOfData">
         <thead>
           <tr>
