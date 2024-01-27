@@ -47,7 +47,9 @@ interface Application {
 export class ApplicationsComponent {
 
   listOfData: Application[] = [];
+  listOfSuccess: Application[] = [];
   applicantId = 0;
+  showSuccess = false;
 
   constructor(private apiClientService: ApiClientService, private route: ActivatedRoute) {}
 
@@ -67,8 +69,11 @@ export class ApplicationsComponent {
       (data: any) => {
         console.log('API Response:', data);
         this.listOfData = data.applicants.filter((applicant: Application) => 
-        applicant.applicantId === applicantId
-      );
+        applicant.applicantId === applicantId && applicant.status === 'Pending'
+        );
+        this.listOfSuccess = data.applicants.filter((applicant: Application) =>
+          applicant.applicantId === applicantId && applicant.status === 'Success'
+        );
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -78,6 +83,14 @@ export class ApplicationsComponent {
 
   getColorForStatus(status: string): string {
     return status === 'Success' || 'success' ? 'green' : 'gold';
+  }
+
+  successShow() {
+    this.showSuccess = true;
+  }
+  
+  pendingShow() {
+    this.showSuccess = false;
   }
 
   ngOnDestroy(): void {
