@@ -41,7 +41,7 @@
           <!-- <td>{{data.jobNature}}</td> -->
           <td>{{data.position?.position}}</td>
           <td>{{ data.hourlyRate | currency:'£' }}</td>
-          <td>80%</td>
+          <td>{{ data.efficiency || 80}}%</td>
           <td>{{data.createdAt | date: 'yyyy-MM-dd ' }}</td>
           <td>
             <button nz-button [nzType]="'primary'" (click)="showModal(data.id, data.skillTags)"><span>View Skills</span></button>        
