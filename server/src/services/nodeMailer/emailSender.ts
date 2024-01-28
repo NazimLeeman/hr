@@ -4,15 +4,15 @@ import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'your-email@gmail.com',
-    pass: 'your-email-password',
+    user: 'bento.mailer.service@gmail.com',
+    pass: 'ifwd jdkb moph xnzu',
   },
 });
 
 // Function to send the payroll email
 function sendPayrollEmail(to: string, subject: string, content: string): void {
   const mailOptions = {
-    from: 'your-email@gmail.com',
+    from: 'bento.mailer.service@gmail.com',
     to,
     subject,
     text: content,

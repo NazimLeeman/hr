@@ -4,6 +4,6 @@ const router = Router();
 
 router.get('/:employeeId', getPayrollOfEmployee);
 router.post('/:id', postPayrollToEmployee);
-router.post('/send', sendPayroll);
+router.post('/send/mail', sendPayroll);
 
 export default router;
