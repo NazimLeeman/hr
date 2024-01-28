@@ -31,6 +31,8 @@ export class PostJobComponent {
   listOfSelectedValue = [];
   responsibilities: string[] = [];
   isLoading = false;
+  currentPage: number = 1; 
+  pageSize: number = 9;
 
   validateForm: FormGroup<{
     jobRole: FormControl<string>,
@@ -107,6 +109,11 @@ export class PostJobComponent {
     };
     return mergedData;
   }
+
+  handlePageIndexChange(pageIndex: number): void {
+    this.currentPage = pageIndex;
+  }
+
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private modalService: NzModalService) {
     this.validateForm = this.fb.group({

@@ -61,6 +61,7 @@ export class PayrollComponent {
         this.totalHours = data.data.totalHours;
         this.totalDeduction = data.data.totalDeduction;
         this.employeeId = data.data.employeeId
+        this.sendPayrollToEmail(this.apiData);
       },
       (error) => {
         console.error('Error fetching data from the API', error);
@@ -133,6 +134,7 @@ export class PayrollComponent {
   }
 
   sendPayrollToEmail(data: any): void {
+    console.log(data)
     const subject = 'Payroll Information';
     const content = `Hourly Rate: ${data.hourlyRate}, Total Hours: ${data.totalHours}, Total Deduction: ${data.totalDeduction}, NetPayable: ${this.netPayable}`; 
     if (data.employeeId) {

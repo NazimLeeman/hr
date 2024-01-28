@@ -60,6 +60,8 @@ export class ApplicantTrackingComponent {
   private statusUpdateSubject = new Subject<string>();
   pastHistory = false;
  @Input() signInRoute: string = '/admin/position';
+ pageSize: number = 6;
+ currentPage: number = 1; 
 
   constructor(private router: Router, private apiClientService: ApiClientService, private modalService: NzModalService) {}
 
@@ -208,6 +210,10 @@ export class ApplicantTrackingComponent {
   
   showCurrentHistory() {
     this.pastHistory = false;
+  }
+
+  handlePageIndexChange(pageIndex: number): void {
+    this.currentPage = pageIndex;
   }
 
   ngOnDestroy(): void {

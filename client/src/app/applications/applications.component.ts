@@ -50,6 +50,8 @@ export class ApplicationsComponent {
   listOfSuccess: Application[] = [];
   applicantId = 0;
   showSuccess = false;
+  pageSize: number = 6;
+  currentPage: number = 1; 
 
   constructor(private apiClientService: ApiClientService, private route: ActivatedRoute) {}
 
@@ -92,6 +94,11 @@ export class ApplicationsComponent {
   pendingShow() {
     this.showSuccess = false;
   }
+
+  handlePageIndexChange(pageIndex: number): void {
+    this.currentPage = pageIndex;
+  }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();

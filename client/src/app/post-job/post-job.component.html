@@ -5,7 +5,7 @@
       <h1 *ngIf="apiData.length === 0" style="margin-top: 1.5rem; text-align: center; font-size: 1.875rem;">You didn't post any Job.</h1>
       <div *ngIf="apiData.length">
         <h1 style="margin-top: 1.5rem; text-align: center; font-size: 1.875rem;">Job Post Information</h1>
-      <nz-table style="max-width: 90vw;" #basicTable [nzData]="apiData">
+      <nz-table style="max-width: 90vw;" #basicTable [nzPageIndex]="currentPage" [nzPageSize]="pageSize" (nzPageIndexChange)="handlePageIndexChange($event)" [nzData]="apiData">
         <thead>
           <tr>
             <th>Job Role</th>

@@ -8,7 +8,7 @@
   <div *ngIf="!showSuccess" style="padding: 1rem; margin-left: 4px;">
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Your Current Pending Applications</h1>
     
-    <nz-table #basicTable [nzData]="listOfData">
+    <nz-table #basicTable [nzPageIndex]="currentPage" [nzPageSize]="pageSize" (nzPageIndexChange)="handlePageIndexChange($event)" [nzData]="listOfData">
       <thead>
         <tr>
           <th>Restaurant Name</th>
@@ -46,7 +46,7 @@
   <div *ngIf="showSuccess" style="padding: 1rem; margin-left: 4px;">
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Your Current Success Applications</h1>
     
-    <nz-table #basicTable [nzData]="listOfSuccess">
+    <nz-table #basicTable [nzPageIndex]="currentPage" [nzPageSize]="pageSize" (nzPageIndexChange)="handlePageIndexChange($event)" [nzData]="listOfSuccess">
       <thead>
         <tr>
           <th>Restaurant Name</th>
