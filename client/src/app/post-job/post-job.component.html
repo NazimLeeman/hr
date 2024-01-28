@@ -55,8 +55,26 @@
       <form nz-form style="padding: 2rem; display: grid; grid-template-columns: repeat(3, 1fr);" [formGroup]="validateForm" (ngSubmit)="submitForm()">
           <div style="padding: 1rem; display: flex; flex-direction: column;">
               <label style="font-size: medium;">Job Role</label>
-              <input nz-input type="text" style="font-size: medium;" id="jobRole" formControlName="jobRole" placeholder="Chef">
-          </div>
+             <!-- <input nz-input type="text" style="font-size: medium;" id="jobRole" formControlName="jobRole" placeholder="Chef"> -->
+                <nz-select id="select" formControlName="jobRole" nzAllowClear nzPlaceHolder="Chef" >   
+      <nz-option nzValue="Chef" nzLabel="Chef"></nz-option>
+      <nz-option nzValue="Waiter" nzLabel="Waiter"></nz-option>
+      <nz-option nzValue="Exective Chef" nzLabel="Exective Chef"></nz-option>
+      <nz-option nzValue="Prep Cook" nzLabel="Prep Cook"></nz-option>
+      <nz-option nzValue="Cashier" nzLabel="Cashier"></nz-option>
+      <nz-option nzValue="Manager" nzLabel="Manager"></nz-option>        
+      <nz-option nzValue="Bartender" nzLabel="Bartender"></nz-option>        
+      <nz-option nzValue="Dishwasher" nzLabel="Dishwasher"></nz-option>        
+      <nz-option nzValue="Server" nzLabel="Server"></nz-option>        
+      <nz-option nzValue="Line Cook" nzLabel="Line Cook"></nz-option>        
+      <nz-option nzValue="Assistant Manager" nzLabel="Assistant Manager"></nz-option>        
+      <nz-option nzValue="Kitchen Manager" nzLabel="Kitchen Manager"></nz-option>        
+      <nz-option nzValue="General Manager" nzLabel="General Manager"></nz-option>        
+      <nz-option nzValue="Pastry Chef" nzLabel="Pastry Chef"></nz-option>        
+      <nz-option nzValue="Beverage Manager" nzLabel="Beverage Manager"></nz-option>        
+      <nz-option nzValue="Busser" nzLabel="Busser"></nz-option>        
+  </nz-select>
+            </div>
 
           <div style="padding: 1rem; display: flex; flex-direction: column;">
               <label style="font-size: medium;">Job Nature</label>
