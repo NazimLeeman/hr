@@ -29,7 +29,7 @@
             </td>
             <!-- <td *ngFor="let exp of data.applicant.experience">{{ formatExperience([exp]) }}</td> -->
             <td>
-                {{data.job.hourlyRate | currency}}
+                {{data.job.hourlyRate | currency:'£'}}
             </td>
             <td>{{data.job.jobRole}}</td>
             <td>
@@ -92,7 +92,7 @@
             <button nz-button [nzType]="'primary'" (click)="showModalExp(data.applicant.id, data.applicant.experience)"><span>View Experience</span></button>        
           </td>
           <td>
-              {{data.job.hourlyRate | currency}}
+              {{data.job.hourlyRate | currency:'£'}}
           </td>
           <td>{{data.job.jobRole}}</td>
           <!-- <td>

@@ -209,7 +209,7 @@ additionOnInit(): void {
 
   salaryCal() {
     const result = this.hourlyRate * 172;
-    return `${result}$`
+    return `£${result}`
   }
 
   currencySelectionChanged(event: Event): void {

@@ -57,7 +57,7 @@
         <label style="font-size: medium;">Enter your expected hourly rate</label>
         <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
           <div style="display: flex;">
-            <input nz-input style="font-size: medium; margin-top: .5rem;"  [value]="hourlyRate" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" >
+            <input nz-input style="font-size: medium; margin-top: .5rem;"  [value]="hourlyRate | currency:'£'" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" >
             <!-- <nz-select id="select" nzAllowClear nzPlaceHolder="USD">
               <nz-option *ngFor="let option of currencyOptions" [nzValue]="option.name" [nzLabel]="option.name"></nz-option>
             </nz-select> -->

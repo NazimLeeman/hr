@@ -24,7 +24,7 @@
           <td>KFC</td>
           <td>{{data.job.jobRole}}</td>
           <td>{{data.job.jobNature}}</td>
-          <td>{{data.job.hourlyRate | currency}}</td>
+          <td>{{data.job.hourlyRate | currency:'£'}}</td>
           <td>
   <!-- <ng-container *ngIf="data.status === 'Success'; else goldTag">
     <nz-tag [nzColor]="'green'">{{data.status}}</nz-tag>
@@ -62,7 +62,7 @@
           <td>KFC</td>
           <td>{{data.job.jobRole}}</td>
           <td>{{data.job.jobNature}}</td>
-          <td>{{data.job.hourlyRate | currency}}</td>
+          <td>{{data.job.hourlyRate | currency:'£'}}</td>
           <td>
   <ng-container *ngIf="data.status === 'Success'; else goldTag">
     <nz-tag [nzColor]="'green'">{{data.status}}</nz-tag>
