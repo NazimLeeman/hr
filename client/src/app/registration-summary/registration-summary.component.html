@@ -70,7 +70,7 @@
           <textarea nz-input style="font-size: medium; margin-top: .5rem;"  [value]="address" id="address" formControlName="address" placeholder="Address"></textarea>
         </nz-form-control> -->
         <div style="margin-left: 1rem; margin-top: .5rem;">
-          <app-address></app-address>
+          <app-address [applicantId]="applicantId" [address]="address"></app-address>
         </div>
       </nz-form-item>
       <div style="display: flex; flex-direction: column; margin-left: 12rem;">

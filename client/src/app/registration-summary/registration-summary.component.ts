@@ -17,6 +17,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { CurrencyService } from '../currency.service';
+import { AddressComponent } from '../address/address.component';
 
 @Component({
   selector: 'app-registration-summary',
@@ -45,8 +46,7 @@ export class RegistrationSummaryComponent implements OnInit {
   private from: any;
   private to: any;
   public amountValue: any;
-  @ViewChild('from') fromCmp: any;
-  @ViewChild('to') toCmp: any;
+  @ViewChild(AddressComponent) addressComponent!: AddressComponent;
 
   validateForm: FormGroup<{
     phoneNumber: FormControl<string>,
@@ -119,7 +119,7 @@ additionOnInit(): void {
       console.log(updatedData)
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
         console.log('Applicant updated successfully:', response);
-        location.reload();
+        // location.reload();
       },
       (error) => {
         console.log("Error during update", error)
@@ -132,6 +132,7 @@ additionOnInit(): void {
         }
       });
     }
+    this.submitAddressFormFromParent();
   }
 
   currencyOnInit(): void {
@@ -217,6 +218,10 @@ additionOnInit(): void {
     const selectedValue: any =  ''
 
     this.selectedCurrencySymbol = selectedValue ? selectedValue.symbol || '' : '';
+  }
+
+  submitAddressFormFromParent(): void {
+    this.addressComponent.handleLoginClick();
   }
 
   constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService, private currency: CurrencyService) {

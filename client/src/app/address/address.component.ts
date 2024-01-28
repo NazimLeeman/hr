@@ -10,6 +10,8 @@ import { ApiClientService } from '../api-client.service';
 })
 export class AddressComponent {
   @Input() formGroup: FormGroup = new FormGroup({});
+  @Input() applicantId = 0;
+  @Input() address: string = '';
   @Output() addressFormReady = new EventEmitter<FormGroup>();
   addressForm: FormGroup;
 
@@ -62,10 +64,15 @@ export class AddressComponent {
 
   handleLoginClick(): void {
     if (this.addressForm.valid) {
-      const loginData = this.addressForm.value;
-      console.log(loginData)
-      // this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
-      //   console.log('Applicant updated successfully:', response);
-    }
+      const addressData = this.addressForm.value;
+      console.log(addressData, this.applicantId)
+      this.apiClientService.updateApplicantData(this.applicantId, addressData).subscribe((response) => {
+        console.log('Applicant updated successfully:', response);
+        location.reload();
+      },
+      (error) => {
+        console.log("Error during update", error)
+      })
+    } 
   }
 }
