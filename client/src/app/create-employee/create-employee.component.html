@@ -121,12 +121,27 @@
     </form>
   </div>
   <form nz-form style="padding: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr);" [formGroup]="validateFormPartOne" (ngSubmit)="submitFormPartOne()">
-    <nz-form-item>
+    <!-- <nz-form-item>
       <label style="font-size: medium;" >Phone Number</label>
       <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
         <input nz-input style="font-size: medium; margin-top: .5rem;" type="text"  formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" >
       </nz-form-control>
-    </nz-form-item>
+    </nz-form-item> -->
+    <nz-form-item>
+        <label style="font-size: medium;">Enter your phone number to connect with others</label>
+        <nz-form-control style="margin-left: 1rem; margin-top: .5rem;">
+          <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+            <ng-template #addOnBeforeTemplate>
+              <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                <nz-option nzLabel="+880" nzValue="+880"></nz-option>
+                <nz-option nzLabel="+86" nzValue="+86"></nz-option>
+                <nz-option nzLabel="+87" nzValue="+87"></nz-option>
+              </nz-select>
+            </ng-template>
+            <input nz-input formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" >
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
     <nz-form-item >
       <label style="font-size: medium;">Hourly Rate</label>
       <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">

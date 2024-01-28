@@ -19,9 +19,8 @@
   }
 
   #phoneNumber {
-    margin-left: 1rem;
-    width: 24rem;
-    
+    width: 16vw;
+    padding: .4rem;
   }
 
   #service {
@@ -32,6 +31,34 @@
   #firstName, #lastName, #email, #password {
     width: 18rem;
     margin-left: .5rem;
+  }
+
+
+  .phone-select {
+  width: 70px;
+}
+
+.register-are {
+  margin-bottom: 8px;
+}
+
+input[type="number"] {
+  margin-bottom: 1rem;
+  border: 1px solid #cbd5e0;
+  color: black;
+  outline: none;
+  transition: all;
+  /* padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-right: 5rem; */
+  /* padding-left: 1rem; */
+  /* border-radius: 10px; */
+}
+  
+  #select {
+    width: 6vw;
+    padding-top: .5rem;
+    /* margin-left: 1rem; */
   }
 
    

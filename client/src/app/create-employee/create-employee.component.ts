@@ -40,6 +40,7 @@ export class CreateEmployeeComponent {
     address: FormControl<string>;
     hourlyRate: FormControl<string>;
     imageUrl: FormControl<string>;
+    phoneNumberPrefix: FormControl<'+86' | '+87' | '+880'>;
   }>
   
   validateFormPartTwo: FormGroup<{
@@ -214,7 +215,8 @@ export class CreateEmployeeComponent {
       phoneNumber: ['', [Validators.required]],
       address: ['', [Validators.required]],
       hourlyRate: ['', [Validators.required]],
-      imageUrl: ['']
+      imageUrl: [''],
+      phoneNumberPrefix: ['+880', Validators.required as any]
     }),
     this.validateFormPartTwo = this.fb.group({
       position: ['', [Validators.required]],
