@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../api-client.service';
@@ -7,6 +7,7 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { CloudinaryService } from '../cloudinary.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { AddressComponent } from '../address/address.component';
 
 @Component({
   selector: 'app-create-employee',
@@ -30,6 +31,8 @@ export class CreateEmployeeComponent {
   sortColumn: string = 'id';
   sortOrder: 'asc' | 'desc' = 'asc';
   isLoading = false;
+  employeeId = 0;
+  @ViewChild(AddressComponent) addressComponent!: AddressComponent;
 
   validateFormPartOne: FormGroup<{
     firstName: FormControl<string>,
@@ -37,7 +40,7 @@ export class CreateEmployeeComponent {
     email: FormControl<string>,
     password: FormControl<string>,
     phoneNumber: FormControl<string>,
-    address: FormControl<string>;
+    // address: FormControl<string>;
     hourlyRate: FormControl<string>;
     imageUrl: FormControl<string>;
     phoneNumberPrefix: FormControl<'+86' | '+87' | '+880'>;
@@ -72,8 +75,9 @@ export class CreateEmployeeComponent {
       delete updatedEmployeeData.lastName;
       this.apiClientService.createEmployee(updatedEmployeeData).subscribe((response) => {
         console.log('Employee Created successfully:', response);
-        const employeeId = response.user.id
-        this.router.navigate([this.signInRoute +  '/' +  employeeId]);
+        this.employeeId = response.user.id;
+        this.submitAddressFormFromParent(this.employeeId);
+        // this.router.navigate([this.signInRoute +  '/' +  this.employeeId]);
         this.modalService.success({
           nzTitle: 'Success',
           nzContent: 'Employee Created successfully.',
@@ -206,6 +210,10 @@ export class CreateEmployeeComponent {
     });
   }
 
+  submitAddressFormFromParent(employeeId: number): void {
+    this.addressComponent.handleLoginClick();
+  }
+
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private cloudinary: CloudinaryService, private msg: NzMessageService, private modalService: NzModalService) {
     this.validateFormPartOne = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -213,7 +221,7 @@ export class CreateEmployeeComponent {
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
-      address: ['', [Validators.required]],
+      // address: ['', [Validators.required]],
       hourlyRate: ['', [Validators.required]],
       imageUrl: [''],
       phoneNumberPrefix: ['+880', Validators.required as any]

@@ -23,6 +23,10 @@ export class ApiClientService {
     return this.http.post(`${this.apiUrl}/employee/create/1`, userData);
   }
 
+  updateEmployee(userData: any, employeeId:number): Observable<any>{
+    return this.http.put(`${this.apiUrl}/employee/update/1/${employeeId}`, userData)
+  }
+
   getAllEmployee(): Observable<any> {
     return this.http.get(`${this.apiUrl}/employee/restaurant/1`);
   }

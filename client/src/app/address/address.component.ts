@@ -11,6 +11,7 @@ import { ApiClientService } from '../api-client.service';
 export class AddressComponent {
   @Input() formGroup: FormGroup = new FormGroup({});
   @Input() applicantId = 0;
+  @Input() employeeId = 0;
   @Input() address: string = '';
   @Output() addressFormReady = new EventEmitter<FormGroup>();
   addressForm: FormGroup;
@@ -64,15 +65,27 @@ export class AddressComponent {
 
   handleLoginClick(): void {
     if (this.addressForm.valid) {
-      const addressData = this.addressForm.value;
-      console.log(addressData, this.applicantId)
-      this.apiClientService.updateApplicantData(this.applicantId, addressData).subscribe((response) => {
-        console.log('Applicant updated successfully:', response);
-        location.reload();
-      },
-      (error) => {
-        console.log("Error during update", error)
-      })
-    } 
+      if (this.applicantId > 0) {
+        const addressData = this.addressForm.value;
+        console.log(addressData, this.applicantId)
+        this.apiClientService.updateApplicantData(this.applicantId, addressData).subscribe((response) => {
+          console.log('Applicant updated successfully:', response);
+          location.reload();
+        },
+        (error) => {
+          console.log("Error during update", error)
+        })
+      } else {
+          const addressData = this.addressForm.value;
+        console.log(addressData, this.employeeId)
+        this.apiClientService.updateEmployee(addressData,this.employeeId).subscribe((response) => {
+          console.log('Employee updated successfully:', response);
+          // location.reload();
+        },
+        (error) => {
+          console.log("Error during update", error)
+        })
+      } 
+    }
   }
 }
