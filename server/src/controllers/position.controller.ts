@@ -43,9 +43,9 @@ export async function postPositionAccess (req: Request, res: Response) {
         }
           const positionId = access.id; 
 
-          await updateEmployeePositionId(employee.id, positionId);
+          const result = await updateEmployeePositionId(employee.id, positionId);
   
-        res.status(201).send({ status: "success", access });
+        res.status(201).send({ status: "success", access, result });
       } else res.status(400).send({ message: 'Invalid employee ID or services.'})
     } catch (error) {
       console.log(error);
