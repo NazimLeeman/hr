@@ -98,10 +98,10 @@
 </div>
 <div style="display: flex; justify-content: center; margin-top: .5rem; ">
   <nz-spin style="margin-left: 40rem;" *ngIf="!cards || cards.length === 0" nzSimple [nzSize]="'large'"></nz-spin>
-    <div style="margin-right: 45rem;">
+    <div style="margin-right: 42rem;">
       <app-job-card *ngFor="let card of cards" [percentageJob]="card.percentage" [card]="card" [isSliced]="true" [showButton]="true" (click)="selectCard(card)" ></app-job-card>
     </div>
-    <div class="selected-card" style="position: fixed; top: 268px; right: 0; bottom: 0; overflow-y: auto; margin-right: 15rem;">
+    <div class="selected-card" style="position: fixed; top: 268px; right: 0; bottom: 0;  margin-right: 15rem;">
       <app-job-card *ngIf="selectedCard" [card]="selectedCard" [isSliced]="false" [showButton]="false"></app-job-card>
     
     </div>
