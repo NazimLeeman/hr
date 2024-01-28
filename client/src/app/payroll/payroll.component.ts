@@ -92,11 +92,13 @@ export class PayrollComponent {
       (data: any) => {
         console.log('API Response:', data);
         this.apiData = data.data;
+        this.sendPayrollToEmail(this.apiData);
       },
       (error) => {
         console.error('Error fetching data from the API', error);
       }
-    );
+      );
+    
   }
 
   loadMore(): void {
@@ -130,11 +132,12 @@ export class PayrollComponent {
     return mergedData;
   }
 
-  sendPayrollToEmail(): void {
+  sendPayrollToEmail(data: any): void {
     const subject = 'Payroll Information';
-    const content = `Hourly Rate: ${this.hourlyRate}, Total Hours: ${this.totalHours}, Total Deduction: ${this.totalDeduction}, NetPayable: ${this.netPayable}`; 
-    if (this.selectedUser) {
-      const employeeEmail = this.selectedUser.email
+    const content = `Hourly Rate: ${data.hourlyRate}, Total Hours: ${data.totalHours}, Total Deduction: ${data.totalDeduction}, NetPayable: ${this.netPayable}`; 
+    if (data.employeeId) {
+      console.log('selected User', data.employeeId)
+      const employeeEmail = data.employee.email
       this.emailService.sendPayrollEmail(employeeEmail, subject, content).subscribe(
         (response) => {
           console.log('Email sent successfully', response);
