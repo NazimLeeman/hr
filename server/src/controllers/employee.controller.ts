@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
-import { checkEmployeeServiceAccess, getEmployeeInfo, getEmployeeServiceAccess } from '../models/position/position.query';
+import { checkEmployeeServiceAccess, createEmployeeServiceAccess, createOwnerServiceAccess, getEmployeeInfo, getEmployeeServiceAccess } from '../models/position/position.query';
 import { Request, Response } from "express";
-import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, deleteEmployeeById, deleteEmployeeLogin, findEmployeeBySearchTerm, updateEmployeeById, updateEmployeeInformation } from "../models/employee/employee.query";
+import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, deleteEmployeeById, deleteEmployeeLogin, findEmployeeBySearchTerm, updateEmployeeById, updateEmployeeInformation, addOwnerToRestaurant } from "../models/employee/employee.query";
 import { findEmployeeLoginByEmail, createEmployeeLogin } from "../models/employeeLogin/employeeLogin.query";
 import { validateLoginData, validateEmployeeData } from "../utils/validation.helper";
 
@@ -253,3 +253,37 @@ export async function getUserInfo(req: Request, res: Response) {
     res.status(500).json(error)
    }
 }
+
+export async function createRestaurantOwner (req: Request, res: Response) {
+    try {
+      const { restaurantId, name, email, password } = req.body;
+      const data = { name, email };
+  
+      if (validateEmployeeData({ name, email, password })) {
+        const loginCheck = await findEmployeeLoginByEmail(email);
+  
+        if (!loginCheck) {
+          const newEmployee = await addOwnerToRestaurant( restaurantId,data);
+  
+          const salt = bcrypt.genSaltSync();
+          const encryptedPassword =  bcrypt.hashSync(password, salt);
+          const loginData = {
+            email,
+            password: encryptedPassword,
+            employeeId: newEmployee.id
+          }
+          
+          await createEmployeeLogin(loginData);
+  
+          // if (data.role === 'admin') {
+            // }
+           await createOwnerServiceAccess({ employeeId: newEmployee.id, services: ["all"], position: "owner", restaurantId: restaurantId });
+  
+          res.status(201).send({ status: 'success', user: newEmployee });
+        } else res.status(400).send({message: 'An account with this email already exists.'});
+      } else res.status(400).send({message: 'Invalid data.'});
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: (error as Error).message });
+    }
+  }

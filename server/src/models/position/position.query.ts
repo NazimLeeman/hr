@@ -179,3 +179,15 @@ export async function findAllWaitersInRestaurant(restaurantId: number) {
     throw new Error('Error finding position in restaurant.');
   }
 }
+
+export async function createOwnerServiceAccess (data: {
+  employeeId: number, position: string, services: string[], restaurantId: number
+}) {
+  try {
+    const access = await Position.create(data);
+    return access;
+  } catch (error) {
+    console.log(error)
+    throw new Error('Error while creating employee service in database.');
+  }
+}

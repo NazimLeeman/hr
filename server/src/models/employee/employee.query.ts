@@ -197,3 +197,17 @@ export async function findEmployeeBySearchTerm (searchTerm: string) {
     throw new Error ('Error searching for employee.')
   }
 }
+
+export async function addOwnerToRestaurant (restaurantId: number,data: { 
+    // restaurantId: number,  
+    name: string,
+    email: string,
+ }) {
+  try {
+    const newEmployee = await Employee.create({...data, restaurantId});
+    return newEmployee;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error adding employee to restaurant.');
+  }
+}
