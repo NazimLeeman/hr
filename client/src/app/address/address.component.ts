@@ -15,6 +15,7 @@ export class AddressComponent {
   @Input() address: string = '';
   @Output() addressFormReady = new EventEmitter<FormGroup>();
   addressForm: FormGroup;
+  id = 0;
 
   constructor(
     private router: Router,
@@ -63,7 +64,7 @@ export class AddressComponent {
     return false;
   }
 
-  handleLoginClick(): void {
+  handleLoginClick(id:number): void {
     if (this.addressForm.valid) {
       if (this.applicantId > 0) {
         const addressData = this.addressForm.value;
@@ -76,7 +77,8 @@ export class AddressComponent {
           console.log("Error during update", error)
         })
       } else {
-          const addressData = this.addressForm.value;
+        const addressData = this.addressForm.value;
+        this.employeeId = id
         console.log(addressData, this.employeeId)
         this.apiClientService.updateEmployee(addressData,this.employeeId).subscribe((response) => {
           console.log('Employee updated successfully:', response);

@@ -221,7 +221,7 @@ additionOnInit(): void {
   }
 
   submitAddressFormFromParent(): void {
-    this.addressComponent.handleLoginClick();
+    this.addressComponent.handleLoginClick(this.applicantId);
   }
 
   constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService, private currency: CurrencyService) {

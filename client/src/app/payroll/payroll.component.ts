@@ -14,6 +14,7 @@ interface Employee {
 interface UserOption {
   id: number;
   name: string;
+  email: string;
 }
 
 @Component({
@@ -129,18 +130,20 @@ export class PayrollComponent {
     return mergedData;
   }
 
-  sendPayrollEmail(employeeEmail: string, payrollData: any): void {
+  sendPayrollToEmail(): void {
     const subject = 'Payroll Information';
-    const content = `Hourly Rate: ${payrollData.hourlyRate}, Total Hours: ${payrollData.totalHours}, Total Deduction: ${payrollData.totalDeduction}, NetPayable: ${payrollData.netPayable}`; 
-
-    this.emailService.sendPayrollEmail(employeeEmail, subject, content).subscribe(
-      (response) => {
-        console.log('Email sent successfully', response);
-      },
-      (error) => {
-        console.error('Error sending email', error);
-      }
-    );
+    const content = `Hourly Rate: ${this.hourlyRate}, Total Hours: ${this.totalHours}, Total Deduction: ${this.totalDeduction}, NetPayable: ${this.netPayable}`; 
+    if (this.selectedUser) {
+      const employeeEmail = this.selectedUser.email
+      this.emailService.sendPayrollEmail(employeeEmail, subject, content).subscribe(
+        (response) => {
+          console.log('Email sent successfully', response);
+        },
+        (error) => {
+          console.error('Error sending email', error);
+        }
+      );
+    }
   }
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private emailService: EmailService) {

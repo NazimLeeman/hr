@@ -4,7 +4,7 @@
     <div > 
     <div style="padding: 1rem; margin-left: 4px;">
       <div>
-        <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Genarate Payroll</h1>
+        <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Generate Payroll</h1>
         <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Search the Employee you want to generate payroll.</p>
         <nz-select
       formControlName="selectedUser"
@@ -47,7 +47,7 @@
         <div style="display: flex; justify-content: center;  padding-bottom: 1rem;">
           <button type="submit" nz-button
           style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
-              [nzType]="'primary'" (click)="submitForm()" >Genarate
+             [nzType]="'primary'" (click)="submitForm()" >Genarate
           </button>
         </div>
     </div>
@@ -94,7 +94,7 @@
         <div style="display: flex; justify-content: center; margin: 1.5rem;">
           <button type="submit" nz-button
           style="font-family: 'GTPressura', sans-serif; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 10rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';"
-              [nzType]="'primary'" >Send Payroll
+            (click)="sendPayrollToEmail()"  [nzType]="'primary'" >Send Payroll
           </button>
         </div>
       </div>

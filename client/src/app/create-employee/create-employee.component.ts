@@ -77,7 +77,7 @@ export class CreateEmployeeComponent {
         console.log('Employee Created successfully:', response);
         this.employeeId = response.user.id;
         this.submitAddressFormFromParent(this.employeeId);
-        // this.router.navigate([this.signInRoute +  '/' +  this.employeeId]);
+        this.router.navigate([this.signInRoute +  '/' +  this.employeeId]);
         this.modalService.success({
           nzTitle: 'Success',
           nzContent: 'Employee Created successfully.',
@@ -211,7 +211,7 @@ export class CreateEmployeeComponent {
   }
 
   submitAddressFormFromParent(employeeId: number): void {
-    this.addressComponent.handleLoginClick();
+    this.addressComponent.handleLoginClick(employeeId);
   }
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute, private cloudinary: CloudinaryService, private msg: NzMessageService, private modalService: NzModalService) {
