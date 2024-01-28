@@ -1,3 +1,4 @@
+<div>
   <div style="flex: 1; position: sticky; top: 0;"></div>
   <nav style="background-color: #038851; color: #ffffff; ">
     <div style="margin-right: 2rem; padding-right: 2rem; padding-left: 2rem; display: flex; align-items: center; justify-content: flex-end;">
@@ -90,17 +91,20 @@
 </div>
 </div>
 </div>
-<div style="height: 1.2rem; margin-top: .5rem; margin-left: 19rem;">
+</div>
+<div style="position: fixed; top: 240px; left: 10rem; right: 0; bottom: 0; overflow-y: auto;">
+<div style="height: 1.2rem;">
   <h1 style="color: #020202; font-weight: bold;">These are Best Matches for you....</h1>
 </div>
 <div style="display: flex; justify-content: center; margin-top: .5rem; ">
-  <nz-spin *ngIf="!cards || cards.length === 0" nzSimple [nzSize]="'large'"></nz-spin>
-    <div>
+  <nz-spin style="margin-left: 40rem;" *ngIf="!cards || cards.length === 0" nzSimple [nzSize]="'large'"></nz-spin>
+    <div style="margin-right: 45rem;">
       <app-job-card *ngFor="let card of cards" [percentageJob]="card.percentage" [card]="card" [isSliced]="true" [showButton]="true" (click)="selectCard(card)" ></app-job-card>
     </div>
-    <div class="selected-card">
+    <div class="selected-card" style="position: fixed; top: 268px; right: 0; bottom: 0; overflow-y: auto; margin-right: 15rem;">
       <app-job-card *ngIf="selectedCard" [card]="selectedCard" [isSliced]="false" [showButton]="false"></app-job-card>
     
     </div>
   </div>
+</div>
 
