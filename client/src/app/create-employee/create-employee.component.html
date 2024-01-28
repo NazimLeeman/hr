@@ -23,7 +23,7 @@
             <img
               *ngIf="data.imageUrl; else defaultImage"
               src="{{ data.imageUrl }}"
-              style="width: 4rem; border-radius: 100px;"
+              style="width: 4rem; height: 4rem; border-radius: 100px;"
               alt=""
             />
             <ng-template #defaultImage>
