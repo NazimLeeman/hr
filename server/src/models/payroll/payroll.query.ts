@@ -27,6 +27,9 @@ export async function createPayrollForEmployee (employeeId: number, restaurantId
 export async function findPayrollOfEmployee (employeeId: number) {
     try {
       const employeePayroll = await Payroll.findOne({
+        include: [{
+          model: Employee,
+        }],
         where: {
           employeeId: employeeId
         }
