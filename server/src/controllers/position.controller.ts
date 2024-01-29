@@ -3,6 +3,7 @@ import { createEmployeeServiceAccess, findAllChefsInRestaurant, findEmployeeServ
 import { validateServices } from "../utils/validation.helper";
 import { findEmployeeById } from "../models/employee/employee.query";
 import { updateEmployeePositionId } from "../models/employeeLogin/employeeLogin.query";
+import { AuthRequest } from "../interfaces/authRequest.interface";
 
 // export async function postPositionToEmployee (req: Request, res: Response) {
 //     try {
@@ -21,10 +22,10 @@ import { updateEmployeePositionId } from "../models/employeeLogin/employeeLogin.
 //     }
 // }
 
-export async function postPositionAccess (req: Request, res: Response) {
+export async function postPositionAccess (req: AuthRequest, res: Response) {
     try {
-      // const id = Number(req.params.id);
-      const restaurantId = Number(req.params.restaurantId);
+      // const restaurantId = Number(req.params.restaurantId);
+      const restaurantId = req.user?.employeeInformation.restaurantId
       const { employeeId, services, position } = req.body;
       const employee = await findEmployeeById(employeeId);
       if (employee && validateServices(services)) {

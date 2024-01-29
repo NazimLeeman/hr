@@ -20,11 +20,11 @@ export class ApiClientService {
   }
 
   createEmployee(userData:any): Observable<any>{
-    return this.http.post(`${this.apiUrl}/employee/create/1`, userData);
+    return this.http.post(`${this.apiUrl}/employee/create`, userData);
   }
 
   updateEmployee(userData: any, employeeId:number): Observable<any>{
-    return this.http.put(`${this.apiUrl}/employee/update/1/${employeeId}`, userData)
+    return this.http.put(`${this.apiUrl}/employee/update/${employeeId}`, userData)
   }
 
   getAllEmployee(): Observable<any> {
@@ -32,31 +32,31 @@ export class ApiClientService {
   }
 
   postPosition( userData:any): Observable<any>{
-    const url = `${this.apiUrl}/position/1`
+    const url = `${this.apiUrl}/position/new`
     return this.http.post(url, userData);
   }
 
   postJob(userData:any): Observable<any> {
-    const url = `${this.apiUrl}/job/new/1`
+    const url = `${this.apiUrl}/job/new`
     return this.http.post(url,userData)
   }
 
   postSchedule(userData:any): Observable<any> {
-    const url = `${this.apiUrl}/schedule/1/restaurant`
+    const url = `${this.apiUrl}/schedule/restaurant`
     return this.http.post(url,userData)
   }
 
   getAllScheduleForRestaurant(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/schedule/restaurant/1`)
+    return this.http.get(`${this.apiUrl}/schedule/restaurant`)
   }
 
-  getAllScheduleOfEmployee(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/schedule/2/restaurant/1`)
-  }
+  // getAllScheduleOfEmployee(): Observable<any> {
+  //   return this.http.get(`${this.apiUrl}/schedule/2/restaurant/1`)
+  // }
 
   getAllJobForRestaurant(): Observable<any> {
     // return this.http.get(`${this.apiUrl}/job/1`)
-    const url = `${this.apiUrl}/job/1`
+    const url = `${this.apiUrl}/job/restaurant`
     return this.http.get(url).pipe(
       catchError((error) => {
         console.error('Error fetching applied applicant:', error);
@@ -86,7 +86,7 @@ export class ApiClientService {
   }
 
   postPayroll(userData:any): Observable<any> {
-    const url = `${this.apiUrl}/payroll/1/`
+    const url = `${this.apiUrl}/payroll/new`
     return this.http.post(url,userData)
   }
 
@@ -123,7 +123,7 @@ export class ApiClientService {
   }
 
   getAppliedApplicant(): Observable<any> {
-    const url = `${this.apiUrl}/jobApplicant/applicantTracking/1`
+    const url = `${this.apiUrl}/jobApplicant/applicantTracking`
     // return this.http.get(url);
     return this.http.get(url).pipe(
       catchError((error) => {
@@ -137,7 +137,7 @@ export class ApiClientService {
   }
 
   postApplicantToEmployee(applicantData:any, applicantId: number): Observable<any> {
-    const url = `${this.apiUrl}/employee/1/restaurant/${applicantId}`
+    const url = `${this.apiUrl}/employee/restaurant/${applicantId}`
     const requestData = {
       name: applicantData.name,
       email: applicantData.email,

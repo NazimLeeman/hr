@@ -14,6 +14,6 @@ export async function authMiddleware(req:AuthRequest, res: Response, next: NextF
         } else res.status(403).send({ message: "Forbidden"})
     } catch (error) {
         console.log(error);
-        res.status(401).send({ message: 'Unauthroized'})
+        res.status(401).send({ message: 'Unauthorized'})
     } 
 }

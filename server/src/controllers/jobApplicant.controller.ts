@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Applicant from "../models/applicant/applicant.model";
 import Job from "../models/job/job.model";
 import JobApplicant from "../models/jobApplicant/jobApplicant.model";
+import { AuthRequest } from "../interfaces/authRequest.interface";
 export async function applyJob(req: Request, res: Response) {
     try {
         const  applicantId  = Number(req.params.applicantId); 
@@ -32,9 +33,10 @@ export async function applyJob(req: Request, res: Response) {
       }
   }
 
-  export async function getApplicantsForRestaurant(req: Request, res: Response) {
+  export async function getApplicantsForRestaurant(req: AuthRequest, res: Response) {
     try {
-        const { restaurantId } = req.params;
+      // const { restaurantId } = req.params;
+      const restaurantId = req.user?.employeeInformation.restaurantId;
         const applicants = await JobApplicant.findAll({
           include: [
             {

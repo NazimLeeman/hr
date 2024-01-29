@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { applyJob, getApplicantsForRestaurant, updateJobStatus } from "../controllers/jobApplicant.controller";
+import { authMiddleware } from "../middleware/auth.middleware";
 const router = Router();
 
 router.post('/applyJob/:applicantId', applyJob);
-router.get('/applicantTracking/:restaurantId', getApplicantsForRestaurant);
+router.get('/applicantTracking', authMiddleware, getApplicantsForRestaurant);
 router.put('/:jobApplicantId', updateJobStatus);
 // router.get('/applicationTracking/:applicantId', getApplicationsForApplicant);
 

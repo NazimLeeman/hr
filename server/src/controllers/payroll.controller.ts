@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import { createPayrollForEmployee, findPayrollOfEmployee } from "../models/payroll/payroll.query";
 import { sendPayrollEmail } from "../services/nodeMailer/emailSender";
+import { AuthRequest } from "../interfaces/authRequest.interface";
 
-export async function postPayrollToEmployee (req: Request, res: Response) {
+export async function postPayrollToEmployee (req: AuthRequest, res: Response) {
     try {
-      let id = req.params.id;
-      const restaurantId = Number(id);
-      if (id && restaurantId) {
+      // let id = req.params.id;
+      // const restaurantId = Number(id);
+      const restaurantId = req.user?.employeeInformation.restaurantId;
+      if ( restaurantId) {
         const { employeeId, hourlyRate, totalHours, totalDeduction } = req.body;
         if (
             typeof hourlyRate === 'number' &&

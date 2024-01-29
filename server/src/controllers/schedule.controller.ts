@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import { createSchedule, updateScheduleForEmployee, findAllScheduleOfEmployee, findAllScheduleInRestaurant } from "../models/schedule/schedule.query";
+import { AuthRequest } from "../interfaces/authRequest.interface";
 
 
-export async function postScheduleToEmployee (req: Request, res: Response) {
+export async function postScheduleToEmployee (req: AuthRequest, res: Response) {
     try {
-      let id = req.params.id;
-      const restaurantId = Number(id);
-      if (id && restaurantId) {
+      // let id = req.params.id;
+      // const restaurantId = Number(id);
+      const restaurantId = req.user?.employeeInformation.restaurantId;
+      if (restaurantId) {
         const { employees, day, slotStart, slotEnds, shift } = req.body;
         if (typeof day === 'string' ) {
           const schedule = await createSchedule( restaurantId, {employees, day, slotStart, slotEnds, shift});
@@ -20,11 +22,12 @@ export async function postScheduleToEmployee (req: Request, res: Response) {
     }
   }
 
-export async function getAllScheduleOfRestaurant (req: Request, res: Response) {
+export async function getAllScheduleOfRestaurant (req: AuthRequest, res: Response) {
     try {
-      let id = req.params.id;
-      const restaurantId = Number(id);
-      if (id && restaurantId) {
+      // let id = req.params.id;
+      // const restaurantId = Number(id);
+      const restaurantId = req.user?.employeeInformation.restaurantId;
+      if (restaurantId) {
         const schedule = await findAllScheduleInRestaurant(restaurantId);
         res.json({ data: schedule });
       } else res.status(400).json({ message: "Invalid restaurant ID." });
@@ -35,12 +38,13 @@ export async function getAllScheduleOfRestaurant (req: Request, res: Response) {
     }
   }
 
-  export async function getAllScheduleOfEmployee (req: Request, res: Response) {
+  export async function getAllScheduleOfEmployee (req: AuthRequest, res: Response) {
     try {
-      let id = req.params.id;
-      const restaurantId = Number(id);
+      // let id = req.params.id;
+      // const restaurantId = Number(id);
+      const restaurantId = req.user?.employeeInformation.restaurantId;
       const employeeId = Number(req.params.employeeId);
-      if (id && employeeId) {
+      if (restaurantId && employeeId) {
         const schedule = await findAllScheduleOfEmployee(employeeId, restaurantId);
         res.json({ data: schedule });
       } else res.status(400).json({ message: "Invalid employee ID." });

@@ -44,16 +44,17 @@ export async function getAllEmployeeOfRestaurant (req: AuthRequest, res: Respons
   // }
 
 
-  export async function postEmployeeToRestaurant (req: Request, res: Response) {
+  export async function postEmployeeToRestaurant (req: AuthRequest, res: Response) {
     try {
-      const restaurantId = Number(req.params.restaurantId);
+      // const restaurantId = Number(req.params.restaurantId);
+      const restaurantId = req.user?.employeeInformation.restaurantId
       const { name, email, password, phoneNumber, address, hourlyRate, imageUrl } = req.body;
       const data = { name, email, phoneNumber, address, hourlyRate, imageUrl };
   
       if (validateEmployeeData({ name, email, password })) {
         const loginCheck = await findEmployeeLoginByEmail(email);
   
-        if (!loginCheck) {
+        if (!loginCheck && restaurantId) {
           const newEmployee = await addEmployeeToRestaurant( restaurantId,data);
   
           const salt = bcrypt.genSaltSync();
@@ -105,12 +106,13 @@ export async function login (req: Request, res: Response) {
 }
 
   
-  export async function postApplicantToEmployee (req: Request, res: Response) {
+  export async function postApplicantToEmployee (req: AuthRequest, res: Response) {
     try {
-      let id = req.params.id;
-      const restaurantId = Number(id);
+      // let id = req.params.id;
+      // const restaurantId = Number(id);
+      const restaurantId = req.user?.employeeInformation.restaurantId
       const applicantId = Number(req.params.applicantId);
-      if (id && applicantId && restaurantId) {
+      if (applicantId && restaurantId) {
         const { name, email, experience, phoneNumber, address, skillTags, hourlyRate, imageUrl} = req.body;
         if (
             typeof name === 'string' &&

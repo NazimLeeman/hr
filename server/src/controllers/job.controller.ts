@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import { createJob, deleteJob, findAllFullTimeJob, findAllJob, findAllJobForRestaurant, findAllPartTimeJob, findJobBySearchTerm } from "../models/job/job.query";
+import { AuthRequest } from "../interfaces/authRequest.interface";
 
-export async function postJob (req: Request, res: Response) {
+export async function postJob (req: AuthRequest, res: Response) {
     try {
-        const restaurantId = Number(req.params.restaurantId);
+        // const restaurantId = Number(req.params.restaurantId);
+        const restaurantId = req.user?.employeeInformation.restaurantId
         const { jobRole, jobNature, jobDescription, experience, skillTags, hourlyRate, applicationDeadline, responsibilities} = req.body;
         const data = { jobRole, jobNature, jobDescription, experience, skillTags, hourlyRate, applicationDeadline, responsibilities}
-        if (jobRole && experience && skillTags && hourlyRate) {
+        if (restaurantId && jobRole && experience && skillTags && hourlyRate) {
             const job = await createJob(restaurantId, data);
             res.status(201).json(job);
         } else res.status(400).json({message: 'Invalid job fields.'})
@@ -46,11 +48,14 @@ export async function getAllFullTimeJobs (req: Request, res: Response) {
     }    
 }
 
-export async function getAllJobForRestaurant(req: Request, res: Response) {
+export async function getAllJobForRestaurant(req: AuthRequest, res: Response) {
     try {
-        const restaurantId = Number(req.params.restaurantId);
-        const jobs = await findAllJobForRestaurant(restaurantId);
-        res.json({ data: jobs });
+        // const restaurantId = Number(req.params.restaurantId);
+        const restaurantId = req.user?.employeeInformation.restaurantId;
+        if (restaurantId) {     
+            const jobs = await findAllJobForRestaurant(restaurantId);
+            res.json({ data: jobs });
+        }
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
