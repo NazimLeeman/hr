@@ -4,12 +4,14 @@ import { Request, Response } from "express";
 import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, deleteEmployeeById, deleteEmployeeLogin, findEmployeeBySearchTerm, updateEmployeeById, updateEmployeeInformation, addOwnerToRestaurant } from "../models/employee/employee.query";
 import { findEmployeeLoginByEmail, createEmployeeLogin } from "../models/employeeLogin/employeeLogin.query";
 import { validateLoginData, validateEmployeeData } from "../utils/validation.helper";
+import { AuthRequest } from '../interfaces/authRequest.interface';
 
-export async function getAllEmployeeOfRestaurant (req: Request, res: Response) {
+export async function getAllEmployeeOfRestaurant (req: AuthRequest, res: Response) {
     try {
-      let id = req.params.id;
-      const restaurantId = Number(id);
-      if (id && restaurantId) {
+      // let id = req.params.id;
+      // const restaurantId = Number(id);
+      const restaurantId = req.user?.employeeInformation.restaurantId
+      if (restaurantId) {
         const employee = await findAllEmployeeInRestaurant(restaurantId);
         res.json({ data: employee });
       } else res.status(400).json({ message: "Invalid restaurant ID." });

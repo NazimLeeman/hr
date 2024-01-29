@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { deleteEmployee, getAllEmployeeOfRestaurant, getUserInfo, login, serviceAccess, CheckServiceAccess, postApplicantToEmployee, postEmployeeToRestaurant, searchEmployee, updateEmployee } from "../controllers/employee.controller";
+import { authMiddleware } from "../middleware/auth.middleware";
 const router = Router();
 
-router.get('/restaurant/:id', getAllEmployeeOfRestaurant);
+router.get('/restaurant',authMiddleware, getAllEmployeeOfRestaurant);
 // router.get('/:id/restaurant/:employeeId', searchEmployee);
 router.post('/:id/restaurant/:applicantId', postApplicantToEmployee);
 // router.post('/signup', postEmployeeToRestaurant);

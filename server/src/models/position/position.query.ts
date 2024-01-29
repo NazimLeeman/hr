@@ -185,9 +185,20 @@ export async function createOwnerServiceAccess (data: {
 }) {
   try {
     const access = await Position.create(data);
-    return access;
+    if (access) {
+      const owner = await Employee.findByPk(access.employeeId);
+  
+      if (!owner) {
+        throw new Error('Owner not found with the given ID');
+      }
+  
+      owner.positionId = access.id;
+      await owner.save();
+  
+      return owner;
+    }
   } catch (error) {
     console.log(error)
-    throw new Error('Error while creating employee service in database.');
+    throw new Error('Error while creating owner service in database.');
   }
 }

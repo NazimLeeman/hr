@@ -9,6 +9,12 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddressComponent } from '../address/address.component';
 
+interface FilterData {
+  position: {
+    position: string
+  }
+}
+
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
@@ -23,6 +29,7 @@ export class CreateEmployeeComponent {
   skillTags: string[] = [];
   // showFormTwo: boolean = false;
   apiData: any[] = [];
+  filterData: FilterData[] = [];
   currentPage: number = 1; 
   pageSize: number = 6;
   @Input() signInRoute: string = '/admin/position';
@@ -55,6 +62,8 @@ export class CreateEmployeeComponent {
     this.apiClientService.getAllEmployee().subscribe(
       (data: any) => {
         console.log('API Response:', data);
+        this.filterData = data.data
+        if (this.filterData.length > 0 && this.filterData[0].position.position !== 'owner')
         this.apiData = data.data;
         this.apiData.sort((a: any, b: any) => a.id - b.id);
       },

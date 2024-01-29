@@ -28,7 +28,7 @@ export class ApiClientService {
   }
 
   getAllEmployee(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/employee/restaurant/1`);
+    return this.http.get(`${this.apiUrl}/employee/restaurant`);
   }
 
   postPosition( userData:any): Observable<any>{
