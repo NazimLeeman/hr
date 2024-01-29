@@ -1,0 +1,24 @@
+.scrollable-div {
+  max-height: 350px; /* Set maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Style the scrollbar */
+.scrollable-div::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+/* Track (the area on which the thumb runs) */
+.scrollable-div::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+
+/* Thumb (the draggable scrolling handle) */
+.scrollable-div::-webkit-scrollbar-thumb {
+  background: #22c55e; /* Color of the thumb */
+}
+
+/* On hover, style the thumb */
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+  background: #22c55e; /* Color of the thumb on hover */
+}

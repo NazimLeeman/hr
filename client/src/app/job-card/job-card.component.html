@@ -44,7 +44,7 @@
     </div> -->
     <!-- <p *ngIf="isSliced">{{card.description | slice:0:450}}<span *ngIf="card.description.length > 100">...</span></p>
   <p *ngIf="!isSliced">{{card.description }}</p> -->
-  <div style="max-height: 350px; overflow-y: auto;">
+  <div class="scrollable-div">
     <p *ngIf="isSliced; else fullDescription">{{card.description | slice:0:450}}<span *ngIf="card.description.length > 100">...</span></p>
     <ng-template #fullDescription>
       <p>{{card.description }}</p>
