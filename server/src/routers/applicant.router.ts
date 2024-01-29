@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { postApplicant, searchApplicant, getAllApplicant, login, deleteApplicant, updateApplicant, getAllApplicantLogin, deleteApplicantLoginData, getApplicantLoginData, getApplicantById, addExperience, addSkillTags } from "../controllers/applicant.controller";
+import { postApplicant, searchApplicant, getAllApplicant, login, deleteApplicant, updateApplicant, getAllApplicantLogin, deleteApplicantLoginData, getApplicantLoginData, getApplicantById, addExperience, addSkillTags, masterApplicant } from "../controllers/applicant.controller";
 import { applyJob } from "../controllers/jobApplicant.controller";
 const router = Router();
 
@@ -16,5 +16,6 @@ router.put('/:applicantId', updateApplicant);
 router.put('/experience/:applicantId', addExperience);
 router.put('/skillTags/:applicantId', addSkillTags);
 router.post('dashboard/:applicantId', applyJob);
+router.post('/signup/master', masterApplicant);
 
 export default router;

@@ -87,3 +87,28 @@ export async function deleteJobInfo (req: Request, res: Response) {
         res.status(500).json(error)
     }
 }
+
+export async function masterJob(req: Request, res: Response) {
+    try {
+        const jobsData = req.body; // Assuming req.body is an array of job objects
+        const createdJobs = [];
+
+        for (const jobData of jobsData) {
+            const { restaurantId, jobRole, jobNature, jobDescription, experience, skillTags, hourlyRate, applicationDeadline, responsibilities } = jobData;
+            const data = { jobRole, jobNature, jobDescription, experience, skillTags, hourlyRate, applicationDeadline, responsibilities };
+
+            if (restaurantId && jobRole && experience && skillTags && hourlyRate) {
+                const job = await createJob(restaurantId, data);
+                createdJobs.push(job);
+            } else {
+                // If any job data is missing, skip creating the job and log an error
+                console.error('Invalid job fields for job:', jobData);
+            }
+        }
+
+        res.status(201).json(createdJobs);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(error);
+    }
+}

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { postJob, deleteJobInfo, getAllJob, searchJob,getAllPartTimeJobs, getAllFullTimeJobs, getAllJobForRestaurant } from "../controllers/job.controller";
+import { postJob, masterJob, deleteJobInfo, getAllJob, searchJob,getAllPartTimeJobs, getAllFullTimeJobs, getAllJobForRestaurant } from "../controllers/job.controller";
 const router = Router();
 
 router.get('/all', getAllJob);
@@ -9,5 +9,6 @@ router.post('/new/:restaurantId', postJob);
 router.delete('/delete/:jobId', deleteJobInfo);
 router.get('/:restaurantId', getAllJobForRestaurant);
 router.get('/search/jobs', searchJob);
+router.post('/new/master', masterJob)
  
 export default router;

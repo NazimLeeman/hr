@@ -211,3 +211,41 @@ export async function addSkillTags(req: Request, res: Response) {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 }
+
+export async function masterApplicant(req: Request, res: Response) {
+  try {
+    const applicantsData = req.body; // Assuming req.body is an array of applicant data
+    const createdApplicants = [];
+
+    for (const applicantData of applicantsData) {
+      const { name, email, password } = applicantData;
+
+      if (name && email && password && typeof name === 'string' && typeof email === 'string') {
+        const loginCheck = await findApplicantLoginByEmail(email);
+        
+        if (!loginCheck) {
+          const newApplicant = await createApplicant({ name, email });
+          const salt = bcrypt.genSaltSync();
+          const encryptedPassword = bcrypt.hashSync(password, salt);
+          const loginData = {
+            email,
+            password: encryptedPassword,
+            applicantId: newApplicant.id
+          };
+          await createApplicantLogin(loginData);
+          createdApplicants.push(newApplicant);
+        } else {
+          // If account with email already exists, skip and continue with the next applicant
+          console.log(`An account with email ${email} already exists. Skipping...`);
+        }
+      } else {
+        console.log('Invalid applicant fields:', applicantData);
+      }
+    }
+
+    res.status(201).send({ status: 'success', createdApplicants });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
+}
