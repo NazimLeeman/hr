@@ -9,6 +9,9 @@ interface Employee {
   restaurantId: number;
   name: string;
   email: string;
+  position: {
+    position: string;
+  }
 }
 
 interface UserOption {
@@ -106,7 +109,13 @@ export class PayrollComponent {
     this.isLoading = true;
     this.apiClientService.getAllEmployee().subscribe(data => {
       console.log(data.data)
-      const users: UserOption[] = data.data.map((employee: Employee) => ({ id: employee.id, name: employee.name }));
+      // const users: UserOption[] = data.data.map((employee: Employee) => ({ id: employee.id, name: employee.name }));
+      // this.isLoading = false;
+      // this.optionList = [...this.optionList, ...users];
+      const users: UserOption[] = data.data
+      .filter((employee: Employee) => employee.position.position !== 'owner')
+      .map((employee: Employee) => ({ id: employee.id, name: employee.name }));
+
       this.isLoading = false;
       this.optionList = [...this.optionList, ...users];
     });
