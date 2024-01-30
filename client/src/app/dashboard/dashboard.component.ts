@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
   }
 
   anotherOnInit(): void {
-    this.apiClientService.getAllJobForRestaurant().subscribe(
+    this.apiClientService.getAllJob().subscribe(
       (data: any) => {
         console.log('API Response:', data);
         this.apiData = data.data;
