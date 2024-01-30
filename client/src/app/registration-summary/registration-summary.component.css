@@ -1,3 +1,55 @@
+.container {
+  padding: 1rem; 
+  margin-left: 4px;
+}
+
+h1 {
+  font-size: 1.875rem; 
+  font-weight: bold; 
+  padding-bottom: .5rem;
+}
+
+p {
+  margin-left: .5rem; 
+  font-size: x-large; 
+  padding-bottom: 1rem;
+}
+
+.details {
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.img-container {
+  display: flex; 
+  flex-direction: column;
+}
+
+img {
+  padding-bottom: 1rem; 
+  width: 12rem; 
+  border-radius: 100px;
+}
+
+.firstColumn {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: 
+  center; padding-left: 1rem;
+}
+
+.secondColumn {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center;
+}
+
+form {
+  padding: 1.5rem; 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr);
+}
+   
    nz-form-item {
     display: block;
   }
@@ -25,20 +77,9 @@
   }
 
   #phoneNumber {
-    /* margin-left: 1rem; */
     width: 16vw;
     padding: .4rem;
   }
-
-   
-  
-  input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="text"]:focus {
-  /* border-color: #2bb053;  */
-  box-shadow: 0 0 5px #2bb053 !important;
-  border-color: #2bb053 !important;
-}
   
 .phone-select {
   width: 70px;
@@ -48,21 +89,16 @@ input[type="text"]:focus {
   margin-bottom: 8px;
 }
 
-input[type="number"] {
-  margin-bottom: 1rem;
-  border: 1px solid #cbd5e0;
-  color: black;
-  outline: none;
-  transition: all;
-  /* padding-top: .5rem;
-  padding-bottom: .5rem;
-  padding-right: 5rem; */
-  /* padding-left: 1rem; */
-  /* border-radius: 10px; */
-}
-  
   #select {
     width: 6vw;
     padding-top: .5rem;
-    /* margin-left: 1rem; */
+  }
+
+  label {
+    font-size: medium;
+  }
+
+  .address {
+    margin-left: 1rem; 
+    margin-top: .5rem;
   }

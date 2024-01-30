@@ -1,11 +1,11 @@
 <nz-skeleton *ngIf="!isLoading"></nz-skeleton>
 <div *ngIf="isLoading">
-    <div style="padding: 1rem; margin-left: 4px;">
-      <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Contact Info</h1>
-      <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Start by filling in some basic profile and contact information.</p>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr);">
-        <div style="display: flex; flex-direction: column;">
-        <img style="padding-bottom: 1rem; width: 12rem; border-radius: 100px;" [src]="uploadedImageUrl || '../../assets/images/user-profile-default.png'" alt="">
+    <div class="container">
+      <h1>Contact Info</h1>
+      <p>Start by filling in some basic profile and contact information.</p>
+      <div class="details">
+        <div class="img-container">
+        <img [src]="uploadedImageUrl || '../../assets/images/user-profile-default.png'" alt="">
         
           <nz-upload style="margin-left: 1.5rem;"
       nzAction="''"   
@@ -17,19 +17,19 @@
       </button>
     </nz-upload>
         </div>
-        <div style="display: flex; flex-direction: column; justify-content: center; padding-left: 1rem;">
+        <div class="firstColumn">
           <app-profile-details label="First Name" [value]="firstName"></app-profile-details>
           <app-profile-details label="Email" type="email" [value]="email"></app-profile-details>
         </div>
-        <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div class="secondColumn">
           <app-profile-details label="Last Name" [value]="lastName"></app-profile-details>
           <app-profile-details label="Password" type="password" [value]="password"></app-profile-details>
         </div>
       </div>
     </div>
-    <form nz-form style="padding: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr);" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
-        <label style="font-size: medium;">Enter your phone number to connect with others</label>
+        <label>Enter your phone number to connect with others</label>
         <nz-form-control style="margin-left: 1rem; margin-top: .5rem;">
           <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
             <ng-template #addOnBeforeTemplate>
@@ -44,7 +44,7 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item style="margin-left: 12rem;">
-        <label style="font-size: medium;">Enter your expected hourly rate</label>
+        <label>Enter your expected hourly rate</label>
         <nz-form-control nzErrorTip="Please input your hourly Rate!" class="custom-error-tip">
           <div style="display: flex;">
             <input nz-input style="font-size: medium; margin-top: .5rem;"  [value]="hourlyRate | currency:'£'" id="hourlyRate" formControlName="hourlyRate" placeholder="Hourly Rate" >
@@ -52,19 +52,19 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item >
-        <label style="font-size: medium;">Entering your address allows us to find jobs closest to you!</label>
-        <div style="margin-left: 1rem; margin-top: .5rem;">
+        <label>Entering your address allows us to find jobs closest to you!</label>
+        <div class="address">
           <app-address [applicantId]="applicantId" [address]="address"></app-address>
         </div>
       </nz-form-item>
       <div style="display: flex; flex-direction: column; margin-left: 12rem;">
-        <label style="font-size: medium;">Monthly Salary (40 hours)</label>
+        <label>Monthly Salary (40 hours)</label>
         <input style="background-color: #F3F4F6; margin-top: .5rem; margin-left: 1rem; width: 16vw;" type="text" [value]="salaryCal()" readonly>
       </div>
      
     </form>
     <div style="display: flex; justify-content: center;  padding-bottom: 1rem;">
-      <button class="my-btn" type="submit" (click)="submitForm()" nz-button style=" background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Save</button>
+      <button type="submit" (click)="submitForm()" nz-button style=" background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 8rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Save</button>
   </div>
   </div>
 

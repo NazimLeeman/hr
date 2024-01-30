@@ -43,14 +43,13 @@ export class RegistrationSummaryComponent implements OnInit {
 
   public isDataAvailable = false;
   public failedToLoad = false;
-  private from: any;
-  private to: any;
+  // private from: any;
+  // private to: any;
   public amountValue: any;
   @ViewChild(AddressComponent) addressComponent!: AddressComponent;
 
   validateForm: FormGroup<{
     phoneNumber: FormControl<string>,
-    // address: FormControl<string>;
     hourlyRate: FormControl<number>;
     phoneNumberPrefix: FormControl<'+86' | '+87' | '+880'>;
     imageUrl: FormControl<string>;
@@ -70,7 +69,6 @@ ngOnInit(): void {
           this.password = '********';
 
           this.additionOnInit();
-          this.currencyOnInit();
           this.isLoading = true
       },
       (error) => {
@@ -119,7 +117,7 @@ additionOnInit(): void {
       console.log(updatedData)
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
         console.log('Applicant updated successfully:', response);
-        // location.reload();
+        location.reload();
       },
       (error) => {
         console.log("Error during update", error)
@@ -135,22 +133,22 @@ additionOnInit(): void {
     this.submitAddressFormFromParent();
   }
 
-  currencyOnInit(): void {
-    this.currency.getCurrenciesPromise().then((data) => {
-      this.from = data[0];
-      this.to = data[1];
-      this.currencyOptions = data; 
-      this.isDataAvailable = true
-      console.log(this.currencyOptions)
-    },
-      () =>{
-      this.failedToLoad = true;
-      }
-    );
+  // currencyOnInit(): void {
+  //   this.currency.getCurrenciesPromise().then((data) => {
+  //     this.from = data[0];
+  //     this.to = data[1];
+  //     this.currencyOptions = data; 
+  //     this.isDataAvailable = true
+  //     console.log(this.currencyOptions)
+  //   },
+  //     () =>{
+  //     this.failedToLoad = true;
+  //     }
+  //   );
 
-    let localAmount = localStorage.getItem("amount");
-    this.amountValue= localAmount ? localAmount : (1).toFixed(2);
-  }
+  //   let localAmount = localStorage.getItem("amount");
+  //   this.amountValue= localAmount ? localAmount : (1).toFixed(2);
+  // }
 
   uploadedImageUrl: string | undefined;
   private successMessageDisplayed = false;
@@ -223,7 +221,6 @@ additionOnInit(): void {
   constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService, private currency: CurrencyService) {
     this.validateForm = this.fb.group({
       phoneNumber: ['', [Validators.required]],
-      // address: ['', [Validators.required]],
       imageUrl: [''],
       hourlyRate: [0, [Validators.required]],
       phoneNumberPrefix: ['+880', Validators.required as any],
