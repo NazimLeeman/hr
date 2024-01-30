@@ -67,7 +67,7 @@ export class ApplicationsComponent {
   }
 
   loadApplicantsData(applicantId?: number): void {
-    this.apiClientService.getAppliedApplicant().subscribe(
+    this.apiClientService.getAppliedApplications(this.applicantId).subscribe(
       (data: any) => {
         console.log('API Response:', data);
         this.listOfData = data.applicants.filter((applicant: Application) => 

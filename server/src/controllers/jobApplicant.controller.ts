@@ -78,3 +78,25 @@ export async function updateJobStatus(req: Request, res: Response) {
   }
 }
   
+export async function getApplicationsForApplicant(req: Request, res: Response) {
+    try {
+      const { applicantId } = req.params;
+        const applicants = await JobApplicant.findAll({
+          where: { applicantId },
+          include: [
+            {
+                model: Job,
+              },
+              {
+                model: Applicant,
+              },
+          ],
+        });
+    
+        return res.status(200).json({ applicants });
+      } catch (error) {
+        console.error('Error getting applications for restaurant:', error);
+        console.error('Params:', req.params);
+        return res.status(500).json({ error: 'Internal server error.' });
+      }
+  }

@@ -9,7 +9,7 @@ export class ApiClientService {
 
   // private apiUrl = 'http://localhost:4000';
   // private apiUrl = 'https://hr-server-icl9.onrender.com';
-  private apiUrl = 'https://bento-hr.fly.dev'; //flyIo
+  private apiUrl = 'https://bento-hr.fly.dev'; 
   private tokenKey = 'token';
   private updateSubject = new Subject<any>();
 
@@ -128,6 +128,20 @@ export class ApiClientService {
     return this.http.get(url).pipe(
       catchError((error) => {
         console.error('Error fetching applied applicant:', error);
+        throw error;
+      }),
+      tap((data) => {
+        this.updateSubject.next(data);
+      })
+    );
+  }
+  
+  getAppliedApplications(applicantId:number): Observable<any> {
+    const url = `${this.apiUrl}/jobApplicant/applicationTracking/${applicantId}`
+    // return this.http.get(url);
+    return this.http.get(url).pipe(
+      catchError((error) => {
+        console.error('Error fetching applied applications:', error);
         throw error;
       }),
       tap((data) => {
