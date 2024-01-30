@@ -1,9 +1,4 @@
-.custom-error-tip {
-    color: red;
-    font-size: large;
-  }
-  
-  nz-form-item {
+   nz-form-item {
     display: block;
   }
   
@@ -11,8 +6,6 @@
     position: relative;
   }
   
-  /* input[type="email"], */
-  input[type="password"],
   input[type="text"] {
     margin-bottom: 1rem;
     border: 1px solid #cbd5e0;
@@ -24,33 +17,6 @@
     padding-right: 5rem;
     padding-left: 1rem;
     border-radius: 10px;
-  }
-
-  input[type="email"] {
-    margin-bottom: 1rem;
-    margin-left: 2.4rem;
-    border: 1px solid #cbd5e0;
-    color: black;
-    outline: none;
-    transition: all;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    /* padding-right: 5rem; */
-    padding-left: 1rem;
-    border-radius: 10px;
-    width: 17rem;
-  }
-
-  /* #address {
-    padding-right: 20rem;
-    padding-bottom: 8rem;
-    
-  } */
-
-  #address {
-    margin-left: 1rem;
-    width: 24rem;
-    padding-bottom: 4rem;
   }
 
   #hourlyRate {

@@ -167,10 +167,6 @@ additionOnInit(): void {
       console.log('Upload response:', info.file.response);
       this.uploadedImageUrl = info.file.response.url; 
     } 
-    // else if (info.file.status === 'error') {
-    //   this.msg.error(`${info.file.name} file upload failed.`);
-    //   console.error('Upload error:', info.file.error);
-    // }
   }
 
 
