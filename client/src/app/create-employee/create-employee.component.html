@@ -39,7 +39,7 @@
           <td>{{data.id}}</td>
           <td>{{data.name}}</td>
           <!-- <td>{{data.jobNature}}</td> -->
-          <td>{{data.position?.position}}</td>
+          <td *ngIf="data.position?.position !== 'owner'">{{data.position?.position}}</td>
           <td>{{ data.hourlyRate | currency:'£' }}</td>
           <td>{{ data.efficiency || 80}}%</td>
           <td>{{data.createdAt | date: 'yyyy-MM-dd ' }}</td>
