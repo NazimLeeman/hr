@@ -79,6 +79,7 @@ import { AuthRedirectComponent } from './auth-redirect/auth-redirect.component';
 import { SpashLogoComponent } from './spash-logo/spash-logo.component';
 import { AuthInterceptor } from './interceptors/auth/auth.service';
 import { TokenInterceptor } from './interceptors/token/token.service';
+import { MapComponent } from './map/map.component';
 
 
 registerLocaleData(en);
@@ -117,7 +118,8 @@ registerLocaleData(en);
     AddressComponent,
     TalentMarketComponent,
     AuthRedirectComponent,
-    SpashLogoComponent
+    SpashLogoComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

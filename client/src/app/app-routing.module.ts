@@ -25,6 +25,7 @@ import { AvailabilityComponent } from './availability/availability.component';
 import { AddressComponent } from './address/address.component';
 import { TalentMarketComponent } from './talent-market/talent-market.component';
 import { AuthRedirectComponent } from './auth-redirect/auth-redirect.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent },
@@ -62,6 +63,7 @@ const routes: Routes = [
   { path: 'dashboard/:applicantId', component: DashboardComponent, canActivate: [authGuard]},
   { path: 'login', component: EmployeeLoginComponent},
   { path: 'success', component: SuccessDialogComponent},
+  { path: 'map', component: MapComponent},
   { path: '**', redirectTo: ''}
 ];
 
