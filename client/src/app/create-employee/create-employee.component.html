@@ -19,6 +19,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
+          <ng-container *ngIf="data.position?.position !== 'owner'">
           <td>
             <img
               *ngIf="data.imageUrl; else defaultImage"
@@ -39,13 +40,14 @@
           <td>{{data.id}}</td>
           <td>{{data.name}}</td>
           <!-- <td>{{data.jobNature}}</td> -->
-          <td *ngIf="data.position?.position !== 'owner'">{{data.position?.position}}</td>
+          <td>{{data.position?.position}}</td>
           <td>{{ data.hourlyRate | currency:'£' }}</td>
           <td>{{ data.efficiency || 80}}%</td>
           <td>{{data.createdAt | date: 'yyyy-MM-dd ' }}</td>
           <td>
             <button nz-button [nzType]="'primary'" (click)="showModal(data.id, data.skillTags)"><span>View Skills</span></button>        
           </td>
+        </ng-container>
         </tr>
       </tbody>
     </nz-table>
