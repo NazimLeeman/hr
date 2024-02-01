@@ -67,3 +67,30 @@
     nz-spin {
       display: inline-block;
     }
+
+    .overflow {
+      position: fixed;
+      top: 240px;
+      left: 10rem;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+    }
+
+    .overflow::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+/* Track (the area on which the thumb runs) */
+.overflow::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+
+    .overflow::-webkit-scrollbar-thumb {
+  background: #22c55e; /* Color of the thumb */
+}
+
+/* On hover, style the thumb */
+.overflow::-webkit-scrollbar-thumb:hover {
+  background: #22c55e; /* Color of the thumb on hover */
+}
