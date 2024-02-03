@@ -5,6 +5,8 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import * as mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import { MapService } from '../map.service';
+import { Feature, FeatureCollection, LineString } from 'geojson';
 
 
 @Component({
@@ -128,6 +130,7 @@ export class MapComponent {
   // }
   map!: mapboxgl.Map;
   marker!: mapboxgl.Marker;
+  endMarker!: mapboxgl.Marker;
   style = 'mapbox://styles/mapbox/streets-v12'
 
   usersCurrentLatitude: number = 0
@@ -136,6 +139,13 @@ export class MapComponent {
   selectedLatitude!: number
   selectedLongitude!: number
 
+  start: number[] = [];
+  end: number[] = [];
+
+  previousMarker: mapboxgl.Marker | null = null;
+
+  constructor(private mapboxService:MapService) {}
+
   ngOnInit(): void {
 
     if (navigator.geolocation) {
@@ -143,7 +153,7 @@ export class MapComponent {
         const { latitude, longitude } = position.coords;
         this.usersCurrentLatitude = latitude;
         this.usersCurrentLongitude = longitude;
-
+        this.start = [this.usersCurrentLongitude, this.usersCurrentLatitude];
         if (latitude && longitude) {
           console.log(this.usersCurrentLongitude && this.usersCurrentLatitude)
           this.initializeMapAndMarker()
@@ -182,6 +192,7 @@ export class MapComponent {
       const lngLat = this.marker.getLngLat()
       console.log('lnglat', lngLat);
     }
+    
   }
 
        addMapboxGeocoderControl() {
@@ -191,6 +202,7 @@ export class MapComponent {
         mapboxgl: mapboxgl,
       })
     );
+         this.gettingEnd()
        }
   
   // addMapboxDirections() {
@@ -201,4 +213,109 @@ export class MapComponent {
   //     })
   //   )
   // }
+
+  gettingRoute(end: any[]) {
+    this.mapboxService.getRoute(this.map, this.start, end).subscribe((data: any) => {
+      const route = data.routes[0].geometry.coordinates;
+      console.log(route);
+    const geojson: Feature<LineString> = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: route
+      }
+    };
+  
+      if (this.map.getSource('route')) {
+      (this.map.getSource('route') as mapboxgl.GeoJSONSource).setData(geojson);
+      // this.map.getSource('route').setData(geojson);
+    } else {
+      this.map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: geojson
+        },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': '#3887be',
+          'line-width': 5,
+          'line-opacity': 0.75
+        }
+      });
+    }
+  });
+  }
+
+  gettingEnd() {
+    this.map.on('click', (event: any) => {
+    const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
+    const end: FeatureCollection = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Point',
+            coordinates: coords
+          }
+        }
+      ]
+    };
+  
+    const endSource = this.map?.getSource('end');
+    if (endSource) {
+      const geojsonSource = endSource as mapboxgl.GeoJSONSource;
+      geojsonSource.setData(end);
+    } else {
+      // this.map?.addLayer({
+      //   id: 'end',
+      //   type: 'circle',
+      //   source: {
+      //     type: 'geojson',
+      //     data: {
+      //       type: 'FeatureCollection',
+      //       features: [
+      //         {
+      //           type: 'Feature',
+      //           properties: {},
+      //           geometry: {
+      //             type: 'Point',
+      //             coordinates: coords
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   },
+      // });
+    
+      if (this.map.getLayer('end')) {
+        this.map.removeLayer('end');
+        this.map.removeSource('end');
+      }
+        if (this.previousMarker) {
+        this.previousMarker.remove();
+      }
+      this.endMarker = new mapboxgl.Marker({ color: 'blue', draggable: true })
+        .setLngLat(coords as mapboxgl.LngLatLike)
+        .addTo(this.map);
+      
+      this.previousMarker = this.endMarker
+      
+    }
+      
+
+    this.gettingRoute(coords);
+  });
+  }
+
+  
+
+
 }
