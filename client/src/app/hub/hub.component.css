@@ -1,0 +1,85 @@
+.match-parent {
+  position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.form {
+  position: absolute;
+  /* float: left; */
+  margin: 24px;
+  padding: 24px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  z-index: 1; 
+}
+
+
+.txt-m {
+  font-size: 14px;
+}
+
+.txt-bold {
+  font-weight: bold;
+}
+
+.mb6 {
+  margin-bottom: 6px;
+}
+
+.mb12 {
+  margin-bottom: 12px;
+}
+
+.mr12 {
+  margin-right: 12px;
+}
+
+.toggle-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.toggle-container {
+  margin-right: 12px;
+}
+
+.toggle-container:last-child {
+  margin-right: 0;
+}
+
+.toggle {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+}
+
+.toggle:hover {
+  background-color: #e6e6e6;
+}
+
+.toggle--active-null {
+  color: #333333;
+}
+
+.toggle--null {
+  color: #666666;
+}
+
+.toggle input[type="radio"] {
+  display: none;
+}
+
+.toggle input[type="radio"]:checked + .toggle {
+  background-color: #314ccd; /* Adjust the color for checked state */
+  color: #ffffff;
+  border-color: #314ccd;
+}
+
+

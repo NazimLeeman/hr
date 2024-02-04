@@ -26,6 +26,9 @@ import { AddressComponent } from './address/address.component';
 import { TalentMarketComponent } from './talent-market/talent-market.component';
 import { AuthRedirectComponent } from './auth-redirect/auth-redirect.component';
 import { MapComponent } from './map/map.component';
+import { HubComponent } from './hub/hub.component';
+import { LiveTrackingComponent } from './live-tracking/live-tracking.component';
+import { PointsComponent } from './points/points.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent },
@@ -64,6 +67,9 @@ const routes: Routes = [
   { path: 'login', component: EmployeeLoginComponent},
   { path: 'success', component: SuccessDialogComponent},
   { path: 'map', component: MapComponent},
+  { path: 'hub', component: HubComponent},
+  { path: 'live', component: LiveTrackingComponent},
+  { path: 'points', component: PointsComponent},
   { path: '**', redirectTo: ''}
 ];
 

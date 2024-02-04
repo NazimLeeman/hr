@@ -81,7 +81,9 @@ import { AuthInterceptor } from './interceptors/auth/auth.service';
 import { TokenInterceptor } from './interceptors/token/token.service';
 import { MapComponent } from './map/map.component';
 import { ProfileDetailsComponent } from './component/profile-details/profile-details.component';
-
+import { HubComponent } from './hub/hub.component';
+import { LiveTrackingComponent } from './live-tracking/live-tracking.component';
+import { PointsComponent } from './points/points.component';
 
 registerLocaleData(en);
 
@@ -121,7 +123,10 @@ registerLocaleData(en);
     AuthRedirectComponent,
     SpashLogoComponent,
     MapComponent,
-    ProfileDetailsComponent
+    ProfileDetailsComponent,
+    HubComponent,
+    LiveTrackingComponent,
+    PointsComponent
   ],
   imports: [
     BrowserModule,

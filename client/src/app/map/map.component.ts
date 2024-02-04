@@ -191,6 +191,9 @@ export class MapComponent {
     if (this.marker) {
       const lngLat = this.marker.getLngLat()
       console.log('lnglat', lngLat);
+      this.start = [lngLat.lng, lngLat.lat];
+      console.log('start', this.start)
+      this.gettingRoute(this.end)
     }
     
   }
@@ -215,6 +218,7 @@ export class MapComponent {
   // }
 
   gettingRoute(end: any[]) {
+    this.end = end;
     this.mapboxService.getRoute(this.map, this.start, end).subscribe((data: any) => {
       const route = data.routes[0].geometry.coordinates;
       console.log(route);
@@ -306,6 +310,8 @@ export class MapComponent {
         .setLngLat(coords as mapboxgl.LngLatLike)
         .addTo(this.map);
       
+      this.endMarker.on('dragend', this.onBlueDragEnd)
+      
       this.previousMarker = this.endMarker
       
     }
@@ -315,7 +321,15 @@ export class MapComponent {
   });
   }
 
-  
-
+  onBlueDragEnd = () => {
+    console.log('marker', this.endMarker);
+    if (this.endMarker) {
+      const lngLat = this.endMarker.getLngLat()
+      console.log('lnglat', lngLat);
+      this.end = [lngLat.lng, lngLat.lat];
+      console.log('end', this.end)
+      this.gettingRoute(this.end)
+    }
+  }
 
 }

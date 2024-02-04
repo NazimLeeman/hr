@@ -22,4 +22,8 @@ export class MapService {
   //   const url = `https://api.mapbox.com/optimized-trips/v1/mapbox/driving-traffic/${start[0]},${start[1]};${end[0]},${end[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
   //   return this.http.get(url);
   // }
+
+//   getIsochrone() {
+//     const url = `https://api.mapbox.com/isochrone/v1/mapbox/${this.profile}/${this.lng},${this.lat}?contours_minutes=${this.minutes}&polygons=true&denoise=0.4&generalize=0&access_token=${mapboxgl.accessToken}`;
+//   }
 }
