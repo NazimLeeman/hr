@@ -220,6 +220,7 @@ export class MapComponent {
   gettingRoute(end: any[]) {
     this.end = end;
     this.mapboxService.getRoute(this.map, this.start, end).subscribe((data: any) => {
+      // console.log('getting route',data)
       const route = data.routes[0].geometry.coordinates;
       console.log(route);
     const geojson: Feature<LineString> = {
@@ -258,6 +259,7 @@ export class MapComponent {
 
   gettingEnd() {
     this.map.on('click', (event: any) => {
+      console.log('event',event)
     const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
     const end: FeatureCollection = {
       type: 'FeatureCollection',

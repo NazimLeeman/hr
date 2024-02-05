@@ -89,8 +89,9 @@ export class HubComponent {
       data: data
     });
   } else {
-    const source: any = this.map?.getSource(sourceId);
-    source.setData(data); 
+    // const source: any = this.map?.getSource(sourceId);
+    // source.setData(data); 
+    // console.log('source',source)
   }
 
   if (!this.map?.getLayer(`isoLayer-${profile}-${minutes}-${lng}-${lat}`)) {
@@ -128,7 +129,7 @@ displayMultipleIsochrones() {
     if (this.map) {     
       const marker = new mapboxgl.Marker({
         color: pair.fillColor,
-        draggable: true
+        draggable: false
       }).setLngLat([pair.lng, pair.lat]).addTo(this.map);
     }
 

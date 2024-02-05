@@ -21,7 +21,6 @@ map: mapboxgl.Map | undefined;
   marker: mapboxgl.Marker | null = null;
 
   ngOnInit(): void {
-    // this.getLocation();    //for Bangladesh
     this.map = new mapboxgl.Map({
       accessToken: environment.mapbox.accessToken,
       container: 'map',
