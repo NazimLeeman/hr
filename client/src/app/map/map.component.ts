@@ -182,7 +182,7 @@ export class MapComponent {
         container: 'map',
         style: this.style,
         center: [this.usersCurrentLongitude, this.usersCurrentLatitude], // Default center
-        zoom: 1 // Default zoom level
+        zoom: 12 // Default zoom level
       });
     
       // Initialize the marker and popup
