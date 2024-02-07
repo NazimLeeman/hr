@@ -179,7 +179,15 @@ export class MapComponent {
 
     this.marker = new mapboxgl.Marker({ color: 'red', draggable: true })
       .setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude])
-      .addTo(this.map)
+      .addTo(this.map);
+    
+    const popupContent = `<h3>Marker Information</h3><p>Latitude: ${this.usersCurrentLatitude}</p><p>Longitude: ${this.usersCurrentLongitude}</p>`;
+    const popup = new mapboxgl.Popup({ offset: 25 })
+    .setHTML(popupContent);
+
+    // Attach popup to marker
+    this.marker.setPopup(popup);
+    popup.addTo(this.map);
 
     this.marker.on('dragend', this.onDragEnd)
 
