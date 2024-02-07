@@ -149,7 +149,7 @@ export class MapComponent {
   ngOnInit(): void {
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.watchPosition((position) => {
         const { latitude, longitude } = position.coords;
         this.usersCurrentLatitude = latitude;
         this.usersCurrentLongitude = longitude;
@@ -181,7 +181,7 @@ export class MapComponent {
       .setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude])
       .addTo(this.map);
     
-    const popupContent = `<h3>Marker Information</h3><p>Latitude: ${this.usersCurrentLatitude}</p><p>Longitude: ${this.usersCurrentLongitude}</p>`;
+    const popupContent = `<h3>Information</h3><p>Latitude: ${this.usersCurrentLatitude}</p><p>Longitude: ${this.usersCurrentLongitude}</p>`;
     const popup = new mapboxgl.Popup({ offset: 25 })
     .setHTML(popupContent);
 
