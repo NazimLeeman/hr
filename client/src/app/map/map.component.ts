@@ -163,7 +163,12 @@ export class MapComponent {
         this.updateMarkerAndPopupContent();
 
         if (this.map) {
-          this.map.setCenter([this.usersCurrentLongitude, this.usersCurrentLatitude]);
+          this.map.flyTo({
+            center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
+            zoom: 12,
+            essential: true // Ensures the animation is not interrupted
+          });
+          // this.map.setCenter([this.usersCurrentLongitude, this.usersCurrentLatitude]);
         }
       }
     }, (error) => {
@@ -182,7 +187,7 @@ export class MapComponent {
         container: 'map',
         style: this.style,
         center: [this.usersCurrentLongitude, this.usersCurrentLatitude], // Default center
-        zoom: 12 // Default zoom level
+        zoom: 1 // Default zoom level
       });
     
       // Initialize the marker and popup
