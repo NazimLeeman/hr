@@ -161,6 +161,10 @@ export class MapComponent {
         // If latitude and longitude are available, update the marker and popup content
         console.log(this.usersCurrentLongitude, this.usersCurrentLatitude);
         this.updateMarkerAndPopupContent();
+
+        if (this.map) {
+          this.map.setCenter([this.usersCurrentLongitude, this.usersCurrentLatitude]);
+        }
       }
     }, (error) => {
       console.log('Permission denied');
