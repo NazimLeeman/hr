@@ -172,33 +172,38 @@ export class MapComponent {
   }
   
   initializeMapAndMarker() {
-  // Initialize the map
-  this.map = new mapboxgl.Map({
-    accessToken: environment.mapbox.accessToken,
-    container: 'map',
-    style: this.style,
-    center: [this.usersCurrentLongitude, this.usersCurrentLatitude], // Default center
-    zoom: 1 // Default zoom level
-  });
-
-  // Initialize the marker and popup
-    this.marker = new mapboxgl.Marker({ color: 'red', draggable: true })
-    .setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude])
-    .addTo(this.map);
-
-  const popupContent = `<h3>Information</h3><p>Latitude: ${this.usersCurrentLatitude}</p><p>Longitude: ${this.usersCurrentLongitude}</p>`;
-  this.popup = new mapboxgl.Popup({ offset: 25 })
-    .setHTML(popupContent);
-
-  // Attach the popup to the marker
-    this.marker.setPopup(this.popup);
-    this.popup.addTo(this.map);
-
-  // Add event listener for when the marker is dragged
-  this.marker.on('dragend', this.onDragEnd);
-
-  // Add Mapbox Geocoder control
-    this.addMapboxGeocoderControl();
+    if (!this.map) {
+      // Initialize the map
+      this.map = new mapboxgl.Map({
+        accessToken: environment.mapbox.accessToken,
+        container: 'map',
+        style: this.style,
+        center: [this.usersCurrentLongitude, this.usersCurrentLatitude], // Default center
+        zoom: 12 // Default zoom level
+      });
+    
+      // Initialize the marker and popup
+        this.marker = new mapboxgl.Marker({ color: 'red', draggable: true })
+        .setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude])
+        .addTo(this.map);
+    
+      const popupContent = `<h3>Information</h3><p>Latitude: ${this.usersCurrentLatitude}</p><p>Longitude: ${this.usersCurrentLongitude}</p>`;
+      this.popup = new mapboxgl.Popup({ offset: 25 })
+        .setHTML(popupContent);
+    
+      // Attach the popup to the marker
+        this.marker.setPopup(this.popup);
+        this.popup.addTo(this.map);
+    
+      // Add event listener for when the marker is dragged
+      this.marker.on('dragend', this.onDragEnd);
+    
+      // Add Mapbox Geocoder control
+        this.addMapboxGeocoderControl();
+      
+    } else {
+      this.map.setCenter([this.usersCurrentLongitude, this.usersCurrentLatitude])
+    }
     
   //   this.map.flyTo({
   //   center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
