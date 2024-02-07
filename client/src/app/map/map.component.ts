@@ -144,55 +144,111 @@ export class MapComponent {
 
   previousMarker: mapboxgl.Marker | null = null;
 
+  popup = new mapboxgl.Popup({ offset: 25 });
+
   constructor(private mapboxService:MapService) {}
 
   ngOnInit(): void {
 
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        this.usersCurrentLatitude = latitude;
-        this.usersCurrentLongitude = longitude;
-        this.start = [this.usersCurrentLongitude, this.usersCurrentLatitude];
-        if (latitude && longitude) {
-          console.log(this.usersCurrentLongitude && this.usersCurrentLatitude)
-          this.initializeMapAndMarker()
-        }
-
-      }, (error) => {
-        console.log('Permission dey nai');
-      });
-    }
-
-
+     if (navigator.geolocation) {
+    navigator.geolocation.watchPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      this.usersCurrentLatitude = latitude;
+      this.usersCurrentLongitude = longitude;
+      this.start = [this.usersCurrentLongitude, this.usersCurrentLatitude];
+      if (latitude && longitude && !this.map) { // Check if map is not initialized
+        console.log(this.usersCurrentLongitude, this.usersCurrentLatitude);
+        this.initializeMapAndMarker();
+      } else {
+        this.updateMarkerAndPopupContent(); // Update marker and popup content
+      }
+    }, (error) => {
+      console.log('Permission denied');
+    });
   }
+}
+
+initializeMapAndMarker() {
+  this.map = new mapboxgl.Map({
+    accessToken: environment.mapbox.accessToken,
+    container: 'map',
+    style: this.style,
+    center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
+    zoom: 12
+  });
+
+  // Create marker
+  this.marker = new mapboxgl.Marker({ color: 'red', draggable: true })
+    .setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude])
+    .addTo(this.map);
+
+  // Create popup
+  this.popup = new mapboxgl.Popup({ offset: 25 });
+
+  // Update marker and popup content
+  this.updateMarkerAndPopupContent();
+}
+
+updateMarkerAndPopupContent() {
+  // Update marker position
+  this.marker.setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude]);
+
+  // Update popup content
+  const popupContent = `<h3>Information</h3><p>Latitude: ${this.usersCurrentLatitude}</p><p>Longitude: ${this.usersCurrentLongitude}</p>`;
+
+  // Set new content to the existing popup
+  this.popup.setHTML(popupContent);
+
+  // Attach popup to marker
+  this.marker.setPopup(this.popup);
+}
+
+  //------------------checking--------------
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.watchPosition((position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       this.usersCurrentLatitude = latitude;
+  //       this.usersCurrentLongitude = longitude;
+  //       this.start = [this.usersCurrentLongitude, this.usersCurrentLatitude];
+  //       if (latitude && longitude) {
+  //         console.log(this.usersCurrentLongitude && this.usersCurrentLatitude)
+  //         this.initializeMapAndMarker()
+  //       }
+
+  //     }, (error) => {
+  //       console.log('Permission dey nai');
+  //     });
+  //   }
 
 
-  initializeMapAndMarker() {
-    this.map = new mapboxgl.Map({
-      accessToken: environment.mapbox.accessToken,
-      container: 'map',
-      style: this.style,
-      center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
-      zoom: 12
-    })
+  // }
 
-    this.marker = new mapboxgl.Marker({ color: 'red', draggable: true })
-      .setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude])
-      .addTo(this.map);
+
+  // initializeMapAndMarker() {
+  //   this.map = new mapboxgl.Map({
+  //     accessToken: environment.mapbox.accessToken,
+  //     container: 'map',
+  //     style: this.style,
+  //     center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
+  //     zoom: 12
+  //   })
+
+  //   this.marker = new mapboxgl.Marker({ color: 'red', draggable: true })
+  //     .setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude])
+  //     .addTo(this.map);
     
-    const popupContent = `<h3>Information</h3><p>Latitude: ${this.usersCurrentLatitude}</p><p>Longitude: ${this.usersCurrentLongitude}</p>`;
-    const popup = new mapboxgl.Popup({ offset: 25 })
-    .setHTML(popupContent);
+  //   const popupContent = `<h3>Information</h3><p>Latitude: ${this.usersCurrentLatitude}</p><p>Longitude: ${this.usersCurrentLongitude}</p>`;
+  //   const popup = new mapboxgl.Popup({ offset: 25 })
+  //   .setHTML(popupContent);
 
-    // Attach popup to marker
-    this.marker.setPopup(popup);
-    popup.addTo(this.map);
+  //   // Attach popup to marker
+  //   this.marker.setPopup(popup);
+  //   popup.addTo(this.map);
 
-    this.marker.on('dragend', this.onDragEnd)
+  //   this.marker.on('dragend', this.onDragEnd)
 
-    this.addMapboxGeocoderControl() 
-  }
+  //   this.addMapboxGeocoderControl() 
+  // }
 
   onDragEnd = () => {
     console.log('marker', this.marker);
