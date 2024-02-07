@@ -172,7 +172,6 @@ export class MapComponent {
   }
   
   initializeMapAndMarker() {
-    if (!this.map) {
       // Initialize the map
       this.map = new mapboxgl.Map({
         accessToken: environment.mapbox.accessToken,
@@ -200,10 +199,6 @@ export class MapComponent {
     
       // Add Mapbox Geocoder control
         this.addMapboxGeocoderControl();
-      
-    } else {
-      this.map.setCenter([this.usersCurrentLongitude, this.usersCurrentLatitude])
-    }
     
   //   this.map.flyTo({
   //   center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
