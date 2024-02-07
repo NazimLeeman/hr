@@ -198,7 +198,12 @@ export class MapComponent {
   this.marker.on('dragend', this.onDragEnd);
 
   // Add Mapbox Geocoder control
-  this.addMapboxGeocoderControl();
+    this.addMapboxGeocoderControl();
+    
+    this.map.flyTo({
+    center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
+    essential: true // Ensures the animation is not interrupted
+  });
 }
 
 updateMarkerAndPopupContent() {
