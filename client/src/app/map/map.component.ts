@@ -177,7 +177,7 @@ export class MapComponent {
     accessToken: environment.mapbox.accessToken,
     container: 'map',
     style: this.style,
-    center: [0, 0], // Default center
+    center: [this.usersCurrentLongitude, this.usersCurrentLatitude], // Default center
     zoom: 1 // Default zoom level
   });
 
