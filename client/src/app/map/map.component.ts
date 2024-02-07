@@ -156,14 +156,14 @@ export class MapComponent {
         this.start = [this.usersCurrentLongitude, this.usersCurrentLatitude];
         if (latitude && longitude) {
           console.log(this.usersCurrentLongitude && this.usersCurrentLatitude)
-          this.initializeMapAndMarker()
+          // this.initializeMapAndMarker()
         }
 
       }, (error) => {
         console.log('Permission dey nai');
       });
     }
-
+    this.initializeMapAndMarker()
 
   }
 
