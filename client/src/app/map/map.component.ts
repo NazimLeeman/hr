@@ -191,7 +191,8 @@ export class MapComponent {
     .setHTML(popupContent);
 
   // Attach the popup to the marker
-  this.marker.setPopup(this.popup);
+    this.marker.setPopup(this.popup);
+    this.popup.addTo(this.map);
 
   // Add event listener for when the marker is dragged
   this.marker.on('dragend', this.onDragEnd);
