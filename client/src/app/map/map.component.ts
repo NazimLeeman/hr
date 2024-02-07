@@ -150,15 +150,17 @@ export class MapComponent {
 
   ngOnInit(): void {
 
-     if (navigator.geolocation) {
+    if (navigator.geolocation) {
+        let mapInitialized = false;
     navigator.geolocation.watchPosition((position) => {
       const { latitude, longitude } = position.coords;
       this.usersCurrentLatitude = latitude;
       this.usersCurrentLongitude = longitude;
       this.start = [this.usersCurrentLongitude, this.usersCurrentLatitude];
-      if (latitude && longitude && !this.map) { // Check if map is not initialized
+      if (!mapInitialized) { // Check if map is not initialized
         console.log(this.usersCurrentLongitude, this.usersCurrentLatitude);
         this.initializeMapAndMarker();
+        mapInitialized = true;
       } else {
         this.updateMarkerAndPopupContent(); // Update marker and popup content
       }
