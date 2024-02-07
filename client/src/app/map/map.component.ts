@@ -200,10 +200,10 @@ export class MapComponent {
   // Add Mapbox Geocoder control
     this.addMapboxGeocoderControl();
     
-    this.map.flyTo({
-    center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
-    essential: true // Ensures the animation is not interrupted
-  });
+  //   this.map.flyTo({
+  //   center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
+  //   essential: true // Ensures the animation is not interrupted
+  // });
 }
 
 updateMarkerAndPopupContent() {
