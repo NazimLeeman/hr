@@ -163,13 +163,13 @@ export class MapComponent {
         console.log(this.usersCurrentLongitude, this.usersCurrentLatitude);
         this.updateMarkerAndPopupContent();
 
-        if (this.map && !this.initialZoom) {
+        if (this.map) {
           this.map.flyTo({
             center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
             zoom: 12,
             essential: true // Ensures the animation is not interrupted
           });
-          this.initialZoom = true;
+          // this.initialZoom = true;
           // this.map.setCenter([this.usersCurrentLongitude, this.usersCurrentLatitude]);
         }
       }
