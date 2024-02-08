@@ -68,7 +68,7 @@
         [(nzVisible)]="isVisibleDate"
         nzTitle="Confirm Interview Date"
         (nzOnCancel)="handleDate()"
-        (nzOnOk)="handleOk()"
+        (nzOnOk)="handleDate()"
         [nzOkLoading]="isOkLoading"
       >
         <p *nzModalContent><nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker></p>
