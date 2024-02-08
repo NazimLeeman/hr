@@ -12,6 +12,7 @@
             <th>Experiences</th>
             <th>Hourly Rate</th>
             <th>Job Position</th>
+            <th>Set Interview</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -32,6 +33,7 @@
                 {{data.job.hourlyRate | currency:'£'}}
             </td>
             <td>{{data.job.jobRole}}</td>
+            <td><nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker></td>
             <td>
                 <button type="submit" nz-button
           style="font-family: 'Proxima Nova'; border: none; background-color: #22c55e; color: #ffffff;"

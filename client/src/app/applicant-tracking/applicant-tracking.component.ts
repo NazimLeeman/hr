@@ -62,6 +62,7 @@ export class ApplicantTrackingComponent {
  @Input() signInRoute: string = '/admin/position';
  pageSize: number = 6;
  currentPage: number = 1; 
+ date = null;
 
   constructor(private router: Router, private apiClientService: ApiClientService, private modalService: NzModalService) {}
 
@@ -214,6 +215,10 @@ export class ApplicantTrackingComponent {
 
   handlePageIndexChange(pageIndex: number): void {
     this.currentPage = pageIndex;
+  }
+
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
   }
 
   ngOnDestroy(): void {
