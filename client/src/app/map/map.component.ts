@@ -145,6 +145,7 @@ export class MapComponent {
   previousMarker: mapboxgl.Marker | null = null;
 
   popup = new mapboxgl.Popup({ offset: 25 });
+  initialZoom = false;
 
   constructor(private mapboxService:MapService) {}
 
@@ -162,12 +163,13 @@ export class MapComponent {
         console.log(this.usersCurrentLongitude, this.usersCurrentLatitude);
         this.updateMarkerAndPopupContent();
 
-        if (this.map) {
+        if (this.map && !this.initialZoom) {
           this.map.flyTo({
             center: [this.usersCurrentLongitude, this.usersCurrentLatitude],
             zoom: 12,
             essential: true // Ensures the animation is not interrupted
           });
+          this.initialZoom = true;
           // this.map.setCenter([this.usersCurrentLongitude, this.usersCurrentLatitude]);
         }
       }
@@ -191,7 +193,11 @@ export class MapComponent {
       });
     
       // Initialize the marker and popup
-        this.marker = new mapboxgl.Marker({ color: 'red', draggable: true })
+    this.marker = new mapboxgl.Marker({
+      element: this.createCustomMarkerElement('../../assets/images/rider.png'),
+      // color: 'red',
+      draggable: true
+    })
         .setLngLat([this.usersCurrentLongitude, this.usersCurrentLatitude])
         .addTo(this.map);
     
@@ -419,6 +425,15 @@ updateMarkerAndPopupContent() {
       console.log('end', this.end)
       this.gettingRoute(this.end)
     }
+  }
+
+    createCustomMarkerElement(iconPath:string) {
+      const el = document.createElement('div');
+      el.style.backgroundImage = `url('${iconPath}')`;
+      el.style.backgroundSize = 'cover';
+      el.style.width = '60px'; 
+      el.style.height = '60px'; 
+      return el;
   }
 
 }
