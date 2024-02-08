@@ -52,6 +52,7 @@ export class ApplicantTrackingComponent {
   apiData: any[] = [];
   isVisible = false;
   isVisibleExperience = false;
+  isVisibleDate = false;
  isOkLoading = false;
  selectedApplicantId = 0;
  selectedApplicantData = {};
@@ -143,6 +144,13 @@ export class ApplicantTrackingComponent {
     this.selectedJobApplicantId = data.id;
     console.log(this.selectedJobApplicantId)
   }
+  
+  showModalDate(applicantData: any, applicantId: number, data:any): void {
+    this.isVisibleDate = true;
+    this.selectedApplicantId = applicantId;
+    this.selectedApplicantData = applicantData;
+    this.selectedJobApplicantId = data.id;
+  }
 
   handleOk(): void {
   const applicantId = this.selectedApplicantId;
@@ -183,10 +191,15 @@ export class ApplicantTrackingComponent {
   );
 }
 
+handleDate(): void {
+  this.isVisibleDate = false;
+}
+
   
   handleCancel(): void {
     this.isVisible = false;
     this.isVisibleExperience = false;
+    this.isVisibleDate = false;
   }
 
   showModalExp(applicantId: number, experience: string[]): void {

@@ -33,7 +33,12 @@
                 {{data.job.hourlyRate | currency:'£'}}
             </td>
             <td>{{data.job.jobRole}}</td>
-            <td><nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker></td>
+            <td>
+              <button type="submit" nz-button
+          style="font-family: 'Proxima Nova'; border: none; background-color: #22c55e; color: #ffffff;"
+              [nzType]="'primary'" (click)="showModalDate(data.applicant, data.applicantId, data)">Select
+          </button>
+            </td>
             <td>
                 <button type="submit" nz-button
           style="font-family: 'Proxima Nova'; border: none; background-color: #22c55e; color: #ffffff;"
@@ -56,6 +61,17 @@
         [nzOkLoading]="isOkLoading"
       >
         <p *nzModalContent>Hire this applicant.</p>
+            </nz-modal>
+      </div>
+      <div>
+        <nz-modal
+        [(nzVisible)]="isVisibleDate"
+        nzTitle="Confirm Interview Date"
+        (nzOnCancel)="handleDate()"
+        (nzOnOk)="handleOk()"
+        [nzOkLoading]="isOkLoading"
+      >
+        <p *nzModalContent>Fix the interview date.</p>
             </nz-modal>
       </div>
       <div>
