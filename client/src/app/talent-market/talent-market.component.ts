@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiClientService } from '../api-client.service';
+import { ApiClientService } from '../services/apiClient/api-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth/auth.service';
 import { switchMap } from 'rxjs/operators';
 
 @Component({

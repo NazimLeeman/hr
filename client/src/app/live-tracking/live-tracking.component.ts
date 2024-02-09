@@ -4,7 +4,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import * as mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import { MapService } from '../map.service';
+import { MapService } from '../services/map/map.service';
 import { Feature, FeatureCollection, LineString, Point } from 'geojson';
 
 @Component({

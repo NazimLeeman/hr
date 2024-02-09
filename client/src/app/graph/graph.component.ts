@@ -3,7 +3,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { getISOWeek } from 'date-fns';
-import { HelperService } from '../helper.service';
+import { HelperService } from '../services/helper/helper.service';
 
 interface Details {
   key: string;

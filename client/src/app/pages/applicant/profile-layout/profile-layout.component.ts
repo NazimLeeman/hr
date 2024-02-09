@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
-  selector: 'app-navbar-profile',
-  templateUrl: './navbar-profile.component.html',
-  styleUrl: './navbar-profile.component.css'
+  selector: 'app-profile-layout',
+  templateUrl: './profile-layout.component.html',
+  styleUrl: './profile-layout.component.css'
 })
-export class NavbarProfileComponent implements OnInit {
+export class ProfileLayoutComponent {
+  isCollapsed = false;
   applicantId: number = 0;
   constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {}
   ngOnInit(): void {

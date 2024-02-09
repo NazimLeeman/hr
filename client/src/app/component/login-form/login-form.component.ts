@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Input, OnInit } from '@angular/core';
-import { ApiClientService } from '../../api-client.service';
+import { ApiClientService } from '../../services/apiClient/api-client.service';
 
 @Component({
   selector: 'app-login-form',

@@ -1,0 +1,74 @@
+import { Component} from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
+import { ApiClientService } from '../../../services/apiClient/api-client.service';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.css']
+})
+export class SignUpComponent {
+  isLoading: boolean = false;
+  validateForm: FormGroup<{
+    email: FormControl<string>;
+    password: FormControl<string>;
+    checkPassword: FormControl<string>;
+    name: FormControl<string>;
+  }>;
+
+  submitForm(): void {
+    this.isLoading = true;
+    if (this.validateForm.valid) {
+      const userData = this.validateForm.value;
+      
+      this.apiClientService.registerUser(userData).subscribe((response) => {
+        console.log('Applicant registered successfully:', response);
+        const applicantId = response.user.id
+        this.router.navigate(['/successful']);
+        this.isLoading = false;
+      },
+      (error) => {
+        console.log("Error during resgistration", error)
+      })
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+
+
+  updateConfirmValidator(): void {
+    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+  }
+
+  confirmationValidator: ValidatorFn = (control: AbstractControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !== this.validateForm.controls.password.value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  };
+
+  constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router) {
+    this.validateForm = this.fb.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required]],
+      checkPassword: ['', [Validators.required, this.confirmationValidator]],
+      name: ['', [Validators.required]],
+    });
+    
+  }
+}
