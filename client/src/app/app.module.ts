@@ -22,7 +22,7 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { EmployeeLoginComponent } from './employee-login/employee-login.component';
 import { ApplicantLoginComponent } from './applicant-login/applicant-login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginFormComponent } from './component/login-form/login-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';

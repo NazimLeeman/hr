@@ -8,6 +8,14 @@
   .app-layout {
     height: 100%;
   }
+
+  .ant-layout.ant-layout-has-sider {
+    background: #fff;
+}
+
+  .ant-layout-sider {
+    background: #fff;
+  }
   
   .menu-sidebar {
     position: relative;
@@ -30,11 +38,11 @@
   
   .sidebar-logo {
     position: relative;
-    height: 64px;
-    padding-left: 24px;
+    padding-left: 5rem;
     overflow: hidden;
-    line-height: 64px;
-    background: #001529;
+    line-height: 40px;
+    /* background: #001529; */
+    background: #fff;
     transition: all .3s;
   }
   
@@ -48,7 +56,6 @@
   .sidebar-logo h1 {
     display: inline-block;
     margin: 0 0 0 20px;
-    color: #fff;
     font-weight: 600;
     font-size: 14px;
     font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
