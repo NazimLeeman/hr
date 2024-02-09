@@ -113,7 +113,7 @@ export class PayrollComponent {
       // this.isLoading = false;
       // this.optionList = [...this.optionList, ...users];
       const users: UserOption[] = data.data
-      .filter((employee: Employee) => employee.position.position !== 'owner' && employee.position.position !== null)
+      .filter((employee: Employee) => employee.position && employee.position.position !== 'owner')
       .map((employee: Employee) => ({ id: employee.id, name: employee.name }));
 
       this.isLoading = false;
