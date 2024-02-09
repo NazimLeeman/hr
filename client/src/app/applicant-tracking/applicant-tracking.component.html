@@ -68,11 +68,11 @@
         [(nzVisible)]="isVisibleDate"
         nzTitle="Confirm Interview Date"
         (nzOnCancel)="handleDate()"
-        (nzOnOk)="handleDate()"
-        [nzOkLoading]="isOkLoading"
       >
-        <p *nzModalContent><nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker></p>
+        <p *nzModalContent><a href="https://calendly.com/nazimleeman" target="_blank" rel="noopener">Schedule a meeting</a></p>
             </nz-modal>
+        <!-- <p *nzModalContent><nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker></p>
+            </nz-modal> -->
       </div>
       <div>
         <nz-modal [(nzVisible)]="isVisibleExperience" nzTitle="Experiences" (nzOnCancel)="close()" (nzOnOk)="handleCancel()">
@@ -127,6 +127,8 @@
       </tbody>
     </nz-table>
   </div>
+  <!-- <a href="https://calendly.com/nazimleeman" target="_blank" rel="noopener">Schedule a meeting</a> -->
+  <!-- <div class="calendly-inline-widget" data-url="https://calendly.com/nazimleeman" style="min-width:320px;height:630px;"></div> -->
   <div *ngIf="!pastHistory" style="display: flex; justify-content: center;  padding-bottom: 2rem;">
     <button type="submit" (click)="showPastHistory()"  nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 16rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Recruitment history</button>
 </div>
