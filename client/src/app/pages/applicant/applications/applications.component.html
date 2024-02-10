@@ -1,9 +1,9 @@
 <div style=" font-family: 'Proxima Nova'">
-  <div *ngIf="!showSuccess" style="display: flex; justify-content: right; padding-top: 2rem; padding-bottom: 2rem;">
-    <button type="submit" (click)="successShow()"  nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 16rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Granted Applications</button>
+  <div *ngIf="!showSuccess" class="btn">
+    <button type="submit" (click)="toggleApplications(true)"  nz-button onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Granted Applications</button>
 </div>
-  <div *ngIf="showSuccess" style="display: flex; justify-content: right; padding-top: 2rem; padding-bottom: 2rem;">
-    <button type="submit" (click)="pendingShow()"  nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 16rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Pending Applications</button>
+  <div *ngIf="showSuccess" class="btn">
+    <button type="submit" (click)="toggleApplications(false)"  nz-button onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Pending Applications</button>
 </div>
   <div *ngIf="!showSuccess" style="padding: 1rem; margin-left: 4px;">
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Your Current Pending Applications</h1>
@@ -26,12 +26,6 @@
           <td>{{data.job.jobNature}}</td>
           <td>{{data.job.hourlyRate | currency:'£'}}</td>
           <td>
-  <!-- <ng-container *ngIf="data.status === 'Success'; else goldTag">
-    <nz-tag [nzColor]="'green'">{{data.status}}</nz-tag>
-  </ng-container>
-  <ng-template #goldTag>
-    <nz-tag [nzColor]="'gold'">{{data.status}}</nz-tag>
-  </ng-template> -->
     <nz-tag [nzColor]="'gold'">{{data.status}}</nz-tag>
 </td>
           <td>
@@ -54,7 +48,6 @@
           <th>Job Nature</th>
           <th>Hourly Rate</th>
           <th>Status</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -71,11 +64,6 @@
     <nz-tag [nzColor]="'gold'">{{data.status}}</nz-tag>
   </ng-template>
 </td>
-          <td>
-            <button type="submit" nz-button
-    style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 4vw; height: 2.5rem; font-size: medium; " onmouseover="this.style.backgroundColor='#22c55e ';" onmouseout="this.style.backgroundColor='#22c55e';">Confirm
-    </button>
-          </td>
         </tr>
       </tbody>
     </nz-table>

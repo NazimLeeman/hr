@@ -3,42 +3,9 @@ import { ApiClientService } from '../../../services/apiClient/api-client.service
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Application } from '../../../interfaces/Application.interface';
 
-interface Application {
-  id: number;
-  jobId: number;
-  applicantId: number;
-  restaurantId: number;
-  createdAt: string;
-  updatedAt: string;
-  status: string;
-  job: {
-    id: number;
-    jobRole: string;
-    jobNature: string;
-    jobDescription: string;
-    experience: string;
-    skillTags: string[];
-    hourlyRate: number;
-    applicationDeadline: string;
-    responsibilities: string[];
-    restaurantId: number;
-    createdAt: string;
-    updatedAt: string;
-  };
-  applicant: {
-    id: number;
-    name: string;
-    email: string;
-    experience: string[];
-    phoneNumber: number;
-    address: string;
-    skillTags: string[];
-    hourlyRate: number;
-    createdAt: string;
-    updatedAt: string;
-  };
-}
+
 @Component({
   selector: 'app-applications',
   templateUrl: './applications.component.html',
@@ -87,16 +54,12 @@ export class ApplicationsComponent {
     return status === 'Success' || 'success' ? 'green' : 'gold';
   }
 
-  successShow() {
-    this.showSuccess = true;
-  }
-  
-  pendingShow() {
-    this.showSuccess = false;
-  }
-
   handlePageIndexChange(pageIndex: number): void {
     this.currentPage = pageIndex;
+  }
+
+  toggleApplications(boolean: boolean) {
+    this.showSuccess = boolean
   }
 
 
