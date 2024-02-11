@@ -18,7 +18,7 @@ export class ApplicationsComponent {
   applicantId = 0;
   showSuccess = false;
   pageSize: number = 6;
-  pageIndex: number = 1;
+  currentPage: number = 1;
   successHeaders: string[] = ['Restaurant Name', 'Job Role', 'Job Nature', 'Hourly Rate', 'Status'];
   pendingHeaders: string[] = ['Restaurant Name', 'Job Role', 'Job Nature', 'Hourly Rate', 'Status', 'Action'];
 
@@ -58,7 +58,7 @@ export class ApplicationsComponent {
   }
 
   handlePageIndexChange(page: number): void {
-    this.pageIndex = page;
+    this.currentPage = page;
   }
 
   toggleApplications(boolean: boolean) {

@@ -6,7 +6,7 @@
   <app-custom-button buttonText="Pending Applications" backgroundColor="#22c55e" (buttonClick)="toggleApplications(false)"></app-custom-button>
 </div>
 
-  <!-- <div *ngIf="!showSuccess" style="padding: 1rem; margin-left: 4px;">
+  <div *ngIf="!showSuccess" style="padding: 1rem; margin-left: 4px;">
     <h1 >Your Current Pending Applications</h1>
     
     <nz-table #basicTable [nzPageIndex]="currentPage" [nzPageSize]="pageSize" (nzPageIndexChange)="handlePageIndexChange($event)" [nzData]="listOfData">
@@ -68,9 +68,9 @@
         </tr>
       </tbody>
     </nz-table>
-</div> -->
+</div>
 <!-- Reusable Table Component -->
-<app-custom-table *ngIf="!showSuccess" title="Your Current Pending Applications"
+<!-- <app-custom-table *ngIf="!showSuccess" title="Your Current Pending Applications"
           [headers]="pendingHeaders"
           
           [data]="listOfData"></app-custom-table>
@@ -78,6 +78,6 @@
 <app-custom-table *ngIf="showSuccess" title="Your Current Success Applications"
            [headers]="successHeaders" 
            
-           [data]="listOfSuccess"></app-custom-table>
+           [data]="listOfSuccess"></app-custom-table> -->
 
 </div>
