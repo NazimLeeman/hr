@@ -84,6 +84,8 @@ import { ProfileDetailsComponent } from './component/profile-details/profile-det
 import { HubComponent } from './hub/hub.component';
 import { LiveTrackingComponent } from './live-tracking/live-tracking.component';
 import { PointsComponent } from './points/points.component';
+import { CustomButtonComponent } from './component/custom-button/custom-button.component';
+import { CustomTableComponent } from './component/custom-table/custom-table.component';
 
 registerLocaleData(en);
 
@@ -126,7 +128,9 @@ registerLocaleData(en);
     ProfileDetailsComponent,
     HubComponent,
     LiveTrackingComponent,
-    PointsComponent
+    PointsComponent,
+    CustomButtonComponent,
+    CustomTableComponent
   ],
   imports: [
     BrowserModule,

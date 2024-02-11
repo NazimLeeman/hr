@@ -1,12 +1,13 @@
 <div style=" font-family: 'Proxima Nova'">
-  <div *ngIf="!showSuccess" class="btn">
-    <button type="submit" (click)="toggleApplications(true)"  nz-button onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Granted Applications</button>
+<div *ngIf="!showSuccess" class="btn">
+  <app-custom-button buttonText="Granted Applications" backgroundColor="#22c55e" (buttonClick)="toggleApplications(true)"></app-custom-button>
 </div>
-  <div *ngIf="showSuccess" class="btn">
-    <button type="submit" (click)="toggleApplications(false)"  nz-button onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Pending Applications</button>
+<div *ngIf="showSuccess" class="btn">
+  <app-custom-button buttonText="Pending Applications" backgroundColor="#22c55e" (buttonClick)="toggleApplications(false)"></app-custom-button>
 </div>
-  <div *ngIf="!showSuccess" style="padding: 1rem; margin-left: 4px;">
-    <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Your Current Pending Applications</h1>
+
+  <!-- <div *ngIf="!showSuccess" style="padding: 1rem; margin-left: 4px;">
+    <h1 >Your Current Pending Applications</h1>
     
     <nz-table #basicTable [nzPageIndex]="currentPage" [nzPageSize]="pageSize" (nzPageIndexChange)="handlePageIndexChange($event)" [nzData]="listOfData">
       <thead>
@@ -38,7 +39,7 @@
     </nz-table>
 </div>
   <div *ngIf="showSuccess" style="padding: 1rem; margin-left: 4px;">
-    <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Your Current Success Applications</h1>
+    <h1 >Your Current Success Applications</h1>
     
     <nz-table #basicTable [nzPageIndex]="currentPage" [nzPageSize]="pageSize" (nzPageIndexChange)="handlePageIndexChange($event)" [nzData]="listOfSuccess">
       <thead>
@@ -67,5 +68,16 @@
         </tr>
       </tbody>
     </nz-table>
-</div>
+</div> -->
+<!-- Reusable Table Component -->
+<app-custom-table *ngIf="!showSuccess" title="Your Current Pending Applications"
+          [headers]="pendingHeaders"
+          
+          [data]="listOfData"></app-custom-table>
+
+<app-custom-table *ngIf="showSuccess" title="Your Current Success Applications"
+           [headers]="successHeaders" 
+           
+           [data]="listOfSuccess"></app-custom-table>
+
 </div>

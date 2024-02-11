@@ -18,7 +18,10 @@ export class ApplicationsComponent {
   applicantId = 0;
   showSuccess = false;
   pageSize: number = 6;
-  currentPage: number = 1; 
+  pageIndex: number = 1;
+  successHeaders: string[] = ['Restaurant Name', 'Job Role', 'Job Nature', 'Hourly Rate', 'Status'];
+  pendingHeaders: string[] = ['Restaurant Name', 'Job Role', 'Job Nature', 'Hourly Rate', 'Status', 'Action'];
+
 
   constructor(private apiClientService: ApiClientService, private route: ActivatedRoute) {}
 
@@ -54,8 +57,8 @@ export class ApplicationsComponent {
     return status === 'Success' || 'success' ? 'green' : 'gold';
   }
 
-  handlePageIndexChange(pageIndex: number): void {
-    this.currentPage = pageIndex;
+  handlePageIndexChange(page: number): void {
+    this.pageIndex = page;
   }
 
   toggleApplications(boolean: boolean) {
