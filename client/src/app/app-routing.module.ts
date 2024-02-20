@@ -29,6 +29,7 @@ import { MapComponent } from './map/map.component';
 import { HubComponent } from './hub/hub.component';
 import { LiveTrackingComponent } from './live-tracking/live-tracking.component';
 import { PointsComponent } from './points/points.component';
+import { SquareComponent } from './component/square/square.component';
 
 const routes: Routes = [
   { path: '', component: ApplicantLoginComponent },
@@ -70,6 +71,7 @@ const routes: Routes = [
   { path: 'hub', component: HubComponent},
   { path: 'live', component: LiveTrackingComponent},
   { path: 'points', component: PointsComponent},
+  { path: 'square', component: SquareComponent},
   { path: '**', redirectTo: ''}
 ];
 

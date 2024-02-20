@@ -86,6 +86,7 @@ import { LiveTrackingComponent } from './live-tracking/live-tracking.component';
 import { PointsComponent } from './points/points.component';
 import { CustomButtonComponent } from './component/custom-button/custom-button.component';
 import { CustomTableComponent } from './component/custom-table/custom-table.component';
+import { SquareComponent } from './component/square/square.component';
 
 registerLocaleData(en);
 
@@ -130,7 +131,8 @@ registerLocaleData(en);
     LiveTrackingComponent,
     PointsComponent,
     CustomButtonComponent,
-    CustomTableComponent
+    CustomTableComponent,
+    SquareComponent
   ],
   imports: [
     BrowserModule,

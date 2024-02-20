@@ -24,6 +24,7 @@
     "@mapbox/mapbox-gl-directions": "^4.2.0",
     "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "@mapbox/polyline": "^1.2.1",
+    "@square/web-payments-sdk-types": "^1.54.6",
     "@turf/turf": "^6.5.0",
     "@types/geojson": "^7946.0.14",
     "chart.js": "^4.4.1",
@@ -34,6 +35,7 @@
     "ng-zorro-antd": "^17.1.0",
     "ng2-charts": "^5.0.4",
     "rxjs": "~7.8.0",
+    "square": "^34.0.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },
