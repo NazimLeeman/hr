@@ -48,6 +48,27 @@ export async function addEmployeeToRestaurant (restaurantId: number,data: {
   }
 }
 
+export async function addEmployeesToRestaurant(restaurantId: number, data: { 
+    // restaurantId: number,  
+    name: string,
+    email: string,
+    experience?: [string],
+    phoneNumber?: number,
+    address: string,
+    skillTags?: [string],
+    hourlyRate: number,
+    efficiency?: string,
+    imageUrl?: string
+ }) {
+  try {
+    const newEmployee = await Employee.create({...data, restaurantId});
+    return newEmployee;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error adding employees to restaurant.');
+  }
+}
+
 
 export async function addApplicantToEmployee (applicantId: number, restaurantId: number, data: { 
   name: string, 

@@ -69,3 +69,24 @@ export async function gettingAllActiveChefs(restaurantId: number) {
         throw new Error('Error while checking out.'); 
     }
 }
+
+export async function getAllActiveEmployeesAttendance(restaurantId: number | undefined) {
+  try {
+    let activeEmployees = await Attendance.findAll({
+        include: [{
+          model: Employee,
+          include: [{
+            model: Position,
+          }]
+        }],
+        where: {
+          restaurantId: restaurantId,
+          isCheckedIn: true
+        }
+    })
+    return activeEmployees;
+  } catch(error) {
+    console.log(error);
+    throw new Error('Error while getting all attendance')
+  }
+}

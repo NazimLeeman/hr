@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { checkEmployeeServiceAccess, createEmployeeServiceAccess, createOwnerServiceAccess, getEmployeeInfo, getEmployeeServiceAccess } from '../models/position/position.query';
 import { Request, Response } from "express";
-import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, deleteEmployeeById, deleteEmployeeLogin, findEmployeeBySearchTerm, updateEmployeeById, updateEmployeeInformation, addOwnerToRestaurant } from "../models/employee/employee.query";
+import { findAllEmployeeInRestaurant, addEmployeeToRestaurant, addApplicantToEmployee, findEmployeeById, deleteEmployeeById, deleteEmployeeLogin, findEmployeeBySearchTerm, updateEmployeeById, updateEmployeeInformation, addOwnerToRestaurant, addEmployeesToRestaurant } from "../models/employee/employee.query";
 import { findEmployeeLoginByEmail, createEmployeeLogin } from "../models/employeeLogin/employeeLogin.query";
 import { validateLoginData, validateEmployeeData } from "../utils/validation.helper";
 import { AuthRequest } from '../interfaces/authRequest.interface';
@@ -278,14 +278,89 @@ export async function createRestaurantOwner (req: Request, res: Response) {
           }
           
           await createEmployeeLogin(loginData);
-  
-          // if (data.role === 'admin') {
-            // }
            await createOwnerServiceAccess({ employeeId: newEmployee.id, services: ["all"], position: "owner", restaurantId: restaurantId });
   
           res.status(201).send({ status: 'success', user: newEmployee });
         } else res.status(400).send({message: 'An account with this email already exists.'});
       } else res.status(400).send({message: 'Invalid data.'});
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: (error as Error).message });
+    }
+  }
+
+export async function createRestaurantOwners(req: Request, res: Response) {
+  try {
+    const ownersData = req.body.data;
+    for (const owner of ownersData) {
+      const { name, email, password, restaurantId } = owner;
+      const data = { name, email };
+        const loginCheck = await findEmployeeLoginByEmail(email);
+            const newEmployee = await addOwnerToRestaurant( restaurantId,data);
+        const loginData = { employeeId: newEmployee.id, email, password };
+          await createEmployeeLogin(loginData);
+           await createOwnerServiceAccess({ employeeId: newEmployee.id, services: ["all"], position: "owner", restaurantId: restaurantId });
+          }
+      // const { restaurantId, name, email, password } = req.body;
+      // const data = { name, email };
+  
+      // if (validateEmployeeData({ name, email, password })) {
+      //   const loginCheck = await findEmployeeLoginByEmail(email);
+  
+      //   if (!loginCheck) {
+      //     const newEmployee = await addOwnerToRestaurant( restaurantId,data);
+  
+      //     const salt = bcrypt.genSaltSync();
+      //     const encryptedPassword =  bcrypt.hashSync(password, salt);
+      //     const loginData = {
+      //       email,
+      //       password: encryptedPassword,
+      //       employeeId: newEmployee.id
+      //     }
+          
+      //     await createEmployeeLogin(loginData);
+      //      await createOwnerServiceAccess({ employeeId: newEmployee.id, services: ["all"], position: "owner", restaurantId: restaurantId });
+  
+          res.status(201).send({ status: 'success' });
+      //     res.status(201).send({ status: 'success', user: newEmployee });
+        
+      // } else res.status(400).send({message: 'Invalid data.'});
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: (error as Error).message });
+    }
+  }
+
+  export async function postManyEmployeesToRestaurant (req: Request, res: Response) {
+    try {
+      const employeesData = req.body.data;
+      for (const datas of employeesData) {
+
+        const { name, email, password, address, hourlyRate, restaurantId, position } = datas;
+        const data = { name, email, address, hourlyRate };
+        
+        if (validateEmployeeData({ name, email, password })) {
+          const loginCheck = await findEmployeeLoginByEmail(email);
+          
+          if (!loginCheck && restaurantId) {
+            const newEmployee = await addEmployeesToRestaurant(restaurantId, data);
+            
+            // const salt = bcrypt.genSaltSync();
+            // const encryptedPassword = bcrypt.hashSync(password, salt);
+            const loginData = {
+              email,
+              password,
+              employeeId: newEmployee.id
+            }
+            
+            await createEmployeeLogin(loginData);
+            await createOwnerServiceAccess({ employeeId: newEmployee.id, services: ["all"], position: position, restaurantId: restaurantId });
+          }
+        }
+      }
+          res.status(201).send({ status: 'success' });
+        // } else res.status(400).send({message: 'An account with this email already exists.'});
+      // } else res.status(400).send({message: 'Invalid data.'});
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: (error as Error).message });

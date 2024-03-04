@@ -1,4 +1,5 @@
 import express, { Express } from 'express';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import config from './config';
 import sequelize from './models';
@@ -21,6 +22,14 @@ app.use(cors({
   origin: config.CORS_ORIGIN.split(','),
   exposedHeaders: ['Authorization']
 }));
+
+const bodyParserConfig = {
+    limit: '50mb' // Set the limit to whatever size you need
+};
+
+// Use body-parser middleware
+app.use(bodyParser.json(bodyParserConfig));
+app.use(bodyParser.urlencoded({ extended: true, ...bodyParserConfig }));
 
 app.use(express.json());
 

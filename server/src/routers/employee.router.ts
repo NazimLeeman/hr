@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteEmployee, getAllEmployeeOfRestaurant, getUserInfo, login, serviceAccess, CheckServiceAccess, postApplicantToEmployee, postEmployeeToRestaurant, searchEmployee, updateEmployee } from "../controllers/employee.controller";
+import { deleteEmployee, getAllEmployeeOfRestaurant, getUserInfo, login, serviceAccess, CheckServiceAccess, postApplicantToEmployee, postEmployeeToRestaurant, searchEmployee, updateEmployee, postManyEmployeesToRestaurant } from "../controllers/employee.controller";
 import { authMiddleware } from "../middleware/auth.middleware";
 const router = Router();
 
@@ -16,5 +16,6 @@ router.post('/login', login);
 router.get('/access/service/:userId', serviceAccess);
 router.get('/userInfo/:userId', getUserInfo);
 router.post('/access/check', CheckServiceAccess);
+router.post('/createmany', postManyEmployeesToRestaurant);
 
 export default router;

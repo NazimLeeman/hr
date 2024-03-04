@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { CheckOutTimeForEmployee, createCheckInTimeForEmployee } from "../models/attendance/attendance.query";
+import { CheckOutTimeForEmployee, createCheckInTimeForEmployee, getAllActiveEmployeesAttendance } from "../models/attendance/attendance.query";
+import { AuthRequest } from "../interfaces/authRequest.interface";
 
 export async function postAttendanceToEmployee (req: Request, res: Response) {
     try {
@@ -33,4 +34,19 @@ export async function updateAttendanceOfEmployee (req: Request, res: Response) {
         console.log(error);
         res.status(500).json(error);
     }
+}
+  
+export async function gettingAllActiveEmployees(req: AuthRequest, res: Response) {
+    try {
+        const restaurantId = req.user?.employeeInformation.restaurantId;   
+        const result = await getAllActiveEmployeesAttendance(restaurantId);
+       if (result) {
+      return res.status(200).json({ user: result });
+  } else {
+      return res.status(404).json({ user: result });
+  }
+   } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+   }
   }
