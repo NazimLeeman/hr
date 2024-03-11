@@ -65,7 +65,7 @@ export class CreateEmployeeComponent {
         console.log('API Response:', data);
         this.filterData = data.data
         this.filterData.forEach((employee) => employee.position && employee.position.position !== 'owner')
-        if (this.filterData.length > 0 && this.filterData[0].position.position !== 'owner') {
+        if (this.filterData.length > 0) {
           this.apiData = data.data;
           this.apiData.sort((a: any, b: any) => a.id - b.id);
           console.log('sorted data',this.apiData)
