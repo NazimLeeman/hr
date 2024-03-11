@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
 import { EmailService } from '../../../services/email/email.service';
 
-interface Employee {
+export interface Employee {
   id: number;
   restaurantId: number;
   name: string;
