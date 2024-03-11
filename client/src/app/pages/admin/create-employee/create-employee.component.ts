@@ -66,6 +66,7 @@ export class CreateEmployeeComponent {
         if (this.filterData.length > 0 && this.filterData[0].position.position !== 'owner')
         this.apiData = data.data;
         this.apiData.sort((a: any, b: any) => a.id - b.id);
+        console.log('sorted data',this.apiData)
       },
       (error) => {
         console.error('Error fetching data from the API', error);
