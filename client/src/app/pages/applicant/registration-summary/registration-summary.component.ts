@@ -16,7 +16,6 @@ import { CloudinaryService } from '../../../services/cloudinary/cloudinary.servi
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
-import { CurrencyService } from '../../../services/currency/currency.service';
 import { AddressComponent } from '../../../component/address/address.component';
 
 @Component({
@@ -133,23 +132,6 @@ additionOnInit(): void {
     this.submitAddressFormFromParent();
   }
 
-  // currencyOnInit(): void {
-  //   this.currency.getCurrenciesPromise().then((data) => {
-  //     this.from = data[0];
-  //     this.to = data[1];
-  //     this.currencyOptions = data; 
-  //     this.isDataAvailable = true
-  //     console.log(this.currencyOptions)
-  //   },
-  //     () =>{
-  //     this.failedToLoad = true;
-  //     }
-  //   );
-
-  //   let localAmount = localStorage.getItem("amount");
-  //   this.amountValue= localAmount ? localAmount : (1).toFixed(2);
-  // }
-
   uploadedImageUrl: string | undefined;
   private successMessageDisplayed = false;
 
@@ -218,7 +200,7 @@ additionOnInit(): void {
     this.addressComponent.handleLoginClick(this.applicantId);
   }
 
-  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService, private currency: CurrencyService) {
+  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService) {
     this.validateForm = this.fb.group({
       phoneNumber: ['', [Validators.required]],
       imageUrl: [''],
