@@ -3,7 +3,7 @@ import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
 import { switchMap } from 'rxjs/operators';
-import { getISOWeek } from 'date-fns';
+import { UserResponse } from '../../../interfaces/IUserResponse.interface';
 
 @Component({
   selector: 'app-experience',
@@ -34,7 +34,7 @@ export class ExperienceComponent implements OnInit {
           return this.apiClientService.getApplicantData(this.applicantId);
       })
   ).subscribe(
-      (data: any) => {
+      (data: UserResponse) => {
         console.log('API Response:', data);
       this.experience = data.data.experience || [];
       const experienceParts = this.experience[0].split('-');
@@ -53,8 +53,6 @@ export class ExperienceComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       const mergedData = this.mergeFormData();
-      console.log('merged data:', mergedData)
-      // const updatedData = this.validateForm.value;
       this.apiClientService.updateApplicantData(this.applicantId, mergedData).subscribe((response) => {
         console.log('Applicant updated successfully:', response);
         location.reload();

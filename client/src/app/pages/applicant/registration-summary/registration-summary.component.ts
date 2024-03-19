@@ -1,10 +1,8 @@
-import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
   NonNullableFormBuilder,
-  ValidatorFn,
   Validators
 } from '@angular/forms';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
@@ -14,9 +12,9 @@ import { Observable, Observer } from 'rxjs';
 import { CloudinaryService } from '../../../services/cloudinary/cloudinary.service';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { AddressComponent } from '../../../component/address/address.component';
+import { RegisterResponse } from '../../../interfaces/IResgister.interface';
 
 @Component({
   selector: 'app-registration-summary',
@@ -36,14 +34,9 @@ export class RegistrationSummaryComponent implements OnInit {
   phoneNumber: string = '';
   password: string = '';
   imageUrl = '';
-  currencyOptions: any[] = [];
-  selectedCurrency = '';
-  selectedCurrencySymbol: string = '';
 
   public isDataAvailable = false;
   public failedToLoad = false;
-  // private from: any;
-  // private to: any;
   public amountValue: any;
   @ViewChild(AddressComponent) addressComponent!: AddressComponent;
 
@@ -62,8 +55,7 @@ ngOnInit(): void {
           return this.apiClientService.getRegisterData(this.applicantId);
       })
   ).subscribe(
-      (data: any) => {
-        console.log('API Response:', data);
+      (data: RegisterResponse) => {
           this.email = data.data.email;
           this.password = '********';
 
@@ -84,7 +76,6 @@ additionOnInit(): void {
       })
   ).subscribe(
       (data: any) => {
-        console.log('API Response:', data);
       this.firstName = '';
       this.lastName = '';
 
@@ -187,13 +178,6 @@ additionOnInit(): void {
   salaryCal() {
     const result = this.hourlyRate * 172;
     return `£${result}`
-  }
-
-  currencySelectionChanged(event: Event): void {
-    console.log('event');
-    const selectedValue: any =  ''
-
-    this.selectedCurrencySymbol = selectedValue ? selectedValue.symbol || '' : '';
   }
 
   submitAddressFormFromParent(): void {

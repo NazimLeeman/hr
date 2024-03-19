@@ -24,10 +24,10 @@ app.use(cors({
 }));
 
 const bodyParserConfig = {
-    limit: '50mb' // Set the limit to whatever size you need
+    limit: '50mb' 
 };
 
-// Use body-parser middleware
+
 app.use(bodyParser.json(bodyParserConfig));
 app.use(bodyParser.urlencoded({ extended: true, ...bodyParserConfig }));
 
@@ -45,7 +45,6 @@ app.use('/auth', authRouter);
 app.use('/chef', chefRouter);
 app.use('/waiter', waiterRouter);
 app.use('/restaurant', restaurantRouter);
-// app.use('/cloud', cloudinaryRouter);
 
 (async function bootstrap () {
     try {

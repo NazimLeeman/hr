@@ -3,6 +3,7 @@ import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
 import { switchMap } from 'rxjs/operators';
+import { UserResponse } from '../../../interfaces/IUserResponse.interface';
 
 @Component({
   selector: 'app-skills',
@@ -41,7 +42,7 @@ export class SkillsComponent implements OnInit {
           return this.apiClientService.getApplicantData(this.applicantId);
       })
   ).subscribe(
-      (data: any) => {
+      (data: UserResponse) => {
         console.log('API Response:', data);
       this.skillTags = data.data.skillTags;
       },
@@ -53,7 +54,6 @@ export class SkillsComponent implements OnInit {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      // const skillTags = this.validateForm.get('listOfSelectedValue')?.value || [];
       const updatedData = this.suitableData();
       console.log('merged data:', updatedData)
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {

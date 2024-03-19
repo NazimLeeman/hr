@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Application } from '../../../interfaces/Application.interface';
+import { ApplicantResponse } from '../../../interfaces/IApplicantResponse';
 
 
 @Component({
@@ -38,8 +39,7 @@ export class ApplicationsComponent {
 
   loadApplicantsData(applicantId?: number): void {
     this.apiClientService.getAppliedApplications(this.applicantId).subscribe(
-      (data: any) => {
-        console.log('API Response:', data);
+      (data: ApplicantResponse) => {
         this.listOfData = data.applicants.filter((applicant: Application) => 
         applicant.applicantId === applicantId && applicant.status === 'Pending'
         );

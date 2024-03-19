@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
 import { switchMap } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { UserResponse } from '../../../interfaces/IUserResponse.interface';
 
 @Component({
   selector: 'app-availability',
@@ -27,22 +28,6 @@ export class AvailabilityComponent {
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   validateForm: FormGroup;
-  // <{
-  //   MondayFrom: FormControl<[Date] | null>;
-  //   MondayTo: FormControl<[Date] | null>;
-  //   TuesdayFrom: FormControl<[Date] | null>;
-  //   TuesdayTo: FormControl<[Date] | null>;
-  //   WednesdayFrom: FormControl<[Date] | null>;
-  //   WednesdayTo: FormControl<[Date] | null>;
-  //   ThursdayFrom: FormControl<[Date] | null>;
-  //   ThursdayTo: FormControl<[Date] | null>;
-  //   FridayFrom: FormControl<[Date] | null>;
-  //   FridayTo: FormControl<[Date] | null>;
-  //   SaturdayFrom: FormControl<[Date] | null>;
-  //   SaturdayTo: FormControl<[Date] | null>;
-  //   SundayFrom: FormControl<[Date] | null>;
-  //   SundayTo: FormControl<[Date] | null>;
-  // }>
 
   ngOnInit(): void {
     this.route.params.pipe(
@@ -51,11 +36,11 @@ export class AvailabilityComponent {
           return this.apiClientService.getApplicantData(this.applicantId);
       })
   ).subscribe(
-      (data: any) => {
+      (data: UserResponse) => {
         console.log('API Response:', data);
       this.availability = data.data.availability.map((item: string) => JSON.parse(item));
-      this.days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']     
-      console.log(this.availability)
+      this.days;    
+    
     },
       (error) => {
           console.error('Error fetching data from the API', error);
@@ -65,20 +50,6 @@ export class AvailabilityComponent {
 
   constructor(private fb: NonNullableFormBuilder,private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private modalService: NzModalService) {
     this.validateForm = this.fb.group({
-      // MondayFrom: this.fb.control<[Date] | null>(null),
-      // MondayTo: this.fb.control<[Date] | null>(null),
-      // TuesdayFrom: this.fb.control<[Date] | null>(null),
-      // TuesdayTo: this.fb.control<[Date] | null>(null),
-      // WednesdayFrom: this.fb.control<[Date] | null>(null),
-      // WednesdayTo: this.fb.control<[Date] | null>(null),
-      // ThursdayFrom: this.fb.control<[Date] | null>(null),
-      // ThursdayTo: this.fb.control<[Date] | null>(null),
-      // FridayFrom: this.fb.control<[Date] | null>(null),
-      // FridayTo: this.fb.control<[Date] | null>(null),
-      // SaturdayFrom: this.fb.control<[Date] | null>(null),
-      // SaturdayTo: this.fb.control<[Date] | null>(null),
-      // SundayFrom: this.fb.control<[Date] | null>(null),
-      // SundayTo: this.fb.control<[Date] | null>(null),
     })
     this.days.forEach(day => {
       this.validateForm.addControl(`${day}From`, this.fb.control<[Date] | null>(null));
@@ -95,7 +66,7 @@ export class AvailabilityComponent {
   }
 
   submitForm(): void {
-    console.log(this.validateForm.value)
+
     if(this.validateForm.valid) {
       const availabilityArray: any = [];
       // const availabilityArray: any = Object.values(this.validateForm.value);
@@ -114,9 +85,9 @@ export class AvailabilityComponent {
       const updatedData = {
         availability: availabilityArray,
       };
-      console.log(' data:', updatedData)
+      
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
-        console.log('Applicant availability updated successfully:', response);
+       
         this.modalService.success({
           nzTitle: 'Success',
           nzContent: 'Applicant Availability Updated successfully.',

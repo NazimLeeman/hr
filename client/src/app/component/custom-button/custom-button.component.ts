@@ -16,8 +16,7 @@ export class CustomButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.buttonStyle = {
-      'background-color': this.backgroundColor,
-      // Add other common styles here
+      'background-color': this.backgroundColor
     };
   }
 

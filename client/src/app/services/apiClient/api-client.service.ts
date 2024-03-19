@@ -138,16 +138,16 @@ export class ApiClientService {
   
   getAppliedApplications(applicantId:number): Observable<any> {
     const url = `${this.apiUrl}/jobApplicant/applicationTracking/${applicantId}`
-    // return this.http.get(url);
-    return this.http.get(url).pipe(
-      catchError((error) => {
-        console.error('Error fetching applied applications:', error);
-        throw error;
-      }),
-      tap((data) => {
-        this.updateSubject.next(data);
-      })
-    );
+    return this.http.get(url);
+    // return this.http.get(url).pipe(
+    //   catchError((error) => {
+    //     console.error('Error fetching applied applications:', error);
+    //     throw error;
+    //   }),
+    //   tap((data) => {
+    //     this.updateSubject.next(data);
+    //   })
+    // );
   }
 
   postApplicantToEmployee(applicantData:any, applicantId: number): Observable<any> {
