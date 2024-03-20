@@ -45,13 +45,10 @@ export class LoginFormComponent {
       this.apiClientService.loginUser(loginData).subscribe((response) => {
         const data:UserResponse = { data: response.applicant };
         this.applicantDataService.setNewApplicantData(data)
-        // console.log('Applicant logined successfully:', response);
         const jwtToken = response.token;
         localStorage.setItem('token', jwtToken);
-        let applicantId = response.applicant.id
-        // console.log(applicantId);
-        // console.log('signInRoute:', this.signInRoute);
-        this.router.navigate([this.signInRoute +  '/' +  applicantId + '/profile/' + applicantId ]);
+        const applicantId = response.applicant.id
+        this.router.navigate([`${this.signInRoute   }/${   applicantId  }/profile/${  applicantId}` ])
       },
       (error) => {
         console.log("Error during login", error)
