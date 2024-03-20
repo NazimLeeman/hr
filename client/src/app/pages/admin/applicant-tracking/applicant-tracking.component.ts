@@ -79,7 +79,7 @@ export class ApplicantTrackingComponent {
     this.apiClientService.getAppliedApplicant().subscribe(
       (data: any) => {
           this.apiData = data.applicants[0].applicant.experience;
-        console.log('API Response:', data, this.apiData);
+       
 
         const restaurantId = 1;
 
