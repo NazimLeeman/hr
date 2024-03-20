@@ -17,7 +17,7 @@ export class SettingsComponent {
     private apiClientService: ApiClientService,
     private authService: AuthService
   ) {
-    this.applicantId = +this.route.snapshot.params['applicantId'];
+    this.applicantId = Number(this.route.snapshot.params['applicantId'])
   }
 
   deleteApplicant() {
@@ -34,6 +34,5 @@ export class SettingsComponent {
 
   logout(): void {
     this.authService.removeToken();
-    // this.router.navigate([''])
   }
 }

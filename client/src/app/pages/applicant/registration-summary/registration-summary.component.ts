@@ -8,13 +8,14 @@ import {
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Observable, Observer } from 'rxjs';
 import { CloudinaryService } from '../../../services/cloudinary/cloudinary.service';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { AddressComponent } from '../../../component/address/address.component';
 import { RegisterResponse } from '../../../interfaces/IResgister.interface';
+import { UserResponse } from '../../../interfaces/IUserResponse.interface';
+import { ApplicantDataService } from '../../../services/applicant/applicant-data.service';
 
 @Component({
   selector: 'app-registration-summary',
@@ -31,7 +32,7 @@ export class RegistrationSummaryComponent implements OnInit {
   email: string = '';
   address: string = '';
   hourlyRate: number = 0;
-  phoneNumber: string = '';
+  phoneNumber: number = 0;
   password: string = '';
   imageUrl = '';
 
@@ -51,13 +52,12 @@ ngOnInit(): void {
   this.route.params.pipe(
       switchMap((params) => {
           this.applicantId = params['applicantId'];
-          console.log(this.applicantId)
           return this.apiClientService.getRegisterData(this.applicantId);
       })
   ).subscribe(
       (data: RegisterResponse) => {
           this.email = data.data.email;
-          this.password = '********';
+          this.password = "*******";
 
           this.additionOnInit();
           this.isLoading = true
@@ -75,10 +75,8 @@ additionOnInit(): void {
           return this.apiClientService.getApplicantData(this.applicantId);
       })
   ).subscribe(
-      (data: any) => {
-      this.firstName = '';
-      this.lastName = '';
-
+  // this.applicantDataService.newApplicantDataEvent.subscribe(
+      (data: UserResponse) => {
       if (data.data.name) {
         const spaceIndex = data.data.name.indexOf(' ');
         if (spaceIndex !== -1) {
@@ -106,7 +104,6 @@ additionOnInit(): void {
       updatedData.imageUrl = this.uploadedImageUrl;
       console.log(updatedData)
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
-        console.log('Applicant updated successfully:', response);
         location.reload();
       },
       (error) => {
@@ -127,15 +124,9 @@ additionOnInit(): void {
   private successMessageDisplayed = false;
 
   handleChange(info: NzUploadChangeParam): void {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-      console.log('File information:', info.file);
-    console.log('File list:', info.fileList);
-    }
     if (info.file.status === 'done' && !this.successMessageDisplayed) {
       this.msg.success(`${info.file.name} file uploaded successfully`);
       this.successMessageDisplayed = true;
-      console.log('Upload response:', info.file.response);
       this.uploadedImageUrl = info.file.response.url; 
     } 
   }
@@ -147,14 +138,13 @@ additionOnInit(): void {
       this.cloudinary.cloudUpload(file, 'user123') 
       .subscribe(
         (response) => {
-          console.log('Cloudinary API Response:', response);
           const fakeEvent: NzUploadChangeParam = {
             file: {
               ...event.file,
               status: 'done',
-              response: response,
+              response: response
             },
-            fileList: [...event.fileList],
+            fileList: [...event.fileList]
           };
   
           this.handleChange(fakeEvent);
@@ -165,9 +155,9 @@ additionOnInit(): void {
             file: {
               ...event.file,
               status: 'error',
-              response: error,
+              response: error
             },
-            fileList: [...event.fileList],
+            fileList: [...event.fileList]
           };
   
           this.handleChange(fakeEvent);
@@ -184,12 +174,12 @@ additionOnInit(): void {
     this.addressComponent.handleLoginClick(this.applicantId);
   }
 
-  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService) {
+  constructor(private fb: NonNullableFormBuilder, private route: ActivatedRoute, private apiClientService: ApiClientService, private router: Router, private msg: NzMessageService, private cloudinary: CloudinaryService, private applicantDataService:ApplicantDataService) {
     this.validateForm = this.fb.group({
       phoneNumber: ['', [Validators.required]],
       imageUrl: [''],
       hourlyRate: [0, [Validators.required]],
-      phoneNumberPrefix: ['+880', Validators.required as any],
+      phoneNumberPrefix: ['+880', Validators.required as any]
     })
   }
 }

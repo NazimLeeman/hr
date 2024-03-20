@@ -1,27 +1,17 @@
 <nz-skeleton *ngIf="isLoading"></nz-skeleton>
 
-<div style=" font-family: 'Proxima Nova'">
-  <div style="padding: 1rem; margin-left: 4px;">
-    <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Availability</h1>
-      <h1 style="margin-top: 1rem; margin-left: .5rem; font-size:x-large;">Let employers know when you are available. This will help them match you with their desired shifts.</h1>
-      <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1rem;">
-        <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1rem;">
+<div>
+  <div class="container">
+    <h1>Availability</h1>
+      <h2>Let employers know when you are available. This will help them match you with their desired shifts.</h2>
+        <div class="hero">
           <div *ngFor="let dayData of this.availability" style="width: 11vw; height: 10vh; margin: .5rem; background-color: #F0F2F5">
             <p style="font-size: 1rem; font-weight: medium; margin-top: .5rem; text-align: center;" [innerHTML]="formatAvailabilityData(dayData)"></p>
           </div>
         </div>        
-        <!-- <div *ngFor="let dayData of generateAvailabilityStructure()" style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-          <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">{{ dayData.day }}</p>
-          <div *ngFor="let dayData of generateAvailabilityStructure()" style="width: 12vw; height: 10vh; margin: 1rem; background-color: #F0F2F5">
-            <p style="font-size: 1rem; font-weight: bold; margin-top: .5rem; text-align: center;">{{ formatAvailabilityData(dayData) }}</p>
-          </div>
-          <p style="font-size: 1rem; text-align: center;">{{ dayData.availability }}</p>
-        </div>   -->
-      </div>
       <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
-        <button class="my-btn" type="submit" (click)="open()" nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Edit Availability</button>
+        <button class="my-btn" type="submit" (click)="toggleVisibility(!visible)" nz-button style="font-family: 'Proxima Nova'; background-color: #22c55e; color: #ffffff; border-radius: 0.375rem; border-color: #22c55e; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.25rem; " onmouseover="this.style.backgroundColor='#38a169';" onmouseout="this.style.backgroundColor='#22c55e';">Edit Availability</button>
       </div>
-      <!-- <button style=" font-family: 'Proxima Nova'; background-color: #22c55e; border: none;" nz-button nzType="primary" (click)="open()">Edit Availability</button> -->
       <nz-drawer
       [nzBodyStyle]="{ overflow: 'auto' }"
       [nzMaskClosable]="false"
@@ -29,7 +19,7 @@
       [nzVisible]="visible"
       nzTitle="Availability"
       [nzFooter]="footerTpl"
-      (nzOnClose)="close()"
+      (nzOnClose)="toggleVisibility(!visible)"
     >
       <form nz-form *nzDrawerContent [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <div nz-row [nzGutter]="8">
@@ -129,7 +119,7 @@
 
       <ng-template #footerTpl>
         <div style="float: right">
-          <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
+          <button nz-button style="margin-right: 8px;" (click)="toggleVisibility(!visible)">Cancel</button>
           <button nz-button nzType="primary" (click)="submitForm()">Submit</button>
         </div>
       </ng-template>

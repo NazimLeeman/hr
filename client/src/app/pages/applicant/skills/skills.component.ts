@@ -3,7 +3,7 @@ import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
 import { switchMap } from 'rxjs/operators';
-import { UserResponse } from '../../../interfaces/IUserResponse.interface';
+import { SuitableSkill, UserResponse } from '../../../interfaces/IUserResponse.interface';
 
 @Component({
   selector: 'app-skills',
@@ -43,7 +43,6 @@ export class SkillsComponent implements OnInit {
       })
   ).subscribe(
       (data: UserResponse) => {
-        console.log('API Response:', data);
       this.skillTags = data.data.skillTags;
       },
       (error) => {
@@ -57,7 +56,6 @@ export class SkillsComponent implements OnInit {
       const updatedData = this.suitableData();
       console.log('merged data:', updatedData)
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
-        console.log('Applicant skill tags updated successfully:', response);
         location.reload();
       },
       (error) => {
@@ -77,7 +75,7 @@ export class SkillsComponent implements OnInit {
     this.showSkillTagsForm = !this.showSkillTagsForm;
   }
 
-  suitableData(): any {
+  suitableData(): SuitableSkill {
     const skillTags = this.validateForm.get('listOfSelectedValue')?.value || [];
 
     const newSkillTags = `${skillTags}`;
@@ -97,7 +95,7 @@ export class SkillsComponent implements OnInit {
 
   constructor(private fb: NonNullableFormBuilder, private apiClientService: ApiClientService, private router: Router, private route: ActivatedRoute) {
     this.validateForm = this.fb.group({
-      listOfSelectedValue: [[] as string[], [Validators.required]],
+      listOfSelectedValue: [[] as string[], [Validators.required]]
     })
   }
 }

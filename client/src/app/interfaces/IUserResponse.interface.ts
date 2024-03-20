@@ -16,3 +16,7 @@ export interface UserData {
 export interface UserResponse {
   data: UserData;
 }
+
+export interface SuitableSkill {
+    skillTags: string[];
+}

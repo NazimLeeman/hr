@@ -37,10 +37,8 @@ export class AvailabilityComponent {
       })
   ).subscribe(
       (data: UserResponse) => {
-        console.log('API Response:', data);
       this.availability = data.data.availability.map((item: string) => JSON.parse(item));
       this.days;    
-    
     },
       (error) => {
           console.error('Error fetching data from the API', error);
@@ -57,20 +55,14 @@ export class AvailabilityComponent {
     });
   }
 
-  open(): void {
-    this.visible = true;
-  }
-
-  close(): void {
-    this.visible = false;
-  }
+  toggleVisibility(isVisible: boolean): void {
+    this.visible = isVisible;
+}
 
   submitForm(): void {
 
     if(this.validateForm.valid) {
       const availabilityArray: any = [];
-      // const availabilityArray: any = Object.values(this.validateForm.value);
-
       this.days.forEach(day => {
         const fromTime = this.validateForm.get(`${day}From`)?.value;
         const toTime = this.validateForm.get(`${day}To`)?.value;
@@ -83,7 +75,7 @@ export class AvailabilityComponent {
         }
       })
       const updatedData = {
-        availability: availabilityArray,
+        availability: availabilityArray
       };
       
       this.apiClientService.updateApplicantData(this.applicantId, updatedData).subscribe((response) => {
@@ -111,13 +103,6 @@ export class AvailabilityComponent {
 
   log(time: Date): void {
     console.log(time && time.toTimeString());
-  }
-
-  generateAvailabilityStructure(): any[] {
-    return this.days.map((day) => ({
-      day,
-      // availability: this.availability.find((data) => data.day === day)
-    }));
   }
 
   onCheckboxChange(day: string): void {

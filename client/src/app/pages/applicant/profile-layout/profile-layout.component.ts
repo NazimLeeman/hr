@@ -18,6 +18,7 @@ export class ProfileLayoutComponent {
   }
   logout(): void {
     this.authService.removeToken();
+    localStorage.clear();
     this.router.navigate([''])
   }
 }

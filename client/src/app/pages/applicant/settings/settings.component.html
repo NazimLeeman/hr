@@ -1,9 +1,8 @@
-<!-- <app-navbar-profile></app-navbar-profile> -->
-<div style=" font-family: 'Proxima Nova'">
-  <div style="padding: 1rem; margin-left: 4px;">
-    <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: 1rem;">Delete account</h1>
-       <p style="font-size:x-large; padding-left: .5rem;">If you delete your account, you will have the option to recover it within 30 days.</p> 
-  <div style="display: flex; justify-content: center; padding-top: 2rem; padding-bottom: 2rem;">
+<div>
+  <div class="container">
+    <h1>Delete account</h1>
+       <p>If you delete your account, you will have the option to recover it within 30 days.</p> 
+  <div class="btn-container">
     <button type="submit" nz-button
     style="font-family: 'Proxima Nova'; background-color: #EF4444; color: #ffffff; border-radius: 0.375rem; border-color: #EF4444; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; width: 12rem; height: 3rem; font-size: 1.5rem; " onmouseover="this.style.backgroundColor='#C53030 ';" onmouseout="this.style.backgroundColor='#EF4444';"
         [nzType]="'primary'" (click)="deleteApplicant()">Delete Account
