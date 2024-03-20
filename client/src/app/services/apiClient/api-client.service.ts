@@ -184,14 +184,10 @@ export class ApiClientService {
     return this.updateSubject.asObservable();
   }
 
-  // triggerUpdate() {
-  //   this.updateSubject.next();
-  // }
-
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem(this.tokenKey);
     return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     });
   }
 }
