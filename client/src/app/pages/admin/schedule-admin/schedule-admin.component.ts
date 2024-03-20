@@ -2,30 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
-import { NzCalendarMode } from 'ng-zorro-antd/calendar';
-interface Employee {
-  id: number;
-  restaurantId: number;
-  name: string;
-  email: string;
-}
+import { Employee, Schedule, UserOption } from '../../../interfaces/ISchedule.interface';
 
-interface UserOption {
-  id: number;
-  name: string;
-}
-
-interface Schedule {
-  id: number;
-  day: string;
-  slotStart: string;
-  slotEnds: string;
-  restaurantId: number;
-  shift: string;
-  employees: { id: number; name: string }[];
-  createdAt: string;
-  updatedAt: string;
-}
 
 @Component({
   selector: 'app-schedule-admin',

@@ -1,4 +1,4 @@
-<div style="  font-family: 'Proxima Nova';">
+<div>
   <div *ngIf="!showForm">
     <h1 *ngIf="apiData.length === 0" style="margin-top: 1rem; text-align: center; font-size: 1.875rem;">You don't have any Employee right now.</h1>
     <div *ngIf="apiData.length">
@@ -10,7 +10,6 @@
           <th >Id</th>
           <th>Name</th>
           <th>Position</th>
-          <!-- <th>Job Nature</th> -->
           <th>Hourly Rate</th>
           <th>Efficiency</th>
           <th>Joining Date</th>
@@ -19,7 +18,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <ng-container *ngIf="data.position?.position !== 'owner'">
           <td>
             <img
               *ngIf="data.imageUrl; else defaultImage"
@@ -36,10 +34,8 @@
             </ng-template>
           </td>
           
-          <!-- <td><img src="{{data.imageUrl}} " style="width: 6rem; border-radius: 100px;" alt=""></td> -->
           <td>{{data.id}}</td>
           <td>{{data.name}}</td>
-          <!-- <td>{{data.jobNature}}</td> -->
           <td>{{data.position?.position}}</td>
           <td>{{ data.hourlyRate | currency:'£' }}</td>
           <td>{{ data.efficiency || 80}}%</td>
@@ -47,12 +43,11 @@
           <td>
             <button nz-button [nzType]="'primary'" (click)="showModal(data.id, data.skillTags)"><span>View Skills</span></button>        
           </td>
-        </ng-container>
         </tr>
       </tbody>
     </nz-table>
     </div>
-    <div><nz-modal [(nzVisible)]="isVisible" nzTitle="Skill Tags" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <div><nz-modal [(nzVisible)]="isVisible" nzTitle="Skill Tags" (nzOnCancel)="handleButtonClick()" (nzOnOk)="handleButtonClick()">
       <ng-container *nzModalContent>
         <p *ngIf="selectedEmployeeSkill.length > 0; else noSkill">{{ selectedEmployeeSkill.join(', ') }}</p>
 <ng-template #noSkill>No skill added</ng-template>
@@ -74,8 +69,6 @@
     <h1 style="font-size: 1.875rem; font-weight: bold; padding-bottom: .5rem;">Create Employee</h1>
     <p style="margin-left: .5rem; font-size: x-large; padding-bottom: 1rem;">Create by filling in these information.</p>
     <form nz-form style="display: grid; grid-template-columns: repeat(3, 1fr);" [formGroup]="validateFormPartOne">
-    <!-- <div style="display: grid; grid-template-columns: repeat(3, 1fr);"> -->
-      <!-- <img style="padding-bottom: 1rem;" src="../../assets/images/user-profile-default.png" alt=""> -->
       <div style="display: flex; flex-direction: column;">
         <img style="padding-bottom: .5rem; width: 12rem; height: 22vh; " [src]="uploadedImageUrl || '../../assets/images/user-profile-default.png'" alt="">
         
@@ -123,12 +116,6 @@
     </form>
   </div>
   <form nz-form style="padding: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr);" [formGroup]="validateFormPartOne" (ngSubmit)="submitFormPartOne()">
-    <!-- <nz-form-item>
-      <label style="font-size: medium;" >Phone Number</label>
-      <nz-form-control nzErrorTip="Please input your phone number!" class="custom-error-tip">
-        <input nz-input style="font-size: medium; margin-top: .5rem;" type="text"  formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number" >
-      </nz-form-control>
-    </nz-form-item> -->
     <nz-form-item>
         <label style="font-size: medium;">Phone Number</label>
         <nz-form-control style="margin-left: 1rem; margin-top: .5rem;">
@@ -152,9 +139,6 @@
     </nz-form-item>
     <nz-form-item >
       <label style="font-size: medium;">Address</label>
-      <!-- <nz-form-control nzErrorTip="Please input an address!" class="custom-error-tip">
-        <textarea nz-input style="font-size: medium; margin-top: .5rem;" type="text"  id="address" formControlName="address" placeholder="Address"></textarea>
-      </nz-form-control> -->
       <div style="margin-left: 1rem; margin-top: .5rem;">
           <app-address [employeeId]="employeeId"></app-address>
         </div>

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@ang
 import { Router } from '@angular/router';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { JobListingsResponse } from '../../../interfaces/IJobListing.interface';
 
 @Component({
   selector: 'app-post-job',
@@ -47,7 +48,7 @@ export class PostJobComponent {
 
   ngOnInit(): void {
     this.apiClientService.getAllJobForRestaurant().subscribe(
-      (data: any) => {
+      (data: JobListingsResponse) => {
         console.log('API Response:', data);
         this.apiData = data.data;
       },
@@ -64,7 +65,6 @@ export class PostJobComponent {
       const userData = this.constructJobData();
       console.log(userData)
       this.apiClientService.postJob(userData).subscribe((response) => {
-        console.log('Job Posted successfully:', response);
         location.reload();
         this.modalService.success({
           nzTitle: 'Success',

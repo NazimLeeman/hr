@@ -3,22 +3,9 @@ import { FormGroup, FormControl, NonNullableFormBuilder, Validators } from '@ang
 import { Router } from '@angular/router';
 import { ApiClientService } from '../../../services/apiClient/api-client.service';
 import { EmailService } from '../../../services/email/email.service';
+import { EmployeeOption, UserOption } from '../../../interfaces/IEmployeeResponse.interface';
 
-export interface Employee {
-  id: number;
-  restaurantId: number;
-  name: string;
-  email: string;
-  position: {
-    position: string;
-  }
-}
 
-interface UserOption {
-  id: number;
-  name: string;
-  email: string;
-}
 
 @Component({
   selector: 'app-payroll',
@@ -52,12 +39,9 @@ export class PayrollComponent {
       const userData = this.constructPayrollData();
       console.log(userData)
       this.apiClientService.postPayroll(userData).subscribe((response) => {
-        console.log('Payroll generated successfully:', response);
-        console.log(response.id)
         if(response.employeeId)
     this.apiClientService.getPayroll(response.employeeId).subscribe(
       (data: any) => {
-        console.log('API Response:', data);
         this.showForm = true;
         this.apiData = data.data;
         this.hourlyRate = data.data.hourlyRate;
@@ -94,7 +78,6 @@ export class PayrollComponent {
     if(this.selectedUser?.id)
     this.apiClientService.getPayroll(this.selectedUser.id).subscribe(
       (data: any) => {
-        console.log('API Response:', data);
         this.apiData = data.data;
         this.sendPayrollToEmail(this.apiData);
       },
@@ -109,12 +92,9 @@ export class PayrollComponent {
     this.isLoading = true;
     this.apiClientService.getAllEmployee().subscribe(data => {
       console.log(data.data)
-      // const users: UserOption[] = data.data.map((employee: Employee) => ({ id: employee.id, name: employee.name }));
-      // this.isLoading = false;
-      // this.optionList = [...this.optionList, ...users];
       const users: UserOption[] = data.data
-      .filter((employee: Employee) => employee.position && employee.position.position !== 'owner')
-      .map((employee: Employee) => ({ id: employee.id, name: employee.name }));
+      .filter((employee: EmployeeOption) => employee.position && employee.position.position !== 'owner')
+      .map((employee: EmployeeOption) => ({ id: employee.id, name: employee.name }));
 
       this.isLoading = false;
       this.optionList = [...this.optionList, ...users];
@@ -130,7 +110,7 @@ export class PayrollComponent {
       selectedUser,
       hourlyRate,
       totalHours,
-      totalDeduction,
+      totalDeduction
     } = this.validateForm.value;
 
     const mergedData = {
