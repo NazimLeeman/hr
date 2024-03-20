@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, catchError, tap } from 'rxjs';
+import { UserResponse } from '../../interfaces/IUserResponse.interface';
+import { LoginData } from '../../interfaces/ILoginResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -94,7 +96,7 @@ export class ApiClientService {
     return this.http.get(`${this.apiUrl}/payroll/${employeeId}`)
   }
 
-  loginUser(loginData: any): Observable<any>{
+  loginUser(loginData: LoginData): Observable<any>{
     return this.http.post(`${this.apiUrl}/applicant/login`, loginData)
   }
 
@@ -108,9 +110,9 @@ export class ApiClientService {
     return this.http.get(url);
   }
   
-  getApplicantData(applicantId: number): Observable<any> {
+  getApplicantData(applicantId: number): Observable<UserResponse> {
     const url = `${this.apiUrl}/applicant/${applicantId}`
-    return this.http.get(url);
+    return this.http.get<UserResponse>(url);
   }
 
   applyJob(selectedJobId:number, selectedRestaurantId: number, applicantId: number): Observable<any> {
