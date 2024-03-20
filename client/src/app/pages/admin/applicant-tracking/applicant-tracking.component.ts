@@ -79,15 +79,12 @@ export class ApplicantTrackingComponent {
     this.apiClientService.getAppliedApplicant().subscribe(
       (data: any) => {
           this.apiData = data.applicants[0].applicant.experience;
-       
-
-        const restaurantId = 1;
 
         this.listOfData = data.applicants.filter((applicant: Application) => 
-        applicant.restaurantId === restaurantId && applicant.status === 'Pending'
+        applicant.status === 'Pending'
       );
         this.pastData = data.applicants.filter((applicant: Application) => 
-        applicant.restaurantId === restaurantId && applicant.status === 'Success'
+        applicant.status === 'Success'
       );
       },
       (error) => {

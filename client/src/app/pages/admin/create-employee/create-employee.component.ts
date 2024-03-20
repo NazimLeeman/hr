@@ -209,7 +209,6 @@ export class CreateEmployeeComponent {
     this.sortData();
   }
   
-  // Method to sort the data based on current sort column and order
   sortData() {
     this.apiData = this.apiData.sort((a, b) => {
       const aValue = a[this.sortColumn];
