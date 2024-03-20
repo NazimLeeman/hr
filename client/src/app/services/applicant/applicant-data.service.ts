@@ -14,7 +14,6 @@ export class ApplicantDataService {
 
   setNewApplicantData (applicantData: UserResponse) {
     this.applicantData = applicantData;
-    console.log(applicantData)
     this.newApplicantDataEvent.next(applicantData);
   }
 }
