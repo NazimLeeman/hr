@@ -5,9 +5,6 @@ import Position from "../position/position.model";
 import Applicant from "../applicant/applicant.model";
 import Attendance from "../attendance/attendance.model";
 import Payroll from "../payroll/payroll.model";
-import Job from "../job/job.model";
-import Schedule from "../schedule/schedule.model";
-// import ServiceAccess from "../serviceAccess/serviceAccess.model";
 
 interface EmployeeCreationAttributes extends Optional<IEmployee, 'id' > {};
 
@@ -71,10 +68,6 @@ const Employee = sequelize.define<EmployeeInstance>('employee', {
         allowNull: true,
         defaultValue: ''
     }
-    // positionId: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false
-    // },
 })
 
 Employee.belongsTo(Position, { foreignKey: 'positionId' });
@@ -85,15 +78,5 @@ Employee.hasMany(Payroll, { foreignKey: 'employeeId' });
 Applicant.hasOne(Employee, { foreignKey: 'applicantId' });
 Attendance.belongsTo(Employee, { foreignKey: 'employeeId' });
 Payroll.belongsTo(Employee, { foreignKey: 'employeeId' });
-// Job.hasMany(Applicant, { foreignKey: 'jobId' });
-// Applicant.belongsTo(Job, { foreignKey: 'jobId' });
-// Schedule.belongsTo(Employee, {foreignKey: 'employeeId'});
-// Employee.hasMany(Schedule, { foreignKey: 'employeeId'});
-// Employee.hasMany(ServiceAccess, { foreignKey: 'employeeId'});
-// ServiceAccess.belongsTo(Employee, { foreignKey: 'employeeId'})
-
-// Employee.hasMany(PerformanceReview, { 
-//     foreignKey: 'employee_id' 
-// });
 
 export default Employee;

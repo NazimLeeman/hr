@@ -21,18 +21,6 @@ const Attendance = sequelize.define<AttendanceInstance>('attendance', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    // day: {
-    //     type: DataTypes.TEXT,
-    //     allowNull: false
-    // },
-    // checkInTime: {
-    //     type: DataTypes.DATE,
-    //     allowNull: false,
-    // },
-    // checkOutTime: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: true,
-    // },
     isCheckedIn: {
         type: DataTypes.BOOLEAN,
         allowNull: false

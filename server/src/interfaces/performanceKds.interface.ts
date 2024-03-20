@@ -1,6 +1,6 @@
 export interface IPerformanceKds {
-    id: number;
-    employeeId: number,
-    orderId: string,
-    servedOnTime: boolean;
-  }
+  id: number;
+  employeeId: number;
+  orderId: string;
+  servedOnTime: boolean;
+}

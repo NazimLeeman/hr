@@ -1,7 +1,6 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import { IJob } from "../../interfaces/job.interface";
 import sequelize from "..";
-import Applicant from "../applicant/applicant.model";
 
 interface JobCreationAttributes extends Optional<IJob, 'id'> {};
 

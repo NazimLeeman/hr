@@ -7,6 +7,6 @@ router.get('/restaurant', authMiddleware, getAllScheduleOfRestaurant);
 router.get('/:employeeId/restaurant',authMiddleware, getAllScheduleOfEmployee);
 
 router.put('/:employeeId/restaurant/:scheduleId', updateScheduleOfEmployee);
-router.post('/restaurant',authMiddleware, postScheduleToEmployee);
+router.post('/restaurant', authMiddleware, postScheduleToEmployee);
 
 export default router;

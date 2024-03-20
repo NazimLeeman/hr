@@ -17,11 +17,6 @@ const Schedule = sequelize.define<ScheduleInstance>('schedule', {
         type: DataTypes.INTEGER,
         unique: true
     },
-    // employeeId: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: true,
-    //     defaultValue: 0
-    // },
     day: {
         type: DataTypes.TEXT,
         allowNull: false,

@@ -9,8 +9,4 @@ export interface IJob {
   applicationDeadline: Date; 
   responsibilities: string[];
   restaurantId: number; 
-  // restaurantName: string;
-  // restaurantInformation: string; 
-  // restaurantLogoUrl: string; 
-  // restaurantcontactEmail: string;
 }

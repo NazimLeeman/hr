@@ -1,10 +1,8 @@
-import { Op, Sequelize } from "sequelize";
 import Employee from "../employee/employee.model";
 import Position from "../position/position.model";
 import Attendance from "./attendance.model";
 
 export async function createCheckInTimeForEmployee (employeeId: number, restaurantId: number, data: { 
-  // day: string, checkInTime: number, checkOutTime?: number
   isCheckedIn: boolean
  }) {
   try {
@@ -26,7 +24,6 @@ export async function createCheckInTimeForEmployee (employeeId: number, restaura
 }
 
 export async function CheckOutTimeForEmployee(employeeId: number, attendanceId: number, data: {
-  // day?: string, checkInTime?: number, checkOutTime: number
   isCheckedIn: boolean
 }) {
     try {
