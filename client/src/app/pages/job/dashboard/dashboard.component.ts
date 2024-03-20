@@ -163,7 +163,7 @@ export class DashboardComponent implements OnInit {
   
 
   search(value: string): void {
-    this.apiClientService.getAllJobForRestaurant().subscribe(
+    this.apiClientService.getAllJob().subscribe(
       (data: any) => {
         if (data) {
           this.apiData = data.data;
