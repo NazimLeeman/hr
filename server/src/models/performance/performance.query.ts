@@ -43,7 +43,6 @@ export async function getEmployeeEfficiency(employeeId: number) {
     const result = Math.round((servedOnTimeCount / totalOrders) * 100);
     const efficiency = result.toString();
 
-    // return efficiency;
     const updateEfficiency = await Employee.update({efficiency: efficiency}, {
       where: {
         id: employeeId

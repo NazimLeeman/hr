@@ -2,118 +2,115 @@ import { Op } from "sequelize";
 import Employee from "../employee/employee.model";
 import Position from "./position.model";
 
-// export async function createPositionForEmployee (employeeId: number, restaurantId: number, data: { 
-//     position: string, services: string[]
-//  }) {
-//   try {
-//     let employee = await Employee.findOne({
-//       where: {
-//         id: employeeId,
-//         restaurantId: restaurantId
-//       }
-//     })
-//     if (!employee) {
-//       throw new Error('Employee not found.');
-//     }
-//     const newPosition = await Position.create({ ...data, employeeId, restaurantId });
-//     return newPosition;
-//   } catch (error) {
-//     console.log(error)
-//     throw new Error('Error creating position for employee.');
-//   }
-// }
-
-export async function createEmployeeServiceAccess (data: {
-  employeeId: number, position: string, services: string[]
+export async function createEmployeeServiceAccess(data: {
+  employeeId: number;
+  position: string;
+  services: string[];
 }) {
   try {
     const access = await Position.create(data);
     return access;
   } catch (error) {
-    console.log(error)
-    throw new Error('Error while creating employee service in database.');
+    console.log(error);
+    throw new Error("Error while creating employee service in database.");
   }
 }
 
-
-export async function updateEmployeeServiceAccess(positionId: number, data: {
-  employeeId: number, position: string, services: string[]
-}) {
+export async function updateEmployeeServiceAccess(
+  positionId: number,
+  data: {
+    employeeId: number;
+    position: string;
+    services: string[];
+  }
+) {
   try {
-      const existingPositionAccess = await Position.findOne({
-          where: {
-              id: positionId
-          }
-      })
-      if (!existingPositionAccess) {
-          throw new Error ('Service not found')
-      }
-      const updatedServiceAccess = await existingPositionAccess.update(data);
-      return updatedServiceAccess;
+    const existingPositionAccess = await Position.findOne({
+      where: {
+        id: positionId,
+      },
+    });
+    if (!existingPositionAccess) {
+      throw new Error("Service not found");
+    }
+    const updatedServiceAccess = await existingPositionAccess.update(data);
+    return updatedServiceAccess;
   } catch (error) {
-      console.log(error);
-      throw new Error('Error while updating employee service in database.')
+    console.log(error);
+    throw new Error("Error while updating employee service in database.");
   }
 }
 
-export async function findEmployeeServiceAccess(employeeId:number) {
+export async function findEmployeeServiceAccess(employeeId: number) {
   try {
-      const access = await Position.findOne({
-          where: {
-              employeeId: employeeId
-          }
-      })
-      return access;
+    const access = await Position.findOne({
+      where: {
+        employeeId: employeeId,
+      },
+    });
+    return access;
   } catch (error) {
-      console.log(error);
-      throw new Error('Error while getting employee service access from database.')
+    console.log(error);
+    throw new Error(
+      "Error while getting employee service access from database."
+    );
   }
 }
 
-export async function checkEmployeeServiceAccess(employeeId:number, service: string) {
+export async function checkEmployeeServiceAccess(
+  employeeId: number,
+  service: string
+) {
   try {
-      const employeeServiceAccess = await Position.findOne({
-          where: {
-              employeeId: employeeId
-          }
-      })
-      if (employeeServiceAccess) {
-          return (employeeServiceAccess.services.includes('all') || employeeServiceAccess.services.includes(service.toUpperCase()));        
-      }
-      return false;
+    const employeeServiceAccess = await Position.findOne({
+      where: {
+        employeeId: employeeId,
+      },
+    });
+    if (employeeServiceAccess) {
+      return (
+        employeeServiceAccess.services.includes("all") ||
+        employeeServiceAccess.services.includes(service.toUpperCase())
+      );
+    }
+    return false;
   } catch (error) {
-      console.log(error);
-      throw new Error('Error while checking employee service access from database.')
+    console.log(error);
+    throw new Error(
+      "Error while checking employee service access from database."
+    );
   }
 }
-export async function getEmployeeServiceAccess(employeeId:number) {
+
+export async function getEmployeeServiceAccess(employeeId: number) {
   try {
-      const employeeServiceAccess = await Position.findOne({
-          where: {
-              employeeId: employeeId
-          }
-      })
-      if (employeeServiceAccess) {
-          return (employeeServiceAccess.services);        
-      }
-      return false;
+    const employeeServiceAccess = await Position.findOne({
+      where: {
+        employeeId: employeeId,
+      },
+    });
+    if (employeeServiceAccess) {
+      return employeeServiceAccess.services;
+    }
+    return false;
   } catch (error) {
-      console.log(error);
-      throw new Error('Error while checking employee service access from database.')
+    console.log(error);
+    throw new Error(
+      "Error while checking employee service access from database."
+    );
   }
 }
 
-
-export async function findAllPositionInRestaurant (id: number) {
+export async function findAllPositionInRestaurant(id: number) {
   try {
     const position = await Position.findAll({
       where: {
-        restaurantId: id
-      }
+        restaurantId: id,
+      },
     });
     return position;
   } catch (error) {
-    throw new Error('Error finding position in restaurant.');
+    throw new Error("Error finding position in restaurant.");
   }
 }
 
@@ -129,10 +126,12 @@ export async function getEmployeeInfo(employeeId: number) {
       return { positionId, employeeInformation };
     }
     return false;
-} catch (error) {
+  } catch (error) {
     console.log(error);
-    throw new Error('Error while checking employee service access from database.')
-}
+    throw new Error(
+      "Error while checking employee service access from database."
+    );
+  }
 }
 
 export async function findAllChefsInRestaurant(restaurantId: number) {
@@ -141,23 +140,25 @@ export async function findAllChefsInRestaurant(restaurantId: number) {
       where: {
         restaurantId: restaurantId,
         position: {
-          [Op.iLike]: '%Chef%',
+          [Op.iLike]: "%Chef%",
         },
       },
-      include: [{
-        model: Employee
-      }],
+      include: [
+        {
+          model: Employee,
+        },
+      ],
     });
     if (chefsInfo && chefsInfo.length > 0) {
-      const chefsData = chefsInfo.map(chef => {
+      const chefsData = chefsInfo.map((chef) => {
         const { id, ...employeeInformation } = chef.toJSON();
         return { id, employeeInformation };
       });
-      return chefsData
+      return chefsData;
     }
     return false;
   } catch (error) {
-    throw new Error('Error finding position in restaurant.');
+    throw new Error("Error finding position in restaurant.");
   }
 }
 
@@ -167,38 +168,43 @@ export async function findAllWaitersInRestaurant(restaurantId: number) {
       where: {
         restaurantId: restaurantId,
         position: {
-          [Op.iLike]: '%Waiter%',
+          [Op.iLike]: "%Waiter%",
         },
       },
-      include: [{
-        model: Employee
-      }],
+      include: [
+        {
+          model: Employee,
+        },
+      ],
     });
     return waiters;
   } catch (error) {
-    throw new Error('Error finding position in restaurant.');
+    throw new Error("Error finding position in restaurant.");
   }
 }
 
-export async function createOwnerServiceAccess (data: {
-  employeeId: number, position: string, services: string[], restaurantId: number
+export async function createOwnerServiceAccess(data: {
+  employeeId: number;
+  position: string;
+  services: string[];
+  restaurantId: number;
 }) {
   try {
     const access = await Position.create(data);
     if (access) {
       const owner = await Employee.findByPk(access.employeeId);
-  
+
       if (!owner) {
-        throw new Error('Owner not found with the given ID');
+        throw new Error("Owner not found with the given ID");
       }
-  
+
       owner.positionId = access.id;
       await owner.save();
-  
+
       return owner;
     }
   } catch (error) {
-    console.log(error)
-    throw new Error('Error while creating owner service in database.');
+    console.log(error);
+    throw new Error("Error while creating owner service in database.");
   }
 }

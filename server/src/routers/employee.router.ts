@@ -4,11 +4,8 @@ import { authMiddleware } from "../middleware/auth.middleware";
 const router = Router();
 
 router.get('/restaurant',authMiddleware, getAllEmployeeOfRestaurant);
-// router.get('/:id/restaurant/:employeeId', searchEmployee);
 router.post('/restaurant/:applicantId', authMiddleware, postApplicantToEmployee);
-// router.post('/signup', postEmployeeToRestaurant);
 router.post('/create',authMiddleware, postEmployeeToRestaurant);
-// router.post('/signup/:restaurantId', createEmployeeForRestaurant);
 router.put('/update/:employeeId', authMiddleware, updateEmployee);
 router.delete('/delete/:employeeId', authMiddleware, deleteEmployee);
 router.get('/search', authMiddleware, searchEmployee);
